@@ -1,0 +1,375 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import {
+  ChevronRight,
+  Home,
+  Layers,
+} from "lucide-react";
+
+import { ProductCard } from "@/components/products/ProductCard";
+import { QuickQuoteForm } from "@/components/products/QuickQuoteForm";
+import { BreadcrumbSchema } from "@/components/seo/BreadcrumbSchema";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import {
+  getAllCategories,
+  getCategoryBySlug,
+  getProductsByCategory,
+  type CategoryProductSort,
+} from "@/lib/queries/categories";
+import { cn } from "@/lib/utils";
+
+export const revalidate = 3600;
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+
+type CategoryPageProps = {
+  params: {
+    slug: string;
+  };
+  searchParams?: Record<string, string | string[] | undefined>;
+};
+
+const sortOptions: Array<{ label: string; value: CategoryProductSort }> = [
+  { label: "Featured", value: "featured" },
+  { label: "Name A-Z", value: "name-az" },
+  { label: "Newest", value: "newest" },
+];
+
+function getParam(
+  searchParams: CategoryPageProps["searchParams"],
+  key: string,
+) {
+  const value = searchParams?.[key];
+
+  if (Array.isArray(value)) {
+    return value[0];
+  }
+
+  return value;
+}
+
+function createCategoryHref(
+  slug: string,
+  updates: Record<string, string | number | undefined> = {},
+) {
+  const params = new URLSearchParams();
+
+  Object.entries(updates).forEach(([key, value]) => {
+    if (value === undefined || value === "" || value === 1) {
+      params.delete(key);
+      return;
+    }
+
+    params.set(key, String(value));
+  });
+
+  const query = params.toString();
+
+  return query ? `/products/category/${slug}?${query}` : `/products/category/${slug}`;
+}
+
+function CategoryPagination({
+  slug,
+  page,
+  pageCount,
+  sort,
+}: {
+  slug: string;
+  page: number;
+  pageCount: number;
+  sort?: string;
+}) {
+  if (pageCount <= 1) {
+    return null;
+  }
+
+  const pages = Array.from({ length: pageCount }, (_, index) => index + 1);
+
+  return (
+    <nav
+      className="mt-10 flex flex-wrap items-center justify-center gap-2"
+      aria-label="Category products pagination"
+    >
+      {page > 1 ? (
+        <Button asChild variant="outline" size="sm">
+          <Link href={createCategoryHref(slug, { page: page - 1, sort })}>Previous</Link>
+        </Button>
+      ) : (
+        <Button variant="outline" size="sm" disabled>
+          Previous
+        </Button>
+      )}
+
+      {pages.map((pageNumber) => (
+        <Button
+          key={pageNumber}
+          asChild={pageNumber !== page}
+          variant={pageNumber === page ? "default" : "outline"}
+          size="sm"
+          className={cn(pageNumber === page && "bg-primary text-primary-foreground")}
+        >
+          {pageNumber === page ? (
+            <span>{pageNumber}</span>
+          ) : (
+            <Link href={createCategoryHref(slug, { page: pageNumber, sort })}>
+              {pageNumber}
+            </Link>
+          )}
+        </Button>
+      ))}
+
+      {page < pageCount ? (
+        <Button asChild variant="outline" size="sm">
+          <Link href={createCategoryHref(slug, { page: page + 1, sort })}>Next</Link>
+        </Button>
+      ) : (
+        <Button variant="outline" size="sm" disabled>
+          Next
+        </Button>
+      )}
+    </nav>
+  );
+}
+
+export async function generateMetadata({
+  params,
+}: CategoryPageProps): Promise<Metadata> {
+  const category = await getCategoryBySlug(params.slug);
+
+  if (!category) {
+    return {
+      title: "Category Not Found",
+    };
+  }
+
+  return {
+    title: category.name,
+    description:
+      category.description ||
+      `Browse ${category.name} from leading international brands. Professional commercial cleaning equipment available across Pakistan.`,
+    openGraph: {
+      title: `${category.name} | Moral Clean`,
+      description:
+        category.description ||
+        `Browse ${category.name} from leading international brands. Professional commercial cleaning equipment available across Pakistan.`,
+    },
+    alternates: {
+      canonical: `${siteUrl}/products/category/${category.slug}`,
+    },
+  };
+}
+
+export async function generateStaticParams() {
+  const categories = await getAllCategories();
+  return categories.map((category) => ({ slug: category.slug }));
+}
+
+export default async function CategoryPage({
+  params,
+  searchParams,
+}: CategoryPageProps) {
+  const category = await getCategoryBySlug(params.slug);
+
+  if (!category) {
+    notFound();
+  }
+
+  const page = getParam(searchParams, "page") ?? "1";
+  const sort = getParam(searchParams, "sort") ?? "featured";
+  const brand = getParam(searchParams, "brand");
+  const tag = getParam(searchParams, "tag");
+  const productsResult = await getProductsByCategory(category.id, {
+    page,
+    sort,
+    brand,
+    tag,
+  });
+  const allCategories = await getAllCategories();
+  const relatedCategories = allCategories
+    .filter((item) => item.slug !== category.slug)
+    .slice(0, 6);
+  const activeSort =
+    sortOptions.find((option) => option.value === sort)?.label ?? "Featured";
+
+  return (
+    <>
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", url: "/" },
+          { name: "Products", url: "/products" },
+          { name: category.name, url: `/products/category/${category.slug}` },
+        ]}
+      />
+      <section className="relative overflow-hidden py-20 text-white">
+        {/* Replace this gradient with a real category hero image when assets are available. */}
+        <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(10,37,64,0.93),rgba(10,37,64,0.85),rgba(14,165,233,0.55))]" />
+        <div className="relative mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
+          <h1 className="text-white">{category.name}</h1>
+          <nav
+            className="mt-5 flex flex-wrap items-center justify-center gap-2 text-sm text-white/70"
+            aria-label="Breadcrumb"
+          >
+            <Link href="/" className="inline-flex items-center gap-1 text-white/85 hover:text-white">
+              <Home className="size-4" aria-hidden="true" />
+              Home
+            </Link>
+            <span aria-hidden="true">/</span>
+            <Link href="/products" className="text-white/85 hover:text-white">
+              Products
+            </Link>
+            <span aria-hidden="true">/</span>
+            <span className="text-white/70">{category.name}</span>
+          </nav>
+        </div>
+      </section>
+
+      <section className="bg-background py-12">
+        <div className="mx-auto grid max-w-7xl gap-8 px-4 sm:px-6 lg:grid-cols-[280px_minmax(0,1fr)] lg:px-8">
+          <aside className="space-y-6 lg:sticky lg:top-24 lg:h-fit">
+            <section className="rounded-md border border-border bg-white p-4 shadow-sm">
+              <div className="mb-4 flex items-center gap-2 border-b border-border pb-3">
+                <Layers className="size-4 text-accent" aria-hidden="true" />
+                <h2 className="text-base">Product Categories</h2>
+              </div>
+              <div className="space-y-1">
+                {allCategories.map((item) => {
+                  const isActive = item.slug === category.slug;
+
+                  return (
+                    <Link
+                      key={item.id}
+                      href={`/products/category/${item.slug}`}
+                      className={cn(
+                        "flex items-center gap-2 rounded-md px-3 py-2 text-sm transition-colors",
+                        isActive
+                          ? "bg-accent text-white hover:bg-accent/90"
+                          : "hover:bg-muted",
+                      )}
+                    >
+                      <span className="min-w-0 flex-1 truncate">{item.name}</span>
+                      <span
+                        className={cn(
+                          "rounded-full px-2 py-0.5 text-xs",
+                          isActive ? "bg-white/20 text-white" : "bg-muted text-muted-foreground",
+                        )}
+                      >
+                        {item.product_count}
+                      </span>
+                      <ChevronRight
+                        className={cn(
+                          "size-4 shrink-0",
+                          isActive ? "text-white" : "text-muted-foreground",
+                        )}
+                        aria-hidden="true"
+                      />
+                    </Link>
+                  );
+                })}
+              </div>
+            </section>
+
+            <QuickQuoteForm categorySlug={category.slug} categoryName={category.name} />
+          </aside>
+
+          <div className="min-w-0">
+            <div className="mb-6 rounded-md border border-border bg-white p-5 shadow-sm">
+              <p className="text-xs font-bold uppercase tracking-[0.18em] text-accent">
+                Browse Category
+              </p>
+              <div className="mt-2 flex flex-wrap items-center justify-between gap-4">
+                <h2 className="text-3xl">{category.name}</h2>
+                <Badge variant="secondary" className="bg-muted text-primary">
+                  {productsResult.totalCount} Products
+                </Badge>
+              </div>
+              <p className="mt-4 text-muted-foreground">
+                {category.description ||
+                  `Browse ${category.name} from leading international brands. Professional commercial cleaning equipment available across Pakistan.`}
+              </p>
+            </div>
+
+            <div className="mb-6 flex justify-end">
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="outline" className="justify-between sm:w-40">
+                    {activeSort}
+                    <ChevronRight className="size-4 rotate-90" aria-hidden="true" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-44">
+                  {sortOptions.map((option) => (
+                    <DropdownMenuItem key={option.value} asChild>
+                      <Link
+                        href={createCategoryHref(category.slug, {
+                          sort: option.value === "featured" ? undefined : option.value,
+                          page: undefined,
+                        })}
+                        className={cn(
+                          option.value === sort && "font-semibold text-primary",
+                        )}
+                      >
+                        {option.label}
+                      </Link>
+                    </DropdownMenuItem>
+                  ))}
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
+
+            {productsResult.products.length > 0 ? (
+              <div className="grid grid-cols-2 gap-5 xl:grid-cols-3">
+                {productsResult.products.map((product) => (
+                  <ProductCard key={product.id} product={product} />
+                ))}
+              </div>
+            ) : (
+              <div className="flex min-h-[320px] flex-col items-center justify-center rounded-md border border-dashed border-border bg-muted/50 px-6 text-center">
+                <h3 className="text-xl">Products coming soon for this category</h3>
+                <Link
+                  href="/products"
+                  className="mt-4 text-sm font-semibold text-primary hover:text-accent"
+                >
+                  Browse all products
+                </Link>
+              </div>
+            )}
+
+            <CategoryPagination
+              slug={category.slug}
+              page={productsResult.page}
+              pageCount={productsResult.pageCount}
+              sort={sort === "featured" ? undefined : sort}
+            />
+          </div>
+        </div>
+      </section>
+
+      {relatedCategories.length > 0 ? (
+        <section className="bg-muted py-12">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <h2 className="mb-6 text-2xl">Related Categories</h2>
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
+              {relatedCategories.map((item) => (
+                <Link
+                  key={item.id}
+                  href={`/products/category/${item.slug}`}
+                  className="rounded-md border border-border bg-white p-4 transition hover:-translate-y-1 hover:border-accent"
+                >
+                  <Layers className="size-5 text-accent" aria-hidden="true" />
+                  <p className="mt-3 text-sm font-semibold text-primary">{item.name}</p>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      ) : null}
+    </>
+  );
+}
