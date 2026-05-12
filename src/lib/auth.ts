@@ -20,9 +20,9 @@ export async function isAdmin(userId: string) {
   const { data, error } = await supabase
     .from("admin_users")
     .select("id")
-    .eq("user_id", userId)
+    .eq("id", userId)
     .maybeSingle();
-
+    
   if (error) {
     return false;
   }
