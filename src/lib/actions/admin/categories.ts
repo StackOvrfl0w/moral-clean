@@ -16,7 +16,7 @@ async function uploadCategoryImage(file: File) {
   const ext = file.name.split(".").pop() || "jpg";
   const path = `categories/${Date.now()}-${crypto.randomUUID()}.${ext}`;
   const supabase = createClient();
-  const { error } = await supabase.storage.from("product-images").upload(path, file, {
+  const { error } = await supabase.storage.from("product images").upload(path, file, {
     contentType: file.type,
     upsert: false,
   });
@@ -25,7 +25,7 @@ async function uploadCategoryImage(file: File) {
   }
   const {
     data: { publicUrl },
-  } = supabase.storage.from("product-images").getPublicUrl(path);
+  } = supabase.storage.from("product images").getPublicUrl(path);
   return publicUrl;
 }
 
