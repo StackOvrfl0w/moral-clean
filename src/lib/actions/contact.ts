@@ -6,14 +6,29 @@ import { env } from "@/config/env";
 import { createClient } from "@/lib/supabase/server";
 import type { ContactFormState, QuickQuoteFormState } from "./contact-types";
 
-const resend = new Resend(env.resendApiKey);
-
 function normalizeValue(value: FormDataEntryValue | null) {
   return typeof value === "string" ? value.trim() : "";
 }
 
 function isValidEmail(email: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+async function sendEmail(payload: {
+  from: string;
+  to: string[];
+  replyTo?: string;
+  subject: string;
+  text: string;
+}) {
+  const resend = new Resend(env.resendApiKey);
+  const { data, error } = await resend.emails.send(payload);
+
+  if (error) {
+    console.error("[Resend] Failed to send email:", error);
+  } else {
+    console.log("[Resend] Email sent, id:", data?.id);
+  }
 }
 
 export async function submitQuickQuote(
@@ -43,7 +58,7 @@ export async function submitQuickQuote(
     email: email || null,
     message,
   });
-
+  // console.log("[Supabase] insert error:", error);
   if (error) {
     return {
       success: false,
@@ -51,9 +66,9 @@ export async function submitQuickQuote(
     };
   }
 
-  await resend.emails.send({
-    from: env.resendFromEmail,
-    to: env.resendToEmail,
+  await sendEmail({
+    from: `Moral Clean Website <${env.resendFromEmail}>`,
+    to: [env.resendToEmail],
     subject: `New Quick Quote Request – ${categoryContext}`,
     text: [
       `Name: ${name}`,
@@ -94,7 +109,9 @@ export async function submitContactForm(
     };
   }
 
-  const composedMessage = subject ? `[Subject: ${subject}]\n${message}` : message;
+  const composedMessage = subject
+    ? `[Subject: ${subject}]\n${message}`
+    : message;
   const supabase = createClient();
   const { error } = await supabase.from("contact_submissions").insert({
     name,
@@ -102,7 +119,7 @@ export async function submitContactForm(
     phone,
     message: composedMessage,
   });
-
+  // console.log("[Supabase] insert error:", error);
   if (error) {
     return {
       success: false,
@@ -110,11 +127,13 @@ export async function submitContactForm(
     };
   }
 
-  await resend.emails.send({
-    from: env.resendFromEmail,
-    to: env.resendToEmail,
+  await sendEmail({
+    from: `Moral Clean Website <${env.resendFromEmail}>`,
+    to: [env.resendToEmail],
     replyTo: email,
-    subject: subject ? `${subject} – ${name}` : `New Contact Form Submission – ${name}`,
+    subject: subject
+      ? `${subject} – ${name}`
+      : `New Contact Form Submission – ${name}`,
     text: [
       `Name: ${name}`,
       `Email: ${email}`,
