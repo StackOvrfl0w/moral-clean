@@ -28,8 +28,10 @@ import {
 import type { Json, ProductWithRelations } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
+import { env } from "@/config/env";
+
 export const revalidate = 3600;
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+const siteUrl = env.siteUrl;
 
 type ProductPageProps = {
   params: {

@@ -19,11 +19,12 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
+import { env } from "@/config/env";
 import { getServices } from "@/lib/queries/services";
 import type { Service } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+const siteUrl = env.siteUrl;
 
 export const metadata: Metadata = {
   title: "Services",

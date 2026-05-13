@@ -8,11 +8,12 @@ import {
   Phone,
 } from "lucide-react";
 
+import { env } from "@/config/env";
 import { ContactForm } from "@/components/contact/ContactForm";
 import { getProductBySlug } from "@/lib/queries/products";
 import { getServiceBySlug } from "@/lib/queries/services";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+const siteUrl = env.siteUrl;
 
 export const metadata: Metadata = {
   title: "Contact Us",

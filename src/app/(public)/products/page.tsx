@@ -19,10 +19,11 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { env } from "@/config/env";
 import { getProducts, type ProductSort } from "@/lib/queries/products";
 import { cn } from "@/lib/utils";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+const siteUrl = env.siteUrl;
 
 export const metadata: Metadata = {
   title: "Products",

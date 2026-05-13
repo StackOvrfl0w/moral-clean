@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 // import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import localFont from "next/font/local";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+
+import { env } from "@/config/env";
 import { OrganizationSchema } from "@/components/seo/OrganizationSchema";
 import { WebsiteSchema } from "@/components/seo/WebsiteSchema";
 import { Toaster } from "@/components/ui/sonner";
@@ -59,7 +62,7 @@ const title =
   "Moral Clean — Commercial Cleaning Equipment & Service in Pakistan";
 const description =
   "Moral Clean supplies industrial cleaning machines, replacement parts, and repair services for commercial and facility cleaning teams across Pakistan.";
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+const siteUrl = env.siteUrl;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -136,6 +139,7 @@ export default function RootLayout({
         <WebsiteSchema />
         {children}
         <Toaster />
+        <SpeedInsights />
       </body>
     </html>
   );

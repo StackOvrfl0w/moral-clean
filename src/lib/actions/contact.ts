@@ -1,26 +1,12 @@
 "use server";
 
+import { Resend } from "resend";
+
+import { env } from "@/config/env";
 import { createClient } from "@/lib/supabase/server";
+import type { ContactFormState, QuickQuoteFormState } from "./contact-types";
 
-export type QuickQuoteFormState = {
-  success: boolean;
-  error: string | null;
-};
-
-export type ContactFormState = {
-  success: boolean;
-  error: string | null;
-};
-
-export const initialQuickQuoteFormState: QuickQuoteFormState = {
-  success: false,
-  error: null,
-};
-
-export const initialContactFormState: ContactFormState = {
-  success: false,
-  error: null,
-};
+const resend = new Resend(env.resendApiKey);
 
 function normalizeValue(value: FormDataEntryValue | null) {
   return typeof value === "string" ? value.trim() : "";
@@ -65,10 +51,23 @@ export async function submitQuickQuote(
     };
   }
 
-  return {
-    success: true,
-    error: null,
-  };
+  await resend.emails.send({
+    from: env.resendFromEmail,
+    to: env.resendToEmail,
+    subject: `New Quick Quote Request – ${categoryContext}`,
+    text: [
+      `Name: ${name}`,
+      `Phone: ${phone}`,
+      email ? `Email: ${email}` : null,
+      `Category: ${categoryContext}`,
+      ``,
+      `Requirement:\n${requirement}`,
+    ]
+      .filter(Boolean)
+      .join("\n"),
+  });
+
+  return { success: true, error: null };
 }
 
 export async function submitContactForm(
@@ -111,8 +110,22 @@ export async function submitContactForm(
     };
   }
 
-  return {
-    success: true,
-    error: null,
-  };
+  await resend.emails.send({
+    from: env.resendFromEmail,
+    to: env.resendToEmail,
+    replyTo: email,
+    subject: subject ? `${subject} – ${name}` : `New Contact Form Submission – ${name}`,
+    text: [
+      `Name: ${name}`,
+      `Email: ${email}`,
+      `Phone: ${phone}`,
+      subject ? `Subject: ${subject}` : null,
+      ``,
+      `Message:\n${message}`,
+    ]
+      .filter(Boolean)
+      .join("\n"),
+  });
+
+  return { success: true, error: null };
 }

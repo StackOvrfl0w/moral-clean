@@ -5,10 +5,8 @@ import { CheckCircle2, Loader2, SendHorizontal } from "lucide-react";
 import { useFormState, useFormStatus } from "react-dom";
 import { toast } from "sonner";
 
-import {
-  initialContactFormState,
-  submitContactForm,
-} from "@/lib/actions/contact";
+import { initialContactFormState } from "@/lib/actions/contact-types";
+import { submitContactForm } from "@/lib/actions/contact";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";

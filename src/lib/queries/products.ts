@@ -1,5 +1,6 @@
 import { createClient as createSupabaseClient } from "@supabase/supabase-js";
 
+import { env } from "@/config/env";
 import { createClient as createServerSupabaseClient } from "@/lib/supabase/server";
 import {
   mockCategories,
@@ -52,10 +53,7 @@ type RawSupabaseProduct = Omit<ProductWithRelations, "category" | "images" | "ta
 };
 
 function hasSupabaseConfig() {
-  return Boolean(
-    process.env.NEXT_PUBLIC_SUPABASE_URL?.trim() &&
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY?.trim(),
-  );
+  return Boolean(env.supabaseUrl?.trim() && env.supabaseAnonKey?.trim());
 }
 
 function createPublicCatalogClient() {
@@ -64,8 +62,8 @@ function createPublicCatalogClient() {
   }
 
   return createSupabaseClient<Database>(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    env.supabaseUrl,
+    env.supabaseAnonKey,
     {
       auth: {
         autoRefreshToken: false,

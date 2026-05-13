@@ -20,12 +20,13 @@ import {
   Wrench,
 } from "lucide-react";
 
+import { env } from "@/config/env";
 import { CtaBanner } from "@/components/sections/CtaBanner";
 import { IndustriesStrip } from "@/components/sections/IndustriesStrip";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+const siteUrl = env.siteUrl;
 
 export const metadata: Metadata = {
   title: "Home",

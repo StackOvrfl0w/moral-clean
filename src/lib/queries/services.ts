@@ -1,13 +1,11 @@
 import { createClient as createSupabaseClient } from "@supabase/supabase-js";
 
+import { env } from "@/config/env";
 import { mockServices } from "@/lib/seed-data";
 import type { Database, Service } from "@/lib/types";
 
 function hasSupabaseConfig() {
-  return Boolean(
-    process.env.NEXT_PUBLIC_SUPABASE_URL?.trim() &&
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY?.trim(),
-  );
+  return Boolean(env.supabaseUrl?.trim() && env.supabaseAnonKey?.trim());
 }
 
 function createPublicClient() {
@@ -16,8 +14,8 @@ function createPublicClient() {
   }
 
   return createSupabaseClient<Database>(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    env.supabaseUrl,
+    env.supabaseAnonKey,
     {
       auth: {
         autoRefreshToken: false,

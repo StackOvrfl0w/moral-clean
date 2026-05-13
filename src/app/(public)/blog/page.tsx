@@ -6,9 +6,10 @@ import { ArrowRight } from "lucide-react";
 import { BlogCard } from "@/components/blog/BlogCard";
 import { NewsletterStrip } from "@/components/blog/NewsletterStrip";
 import { Button } from "@/components/ui/button";
+import { env } from "@/config/env";
 import { getAllPosts } from "@/lib/queries/blog";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+const siteUrl = env.siteUrl;
 
 export const metadata: Metadata = {
   title: "Blog",

@@ -5,10 +5,8 @@ import { useFormState, useFormStatus } from "react-dom";
 import { Headset, SendHorizontal } from "lucide-react";
 import { toast } from "sonner";
 
-import {
-  initialQuickQuoteFormState,
-  submitQuickQuote,
-} from "@/lib/actions/contact";
+import { initialQuickQuoteFormState } from "@/lib/actions/contact-types";
+import { submitQuickQuote } from "@/lib/actions/contact";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
