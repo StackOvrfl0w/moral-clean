@@ -60,7 +60,11 @@ function Wordmark() {
   );
 }
 
-export function Header() {
+interface HeaderProps {
+  settings: Record<string, string>;
+}
+
+export function Header({ settings }: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
@@ -76,15 +80,16 @@ export function Header() {
     };
   }, []);
 
+  const announcementText =
+    settings.announcement_bar_text ||
+    "Authorized distributor of leading international cleaning brands  |  +92 331 3195138";
+
   return (
     <header className="sticky top-0 z-50 bg-background">
       <div className="hidden bg-primary text-primary-foreground md:block">
         <div className="mx-auto flex h-9 max-w-7xl items-center justify-center px-6 text-xs font-medium">
           <Phone className="mr-2 size-3.5 text-accent" aria-hidden="true" />
-          <span>
-            Authorized distributor of leading international cleaning brands | +92
-            331 3195138
-          </span>
+          <span>{announcementText}</span>
         </div>
       </div>
 

@@ -50,13 +50,34 @@ function LinkedinIcon(props: SVGProps<SVGSVGElement>) {
   );
 }
 
-const socialLinks = [
-  { label: "Facebook", href: "#", Icon: FacebookIcon },
-  { label: "Instagram", href: "#", Icon: InstagramIcon },
-  { label: "LinkedIn", href: "#", Icon: LinkedinIcon },
-];
+function YoutubeIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" {...props}>
+      <path d="M21.8 8s-.2-1.4-.8-2c-.8-.8-1.6-.8-2-.9C16.8 5 12 5 12 5s-4.8 0-7 .1c-.4.1-1.2.1-2 .9-.6.6-.8 2-.8 2S2 9.6 2 11.2v1.5c0 1.6.2 3.2.2 3.2s.2 1.4.8 2c.8.8 1.8.8 2.3.9C6.8 19 12 19 12 19s4.8 0 7-.1c.4-.1 1.2-.1 2-.9.6-.6.8-2 .8-2s.2-1.6.2-3.2v-1.5C22 9.6 21.8 8 21.8 8ZM9.7 14.5V9l5.5 2.8-5.5 2.7Z" />
+    </svg>
+  );
+}
 
-export function Footer() {
+interface FooterProps {
+  settings: Record<string, string>;
+}
+
+export function Footer({ settings }: FooterProps) {
+  const socialLinks = [
+    { label: "Facebook", href: settings.social_facebook, Icon: FacebookIcon },
+    { label: "Instagram", href: settings.social_instagram, Icon: InstagramIcon },
+    { label: "LinkedIn", href: settings.social_linkedin, Icon: LinkedinIcon },
+    { label: "YouTube", href: settings.social_youtube, Icon: YoutubeIcon },
+  ].filter(({ href }) => Boolean(href));
+
+  const address = settings.business_address || "Shop no 01, Plot no 242, Sector 11-E, North Karachi, Karachi";
+  const phone = settings.business_phone || "+92 331 3195138";
+  const email = settings.business_email || "info@moralclean.com";
+  const hours = settings.business_hours || "Monday – Saturday, 9:00 AM – 6:00 PM";
+  const tagline = settings.business_tagline || "Pakistan's trusted partner for commercial cleaning equipment, parts, and responsive service support.";
+
+  const phoneDigits = phone.replace(/\D/g, "");
+
   return (
     <footer className="bg-primary text-primary-foreground">
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 lg:grid-cols-4 lg:px-8">
@@ -70,8 +91,7 @@ export function Footer() {
             </span>
           </Link>
           <p className="mt-5 max-w-sm text-sm leading-6 text-white/75">
-            Pakistan&apos;s trusted partner for commercial cleaning equipment,
-            parts, and responsive service support.
+            {tagline}
           </p>
         </div>
 
@@ -115,47 +135,52 @@ export function Footer() {
           <address className="mt-5 space-y-4 text-sm not-italic text-white/75">
             <p className="flex gap-3">
               <MapPin className="mt-0.5 size-4 shrink-0 text-accent" aria-hidden="true" />
-              <span>
-                Shop no 01, Plot no 242, Sector 11-E, North Karachi, Karachi
-              </span>
+              <span>{address}</span>
             </p>
             <p>
               <Link
-                href="tel:+923313195138"
+                href={`tel:+${phoneDigits}`}
                 className="flex gap-3 transition-colors hover:text-white"
               >
                 <Phone className="mt-0.5 size-4 shrink-0 text-accent" aria-hidden="true" />
-                <span>+92 331 3195138</span>
+                <span>{phone}</span>
               </Link>
             </p>
             <p>
               <Link
-                href="mailto:info@moralclean.com"
+                href={`mailto:${email}`}
                 className="flex gap-3 transition-colors hover:text-white"
               >
                 <Mail className="mt-0.5 size-4 shrink-0 text-accent" aria-hidden="true" />
-                <span>info@moralclean.com</span>
+                <span>{email}</span>
               </Link>
             </p>
+            {hours ? (
+              <p className="text-white/65 text-xs">{hours}</p>
+            ) : null}
           </address>
         </div>
       </div>
 
       <div className="border-t border-white/10">
         <div className="mx-auto flex max-w-7xl flex-col gap-4 px-4 py-5 text-sm text-white/65 sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
-          <p>© 2026 Moral Clean. All rights reserved.</p>
-          <div className="flex items-center gap-3" aria-label="Social links">
-            {socialLinks.map(({ label, href, Icon }) => (
-              <Link
-                key={label}
-                href={href}
-                className="flex size-8 items-center justify-center rounded-full border border-white/15 text-white/70 transition-colors hover:border-accent hover:text-accent"
-                aria-label={label}
-              >
-                <Icon className="size-4" />
-              </Link>
-            ))}
-          </div>
+          <p>© {new Date().getFullYear()} Moral Clean. All rights reserved.</p>
+          {socialLinks.length > 0 ? (
+            <div className="flex items-center gap-3" aria-label="Social links">
+              {socialLinks.map(({ label, href, Icon }) => (
+                <Link
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex size-8 items-center justify-center rounded-full border border-white/15 text-white/70 transition-colors hover:border-accent hover:text-accent"
+                  aria-label={label}
+                >
+                  <Icon className="size-4" />
+                </Link>
+              ))}
+            </div>
+          ) : null}
         </div>
       </div>
     </footer>

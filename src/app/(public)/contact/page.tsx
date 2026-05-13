@@ -1,17 +1,13 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import type { SVGProps } from "react";
-import {
-  Clock3,
-  Mail,
-  MapPin,
-  Phone,
-} from "lucide-react";
+import Link from "next/link";
+import { Clock3, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 
 import { env } from "@/config/env";
 import { ContactForm } from "@/components/contact/ContactForm";
 import { getProductBySlug } from "@/lib/queries/products";
 import { getServiceBySlug } from "@/lib/queries/services";
+import { getAllSettings } from "@/lib/queries/settings";
 
 const siteUrl = env.siteUrl;
 
@@ -60,11 +56,7 @@ function getParam(
   key: string,
 ) {
   const value = searchParams?.[key];
-
-  if (Array.isArray(value)) {
-    return value[0];
-  }
-
+  if (Array.isArray(value)) return value[0];
   return value;
 }
 
@@ -73,6 +65,16 @@ export default async function ContactPage({
 }: {
   searchParams?: Record<string, string | string[] | undefined>;
 }) {
+  const [settings, productResult, serviceResult] = await Promise.all([
+    getAllSettings(),
+    getParam(searchParams, "product")
+      ? getProductBySlug(getParam(searchParams, "product")!)
+      : Promise.resolve(null),
+    getParam(searchParams, "service")
+      ? getServiceBySlug(getParam(searchParams, "service")!)
+      : Promise.resolve(null),
+  ]);
+
   const productSlug = getParam(searchParams, "product");
   const serviceSlug = getParam(searchParams, "service");
 
@@ -80,14 +82,28 @@ export default async function ContactPage({
   let defaultMessage = "";
 
   if (productSlug) {
-    const product = await getProductBySlug(productSlug);
     defaultSubject = "Product Inquiry";
-    defaultMessage = `Inquiry about: ${product?.name || productSlug}\n`;
+    defaultMessage = `Inquiry about: ${productResult?.name || productSlug}\n`;
   } else if (serviceSlug) {
-    const service = await getServiceBySlug(serviceSlug);
     defaultSubject = "Service Request";
-    defaultMessage = `Inquiry about: ${service?.name || serviceSlug}\n`;
+    defaultMessage = `Inquiry about: ${serviceResult?.name || serviceSlug}\n`;
   }
+
+  const address = settings.business_address || "Shop no 01, Plot no 242, Sector 11-E, North Karachi, Karachi";
+  const phone = settings.business_phone || "+92 331 3195138";
+  const email = settings.business_email || "info@moralclean.com";
+  const hours = settings.business_hours || "Monday – Saturday, 9:00 AM – 6:00 PM";
+  const mapsUrl = settings.google_maps_embed_url || "";
+  const whatsappRaw = settings.contact_form_whatsapp || "";
+  const whatsappDigits = whatsappRaw.replace(/\D/g, "");
+
+  const phoneDigits = phone.replace(/\D/g, "");
+
+  const socialLinks = [
+    { label: "Facebook", href: settings.social_facebook, Icon: FacebookIcon },
+    { label: "Instagram", href: settings.social_instagram, Icon: InstagramIcon },
+    { label: "LinkedIn", href: settings.social_linkedin, Icon: LinkedinIcon },
+  ].filter(({ href }) => Boolean(href));
 
   return (
     <>
@@ -122,9 +138,7 @@ export default async function ContactPage({
                   <p className="text-xs font-semibold uppercase tracking-[0.12em] text-white/65">
                     Office
                   </p>
-                  <p className="mt-1 text-sm text-white/90">
-                    Shop no 01, Plot no 242, Sector 11-E, North Karachi, Karachi
-                  </p>
+                  <p className="mt-1 text-sm text-white/90">{address}</p>
                 </div>
               </div>
 
@@ -134,8 +148,11 @@ export default async function ContactPage({
                   <p className="text-xs font-semibold uppercase tracking-[0.12em] text-white/65">
                     Phone
                   </p>
-                  <Link href="tel:+923313195138" className="mt-1 block text-sm text-white hover:text-accent">
-                    +92 331 3195138
+                  <Link
+                    href={`tel:+${phoneDigits}`}
+                    className="mt-1 block text-sm text-white hover:text-accent"
+                  >
+                    {phone}
                   </Link>
                 </div>
               </div>
@@ -146,8 +163,11 @@ export default async function ContactPage({
                   <p className="text-xs font-semibold uppercase tracking-[0.12em] text-white/65">
                     Email
                   </p>
-                  <Link href="mailto:info@moralclean.com" className="mt-1 block text-sm text-white hover:text-accent">
-                    info@moralclean.com
+                  <Link
+                    href={`mailto:${email}`}
+                    className="mt-1 block text-sm text-white hover:text-accent"
+                  >
+                    {email}
                   </Link>
                 </div>
               </div>
@@ -158,31 +178,43 @@ export default async function ContactPage({
                   <p className="text-xs font-semibold uppercase tracking-[0.12em] text-white/65">
                     Hours
                   </p>
-                  <p className="mt-1 text-sm text-white/90">
-                    Monday - Saturday, 9:00 AM - 6:00 PM
-                  </p>
+                  <p className="mt-1 text-sm text-white/90">{hours}</p>
                 </div>
               </div>
             </div>
 
-            <div className="mt-8 border-t border-white/15 pt-5">
-              <p className="text-sm font-semibold text-white">Follow Us</p>
-              <div className="mt-3 flex items-center gap-3">
-                {[
-                  { label: "Facebook", href: "#", Icon: FacebookIcon },
-                  { label: "Instagram", href: "#", Icon: InstagramIcon },
-                  { label: "LinkedIn", href: "#", Icon: LinkedinIcon },
-                ].map(({ label, href, Icon }) => (
-                  <Link
-                    key={label}
-                    href={href}
-                    aria-label={label}
-                    className="flex size-9 items-center justify-center rounded-full border border-white/20 text-white/85 transition-colors hover:border-accent hover:text-accent"
-                  >
-                    <Icon className="size-4" />
-                  </Link>
-                ))}
-              </div>
+            <div className="mt-8 space-y-5 border-t border-white/15 pt-5">
+              {whatsappDigits ? (
+                <a
+                  href={`https://wa.me/${whatsappDigits}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex w-fit items-center gap-2 rounded-full border border-white/20 px-4 py-2 text-sm font-medium text-white transition-colors hover:border-accent hover:text-accent"
+                >
+                  <MessageCircle className="size-4" aria-hidden="true" />
+                  Chat on WhatsApp
+                </a>
+              ) : null}
+
+              {socialLinks.length > 0 ? (
+                <div>
+                  <p className="text-sm font-semibold text-white">Follow Us</p>
+                  <div className="mt-3 flex items-center gap-3">
+                    {socialLinks.map(({ label, href, Icon }) => (
+                      <Link
+                        key={label}
+                        href={href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={label}
+                        className="flex size-9 items-center justify-center rounded-full border border-white/20 text-white/85 transition-colors hover:border-accent hover:text-accent"
+                      >
+                        <Icon className="size-4" />
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              ) : null}
             </div>
           </aside>
 
@@ -197,14 +229,21 @@ export default async function ContactPage({
 
       <section className="bg-background pb-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          {/* Replace this placeholder iframe URL with official Google Maps embed code from the client account. */}
-          <iframe
-            title="Moral Clean office map"
-            src="https://maps.google.com/maps?q=Shop%20no%2001,%20Plot%20no%20242,%20Sector%2011-E,%20North%20Karachi,%20Karachi&output=embed"
-            className="h-[400px] w-full rounded-lg border border-border"
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-          />
+          {mapsUrl ? (
+            <iframe
+              title="Moral Clean office map"
+              src={mapsUrl}
+              className="h-[400px] w-full rounded-lg border border-border"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
+          ) : (
+            <div className="flex h-[400px] w-full flex-col items-center justify-center gap-3 rounded-lg border border-border bg-muted text-muted-foreground">
+              <MapPin className="size-10 text-muted-foreground/40" aria-hidden="true" />
+              <p className="font-medium">{address}</p>
+              <p className="text-sm">Map embed will appear here once configured in admin settings.</p>
+            </div>
+          )}
         </div>
       </section>
 

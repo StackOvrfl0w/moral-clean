@@ -144,6 +144,11 @@ export type Database = {
         AdminUser,
         Insertable<AdminUser, "user_id">
       >;
+      site_settings: TableDefinition<
+        { id: string; key: string; value: string | null; updated_at: string | null },
+        { key: string; value?: string | null; updated_at?: string | null },
+        { key?: string; value?: string | null; updated_at?: string | null }
+      >;
     };
     Views: {
       [_ in never]: never;

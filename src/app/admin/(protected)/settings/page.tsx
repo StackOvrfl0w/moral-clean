@@ -1,23 +1,17 @@
 import { ChangePasswordDialog } from "@/components/admin/ChangePasswordDialog";
+import { SettingsForm } from "@/components/admin/SettingsForm";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { requireAdmin } from "@/lib/auth";
+import { getAllSettings } from "@/lib/queries/settings";
 
 export default async function AdminSettingsPage() {
   const user = await requireAdmin();
+  const settings = await getAllSettings();
 
   return (
     <div className="space-y-6">
-      <h1 className="text-3xl font-display font-bold text-primary">Settings</h1>
-      <Card>
-        <CardHeader>
-          <CardTitle>More settings coming soon</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p className="text-sm text-muted-foreground">
-            Additional business, SEO, and integration settings will be added here.
-          </p>
-        </CardContent>
-      </Card>
+      <h1 className="font-display text-3xl font-bold text-primary">Settings</h1>
+      <SettingsForm settings={settings} />
       <Card>
         <CardHeader>
           <CardTitle>Account</CardTitle>

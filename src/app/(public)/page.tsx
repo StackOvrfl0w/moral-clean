@@ -25,6 +25,7 @@ import { CtaBanner } from "@/components/sections/CtaBanner";
 import { IndustriesStrip } from "@/components/sections/IndustriesStrip";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { getAllSettings } from "@/lib/queries/settings";
 
 const siteUrl = env.siteUrl;
 
@@ -228,7 +229,15 @@ function MediaPlaceholder({
   );
 }
 
-export default function Home() {
+export default async function Home() {
+  const settings = await getAllSettings();
+
+  const heroLine1 = settings.homepage_hero_heading_line1 || "Industrial-Grade";
+  const heroLine2 = settings.homepage_hero_heading_line2 || "Cleaning Equipment";
+  const heroSub =
+    settings.homepage_hero_subheading ||
+    "Moral Clean supplies, installs, and services professional cleaning machines for factories, hospitals, hotels, malls, and cleaning contractors across Pakistan.";
+
   return (
     <>
       <section className="relative min-h-[85vh] overflow-hidden bg-[linear-gradient(135deg,#ffffff_0%,#f8fafc_58%,#eef8ff_100%)]">
@@ -240,16 +249,14 @@ export default function Home() {
             </p>
             <h1 className="max-w-4xl">
               <span className="block font-medium text-primary/70">
-                Industrial-Grade
+                {heroLine1}
               </span>
               <span className="block font-extrabold text-accent">
-                Cleaning Equipment
+                {heroLine2}
               </span>
             </h1>
             <p className="mt-6 max-w-2xl text-lg text-muted-foreground sm:text-xl">
-              Moral Clean supplies, installs, and services professional cleaning
-              machines for factories, hospitals, hotels, malls, and cleaning
-              contractors across Pakistan.
+              {heroSub}
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Button

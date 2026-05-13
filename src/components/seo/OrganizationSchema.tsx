@@ -2,11 +2,28 @@ import { env } from "@/config/env";
 
 const siteUrl = env.siteUrl;
 
-export function OrganizationSchema() {
+interface OrganizationSchemaProps {
+  settings: Record<string, string>;
+}
+
+export function OrganizationSchema({ settings }: OrganizationSchemaProps) {
+  const name = settings.business_name || "Moral Clean";
+  const telephone = settings.business_phone
+    ? settings.business_phone.replace(/\s/g, "").replace(/^00/, "+")
+    : "+92-331-3195138";
+  const email = settings.business_email || "info@moralclean.com";
+
+  const sameAs = [
+    settings.social_facebook,
+    settings.social_instagram,
+    settings.social_linkedin,
+    settings.social_youtube,
+  ].filter(Boolean);
+
   const schema = {
     "@context": "https://schema.org",
     "@type": ["Organization", "LocalBusiness"],
-    name: "Moral Clean",
+    name,
     url: siteUrl,
     logo: `${siteUrl}/logo.png`,
     image: `${siteUrl}/og-image.jpg`,
@@ -20,8 +37,8 @@ export function OrganizationSchema() {
       postalCode: "75850",
       addressCountry: "PK",
     },
-    telephone: "+92-331-3195138",
-    email: "info@moralclean.com",
+    telephone,
+    email,
     openingHoursSpecification: [
       {
         "@type": "OpeningHoursSpecification",
@@ -37,7 +54,7 @@ export function OrganizationSchema() {
         closes: "18:00",
       },
     ],
-    sameAs: ["#", "#", "#"],
+    sameAs: sameAs.length > 0 ? sameAs : undefined,
     areaServed: "PK",
     priceRange: "$$",
   };

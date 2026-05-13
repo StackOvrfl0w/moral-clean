@@ -27,7 +27,7 @@ async function sendEmail(payload: {
   if (error) {
     console.error("[Resend] Failed to send email:", error);
   } else {
-    console.log("[Resend] Email sent, id:", data?.id);
+    console.log("[Resend] Email sent, id:");
   }
 }
 
