@@ -1,12 +1,11 @@
 import { env } from "@/config/env";
+import { getAllSettings } from "@/lib/queries/settings";
 
 const siteUrl = env.siteUrl;
 
-interface OrganizationSchemaProps {
-  settings: Record<string, string>;
-}
+export async function OrganizationSchema() {
+  const settings = await getAllSettings();
 
-export function OrganizationSchema({ settings }: OrganizationSchemaProps) {
   const name = settings.business_name || "Moral Clean";
   const telephone = settings.business_phone
     ? settings.business_phone.replace(/\s/g, "").replace(/^00/, "+")

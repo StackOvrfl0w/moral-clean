@@ -7,7 +7,6 @@ import { env } from "@/config/env";
 import { OrganizationSchema } from "@/components/seo/OrganizationSchema";
 import { WebsiteSchema } from "@/components/seo/WebsiteSchema";
 import { Toaster } from "@/components/ui/sonner";
-import { getAllSettings } from "@/lib/queries/settings";
 import "./globals.css";
 
 const inter = localFont({
@@ -126,19 +125,17 @@ export const metadata: Metadata = {
   verification: {},
 };
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const settings = await getAllSettings();
-
   return (
     <html lang="en" suppressHydrationWarning>
       <body
         className={`${inter.variable} ${jakarta.variable} font-sans antialiased`}
       >
-        <OrganizationSchema settings={settings} />
+        <OrganizationSchema />
         <WebsiteSchema />
         {children}
         <Toaster />

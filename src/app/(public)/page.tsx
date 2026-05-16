@@ -113,19 +113,25 @@ const services = [
     title: "Motor Repairing",
     description:
       "Diagnosis, rewinding coordination, fitting, and testing for commercial cleaning machine motors.",
-    icon: Settings,
+    image: "/hero-placeholder.jpg",
+    imageAlt: "Technician repairing industrial cleaning machine motor",
+    imagePosition: "object-[50%_38%]",
   },
   {
     title: "Parts Replacement",
     description:
       "Brushes, squeegees, hoses, filters, motors, batteries, and consumables sourced to match your machine.",
-    icon: Wrench,
+    image: "/hero-placeholder.jpg",
+    imageAlt: "Replacement parts for commercial cleaning equipment",
+    imagePosition: "object-[50%_48%]",
   },
   {
     title: "Brush Refilling",
     description:
       "Refilling and replacement support for scrubber, sweeper, and single-disc machine brushes.",
-    icon: BrushCleaning,
+    image: "/hero-placeholder.jpg",
+    imageAlt: "Industrial cleaning brushes for maintenance and refilling",
+    imagePosition: "object-[50%_56%]",
   },
 ];
 
@@ -311,7 +317,11 @@ export default async function Home() {
         </div>
       </section>
 
-      <SectionReveal className="bg-background py-20">
+      <SectionReveal>
+        <IndustriesStrip />
+      </SectionReveal>
+
+      <SectionReveal className="bg-background py-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeader eyebrow="Product Range" title="Explore by Category" />
           <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
@@ -335,7 +345,7 @@ export default async function Home() {
         </div>
       </SectionReveal>
 
-      <SectionReveal className="bg-muted py-20">
+      <SectionReveal className="bg-muted py-14">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeader
             title="Why Moral Clean"
@@ -345,42 +355,14 @@ export default async function Home() {
             {valueProps.map(({ title, description, icon: Icon }) => (
               <div
                 key={title}
-                className="rounded-md border border-border bg-white p-7 shadow-sm"
+                className="rounded-md border border-border bg-white p-5 shadow-sm"
               >
-                <Icon className="size-10 text-accent" aria-hidden="true" />
-                <h3 className="mt-6">{title}</h3>
-                <p className="mt-3 text-sm text-muted-foreground">
+                <Icon className="size-8 text-accent" aria-hidden="true" />
+                <h3 className="mt-4">{title}</h3>
+                <p className="mt-2 text-sm text-muted-foreground">
                   {description}
                 </p>
               </div>
-            ))}
-          </div>
-        </div>
-      </SectionReveal>
-
-      <SectionReveal className="bg-background py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <SectionHeader eyebrow="Top Picks" title="Featured Equipment" />
-          <div className="-mx-4 flex snap-x gap-4 overflow-x-auto px-4 pb-4 lg:mx-0 lg:grid lg:grid-cols-4 lg:overflow-visible lg:px-0 lg:pb-0">
-            {featuredProducts.map(({ brand, name, spec, slug, icon: Icon }) => (
-              <article
-                key={slug}
-                className="min-w-[280px] snap-start rounded-md border border-border bg-white p-4 shadow-sm transition duration-200 hover:-translate-y-1 hover:border-accent hover:shadow-lg hover:shadow-primary/5 lg:min-w-0"
-              >
-                <MediaPlaceholder Icon={Icon} className="aspect-[4/3]" />
-                <p className="mt-5 text-xs font-bold uppercase tracking-[0.16em] text-accent">
-                  {brand}
-                </p>
-                <h3 className="mt-2">{name}</h3>
-                <p className="mt-3 text-sm text-muted-foreground">{spec}</p>
-                <Link
-                  href={`/products/${slug}`}
-                  className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-accent"
-                >
-                  View Details
-                  <ArrowRight className="size-4" aria-hidden="true" />
-                </Link>
-              </article>
             ))}
           </div>
         </div>
@@ -410,13 +392,24 @@ export default async function Home() {
             </Button>
           </div>
           <div className="grid gap-5 lg:grid-cols-3">
-            {services.map(({ title, description, icon: Icon }) => (
+            {services.map(({ title, description, image, imageAlt, imagePosition }) => (
               <div
                 key={title}
-                className="rounded-md border border-white/10 bg-white/5 p-6"
+                className="group overflow-hidden rounded-md border border-white/10 bg-white/5 p-4"
               >
-                <Icon className="size-9 text-accent" aria-hidden="true" />
-                <h3 className="mt-5 text-white">{title}</h3>
+                <div className="relative aspect-[16/10] overflow-hidden rounded-md border border-white/10 bg-white/10">
+                  <Image
+                    src={image}
+                    alt={imageAlt}
+                    fill
+                    sizes="(min-width: 1024px) 22vw, 100vw"
+                    className={cn(
+                      "object-cover transition duration-500 group-hover:scale-105",
+                      imagePosition,
+                    )}
+                  />
+                </div>
+                <h3 className="mt-4 text-white">{title}</h3>
                 <p className="mt-3 text-sm text-white/70">{description}</p>
               </div>
             ))}
@@ -425,36 +418,60 @@ export default async function Home() {
       </SectionReveal>
 
       <SectionReveal>
-        <IndustriesStrip />
-      </SectionReveal>
-
-      <SectionReveal>
         <CtaBanner />
       </SectionReveal>
 
-      <SectionReveal className="bg-muted py-20">
+      <SectionReveal className="bg-background py-14">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <SectionHeader eyebrow="Top Picks" title="Featured Equipment" />
+          <div className="-mx-4 flex snap-x gap-4 overflow-x-auto px-4 pb-2 lg:mx-0 lg:grid lg:grid-cols-4 lg:overflow-visible lg:px-0">
+            {featuredProducts.map(({ brand, name, spec, slug, icon: Icon }) => (
+              <article
+                key={slug}
+                className="min-w-[250px] snap-start rounded-md border border-border bg-white p-3 shadow-sm transition duration-200 hover:-translate-y-1 hover:border-accent hover:shadow-lg hover:shadow-primary/5 lg:min-w-0"
+              >
+                <MediaPlaceholder Icon={Icon} className="aspect-[4/3]" />
+                <p className="mt-4 text-[11px] font-bold uppercase tracking-[0.14em] text-accent">
+                  {brand}
+                </p>
+                <h3 className="mt-1 text-lg">{name}</h3>
+                <p className="mt-2 text-sm text-muted-foreground">{spec}</p>
+                <Link
+                  href={`/products/${slug}`}
+                  className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-accent"
+                >
+                  View Details
+                  <ArrowRight className="size-4" aria-hidden="true" />
+                </Link>
+              </article>
+            ))}
+          </div>
+        </div>
+      </SectionReveal>
+
+      <SectionReveal className="bg-muted py-12">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeader title="Insights & Guides" />
-          <div className="grid gap-6 lg:grid-cols-3">
+          <div className="grid gap-4 lg:grid-cols-3">
             {blogPosts.map((post, index) => (
               <article
                 key={post.href}
-                className="rounded-md border border-border bg-white p-4 shadow-sm"
+                className="rounded-md border border-border bg-white p-3 shadow-sm"
               >
                 <MediaPlaceholder
                   Icon={[BrushCleaning, Wrench, Gauge][index]}
-                  className="aspect-[16/10]"
+                  className="aspect-[16/9]"
                 />
-                <p className="mt-5 text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+                <p className="mt-3 text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
                   {post.date}
                 </p>
-                <h3 className="mt-2">{post.title}</h3>
-                <p className="mt-3 text-sm text-muted-foreground">
+                <h3 className="mt-1 text-lg">{post.title}</h3>
+                <p className="mt-2 text-sm text-muted-foreground [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2]">
                   {post.excerpt}
                 </p>
                 <Link
                   href={post.href}
-                  className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-accent"
+                  className="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-accent"
                 >
                   Read more
                   <ArrowRight className="size-4" aria-hidden="true" />
