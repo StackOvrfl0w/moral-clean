@@ -22,7 +22,7 @@ async function sendEmail(payload: {
   text: string;
 }) {
   const resend = new Resend(env.resendApiKey);
-  const { data, error } = await resend.emails.send(payload);
+  const { error } = await resend.emails.send(payload);
 
   if (error) {
     console.error("[Resend] Failed to send email:", error);
