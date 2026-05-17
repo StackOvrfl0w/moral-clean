@@ -127,10 +127,28 @@
 
 @layer utilities {
   .font-display {
-    font-family: var(--font-display), var(--font-inter), Arial, Helvetica, sans-serif;
+    font-family:
+      var(--font-display), var(--font-inter), Arial, Helvetica, sans-serif;
   }
 
   .text-balance {
     text-wrap: balance;
   }
+}
+
+/* Industries Strip Marquee Animation */
+@keyframes industries-marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.industries-marquee-track {
+  display: flex;
+  width: max-content;
+  gap: 0.75rem;
+  animation: industries-marquee 28s linear infinite;
 }

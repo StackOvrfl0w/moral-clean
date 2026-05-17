@@ -33,16 +33,19 @@ export function IndustriesStrip({
         <div className="mb-10 text-center">
           <h2>{title}</h2>
         </div>
-        <div className="flex gap-3 overflow-x-auto pb-3">
-          {industries.map(({ label, icon: Icon }) => (
-            <div
-              key={label}
-              className="flex min-w-fit items-center gap-3 rounded-md border border-border bg-white px-4 py-3 text-sm font-semibold text-primary shadow-sm"
-            >
-              <Icon className="size-5 text-accent" aria-hidden="true" />
-              <span>{label}</span>
-            </div>
-          ))}
+        <div className="overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
+          <div className="industries-marquee-track pointer-events-none select-none pb-3">
+            {[...industries, ...industries].map(({ label, icon: Icon }, index) => (
+              <div
+                key={`${label}-${index}`}
+                className="flex shrink-0 items-center gap-3 rounded-md border border-border bg-white px-4 py-3 text-sm font-semibold text-primary shadow-sm"
+                aria-hidden={index >= industries.length}
+              >
+                <Icon className="size-5 text-accent" aria-hidden="true" />
+                <span>{label}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
