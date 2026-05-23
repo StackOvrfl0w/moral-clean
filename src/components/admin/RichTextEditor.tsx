@@ -70,6 +70,7 @@ export function RichTextEditor({ value, onChange }: RichTextEditorProps) {
   if (!editor) return <Input disabled value="Loading editor..." />;
 
   function openLinkDialog() {
+    if (!editor) return;
     const { from, to } = editor.state.selection;
     if (from === to) {
       setLinkError(true);
@@ -85,6 +86,7 @@ export function RichTextEditor({ value, onChange }: RichTextEditorProps) {
   }
 
   function handleConfirm() {
+    if (!editor) return;
     const url = dialog.inputValue.trim();
     if (dialog.mode === "link") {
       if (!url) {
