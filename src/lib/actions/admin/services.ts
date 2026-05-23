@@ -12,6 +12,27 @@ function normalize(value: FormDataEntryValue | null) {
   return text || null;
 }
 
+export async function uploadServiceImage(formData: FormData): Promise<{ url: string }> {
+  await requireAdmin();
+  const file = formData.get("file");
+  if (!(file instanceof File)) throw new Error("No file selected.");
+
+  const ext = file.name.split(".").pop() || "jpg";
+  const path = `services/${Date.now()}-${crypto.randomUUID()}.${ext}`;
+  const supabase = createClient();
+  const { error } = await supabase.storage.from("product images").upload(path, file, {
+    contentType: file.type,
+    upsert: false,
+  });
+  if (error) throw new Error(error.message);
+
+  const {
+    data: { publicUrl },
+  } = supabase.storage.from("product images").getPublicUrl(path);
+
+  return { url: publicUrl };
+}
+
 export async function createService(formData: FormData) {
   await requireAdmin();
   const name = normalize(formData.get("name"));

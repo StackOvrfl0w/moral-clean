@@ -3,7 +3,6 @@ import Link from "next/link";
 import {
   ArrowRight,
   BrushCleaning,
-  CheckCircle2,
   Cog,
   MapPin,
   Settings,
@@ -21,7 +20,6 @@ import {
 import { Button } from "@/components/ui/button";
 import { env } from "@/config/env";
 import { getServices } from "@/lib/queries/services";
-import type { Service } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
 const siteUrl = env.siteUrl;
@@ -118,44 +116,6 @@ function serviceIcon(iconName: string | null) {
   return Cog;
 }
 
-function includedItems(service: Service) {
-  if (service.slug === "motor-repairing") {
-    return [
-      "Fault diagnosis and load testing",
-      "Motor dismantling and inspection",
-      "Rewinding coordination where required",
-      "Bearing, seal, and alignment checks",
-      "Post-repair performance validation",
-    ];
-  }
-
-  if (service.slug === "parts-replacement") {
-    return [
-      "Part compatibility verification",
-      "Original spare parts sourcing",
-      "Wear-part replacement and fitting",
-      "Calibration and functional checks",
-      "Operator handover notes",
-    ];
-  }
-
-  if (service.slug === "brush-refilling") {
-    return [
-      "Brush condition assessment",
-      "Refilling and balancing support",
-      "Brush type recommendation by surface",
-      "Replacement where required",
-      "Run-test for cleaning consistency",
-    ];
-  }
-
-  return [
-    "Service requirement assessment",
-    "Technical work by trained team",
-    "Parts and labor transparency",
-    "Functional quality checks",
-  ];
-}
 
 export default async function ServicesPage() {
   const services = await getServices();
@@ -231,7 +191,6 @@ export default async function ServicesPage() {
           <div className="space-y-8">
             {services.map((service, index) => {
               const Icon = serviceIcon(service.icon_name);
-              const included = includedItems(service);
               const mediaFirst = index % 2 === 0;
 
               return (
@@ -241,14 +200,30 @@ export default async function ServicesPage() {
                 >
                   <div
                     className={cn(
-                      "relative order-2 overflow-hidden rounded-md border border-border bg-[linear-gradient(130deg,#f8fafc_0%,#e9f5ff_100%)] p-6 lg:order-1",
+                      "relative order-2 overflow-hidden rounded-md border border-border lg:order-1",
+                      service.image_url
+                        ? "bg-muted"
+                        : "bg-[linear-gradient(130deg,#f8fafc_0%,#e9f5ff_100%)] p-6",
                       !mediaFirst && "lg:order-2",
                     )}
                   >
-                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_25%_25%,rgba(14,165,233,0.2),transparent_35%),radial-gradient(circle_at_75%_75%,rgba(10,37,64,0.08),transparent_40%)]" />
-                    <div className="relative flex h-full min-h-[240px] items-center justify-center">
-                      <Icon className="size-20 text-primary/65" aria-hidden="true" />
-                    </div>
+                    {service.image_url ? (
+                      <div className="min-h-[240px]">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={service.image_url}
+                          alt={service.name}
+                          className="h-full w-full object-contain rounded-md"
+                        />
+                      </div>
+                    ) : (
+                      <>
+                        <div className="absolute inset-0 bg-[radial-gradient(circle_at_25%_25%,rgba(14,165,233,0.2),transparent_35%),radial-gradient(circle_at_75%_75%,rgba(10,37,64,0.08),transparent_40%)]" />
+                        <div className="relative flex h-full min-h-[240px] items-center justify-center">
+                          <Icon className="size-20 text-primary/65" aria-hidden="true" />
+                        </div>
+                      </>
+                    )}
                   </div>
 
                   <div className={cn("order-1 lg:order-2", !mediaFirst && "lg:order-1")}>
@@ -259,18 +234,6 @@ export default async function ServicesPage() {
                     <p className="mt-4 text-sm leading-7 text-muted-foreground">
                       {service.long_description || "Detailed service scope is shared after an initial technical assessment."}
                     </p>
-
-                    <div className="mt-5">
-                      <h3 className="text-base font-semibold text-primary">What&apos;s included</h3>
-                      <ul className="mt-3 space-y-2">
-                        {included.map((item) => (
-                          <li key={item} className="flex items-start gap-2 text-sm text-muted-foreground">
-                            <CheckCircle2 className="mt-0.5 size-4 text-accent" aria-hidden="true" />
-                            <span>{item}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
 
                     <Button asChild className="mt-6 bg-primary text-primary-foreground hover:bg-primary/90">
                       <Link href={`/contact?service=${service.slug}`}>Request This Service</Link>

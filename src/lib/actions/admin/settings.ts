@@ -1,6 +1,6 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 
 import { requireAdmin } from "@/lib/auth";
 import { createClient } from "@/lib/supabase/server";
@@ -23,8 +23,14 @@ export async function updateSettings(
 
   if (error) return { success: false, error: error.message };
 
+  revalidateTag("site-settings");
   revalidatePath("/", "layout");
+  revalidatePath("/");
+  revalidatePath("/about");
   revalidatePath("/contact");
+  revalidatePath("/services");
+  revalidatePath("/products");
+  revalidatePath("/blog");
   revalidatePath("/admin/settings");
 
   return { success: true };

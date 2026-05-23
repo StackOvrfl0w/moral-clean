@@ -44,9 +44,20 @@ function useSection(keys: string[], settings: Record<string, string>) {
   return { values, set, saving, save };
 }
 
-function SaveButton({ saving }: { saving: boolean }) {
+function SaveButton({
+  saving,
+  onSave,
+}: {
+  saving: boolean;
+  onSave: () => void;
+}) {
   return (
-    <Button type="button" disabled={saving} className="min-w-[96px]">
+    <Button
+      type="button"
+      onClick={onSave}
+      disabled={saving}
+      className="min-w-[96px]"
+    >
       {saving ? <Loader2 className="size-4 animate-spin" /> : "Save Changes"}
     </Button>
   );
@@ -133,7 +144,7 @@ export function SettingsForm({ settings }: Props) {
       <Card>
         <CardHeader className="flex flex-row items-center justify-between gap-4 pb-2">
           <CardTitle>Business Information</CardTitle>
-          <SaveButton saving={business.saving} />
+          <SaveButton saving={business.saving} onSave={business.save} />
         </CardHeader>
         <CardContent className="grid gap-5 sm:grid-cols-2">
           <Field label="Business Name">
@@ -187,7 +198,7 @@ export function SettingsForm({ settings }: Props) {
       <Card>
         <CardHeader className="flex flex-row items-center justify-between gap-4 pb-2">
           <CardTitle>Social Media &amp; Contact Links</CardTitle>
-          <SaveButton saving={social.saving} />
+          <SaveButton saving={social.saving} onSave={social.save} />
         </CardHeader>
         <CardContent className="grid gap-5 sm:grid-cols-2">
           <Field label="Facebook URL" hint="Leave blank to hide icon.">
@@ -250,7 +261,7 @@ export function SettingsForm({ settings }: Props) {
       <Card>
         <CardHeader className="flex flex-row items-center justify-between gap-4 pb-2">
           <CardTitle>SEO Defaults</CardTitle>
-          <SaveButton saving={seo.saving} />
+          <SaveButton saving={seo.saving} onSave={seo.save} />
         </CardHeader>
         <CardContent className="grid gap-5">
           <Field label="Default Meta Title">
@@ -282,7 +293,7 @@ export function SettingsForm({ settings }: Props) {
       <Card>
         <CardHeader className="flex flex-row items-center justify-between gap-4 pb-2">
           <CardTitle>Homepage Content</CardTitle>
-          <SaveButton saving={homepage.saving} />
+          <SaveButton saving={homepage.saving} onSave={homepage.save} />
         </CardHeader>
         <CardContent className="grid gap-5 sm:grid-cols-2">
           <Field
