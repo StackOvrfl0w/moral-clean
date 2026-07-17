@@ -47,7 +47,9 @@ type SpecEntry = {
 
 const specIcons = [Gauge, Settings, PackageCheck, Cog];
 
-function isRecord(value: Json | null): value is Record<string, Json | undefined> {
+function isRecord(
+  value: Json | null,
+): value is Record<string, Json | undefined> {
   return Boolean(value && typeof value === "object" && !Array.isArray(value));
 }
 
@@ -122,7 +124,18 @@ function renderDescription(product: ProductWithRelations) {
   const content =
     product.long_description ||
     product.short_description ||
-    "Detailed product description available on request. Contact Moral Clean with your site requirements, cleaning area, and expected duty cycle for a practical recommendation.";
+    "<p>Detailed product description available on request. Contact Moral Clean with your site requirements, cleaning area, and expected duty cycle for a practical recommendation.</p>";
+
+  const isHtml = /<[a-z][\s\S]*>/i.test(content);
+
+  if (isHtml) {
+    return (
+      <div
+        className="prose prose-sm max-w-none text-muted-foreground"
+        dangerouslySetInnerHTML={{ __html: content }}
+      />
+    );
+  }
 
   return content
     .split(/\n+/)
@@ -252,7 +265,10 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
             className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground"
             aria-label="Breadcrumb"
           >
-            <Link href="/" className="inline-flex items-center gap-1 hover:text-primary">
+            <Link
+              href="/"
+              className="inline-flex items-center gap-1 hover:text-primary"
+            >
               <Home className="size-4" aria-hidden="true" />
               Home
             </Link>
@@ -329,12 +345,17 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
                         key={entry.key}
                         className="flex items-center gap-3 rounded-md border border-border bg-muted/60 px-4 py-3"
                       >
-                        <Icon className="size-5 text-accent" aria-hidden="true" />
+                        <Icon
+                          className="size-5 text-accent"
+                          aria-hidden="true"
+                        />
                         <div>
                           <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
                             {entry.label}
                           </p>
-                          <p className="font-semibold text-primary">{entry.value}</p>
+                          <p className="font-semibold text-primary">
+                            {entry.value}
+                          </p>
                         </div>
                       </div>
                     );
@@ -355,7 +376,9 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
                 size="lg"
                 className="w-full bg-accent text-accent-foreground hover:bg-accent/90 sm:w-auto"
               >
-                <Link href={`/contact?product=${product.slug}`}>Request a Quote</Link>
+                <Link href={`/contact?product=${product.slug}`}>
+                  Request a Quote
+                </Link>
               </Button>
               <Button
                 asChild
@@ -420,7 +443,9 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
                       {specEntries.map((entry, index) => (
                         <tr
                           key={entry.key}
-                          className={cn(index % 2 === 0 ? "bg-white" : "bg-muted/60")}
+                          className={cn(
+                            index % 2 === 0 ? "bg-white" : "bg-muted/60",
+                          )}
                         >
                           <th className="w-1/2 px-5 py-4 font-semibold text-primary">
                             {entry.label}
@@ -445,18 +470,24 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
             >
               <div className="grid gap-5 text-sm leading-6 text-muted-foreground md:grid-cols-3">
                 <p>
-                  <span className="font-semibold text-primary">Motor repair:</span>{" "}
+                  <span className="font-semibold text-primary">
+                    Motor repair:
+                  </span>{" "}
                   Moral Clean supports diagnosis, repair coordination, fitting,
                   and testing for compatible motors used in commercial cleaning
                   equipment.
                 </p>
                 <p>
-                  <span className="font-semibold text-primary">Parts replacement:</span>{" "}
+                  <span className="font-semibold text-primary">
+                    Parts replacement:
+                  </span>{" "}
                   We source and replace wear parts including squeegees, filters,
                   hoses, switches, batteries, and other operating consumables.
                 </p>
                 <p>
-                  <span className="font-semibold text-primary">Brush refilling:</span>{" "}
+                  <span className="font-semibold text-primary">
+                    Brush refilling:
+                  </span>{" "}
                   Brush refilling and replacement support is available for
                   scrubbers, sweepers, and single-disc floor machines.
                 </p>
@@ -494,14 +525,20 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
       <section className="bg-primary py-16 text-primary-foreground">
         <div className="mx-auto flex max-w-7xl flex-col gap-6 px-4 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
           <div>
-            <h2 className="text-white">Need help choosing the right equipment?</h2>
+            <h2 className="text-white">
+              Need help choosing the right equipment?
+            </h2>
             <p className="mt-3 max-w-2xl text-white/70">
               Share your floor area, cleaning schedule, and site conditions. Our
               team will recommend equipment that fits the job and the service
               plan behind it.
             </p>
           </div>
-          <Button asChild size="lg" className="w-fit bg-accent text-accent-foreground hover:bg-accent/90">
+          <Button
+            asChild
+            size="lg"
+            className="w-fit bg-accent text-accent-foreground hover:bg-accent/90"
+          >
             <Link href="/contact">Talk to Our Team</Link>
           </Button>
         </div>

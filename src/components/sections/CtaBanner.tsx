@@ -19,7 +19,10 @@ export function CtaBanner({
   secondaryHref?: string;
 }) {
   return (
-    <section className="bg-accent py-16 text-accent-foreground">
+    <section
+      className="py-16 text-accent-foreground"
+      style={{ background: "linear-gradient(to right, #00defc, #00a8ff)" }}
+    >
       <div className="mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
         <h2 className="mx-auto max-w-3xl text-primary">{heading}</h2>
         <p className="mx-auto mt-4 max-w-2xl text-primary/75">{subtitle}</p>
@@ -35,7 +38,7 @@ export function CtaBanner({
             asChild
             size="lg"
             variant="outline"
-            className="border-primary/25 bg-white/15 text-primary hover:bg-white/25"
+            className="border-white bg-white text-primary hover:bg-white/90"
           >
             <Link href={secondaryHref}>
               <Phone className="size-4" aria-hidden="true" />

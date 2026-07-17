@@ -35,7 +35,15 @@ function FacebookIcon(props: SVGProps<SVGSVGElement>) {
 function InstagramIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>
-      <rect width="15" height="15" x="4.5" y="4.5" rx="4" stroke="currentColor" strokeWidth="2" />
+      <rect
+        width="15"
+        height="15"
+        x="4.5"
+        y="4.5"
+        rx="4"
+        stroke="currentColor"
+        strokeWidth="2"
+      />
       <circle cx="12" cy="12" r="3.2" stroke="currentColor" strokeWidth="2" />
       <circle cx="16.9" cy="7.4" r="1.1" fill="currentColor" />
     </svg>
@@ -65,16 +73,25 @@ interface FooterProps {
 export function Footer({ settings }: FooterProps) {
   const socialLinks = [
     { label: "Facebook", href: settings.social_facebook, Icon: FacebookIcon },
-    { label: "Instagram", href: settings.social_instagram, Icon: InstagramIcon },
+    {
+      label: "Instagram",
+      href: settings.social_instagram,
+      Icon: InstagramIcon,
+    },
     { label: "LinkedIn", href: settings.social_linkedin, Icon: LinkedinIcon },
     { label: "YouTube", href: settings.social_youtube, Icon: YoutubeIcon },
   ].filter(({ href }) => Boolean(href));
 
-  const address = settings.business_address || "Shop no 01, Plot no 242, Sector 11-E, North Karachi, Karachi";
+  const address =
+    settings.business_address ||
+    "Shop no 01, Plot no 242, Sector 11-E, North Karachi, Karachi";
   const phone = settings.business_phone || "+92 331 3195138";
   const email = settings.business_email || "info@moralclean.com";
-  const hours = settings.business_hours || "Monday – Saturday, 9:00 AM – 6:00 PM";
-  const tagline = settings.business_tagline || "Pakistan's trusted partner for commercial cleaning equipment, parts, and responsive service support.";
+  const hours =
+    settings.business_hours || "Monday – Saturday, 9:00 AM – 6:00 PM";
+  const tagline =
+    settings.business_tagline ||
+    "Pakistan's trusted partner for commercial cleaning equipment, parts, and responsive service support.";
 
   const phoneDigits = phone.replace(/\D/g, "");
 
@@ -82,11 +99,20 @@ export function Footer({ settings }: FooterProps) {
     <footer className="bg-primary text-primary-foreground">
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 lg:grid-cols-4 lg:px-8">
         <div>
-          <Link href="/" className="flex items-center gap-3" aria-label="Moral Clean home">
-            <span className="flex size-9 items-center justify-center rounded-md bg-accent text-accent-foreground">
-              <Droplets className="size-5" aria-hidden="true" />
-            </span>
-            <span className="font-display text-lg font-bold uppercase tracking-wide">
+          <Link
+            href="/"
+            className="flex items-center gap-3"
+            aria-label="Moral Clean home"
+          >
+            <span
+              className="font-etna text-lg font-bold uppercase tracking-wide"
+              style={{
+                background: "linear-gradient(to right, #00defc, #00a8ff)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+              }}
+            >
               Moral Clean
             </span>
           </Link>
@@ -102,7 +128,10 @@ export function Footer({ settings }: FooterProps) {
           <ul className="mt-5 space-y-3 text-sm text-white/75">
             {quickLinks.map((link) => (
               <li key={link.href}>
-                <Link href={link.href} className="transition-colors hover:text-white">
+                <Link
+                  href={link.href}
+                  className="transition-colors hover:text-white"
+                >
                   {link.label}
                 </Link>
               </li>
@@ -134,7 +163,10 @@ export function Footer({ settings }: FooterProps) {
           </h2>
           <address className="mt-5 space-y-4 text-sm not-italic text-white/75">
             <p className="flex gap-3">
-              <MapPin className="mt-0.5 size-4 shrink-0 text-accent" aria-hidden="true" />
+              <MapPin
+                className="mt-0.5 size-4 shrink-0 text-accent"
+                aria-hidden="true"
+              />
               <span>{address}</span>
             </p>
             <p>
@@ -142,7 +174,10 @@ export function Footer({ settings }: FooterProps) {
                 href={`tel:+${phoneDigits}`}
                 className="flex gap-3 transition-colors hover:text-white"
               >
-                <Phone className="mt-0.5 size-4 shrink-0 text-accent" aria-hidden="true" />
+                <Phone
+                  className="mt-0.5 size-4 shrink-0 text-accent"
+                  aria-hidden="true"
+                />
                 <span>{phone}</span>
               </Link>
             </p>
@@ -151,20 +186,23 @@ export function Footer({ settings }: FooterProps) {
                 href={`mailto:${email}`}
                 className="flex gap-3 transition-colors hover:text-white"
               >
-                <Mail className="mt-0.5 size-4 shrink-0 text-accent" aria-hidden="true" />
+                <Mail
+                  className="mt-0.5 size-4 shrink-0 text-accent"
+                  aria-hidden="true"
+                />
                 <span>{email}</span>
               </Link>
             </p>
-            {hours ? (
-              <p className="text-white/65 text-xs">{hours}</p>
-            ) : null}
+            {hours ? <p className="text-white/65 text-xs">{hours}</p> : null}
           </address>
         </div>
       </div>
 
       <div className="border-t border-white/10">
-        <div className="mx-auto flex max-w-7xl flex-col gap-4 px-4 py-5 text-sm text-white/65 sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
-          <p>© {new Date().getFullYear()} Moral Clean. All rights reserved.</p>
+        <div className="mx-auto flex max-w-7xl flex-col gap-4 px-4 py-5 text-sm text-white/65 sm:flex-row sm:items-center sm:justify-center sm:px-6 lg:px-8">
+          <p className="text-center">
+            © {new Date().getFullYear()} Moral Clean. All rights reserved.
+          </p>
           {socialLinks.length > 0 ? (
             <div className="flex items-center gap-3" aria-label="Social links">
               {socialLinks.map(({ label, href, Icon }) => (
@@ -173,7 +211,7 @@ export function Footer({ settings }: FooterProps) {
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex size-8 items-center justify-center rounded-full border border-white/15 text-white/70 transition-colors hover:border-accent hover:text-accent"
+                  className="flex size-9 items-center justify-center rounded-full border border-white/20 text-white/60 transition-all duration-200 hover:border-[#00defc] hover:text-[#00defc] hover:shadow-[0_0_8px_rgba(0,222,252,0.4)]"
                   aria-label={label}
                 >
                   <Icon className="size-4" />

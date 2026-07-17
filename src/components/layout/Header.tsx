@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Droplets, Menu, Phone } from "lucide-react";
+import { Droplets, Mail, Menu, Phone } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -43,18 +43,89 @@ const navItems = [
   { label: "Contact", href: "/contact" },
 ];
 
+const socialLinks = [
+  {
+    label: "Facebook",
+    href: "https://www.facebook.com/profile.php?id=61591695643287",
+    icon: (
+      <svg
+        viewBox="0 0 24 24"
+        className="size-4 fill-current"
+        aria-hidden="true"
+      >
+        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+      </svg>
+    ),
+  },
+  {
+    label: "Instagram",
+    href: "https://www.instagram.com/moral_clean/",
+    icon: (
+      <svg
+        viewBox="0 0 24 24"
+        className="size-4 fill-current"
+        aria-hidden="true"
+      >
+        <rect
+          x="2"
+          y="2"
+          width="20"
+          height="20"
+          rx="5"
+          ry="5"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+        />
+        <circle
+          cx="12"
+          cy="12"
+          r="4"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+        />
+        <circle cx="17.5" cy="6.5" r="1" />
+      </svg>
+    ),
+  },
+  {
+    label: "LinkedIn",
+    href: "https://linkedin.com/company/moralclean",
+    icon: (
+      <svg
+        viewBox="0 0 24 24"
+        className="size-4 fill-current"
+        aria-hidden="true"
+      >
+        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z" />
+        <circle cx="4" cy="4" r="2" />
+      </svg>
+    ),
+  },
+];
+
 function categoryHref(category: string) {
   return `/products?category=${category.toLowerCase().replaceAll(" ", "-")}`;
 }
 
 function Wordmark() {
   return (
-    <Link href="/" className="flex items-center gap-3" aria-label="Moral Clean home">
-      <span className="flex size-9 items-center justify-center rounded-md bg-accent text-accent-foreground">
-        <Droplets className="size-5" aria-hidden="true" />
-      </span>
-      <span className="font-display text-lg font-bold uppercase tracking-wide text-primary">
-        Moral Clean
+    <Link
+      href="/"
+      className="flex items-center gap-4"
+      aria-label="Moral Clean home"
+    >
+      <span
+        className="font-etna text-3xl font-bold tracking-wide"
+        style={{
+          background: "linear-gradient(to right, #00defc, #00a8ff)",
+          WebkitBackgroundClip: "text",
+          WebkitTextFillColor: "transparent",
+          backgroundClip: "text",
+        }}
+      >
+        moralclean
       </span>
     </Link>
   );
@@ -68,46 +139,83 @@ export function Header({ settings }: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 8);
-    };
-
+    const handleScroll = () => setIsScrolled(window.scrollY > 8);
     handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const announcementText =
-    settings.announcement_bar_text ||
-    "Authorized distributor of leading international cleaning brands  |  +92 331 3195138";
+  const phone = settings.contact_phone || "+92 309 8783242";
+  const email = settings.contact_email || "info@moralclean.com";
 
   return (
     <header className="sticky top-0 z-50 bg-background">
-      <div className="hidden bg-primary text-primary-foreground md:block">
-        <div className="mx-auto flex h-9 max-w-7xl items-center justify-center px-6 text-xs font-medium">
-          <Phone className="mr-2 size-3.5 text-accent" aria-hidden="true" />
-          <span>{announcementText}</span>
+      {/* Top bar */}
+      <div
+        className="hidden md:block py-2"
+        style={{ background: "linear-gradient(to right, #00defc, #00a8ff)" }}
+      >
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 lg:px-8">
+          <div className="flex items-center gap-5 text-xs font-medium">
+            <a
+              href={`mailto:${email}`}
+              className="flex items-center gap-1.5 text-white/90 transition-colors hover:text-white"
+            >
+              <Mail className="size-3.5 text-white" aria-hidden="true" />
+              {email}
+            </a>
+
+            <a
+              href={`tel:${phone.replace(/\s/g, "")}`}
+              className="flex items-center gap-1.5 text-white/90 transition-colors hover:text-white"
+            >
+              <Phone className="size-3.5 text-white" aria-hidden="true" />
+              {phone}
+            </a>
+          </div>
+
+          <div className="flex items-center gap-1">
+            {socialLinks.map(({ label, href, icon }) => (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={label}
+                className="flex size-8 items-center justify-center rounded-full border border-white/40 text-white transition-all duration-200 hover:border-white hover:bg-white/15 hover:shadow-[0_0_8px_rgba(255,255,255,0.3)]"
+              >
+                {icon}
+              </a>
+            ))}
+          </div>
         </div>
       </div>
 
+      {/* Main nav */}
       <div
         className={cn(
           "border-b transition-[border-color,box-shadow] duration-200",
           isScrolled ? "border-border shadow-sm" : "border-transparent",
         )}
       >
-        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-6 px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto flex h-24 max-w-7xl items-center justify-between px-6 lg:px-8">
           <Wordmark />
 
-          <nav className="hidden flex-1 justify-center lg:flex" aria-label="Primary">
+          <nav
+            className="hidden flex-1 items-center justify-center lg:flex"
+            aria-label="Primary"
+          >
             <NavigationMenu>
-              <NavigationMenuList>
+              <NavigationMenuList className="gap-4">
                 <NavigationMenuItem>
                   <NavigationMenuLink asChild>
-                    <Link className={navigationMenuTriggerStyle()} href="/">
+                    <Link
+                      className={cn(
+                        navigationMenuTriggerStyle(),
+                        "h-12 px-5 text-[16px] font-medium",
+                      )}
+                      href="/"
+                    >
                       Home
                     </Link>
                   </NavigationMenuLink>
@@ -153,7 +261,10 @@ export function Header({ settings }: HeaderProps) {
                   <NavigationMenuItem key={item.href}>
                     <NavigationMenuLink asChild>
                       <Link
-                        className={navigationMenuTriggerStyle()}
+                        className={cn(
+                          navigationMenuTriggerStyle(),
+                          "h-12 px-5 text-[16px] font-medium",
+                        )}
                         href={item.href}
                       >
                         {item.label}
@@ -166,7 +277,13 @@ export function Header({ settings }: HeaderProps) {
           </nav>
 
           <div className="hidden items-center gap-3 lg:flex">
-            <Button asChild className="bg-accent text-accent-foreground hover:bg-accent/90">
+            <Button
+              asChild
+              className="border-0 text-white hover:opacity-90"
+              style={{
+                background: "linear-gradient(to right, #00defc, #00a8ff)",
+              }}
+            >
               <Link href="/contact">Get a Quote</Link>
             </Button>
           </div>
@@ -175,24 +292,54 @@ export function Header({ settings }: HeaderProps) {
             <Sheet>
               <SheetTrigger asChild>
                 <Button variant="outline" size="icon" aria-label="Open menu">
-                  <Menu className="size-5" aria-hidden="true" />
+                  <Menu className="size-6" aria-hidden="true" />
                 </Button>
               </SheetTrigger>
               <SheetContent side="right" className="w-[320px] sm:w-[380px]">
                 <SheetHeader className="mb-8 text-left">
                   <SheetTitle asChild>
                     <span className="flex items-center gap-3">
-                      <span className="flex size-9 items-center justify-center rounded-md bg-accent text-accent-foreground">
-                        <Droplets className="size-5" aria-hidden="true" />
+                      <span className="flex size-11 items-center justify-center rounded-md bg-accent text-accent-foreground">
+                        <Droplets className="size-6" aria-hidden="true" />
                       </span>
-                      <span className="font-display text-lg font-bold uppercase tracking-wide text-primary">
+                      <span
+                        className="font-etna text-2xl font-bold uppercase tracking-wide"
+                        style={{
+                          background:
+                            "linear-gradient(to right, #00defc, #00a8ff)",
+                          WebkitBackgroundClip: "text",
+                          WebkitTextFillColor: "transparent",
+                          backgroundClip: "text",
+                        }}
+                      >
                         Moral Clean
                       </span>
                     </span>
                   </SheetTitle>
                 </SheetHeader>
 
-                <nav className="flex flex-col gap-1" aria-label="Mobile primary">
+                {/* Mobile contact info */}
+                <div className="mb-5 flex flex-col gap-2 rounded-md bg-muted px-3 py-3 text-sm">
+                  <a
+                    href={`mailto:${email}`}
+                    className="flex items-center gap-2 text-muted-foreground hover:text-primary"
+                  >
+                    <Mail className="size-4 text-accent" />
+                    {email}
+                  </a>
+                  <a
+                    href={`tel:${phone.replace(/\s/g, "")}`}
+                    className="flex items-center gap-2 text-muted-foreground hover:text-primary"
+                  >
+                    <Phone className="size-4 text-accent" />
+                    {phone}
+                  </a>
+                </div>
+
+                <nav
+                  className="flex flex-col gap-1"
+                  aria-label="Mobile primary"
+                >
                   <SheetClose asChild>
                     <Link
                       href="/"
@@ -234,12 +381,29 @@ export function Header({ settings }: HeaderProps) {
                   <SheetClose asChild>
                     <Button
                       asChild
-                      className="mt-5 bg-accent text-accent-foreground hover:bg-accent/90"
+                      size="lg"
+                      className="mt-2 h-12 rounded-md bg-accent text-accent-foreground hover:bg-accent/90"
                     >
                       <Link href="/contact">Get a Quote</Link>
                     </Button>
                   </SheetClose>
                 </nav>
+
+                {/* Mobile social icons */}
+                <div className="mt-6 flex items-center gap-2">
+                  {socialLinks.map(({ label, href, icon }) => (
+                    <a
+                      key={label}
+                      href={href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={label}
+                      className="flex size-8 items-center justify-center rounded border border-border text-muted-foreground hover:border-accent hover:text-primary"
+                    >
+                      {icon}
+                    </a>
+                  ))}
+                </div>
               </SheetContent>
             </Sheet>
           </div>

@@ -26,6 +26,7 @@ import { IndustriesStrip } from "@/components/sections/IndustriesStrip";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { getAllSettings } from "@/lib/queries/settings";
+import { HeroCarousel } from "@/components/sections/HeroCarousel"; // ← new import
 
 const siteUrl = env.siteUrl;
 
@@ -46,14 +47,46 @@ export const metadata: Metadata = {
 type IconComponent = ComponentType<SVGProps<SVGSVGElement>>;
 
 const categories = [
-  { name: "Floor Cleaning Machines", icon: BrushCleaning },
-  { name: "Vacuum Cleaners", icon: Gauge },
-  { name: "High Pressure Cleaners", icon: SprayCan },
-  { name: "Steam Cleaners", icon: Droplets },
-  { name: "Sweepers", icon: Sparkles },
-  { name: "Single Disc Machines", icon: Settings },
-  { name: "Cleaning Chemicals", icon: PackageCheck },
-  { name: "Janitorial Equipment", icon: Boxes },
+  {
+    name: "Floor Cleaning Machines",
+    icon: BrushCleaning,
+    image: "/assets/categories/walk-behind-scrubber-dryer.png",
+  },
+  {
+    name: "Vacuum Cleaners",
+    icon: Gauge,
+    image: "/assets/categories/Vaccumcleaners.png",
+  },
+  {
+    name: "High Pressure Cleaners",
+    icon: SprayCan,
+    image: "/assets/categories/Pressure-washer.png",
+  },
+  {
+    name: "Steam Cleaners",
+    icon: Droplets,
+    image: "/assets/categories/steam-cleaner.png",
+  },
+  {
+    name: "Sweepers",
+    icon: Sparkles,
+    image: "/assets/categories/Ride-on-scrubber-dryer.png",
+  },
+  {
+    name: "Single Disc Machines",
+    icon: Settings,
+    image: "/assets/categories/Single-disk-machine.png",
+  },
+  {
+    name: "Cleaning Chemicals",
+    icon: PackageCheck,
+    image: "/assets/categories/Cleaning-chemical.png",
+  },
+  {
+    name: "Janitorial Equipment",
+    icon: Boxes,
+    image: "/assets/categories/mop-bucket.png",
+  },
 ];
 
 const valueProps = [
@@ -113,7 +146,7 @@ const services = [
     title: "Motor Repairing",
     description:
       "Diagnosis, rewinding coordination, fitting, and testing for commercial cleaning machine motors.",
-    image: "/hero-placeholder.jpg",
+    image: "/assets/services-image/motor-repairing.png",
     imageAlt: "Technician repairing industrial cleaning machine motor",
     imagePosition: "object-[50%_38%]",
   },
@@ -121,7 +154,7 @@ const services = [
     title: "Parts Replacement",
     description:
       "Brushes, squeegees, hoses, filters, motors, batteries, and consumables sourced to match your machine.",
-    image: "/hero-placeholder.jpg",
+    image: "/assets/services-image/part-replacement.png",
     imageAlt: "Replacement parts for commercial cleaning equipment",
     imagePosition: "object-[50%_48%]",
   },
@@ -129,7 +162,7 @@ const services = [
     title: "Brush Refilling",
     description:
       "Refilling and replacement support for scrubber, sweeper, and single-disc machine brushes.",
-    image: "/hero-placeholder.jpg",
+    image: "/assets/services-image/brush.jpeg",
     imageAlt: "Industrial cleaning brushes for maintenance and refilling",
     imagePosition: "object-[50%_56%]",
   },
@@ -176,11 +209,7 @@ function SectionReveal({
   children: ReactNode;
   className?: string;
 }) {
-  return (
-    <section className={className}>
-      {children}
-    </section>
-  );
+  return <section className={className}>{children}</section>;
 }
 
 function SectionHeader({
@@ -188,11 +217,13 @@ function SectionHeader({
   title,
   description,
   align = "center",
+  descriptionClassName,
 }: {
   eyebrow?: string;
   title: string;
   description?: string;
   align?: "center" | "left";
+  descriptionClassName?: string;
 }) {
   return (
     <div
@@ -208,7 +239,14 @@ function SectionHeader({
       ) : null}
       <h2>{title}</h2>
       {description ? (
-        <p className="mt-4 text-base text-muted-foreground">{description}</p>
+        <p
+          className={cn(
+            "mt-4 text-base text-muted-foreground",
+            descriptionClassName,
+          )}
+        >
+          {description}
+        </p>
       ) : null}
     </div>
   );
@@ -239,28 +277,28 @@ export default async function Home() {
   const settings = await getAllSettings();
 
   const heroLine1 = settings.homepage_hero_heading_line1 || "Industrial-Grade";
-  const heroLine2 = settings.homepage_hero_heading_line2 || "Cleaning Equipment";
+  const heroLine2 =
+    settings.homepage_hero_heading_line2 || "Cleaning Equipment";
   const heroSub =
     settings.homepage_hero_subheading ||
     "Moral Clean supplies, installs, and services professional cleaning machines for factories, hospitals, hotels, malls, and cleaning contractors across Pakistan.";
 
   return (
     <>
-      <section className="relative min-h-[85vh] overflow-hidden bg-[linear-gradient(135deg,#ffffff_0%,#f8fafc_58%,#eef8ff_100%)]">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgba(10,37,64,0.08)_1px,transparent_0)] [background-size:28px_28px]" />
-        <div className="relative mx-auto grid min-h-[85vh] max-w-7xl items-center gap-12 px-4 py-16 sm:px-6 lg:grid-cols-[minmax(0,3fr)_minmax(320px,2fr)] lg:px-8">
+      <section className="relative bg-white">
+        <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-4 py-0 sm:px-6 lg:grid-cols-[1fr_1fr] lg:px-8">
+          {" "}
           <div>
             <p className="mb-4 inline-flex items-center rounded-full border border-border bg-white px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground shadow-sm">
               Commercial Cleaning Equipment Pakistan
             </p>
-            <h1 className="max-w-4xl">
+            <h1 className="max-w-4xl text-4xl font-extrabold leading-tight sm:text-5xl">
               <span className="block font-medium text-primary/70">
                 {heroLine1}
               </span>
-              <span className="block font-extrabold text-accent">
-                {heroLine2}
-              </span>
+              <span className="block text-accent">{heroLine2}</span>
             </h1>
+
             <p className="mt-6 max-w-2xl text-lg text-muted-foreground sm:text-xl">
               {heroSub}
             </p>
@@ -296,22 +334,10 @@ export default async function Home() {
               ))}
             </div>
           </div>
-
-          <div className="relative">
-            <div className="absolute -inset-5 rounded-full bg-accent/12 blur-3xl" />
-            <div className="absolute -right-3 top-8 size-24 rounded-md bg-accent/20" />
-            <div className="relative overflow-hidden rounded-md border border-border bg-white p-3 shadow-2xl shadow-primary/10">
-              <div className="relative aspect-[4/3] overflow-hidden rounded-md bg-muted">
-                {/* Replace /public/hero-placeholder.jpg with a real product hero image before launch. */}
-                <Image
-                  src="/hero-placeholder.jpg"
-                  alt="Commercial floor cleaning machine"
-                  fill
-                  priority
-                  sizes="(min-width: 1024px) 40vw, 100vw"
-                  className="object-cover"
-                />
-              </div>
+          {/* ↓ Only this block changed — client island, rest of page stays server */}
+          <div className="flex justify-center lg:justify-end">
+            <div className="relative w-full max-w-[720px]">
+              <HeroCarousel />
             </div>
           </div>
         </div>
@@ -320,18 +346,52 @@ export default async function Home() {
       <SectionReveal>
         <IndustriesStrip />
       </SectionReveal>
-
+      <div
+        style={{ background: "linear-gradient(to right, #00defc, #00a8ff)" }}
+      >
+        <SectionReveal className="py-14">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <SectionHeader
+              title="Why Moral Clean"
+              description="Equipment supply is only useful when technical support, parts, and response time are handled with the same discipline."
+              descriptionClassName="text-white"
+            />
+            <div className="grid gap-6 lg:grid-cols-3">
+              {valueProps.map(({ title, description, icon: Icon }) => (
+                <div
+                  key={title}
+                  className="rounded-md border border-[#0a2540]/15 bg-white p-5 shadow-sm"
+                >
+                  <Icon className="size-8 text-[#0a2540]" aria-hidden="true" />
+                  <h3 className="mt-4 text-[#0a2540]">{title}</h3>
+                  <p className="mt-2 text-sm text-[#0a2540]/75">
+                    {description}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </SectionReveal>
+      </div>
       <SectionReveal className="bg-background py-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeader eyebrow="Product Range" title="Explore by Category" />
           <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
-            {categories.map(({ name, icon: Icon }) => (
+            {categories.map(({ name, image }) => (
               <Link
                 key={name}
                 href={`/products?category=${slugify(name)}`}
                 className="group rounded-md border border-border bg-white p-3 transition duration-200 hover:-translate-y-1 hover:border-accent hover:shadow-lg hover:shadow-primary/5"
               >
-                <MediaPlaceholder Icon={Icon} className="aspect-square" />
+                <div className="relative aspect-square overflow-hidden rounded-md border border-border bg-[linear-gradient(135deg,#f8fafc_0%,#eef6fb_100%)]">
+                  <Image
+                    src={image}
+                    alt={name}
+                    fill
+                    sizes="(min-width:1024px) 25vw, (min-width:768px) 33vw, 50vw"
+                    className="object-contain p-4 transition duration-300 group-hover:scale-105"
+                  />
+                </div>
                 <div className="mt-4 flex items-center justify-between gap-3">
                   <h3 className="text-base">{name}</h3>
                   <ArrowRight
@@ -345,81 +405,62 @@ export default async function Home() {
         </div>
       </SectionReveal>
 
-      <SectionReveal className="bg-muted py-14">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <SectionHeader
-            title="Why Moral Clean"
-            description="Equipment supply is only useful when technical support, parts, and response time are handled with the same discipline."
-          />
-          <div className="grid gap-6 lg:grid-cols-3">
-            {valueProps.map(({ title, description, icon: Icon }) => (
-              <div
-                key={title}
-                className="rounded-md border border-border bg-white p-5 shadow-sm"
-              >
-                <Icon className="size-8 text-accent" aria-hidden="true" />
-                <h3 className="mt-4">{title}</h3>
-                <p className="mt-2 text-sm text-muted-foreground">
-                  {description}
+      <div
+        style={{ background: "linear-gradient(to right, #00defc, #00a8ff)" }}
+      >
+        <SectionReveal className="py-20">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="mb-10 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
+              <div className="max-w-3xl">
+                <h2 className="text-[#0a2540]">
+                  <b>Our Services</b>
+                </h2>
+                <p className="mt-4 text-[#0a2540]/75">
+                  Our service team supports procurement teams and facility
+                  managers long after delivery, because machine uptime is part
+                  of the cost calculation.
                 </p>
               </div>
-            ))}
-          </div>
-        </div>
-      </SectionReveal>
-
-      <SectionReveal className="bg-primary py-20 text-primary-foreground">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mb-10 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
-            <div className="max-w-3xl">
-              <h2 className="text-white">
-                Beyond Sales — We Keep Your Equipment Running
-              </h2>
-              <p className="mt-4 text-white/70">
-                Our service team supports procurement teams and facility
-                managers long after delivery, because machine uptime is part of
-                the cost calculation.
-              </p>
-            </div>
-            <Button
-              asChild
-              className="w-fit bg-accent text-accent-foreground hover:bg-accent/90"
-            >
-              <Link href="/services">
-                View All Services
-                <ArrowRight className="size-4" aria-hidden="true" />
-              </Link>
-            </Button>
-          </div>
-          <div className="grid gap-5 lg:grid-cols-3">
-            {services.map(({ title, description, image, imageAlt, imagePosition }) => (
-              <div
-                key={title}
-                className="group overflow-hidden rounded-md border border-white/10 bg-white/5 p-4"
+              <Button
+                asChild
+                className="w-fit bg-[#0a2540] text-white hover:bg-[#0a2540]/85"
               >
-                <div className="relative aspect-[16/10] overflow-hidden rounded-md border border-white/10 bg-white/10">
-                  <Image
-                    src={image}
-                    alt={imageAlt}
-                    fill
-                    sizes="(min-width: 1024px) 22vw, 100vw"
-                    className={cn(
-                      "object-cover transition duration-500 group-hover:scale-105",
-                      imagePosition,
-                    )}
-                  />
-                </div>
-                <h3 className="mt-4 text-white">{title}</h3>
-                <p className="mt-3 text-sm text-white/70">{description}</p>
-              </div>
-            ))}
+                <Link href="/services">
+                  View All Services
+                  <ArrowRight className="size-4" aria-hidden="true" />
+                </Link>
+              </Button>
+            </div>
+            <div className="grid gap-5 lg:grid-cols-3">
+              {services.map(
+                ({ title, description, image, imageAlt, imagePosition }) => (
+                  <div
+                    key={title}
+                    className="group overflow-hidden rounded-md border border-[#0a2540]/15 bg-white/80 p-4 transition duration-300 hover:border-[#0a2540]/30 hover:shadow-lg hover:shadow-[#0a2540]/10"
+                  >
+                    <div className="relative aspect-[16/10] overflow-hidden rounded-md border border-[#0a2540]/10 bg-white/20">
+                      <Image
+                        src={image}
+                        alt={imageAlt}
+                        fill
+                        sizes="(min-width: 1024px) 22vw, 100vw"
+                        className={cn(
+                          "object-cover transition duration-500 group-hover:scale-105",
+                          imagePosition,
+                        )}
+                      />
+                    </div>
+                    <h3 className="mt-4 text-[#0a2540]">{title}</h3>
+                    <p className="mt-3 text-sm text-[#0a2540]/75">
+                      {description}
+                    </p>
+                  </div>
+                ),
+              )}
+            </div>
           </div>
-        </div>
-      </SectionReveal>
-
-      <SectionReveal>
-        <CtaBanner />
-      </SectionReveal>
+        </SectionReveal>
+      </div>
 
       <SectionReveal className="bg-background py-14">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -447,6 +488,10 @@ export default async function Home() {
             ))}
           </div>
         </div>
+      </SectionReveal>
+
+      <SectionReveal>
+        <CtaBanner />
       </SectionReveal>
 
       <SectionReveal className="bg-muted py-12">

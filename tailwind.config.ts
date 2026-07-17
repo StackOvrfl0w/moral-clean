@@ -74,6 +74,7 @@ const config: Config = {
       fontFamily: {
         sans: ["var(--font-inter)", ...fontFamily.sans],
         display: ["var(--font-display)", ...fontFamily.sans],
+        etna: ["var(--font-etna)", ...fontFamily.sans],
       },
       borderRadius: {
         lg: "var(--radius)",

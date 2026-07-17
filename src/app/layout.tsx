@@ -58,6 +58,18 @@ const jakarta = localFont({
   display: "swap",
 });
 
+const etna = localFont({
+  src: [
+    {
+      path: "../../public/fonts/etna-sans-serif.woff2",
+      weight: "400",
+      style: "normal",
+    },
+  ],
+  variable: "--font-etna",
+  display: "swap",
+});
+
 const title =
   "Moral Clean — Commercial Cleaning Equipment & Service in Pakistan";
 const description =
@@ -133,7 +145,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${inter.variable} ${jakarta.variable} font-sans antialiased`}
+        className={`${inter.variable} ${jakarta.variable} ${etna.variable} font-sans antialiased`}
       >
         <OrganizationSchema />
         <WebsiteSchema />
