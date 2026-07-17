@@ -1,6 +1,6 @@
 import type { SVGProps } from "react";
 import Link from "next/link";
-import { Droplets, Mail, MapPin, Phone } from "lucide-react";
+import { Mail, MapPin, Phone } from "lucide-react";
 
 const quickLinks = [
   { label: "Home", href: "/" },
