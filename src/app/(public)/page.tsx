@@ -48,7 +48,7 @@ type IconComponent = ComponentType<SVGProps<SVGSVGElement>>;
 
 const categories = [
   {
-    name: "Floor Cleaning Machines",
+    name: "Walk Behind Scrubber Dryer",
     icon: BrushCleaning,
     image: "/assets/categories/walk-behind-scrubber-dryer.png",
   },
@@ -68,7 +68,7 @@ const categories = [
     image: "/assets/categories/steam-cleaner.png",
   },
   {
-    name: "Sweepers",
+    name: "Ride On Scrubber Dryer",
     icon: Sparkles,
     image: "/assets/categories/Ride-on-scrubber-dryer.png",
   },
