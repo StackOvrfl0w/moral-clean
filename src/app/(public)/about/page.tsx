@@ -7,7 +7,6 @@ import {
   Wrench,
 } from "lucide-react";
 import { MapPin, Phone, Mail, Clock3, MessageCircle } from "lucide-react";
-import Link from "next/link";
 
 import { env } from "@/config/env";
 import { IndustriesStrip } from "@/components/sections/IndustriesStrip";
