@@ -333,7 +333,7 @@ export function SettingsForm({ settings }: Props) {
               onChange={(e) =>
                 homepage.set("homepage_hero_subheading", e.target.value)
               }
-              placeholder="Pakistan's trusted partner for professional commercial cleaning machines."
+              placeholder="Trusted partner for professional cleaning equipment in Pakistan"
             />
           </Field>
         </CardContent>
