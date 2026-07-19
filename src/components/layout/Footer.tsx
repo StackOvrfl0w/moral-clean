@@ -73,7 +73,7 @@ export function Footer({ settings }: FooterProps) {
             className="flex items-center gap-3"
             aria-label="Moral Clean home"
           >
-            <span className="bg-brand-gradient bg-clip-text font-etna text-lg font-bold uppercase tracking-wide text-transparent">
+            <span className="font-etna text-lg font-bold uppercase tracking-wide text-brand-navy">
               Moral Clean
             </span>
           </Link>
