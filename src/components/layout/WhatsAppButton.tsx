@@ -19,8 +19,7 @@ export function WhatsAppButton({ whatsapp }: WhatsAppButtonProps) {
       rel="noopener noreferrer"
       aria-label="Chat on WhatsApp"
       title="Chat on WhatsApp"
-      className="group fixed bottom-6 right-6 z-50 flex size-14 items-center justify-center rounded-full shadow-lg transition-transform hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
-      style={{ backgroundColor: "#25D366" }}
+      className="group fixed bottom-6 right-6 z-50 flex size-14 items-center justify-center rounded-full bg-[#25D366] shadow-lg transition-transform hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
     >
       <MessageCircle className="size-7 text-white" aria-hidden="true" />
     </a>

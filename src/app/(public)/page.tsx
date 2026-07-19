@@ -23,6 +23,7 @@ import {
 import { env } from "@/config/env";
 import { CtaBanner } from "@/components/sections/CtaBanner";
 import { IndustriesStrip } from "@/components/sections/IndustriesStrip";
+import { SectionHeader } from "@/components/ui/section-header";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { getAllSettings } from "@/lib/queries/settings";
@@ -212,46 +213,6 @@ function SectionReveal({
   return <section className={className}>{children}</section>;
 }
 
-function SectionHeader({
-  eyebrow,
-  title,
-  description,
-  align = "center",
-  descriptionClassName,
-}: {
-  eyebrow?: string;
-  title: string;
-  description?: string;
-  align?: "center" | "left";
-  descriptionClassName?: string;
-}) {
-  return (
-    <div
-      className={cn(
-        "mb-10 max-w-3xl",
-        align === "center" ? "mx-auto text-center" : "text-left",
-      )}
-    >
-      {eyebrow ? (
-        <p className="mb-3 text-xs font-bold uppercase tracking-[0.18em] text-accent">
-          {eyebrow}
-        </p>
-      ) : null}
-      <h2>{title}</h2>
-      {description ? (
-        <p
-          className={cn(
-            "mt-4 text-base text-muted-foreground",
-            descriptionClassName,
-          )}
-        >
-          {description}
-        </p>
-      ) : null}
-    </div>
-  );
-}
-
 function MediaPlaceholder({
   Icon,
   className,
@@ -346,9 +307,7 @@ export default async function Home() {
       <SectionReveal>
         <IndustriesStrip />
       </SectionReveal>
-      <div
-        style={{ background: "linear-gradient(to right, #00defc, #00a8ff)" }}
-      >
+      <div className="bg-brand-gradient">
         <SectionReveal className="py-14">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <SectionHeader
@@ -360,11 +319,11 @@ export default async function Home() {
               {valueProps.map(({ title, description, icon: Icon }) => (
                 <div
                   key={title}
-                  className="rounded-md border border-[#0a2540]/15 bg-white p-5 shadow-sm"
+                  className="rounded-md border border-brand-navy/15 bg-white p-5 shadow-sm"
                 >
-                  <Icon className="size-8 text-[#0a2540]" aria-hidden="true" />
-                  <h3 className="mt-4 text-[#0a2540]">{title}</h3>
-                  <p className="mt-2 text-sm text-[#0a2540]/75">
+                  <Icon className="size-8 text-brand-navy" aria-hidden="true" />
+                  <h3 className="mt-4 text-brand-navy">{title}</h3>
+                  <p className="mt-2 text-sm text-brand-navy/75">
                     {description}
                   </p>
                 </div>
@@ -405,17 +364,15 @@ export default async function Home() {
         </div>
       </SectionReveal>
 
-      <div
-        style={{ background: "linear-gradient(to right, #00defc, #00a8ff)" }}
-      >
+      <div className="bg-brand-gradient">
         <SectionReveal className="py-20">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="mb-10 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
               <div className="max-w-3xl">
-                <h2 className="text-[#0a2540]">
+                <h2 className="text-brand-navy">
                   <b>Our Services</b>
                 </h2>
-                <p className="mt-4 text-[#0a2540]/75">
+                <p className="mt-4 text-brand-navy/75">
                   Our service team supports procurement teams and facility
                   managers long after delivery, because machine uptime is part
                   of the cost calculation.
@@ -423,7 +380,7 @@ export default async function Home() {
               </div>
               <Button
                 asChild
-                className="w-fit bg-[#0a2540] text-white hover:bg-[#0a2540]/85"
+                className="w-fit bg-brand-navy text-white hover:bg-brand-navy/85"
               >
                 <Link href="/services">
                   View All Services
@@ -436,9 +393,9 @@ export default async function Home() {
                 ({ title, description, image, imageAlt, imagePosition }) => (
                   <div
                     key={title}
-                    className="group overflow-hidden rounded-md border border-[#0a2540]/15 bg-white/80 p-4 transition duration-300 hover:border-[#0a2540]/30 hover:shadow-lg hover:shadow-[#0a2540]/10"
+                    className="group overflow-hidden rounded-md border border-brand-navy/15 bg-white/80 p-4 transition duration-300 hover:border-brand-navy/30 hover:shadow-lg hover:shadow-brand-navy/10"
                   >
-                    <div className="relative aspect-[16/10] overflow-hidden rounded-md border border-[#0a2540]/10 bg-white/20">
+                    <div className="relative aspect-[16/10] overflow-hidden rounded-md border border-brand-navy/10 bg-white/20">
                       <Image
                         src={image}
                         alt={imageAlt}
@@ -450,8 +407,8 @@ export default async function Home() {
                         )}
                       />
                     </div>
-                    <h3 className="mt-4 text-[#0a2540]">{title}</h3>
-                    <p className="mt-3 text-sm text-[#0a2540]/75">
+                    <h3 className="mt-4 text-brand-navy">{title}</h3>
+                    <p className="mt-3 text-sm text-brand-navy/75">
                       {description}
                     </p>
                   </div>

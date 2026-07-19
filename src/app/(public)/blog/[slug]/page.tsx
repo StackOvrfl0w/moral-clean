@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import type { SVGProps } from "react";
-import { Home, MessageCircle } from "lucide-react";
+import { Home, Link2, MessageCircle } from "lucide-react";
 import { notFound } from "next/navigation";
 
 import { BlogCard } from "@/components/blog/BlogCard";
@@ -16,6 +15,7 @@ import {
 } from "@/lib/queries/blog";
 
 import { env } from "@/config/env";
+import { blogFallbackImage } from "@/lib/fallback-images";
 
 export const revalidate = 3600;
 const siteUrl = env.siteUrl;
@@ -26,36 +26,6 @@ type BlogPostPageProps = {
   };
 };
 
-const fallbackImage = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(`
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900">
-  <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#f8fafc"/>
-      <stop offset="1" stop-color="#e0f2fe"/>
-    </linearGradient>
-  </defs>
-  <rect width="1600" height="900" fill="url(#bg)"/>
-  <circle cx="1320" cy="170" r="190" fill="#0ea5e9" opacity="0.16"/>
-  <circle cx="260" cy="760" r="250" fill="#0a2540" opacity="0.08"/>
-  <rect x="340" y="240" width="920" height="400" rx="30" fill="#fff" opacity="0.9"/>
-</svg>
-`)}`;
-
-function LinkedinIcon(props: SVGProps<SVGSVGElement>) {
-  return (
-    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" {...props}>
-      <path d="M6.8 8.9H3.5V20h3.3V8.9ZM5.2 4a1.9 1.9 0 1 0 0 3.8 1.9 1.9 0 0 0 0-3.8ZM20.5 13.8c0-3.1-1.7-5.1-4.4-5.1-1.7 0-2.8.9-3.3 1.8V8.9H9.6V20h3.3v-5.8c0-1.6.8-2.5 2.1-2.5 1.2 0 2 .8 2 2.5V20h3.5v-6.2Z" />
-    </svg>
-  );
-}
-
-function XIcon(props: SVGProps<SVGSVGElement>) {
-  return (
-    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" {...props}>
-      <path d="M18.25 3h2.99l-6.53 7.46L22.4 21h-6.03l-4.72-6.17L6.25 21H3.25l6.99-8L3 3h6.18l4.27 5.67L18.25 3Zm-1.06 16.18h1.66L8.28 4.73H6.5l10.69 14.45Z" />
-    </svg>
-  );
-}
 
 function formatDate(value: string | null) {
   if (!value) {
@@ -122,7 +92,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const relatedPosts = await getRelatedPosts(post.slug, 3);
   const authorName = post.author_name || "The Moral Clean Team";
   const minutes = readingTime(post.content);
-  const imageUrl = post.cover_image_url || fallbackImage;
+  const imageUrl = post.cover_image_url || blogFallbackImage;
   const articleJsonLd = {
     "@context": "https://schema.org",
     "@type": "Article",
@@ -237,8 +207,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             {/* TODO: Replace placeholder share links with generated share URLs. */}
             <div className="mt-3 flex items-center gap-2">
               {[
-                { label: "LinkedIn", href: "#", Icon: LinkedinIcon },
-                { label: "Twitter", href: "#", Icon: XIcon },
+                { label: "LinkedIn", href: "#", Icon: Link2 },
+                { label: "Twitter", href: "#", Icon: MessageCircle },
                 { label: "WhatsApp", href: "#", Icon: MessageCircle },
               ].map(({ label, href, Icon }) => (
                 <Link

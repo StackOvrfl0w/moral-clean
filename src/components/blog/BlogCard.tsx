@@ -3,24 +3,10 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 import type { BlogPost } from "@/lib/types";
+import { blogCardFallbackImage } from "@/lib/fallback-images";
 
 const blurDataUrl =
   "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";
-
-const fallbackImage = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(`
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
-  <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#f8fafc"/>
-      <stop offset="1" stop-color="#e0f2fe"/>
-    </linearGradient>
-  </defs>
-  <rect width="1280" height="720" fill="url(#bg)"/>
-  <circle cx="1080" cy="140" r="170" fill="#0ea5e9" opacity="0.16"/>
-  <circle cx="240" cy="620" r="210" fill="#0a2540" opacity="0.08"/>
-  <rect x="260" y="210" width="760" height="280" rx="24" fill="#fff" opacity="0.92"/>
-</svg>
-`)}`;
 
 function formatDate(value: string | null) {
   if (!value) {
@@ -35,7 +21,7 @@ function formatDate(value: string | null) {
 }
 
 export function BlogCard({ post }: { post: BlogPost }) {
-  const imageUrl = post.cover_image_url || fallbackImage;
+  const imageUrl = post.cover_image_url || blogCardFallbackImage;
 
   return (
     <Link

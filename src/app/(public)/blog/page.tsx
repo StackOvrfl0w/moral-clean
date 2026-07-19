@@ -7,6 +7,7 @@ import { BlogCard } from "@/components/blog/BlogCard";
 import { NewsletterStrip } from "@/components/blog/NewsletterStrip";
 import { Button } from "@/components/ui/button";
 import { env } from "@/config/env";
+import { blogFallbackImage } from "@/lib/fallback-images";
 import { getAllPosts } from "@/lib/queries/blog";
 
 const siteUrl = env.siteUrl;
@@ -26,21 +27,6 @@ export const metadata: Metadata = {
 };
 
 const POSTS_PER_PAGE = 9;
-
-const fallbackImage = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(`
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900">
-  <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#f8fafc"/>
-      <stop offset="1" stop-color="#e0f2fe"/>
-    </linearGradient>
-  </defs>
-  <rect width="1600" height="900" fill="url(#bg)"/>
-  <circle cx="1320" cy="170" r="190" fill="#0ea5e9" opacity="0.16"/>
-  <circle cx="260" cy="760" r="250" fill="#0a2540" opacity="0.08"/>
-  <rect x="340" y="240" width="920" height="400" rx="30" fill="#fff" opacity="0.9"/>
-</svg>
-`)}`;
 
 function getParam(
   searchParams: Record<string, string | string[] | undefined> | undefined,
@@ -113,7 +99,7 @@ export default async function BlogPage({
               <div className="grid lg:grid-cols-2">
                 <div className="relative min-h-[280px]">
                   <Image
-                    src={featuredPost.cover_image_url || fallbackImage}
+                    src={featuredPost.cover_image_url || blogFallbackImage}
                     alt={featuredPost.title}
                     fill
                     sizes="(min-width: 1024px) 50vw, 100vw"

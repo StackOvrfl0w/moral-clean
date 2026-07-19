@@ -4,13 +4,25 @@
 
 @layer base {
   :root {
-    --brand-primary: #0a2540;
-    --brand-accent: #0ea5e9;
-    --brand-background: #ffffff;
-    --brand-surface: #f8fafc;
-    --brand-border: #e2e8f0;
-    --brand-foreground: #0f172a;
-    --brand-muted-foreground: #64748b;
+    --color-brand-gradient-from: 0 222 252;
+    --color-brand-gradient-to: 0 168 255;
+    --color-brand-gradient-deep: 14 44 77;
+    --color-brand-gradient-darker: 16 54 94;
+    --color-navy: 10 37 64;
+    --color-brand-accent: 14 165 233;
+    --color-brand-background: 255 255 255;
+    --color-brand-surface: 248 250 252;
+    --color-brand-border: 226 232 240;
+    --color-brand-foreground: 15 23 42;
+    --color-brand-muted-foreground: 100 116 139;
+
+    --brand-primary: var(--color-navy);
+    --brand-accent: var(--color-brand-accent);
+    --brand-background: var(--color-brand-background);
+    --brand-surface: var(--color-brand-surface);
+    --brand-border: var(--color-brand-border);
+    --brand-foreground: var(--color-brand-foreground);
+    --brand-muted-foreground: var(--color-brand-muted-foreground);
 
     --background: 0 0% 100%;
     --foreground: 222 47% 11%;
@@ -48,13 +60,25 @@
   }
 
   .dark {
-    --brand-primary: #0a2540;
-    --brand-accent: #0ea5e9;
-    --brand-background: #07111f;
-    --brand-surface: #0f172a;
-    --brand-border: #1e293b;
-    --brand-foreground: #f8fafc;
-    --brand-muted-foreground: #94a3b8;
+    --color-brand-gradient-from: 0 222 252;
+    --color-brand-gradient-to: 0 168 255;
+    --color-brand-gradient-deep: 14 44 77;
+    --color-brand-gradient-darker: 16 54 94;
+    --color-navy: 10 37 64;
+    --color-brand-accent: 14 165 233;
+    --color-brand-background: 7 17 31;
+    --color-brand-surface: 15 23 42;
+    --color-brand-border: 30 41 59;
+    --color-brand-foreground: 248 250 252;
+    --color-brand-muted-foreground: 148 163 184;
+
+    --brand-primary: var(--color-navy);
+    --brand-accent: var(--color-brand-accent);
+    --brand-background: var(--color-brand-background);
+    --brand-surface: var(--color-brand-surface);
+    --brand-border: var(--color-brand-border);
+    --brand-foreground: var(--color-brand-foreground);
+    --brand-muted-foreground: var(--color-brand-muted-foreground);
 
     --background: 215 53% 7%;
     --foreground: 210 40% 98%;
@@ -129,6 +153,14 @@
   .font-display {
     font-family:
       var(--font-display), var(--font-inter), Arial, Helvetica, sans-serif;
+  }
+
+  .bg-brand-gradient {
+    background-image: linear-gradient(
+      to right,
+      rgb(var(--color-brand-gradient-from)),
+      rgb(var(--color-brand-gradient-to))
+    );
   }
 
   .text-balance {

@@ -3,31 +3,14 @@ import Link from "next/link";
 import { ArrowRight, PackageCheck } from "lucide-react";
 
 import type { ProductWithRelations } from "@/lib/types";
+import { productCardFallbackImage } from "@/lib/fallback-images";
 
 const blurDataUrl =
   "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";
 
-const fallbackImage = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(`
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800">
-  <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#f8fafc"/>
-      <stop offset="1" stop-color="#e0f2fe"/>
-    </linearGradient>
-  </defs>
-  <rect width="800" height="800" fill="url(#bg)"/>
-  <circle cx="600" cy="180" r="180" fill="#0ea5e9" opacity="0.14"/>
-  <circle cx="220" cy="620" r="220" fill="#0a2540" opacity="0.08"/>
-  <rect x="245" y="330" width="310" height="160" rx="28" fill="#ffffff" opacity="0.88"/>
-  <path d="M300 490h220l34 86H268l32-86Z" fill="#0a2540" opacity="0.18"/>
-  <circle cx="330" cy="590" r="34" fill="#0a2540" opacity="0.22"/>
-  <circle cx="490" cy="590" r="34" fill="#0a2540" opacity="0.22"/>
-</svg>
-`)}`;
-
 export function ProductCard({ product }: { product: ProductWithRelations }) {
   const image = product.images[0];
-  const imageUrl = image?.url || fallbackImage;
+  const imageUrl = image?.url || productCardFallbackImage;
 
   return (
     <article className="group rounded-md border border-border bg-white p-3 shadow-sm transition duration-200 hover:-translate-y-1 hover:border-accent hover:shadow-lg hover:shadow-primary/5">

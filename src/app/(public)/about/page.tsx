@@ -5,10 +5,15 @@ import {
   ShieldCheck,
   Sparkles,
   Wrench,
+  MapPin,
+  Phone,
+  Mail,
+  Clock3,
+  MessageCircle,
 } from "lucide-react";
 
 import { env } from "@/config/env";
-import { CtaBanner } from "@/components/sections/CtaBanner";
+import { ContactForm } from "@/components/contact/ContactForm";
 import { IndustriesStrip } from "@/components/sections/IndustriesStrip";
 
 const siteUrl = env.siteUrl;
@@ -30,53 +35,39 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <>
-      <section className="bg-muted py-24">
-        <div className="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
-          <p className="mb-4 text-xs font-bold uppercase tracking-[0.18em] text-accent">
-            About Moral Clean
-          </p>
-          <h1 className="font-display text-5xl font-extrabold text-primary lg:text-6xl">
-            Built on Service, Trusted by Industry
-          </h1>
-          <p className="mt-6 text-lg text-muted-foreground">
-            Moral Clean supports commercial and industrial cleaning operations
-            across Pakistan with dependable equipment supply and technical
-            service support. We work with facility managers, procurement teams,
-            and contractors who need consistent machine uptime, not one-time
-            transactions. Our focus is practical: right equipment, available
-            parts, and responsive service when it matters.
-          </p>
-        </div>
-      </section>
-
       <section className="bg-background py-20">
         <div className="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-2 lg:items-center lg:px-8">
-          <div className="relative overflow-hidden rounded-lg border border-border bg-[linear-gradient(140deg,#f8fafc_0%,#ebf5ff_100%)]">
+          <div className="relative overflow-hidden rounded-lg border border-border bg-[linear-gradient(140deg,rgb(var(--color-brand-surface))_0%,rgb(var(--color-brand-background))_100%)]">
             {/* Replace this placeholder with a real company/workshop image. */}
-            <div className="aspect-[4/3] bg-[radial-gradient(circle_at_20%_25%,rgba(14,165,233,0.22),transparent_40%),radial-gradient(circle_at_80%_75%,rgba(10,37,64,0.12),transparent_45%)]" />
+            <div className="aspect-[4/3] bg-[radial-gradient(circle_at_20%_25%,rgba(var(--color-brand-accent),0.22),transparent_40%),radial-gradient(circle_at_80%_75%,rgba(var(--color-navy),0.12),transparent_45%)]" />
           </div>
           <div>
-            <p className="mb-3 text-xs font-bold uppercase tracking-[0.18em] text-accent">
+            <p className="mb-3 text-xs font-bold uppercase tracking-[0.18em] text-brand-navy/75">
               Our Story
             </p>
-            <h2>From Equipment Supply to End-to-End Partner</h2>
-            <p className="mt-4 text-muted-foreground">
-              Moral Clean began as an equipment supplier serving commercial
-              cleaning requirements across Pakistan. As client operations grew,
-              one issue became clear: supply alone was not enough when service
-              delays could stop work on active sites.
+            <h2 className="text-brand-navy">About Us</h2>
+            <p className="mt-4 text-brand-navy/75">
+              Your Trusted Partner in Cleaning Equipment and Service
             </p>
-            <p className="mt-4 text-muted-foreground">
-              We expanded into structured after-sales support to close that
-              gap. Today, we combine product supply with maintenance, parts
-              replacement, and technical coordination so clients can maintain
-              performance standards without avoidable downtime.
+            <p className="mt-4 text-brand-navy/75">
+              Established in 2007, Moralclean is a leading supplier of
+              commercial cleaning and janitorial equipment across Pakistan. We
+              don't just supply top-tier machinery; we back it up with expert
+              repair and maintenance services to ensure your operations run
+              smoothly without avoidable downtime.
+            </p>
+            <p className="mt-4 text-brand-navy/75">
+              For over 15 years, we have provided this complete end-to-end
+              support to some of the most demanding sectors in the country. By
+              combining premium products with reliable after-sales care, we
+              proudly serve leading pharmaceutical companies, major hospitals,
+              and premium 5-star hotels.
             </p>
           </div>
         </div>
       </section>
 
-      <section className="bg-muted py-20">
+      <section className="bg-brand-gradient py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid gap-6 md:grid-cols-3">
             {[
@@ -101,11 +92,11 @@ export default function AboutPage() {
             ].map(({ icon: Icon, title, description }) => (
               <article
                 key={title}
-                className="rounded-md border border-border bg-white p-6 shadow-sm"
+                className="rounded-md border border-brand-navy/15 bg-white p-6 shadow-sm"
               >
-                <Icon className="size-9 text-accent" aria-hidden="true" />
-                <h3 className="mt-5">{title}</h3>
-                <p className="mt-3 text-sm text-muted-foreground">{description}</p>
+                <Icon className="size-9 text-brand-navy" aria-hidden="true" />
+                <h3 className="mt-5 text-brand-navy">{title}</h3>
+                <p className="mt-3 text-sm text-brand-navy/75">{description}</p>
               </article>
             ))}
           </div>
@@ -115,34 +106,65 @@ export default function AboutPage() {
       <section className="bg-background py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mb-10 text-center">
-            <p className="mb-3 text-xs font-bold uppercase tracking-[0.18em] text-accent">
+            <p className="mb-3 text-xs font-bold uppercase tracking-[0.18em] text-brand-navy/75">
               Leadership
             </p>
-            <h2>Meet the Team</h2>
+            <h2 className="text-brand-navy">Meet the Team</h2>
           </div>
 
           <article className="rounded-lg border border-border bg-white p-6 shadow-sm lg:p-8">
             <div className="grid gap-6 lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-8">
-              <div className="overflow-hidden rounded-md border border-border bg-[linear-gradient(135deg,#f8fafc_0%,#e8f4ff_100%)]">
+              <div className="overflow-hidden rounded-md border border-border bg-[linear-gradient(135deg,rgb(var(--color-brand-surface))_0%,rgb(var(--color-brand-background))_100%)]">
                 {/* Replace this placeholder with Muhammad Moiz Khan's photo. */}
-                <div className="aspect-square bg-[radial-gradient(circle_at_35%_30%,rgba(14,165,233,0.2),transparent_36%),radial-gradient(circle_at_70%_75%,rgba(10,37,64,0.1),transparent_42%)]" />
+                <div className="aspect-square bg-[radial-gradient(circle_at_35%_30%,rgba(var(--color-brand-accent),0.2),transparent_36%),radial-gradient(circle_at_70%_75%,rgba(var(--color-navy),0.1),transparent_42%)]" />
               </div>
               <div>
                 <h3 className="text-3xl">Muhammad Moiz Khan</h3>
                 <p className="mt-2 text-sm font-semibold uppercase tracking-[0.14em] text-accent">
-                  CEO & Founder
+                  Chief Executive Officer
                 </p>
                 <p className="mt-5 text-muted-foreground">
-                  Muhammad Moiz Khan leads Moral Clean with a clear operational
-                  focus: deliver reliable equipment support that helps clients
-                  maintain measurable cleaning standards in demanding commercial
-                  environments.
+                  Muhammad Moiz Khan leads Moralclean with a clear operational
+                  focus: delivering reliable equipment and repair support that
+                  helps clients maintain measurable cleaning standards in
+                  demanding commercial environments. Building on a foundation
+                  established in 2007, he ensures that top-tier supply is always
+                  backed by dependable service. His direction has shaped the
+                  company into a full-service partner for Pakistan's leading
+                  pharmaceutical companies, major hospitals, and premium 5-star
+                  hotels. Under his leadership, procurement, maintenance, and
+                  technical support are handled with the strict accountability
+                  expected in professional facility operations.
                 </p>
-                <p className="mt-4 text-muted-foreground">
-                  His direction has shaped the company from a product supply
-                  business into a full service partner, where procurement,
-                  maintenance, and technical support are handled with the same
-                  accountability expected in professional facility operations.
+              </div>
+            </div>
+          </article>
+
+          <article className="mt-6 rounded-lg border border-border bg-white p-6 shadow-sm lg:p-8">
+            <div className="grid gap-6 lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-8">
+              <div className="overflow-hidden rounded-md border border-border bg-[linear-gradient(135deg,rgb(var(--color-brand-surface))_0%,rgb(var(--color-brand-background))_100%)]">
+                {/* Replace this placeholder with Musharraf Khan's photo. */}
+                <div className="aspect-square bg-[radial-gradient(circle_at_35%_30%,rgba(var(--color-brand-accent),0.2),transparent_36%),radial-gradient(circle_at_70%_75%,rgba(var(--color-navy),0.1),transparent_42%)]" />
+              </div>
+              <div>
+                <h3 className="text-3xl">Musharraf Khan</h3>
+                <p className="mt-2 text-sm font-semibold uppercase tracking-[0.14em] text-accent">
+                  Partner
+                </p>
+                <p className="mt-5 text-muted-foreground">
+                  Musharraf Khan brings decades of industry expertise to
+                  Moralclean, having originally founded MK Enterprises Company
+                  in 2007. His early vision laid the groundwork for delivering
+                  high-quality commercial cleaning and janitorial equipment
+                  across Pakistan, building a strong industry reputation rooted
+                  in dependable machinery repair and hands-on client service.
+                  Today, as a Partner at Moralclean, his foundational experience
+                  and dedication to technical excellence continue to drive the
+                  company forward. His deep understanding of the sector ensures
+                  that our end-to-end equipment solutions consistently meet the
+                  rigorous operational standards of the country's leading
+                  pharmaceutical facilities, major hospitals, and premium 5-star
+                  hotels.
                 </p>
               </div>
             </div>
@@ -150,7 +172,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="bg-muted py-14">
+      <section className="bg-brand-gradient py-14">
         <div className="mx-auto grid max-w-7xl grid-cols-1 gap-4 px-4 sm:px-6 md:grid-cols-2 lg:grid-cols-4 lg:gap-6 lg:px-8">
           {[
             {
@@ -180,7 +202,9 @@ export default function AboutPage() {
             >
               <Icon className="size-6 text-accent" aria-hidden="true" />
               <h3 className="mt-3 text-xl">{title}</h3>
-              <p className="mt-2 text-sm text-muted-foreground">{description}</p>
+              <p className="mt-2 text-sm text-muted-foreground">
+                {description}
+              </p>
             </div>
           ))}
         </div>
@@ -188,31 +212,104 @@ export default function AboutPage() {
 
       <IndustriesStrip />
 
-      <section className="bg-background py-16">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mb-6 text-center">
-            <p className="mb-2 text-xs font-bold uppercase tracking-[0.18em] text-accent">
-              Trusted By
+      <section className="bg-background py-14">
+        <div className="mx-auto grid max-w-7xl gap-8 px-4 sm:px-6 lg:grid-cols-5 lg:px-8">
+          <aside className="order-2 rounded-lg bg-brand-gradient p-8 lg:order-1 lg:col-span-2">
+            <h2 className="text-2xl font-bold text-brand-navy">
+              Reach Us Directly
+            </h2>
+
+            <p className="mt-3 text-sm leading-6 text-brand-navy/80">
+              For urgent requirements, call us directly. For detailed equipment
+              or service discussions, use the contact form.
             </p>
-          </div>
-          {/* Replace placeholders with real client logos. */}
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
-            {Array.from({ length: 6 }).map((_, index) => (
-              <div
-                key={index}
-                className="flex h-20 items-center justify-center rounded-md border border-dashed border-border bg-muted/60 text-sm font-semibold text-muted-foreground"
-              >
-                Logo
+
+            <div className="mt-7 space-y-5">
+              <div className="flex gap-3">
+                <MapPin
+                  className="mt-0.5 size-5 shrink-0 text-brand-navy"
+                  aria-hidden="true"
+                />
+                <div>
+                  <p className="text-xs font-bold uppercase tracking-[0.12em] text-brand-navy">
+                    Office
+                  </p>
+                  <p className="mt-1 text-sm font-medium text-brand-navy">
+                    Shop no 01, Plot no 242, Sector 11-E, North Karachi, Karachi
+                  </p>
+                </div>
               </div>
-            ))}
+
+              <div className="flex gap-3">
+                <Phone
+                  className="mt-0.5 size-5 shrink-0 text-brand-navy"
+                  aria-hidden="true"
+                />
+                <div>
+                  <p className="text-xs font-bold uppercase tracking-[0.12em] text-brand-navy">
+                    Phone
+                  </p>
+                  <a
+                    href="tel:+923313195138"
+                    className="mt-1 block text-sm font-medium text-brand-navy transition-opacity hover:opacity-75"
+                  >
+                    +92 331 3195138
+                  </a>
+                </div>
+              </div>
+
+              <div className="flex gap-3">
+                <Mail
+                  className="mt-0.5 size-5 shrink-0 text-brand-navy"
+                  aria-hidden="true"
+                />
+                <div>
+                  <p className="text-xs font-bold uppercase tracking-[0.12em] text-brand-navy">
+                    Email
+                  </p>
+                  <a
+                    href="mailto:info@moralclean.com"
+                    className="mt-1 block text-sm font-medium text-brand-navy transition-opacity hover:opacity-75"
+                  >
+                    info@moralclean.com
+                  </a>
+                </div>
+              </div>
+
+              <div className="flex gap-3">
+                <Clock3
+                  className="mt-0.5 size-5 shrink-0 text-brand-navy"
+                  aria-hidden="true"
+                />
+                <div>
+                  <p className="text-xs font-bold uppercase tracking-[0.12em] text-brand-navy">
+                    Hours
+                  </p>
+                  <p className="mt-1 text-sm font-medium text-brand-navy">
+                    Monday – Saturday, 9:00 AM – 6:00 PM
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-8 space-y-5 border-t border-brand-navy/30 pt-5">
+              <a
+                href="https://wa.me/923313195138"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex w-fit items-center gap-2 rounded-full bg-brand-navy px-4 py-2 text-sm font-semibold text-white transition-opacity hover:opacity-85"
+              >
+                <MessageCircle className="size-4" aria-hidden="true" />
+                Chat on WhatsApp
+              </a>
+            </div>
+          </aside>
+
+          <div className="order-1 lg:order-2 lg:col-span-3">
+            <ContactForm />
           </div>
         </div>
       </section>
-
-      <CtaBanner
-        heading="Talk to Our Team"
-        subtitle="Connect with Moral Clean for equipment selection consultations, procurement planning, and service inquiries for commercial cleaning operations."
-      />
     </>
   );
 }

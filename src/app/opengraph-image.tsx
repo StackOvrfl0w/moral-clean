@@ -12,57 +12,23 @@ export default function OpenGraphImage() {
   return new ImageResponse(
     (
       <div
-        style={{
-          width: "100%",
-          height: "100%",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          padding: "72px",
-          background:
-            "linear-gradient(135deg, #0A2540 0%, #0E2C4D 60%, #10365E 100%)",
-          color: "#FFFFFF",
-          position: "relative",
-          fontFamily: "Arial, sans-serif",
-        }}
+        tw="relative flex h-full w-full flex-col justify-center bg-[linear-gradient(135deg,rgb(var(--color-navy))_0%,rgb(var(--color-brand-gradient-deep))_60%,rgb(var(--color-brand-gradient-darker))_100%)] p-[72px] text-white"
       >
         <div
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            right: 0,
-            height: 10,
-            background: "#0EA5E9",
-          }}
+          tw="absolute left-0 right-0 top-0 h-[10px] bg-[rgb(var(--color-brand-accent))]"
         />
         <div
-          style={{
-            fontSize: 82,
-            fontWeight: 800,
-            letterSpacing: 2,
-          }}
+          tw="text-[82px] font-extrabold tracking-[2px]"
         >
           MORAL CLEAN
         </div>
         <div
-          style={{
-            marginTop: 18,
-            fontSize: 34,
-            fontWeight: 500,
-            color: "#D7EEFF",
-          }}
+          tw="mt-[18px] text-[34px] font-medium text-[#D7EEFF]"
         >
           Commercial Cleaning Equipment & Service
         </div>
         <div
-          style={{
-            marginTop: 32,
-            width: 420,
-            height: 6,
-            borderRadius: 999,
-            background: "#0EA5E9",
-          }}
+          tw="mt-8 h-[6px] w-[420px] rounded-full bg-[rgb(var(--color-brand-accent))]"
         />
       </div>
     ),
