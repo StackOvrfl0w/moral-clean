@@ -1,6 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Link2, Clock3, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
+import {
+  Link2,
+  Clock3,
+  Mail,
+  MapPin,
+  MessageCircle,
+  Phone,
+} from "lucide-react";
 
 import { env } from "@/config/env";
 import { ContactForm } from "@/components/contact/ContactForm";
@@ -62,10 +69,13 @@ export default async function ContactPage({
     defaultMessage = `Inquiry about: ${serviceResult?.name || serviceSlug}\n`;
   }
 
-  const address = settings.business_address || "Shop no 01, Plot no 242, Sector 11-E, North Karachi, Karachi";
+  const address =
+    settings.business_address ||
+    "Shop no 01, Plot no 242, Sector 11-E, North Karachi, Karachi";
   const phone = settings.business_phone || "+92 331 3195138";
   const email = settings.business_email || "info@moralclean.com";
-  const hours = settings.business_hours || "Monday – Saturday, 9:00 AM – 6:00 PM";
+  const hours =
+    settings.business_hours || "Monday – Saturday, 9:00 AM – 6:00 PM";
   const mapsUrl = settings.google_maps_embed_url || "";
   const whatsappRaw = settings.contact_form_whatsapp || "";
   const whatsappDigits = whatsappRaw.replace(/\D/g, "");
@@ -98,57 +108,89 @@ export default async function ContactPage({
       <section className="bg-background py-14">
         <div className="mx-auto grid max-w-7xl gap-8 px-4 sm:px-6 lg:grid-cols-5 lg:px-8">
           <aside className="order-2 rounded-lg bg-brand-gradient p-8 text-brand-navy lg:order-1 lg:col-span-2">
-            <h2 className="text-2xl text-brand-navy">Reach Us Directly</h2>
-            <p className="mt-3 text-sm leading-6 text-brand-navy/75">
+            <h2 className="text-2xl font-bold text-brand-navy">
+              Reach Us Directly
+            </h2>
+            <p className="mt-3 text-sm leading-6 text-brand-navy/80">
               For urgent requirements, call us directly. For detailed equipment
               or service discussions, use the contact form.
             </p>
 
             <div className="mt-7 space-y-5">
               <div className="flex gap-3">
-                <MapPin className="mt-0.5 size-5 shrink-0 text-brand-navy" aria-hidden="true" />
+                <MapPin
+                  className="mt-0.5 size-5 shrink-0 text-brand-navy"
+                  aria-hidden="true"
+                />
                 <div>
-                  <p className="text-xs font-semibold uppercase tracking-[0.12em] text-brand-navy/65">Office</p>
-                  <p className="mt-1 text-sm text-brand-navy">{address}</p>
+                  <p className="text-xs font-bold uppercase tracking-[0.12em] text-brand-navy">
+                    Office
+                  </p>
+                  <p className="mt-1 text-sm font-medium text-brand-navy">
+                    {address}
+                  </p>
                 </div>
               </div>
 
               <div className="flex gap-3">
-                <Phone className="mt-0.5 size-5 shrink-0 text-brand-navy" aria-hidden="true" />
+                <Phone
+                  className="mt-0.5 size-5 shrink-0 text-brand-navy"
+                  aria-hidden="true"
+                />
                 <div>
-                  <p className="text-xs font-semibold uppercase tracking-[0.12em] text-brand-navy/65">Phone</p>
-                  <Link href={`tel:+${phoneDigits}`} className="mt-1 block text-sm text-brand-navy hover:text-brand-navy">
+                  <p className="text-xs font-bold uppercase tracking-[0.12em] text-brand-navy">
+                    Phone
+                  </p>
+                  <Link
+                    href={`tel:+${phoneDigits}`}
+                    className="mt-1 block text-sm font-medium text-brand-navy transition-opacity hover:opacity-75"
+                  >
                     {phone}
                   </Link>
                 </div>
               </div>
 
               <div className="flex gap-3">
-                <Mail className="mt-0.5 size-5 shrink-0 text-brand-navy" aria-hidden="true" />
+                <Mail
+                  className="mt-0.5 size-5 shrink-0 text-brand-navy"
+                  aria-hidden="true"
+                />
                 <div>
-                  <p className="text-xs font-semibold uppercase tracking-[0.12em] text-brand-navy/65">Email</p>
-                  <Link href={`mailto:${email}`} className="mt-1 block text-sm text-brand-navy hover:text-brand-navy">
+                  <p className="text-xs font-bold uppercase tracking-[0.12em] text-brand-navy">
+                    Email
+                  </p>
+                  <Link
+                    href={`mailto:${email}`}
+                    className="mt-1 block text-sm font-medium text-brand-navy transition-opacity hover:opacity-75"
+                  >
                     {email}
                   </Link>
                 </div>
               </div>
 
               <div className="flex gap-3">
-                <Clock3 className="mt-0.5 size-5 shrink-0 text-brand-navy" aria-hidden="true" />
+                <Clock3
+                  className="mt-0.5 size-5 shrink-0 text-brand-navy"
+                  aria-hidden="true"
+                />
                 <div>
-                  <p className="text-xs font-semibold uppercase tracking-[0.12em] text-brand-navy/65">Hours</p>
-                  <p className="mt-1 text-sm text-brand-navy">{hours}</p>
+                  <p className="text-xs font-bold uppercase tracking-[0.12em] text-brand-navy">
+                    Hours
+                  </p>
+                  <p className="mt-1 text-sm font-medium text-brand-navy">
+                    {hours}
+                  </p>
                 </div>
               </div>
             </div>
 
-            <div className="mt-8 space-y-5 border-t border-brand-navy/20 pt-5">
+            <div className="mt-8 space-y-5 border-t border-brand-navy/30 pt-5">
               {whatsappDigits ? (
                 <a
                   href={`https://wa.me/${whatsappDigits}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex w-fit items-center gap-2 rounded-full border border-brand-navy/20 px-4 py-2 text-sm font-medium text-brand-navy transition-colors hover:border-brand-navy hover:text-brand-navy"
+                  className="flex w-fit items-center gap-2 rounded-full bg-brand-navy px-4 py-2 text-sm font-semibold text-white transition-opacity hover:opacity-85"
                 >
                   <MessageCircle className="size-4" aria-hidden="true" />
                   Chat on WhatsApp
@@ -157,7 +199,7 @@ export default async function ContactPage({
 
               {socialLinks.length > 0 ? (
                 <div>
-                  <p className="text-sm font-semibold text-brand-navy">Follow Us</p>
+                  <p className="text-sm font-bold text-brand-navy">Follow Us</p>
                   <div className="mt-3 flex items-center gap-3">
                     {socialLinks.map(({ label, href, Icon }) => (
                       <Link
@@ -166,7 +208,7 @@ export default async function ContactPage({
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label={label}
-                        className="flex size-9 items-center justify-center rounded-full border border-brand-navy/30 text-brand-navy/70 transition-colors hover:border-brand-navy hover:text-brand-navy"
+                        className="flex size-9 items-center justify-center rounded-full border-2 border-brand-navy/40 text-brand-navy transition-all duration-200 hover:border-brand-navy hover:bg-brand-navy/10"
                       >
                         <Icon className="size-4" />
                       </Link>
@@ -198,9 +240,14 @@ export default async function ContactPage({
             />
           ) : (
             <div className="flex h-[400px] w-full flex-col items-center justify-center gap-3 rounded-lg border border-border bg-muted text-muted-foreground">
-              <MapPin className="size-10 text-muted-foreground/40" aria-hidden="true" />
+              <MapPin
+                className="size-10 text-muted-foreground/40"
+                aria-hidden="true"
+              />
               <p className="font-medium">{address}</p>
-              <p className="text-sm">Map embed will appear here once configured in admin settings.</p>
+              <p className="text-sm">
+                Map embed will appear here once configured in admin settings.
+              </p>
             </div>
           )}
         </div>
@@ -232,7 +279,9 @@ export default async function ContactPage({
                 className="rounded-md border border-border bg-white p-5"
               >
                 <h3 className="text-lg">{item.question}</h3>
-                <p className="mt-2 text-sm text-muted-foreground">{item.answer}</p>
+                <p className="mt-2 text-sm text-muted-foreground">
+                  {item.answer}
+                </p>
               </article>
             ))}
           </div>

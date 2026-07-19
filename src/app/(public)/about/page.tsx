@@ -35,7 +35,7 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <>
-      <section className="bg-brand-gradient py-20">
+      <section className="bg-background py-20">
         <div className="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-2 lg:items-center lg:px-8">
           <div className="relative overflow-hidden rounded-lg border border-border bg-[linear-gradient(140deg,rgb(var(--color-brand-surface))_0%,rgb(var(--color-brand-background))_100%)]">
             {/* Replace this placeholder with a real company/workshop image. */}
@@ -103,7 +103,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="bg-brand-gradient py-20">
+      <section className="bg-background py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mb-10 text-center">
             <p className="mb-3 text-xs font-bold uppercase tracking-[0.18em] text-brand-navy/75">
@@ -128,14 +128,13 @@ export default function AboutPage() {
                   focus: delivering reliable equipment and repair support that
                   helps clients maintain measurable cleaning standards in
                   demanding commercial environments. Building on a foundation
-                  established in 2007, he ensures that top-tier supply is
-                  always backed by dependable service. His direction has shaped
-                  the company into a full-service partner for Pakistan's
-                  leading pharmaceutical companies, major hospitals, and
-                  premium 5-star hotels. Under his leadership, procurement,
-                  maintenance, and technical support are handled with the
-                  strict accountability expected in professional facility
-                  operations.
+                  established in 2007, he ensures that top-tier supply is always
+                  backed by dependable service. His direction has shaped the
+                  company into a full-service partner for Pakistan's leading
+                  pharmaceutical companies, major hospitals, and premium 5-star
+                  hotels. Under his leadership, procurement, maintenance, and
+                  technical support are handled with the strict accountability
+                  expected in professional facility operations.
                 </p>
               </div>
             </div>
@@ -153,26 +152,19 @@ export default function AboutPage() {
                   Partner
                 </p>
                 <p className="mt-5 text-muted-foreground">
-                  Musharraf Khan brings decades of industry expertise to Moralclean, having originally founded MK Enterprises Company in 2007. His early vision laid the groundwork for delivering high-quality commercial cleaning and janitorial equipment across Pakistan, building a strong industry reputation rooted in dependable machinery repair and hands-on client service. Today, as a Partner at Moralclean, his foundational experience and dedication to technical excellence continue to drive the company forward. His deep understanding of the sector ensures that our end-to-end equipment solutions consistently meet the rigorous operational standards of the country's leading pharmaceutical facilities, major hospitals, and premium 5-star hotels.
-                </p>
-              </div>
-            </div>
-          </article>
-
-          <article className="mt-6 rounded-lg border border-border bg-white p-6 shadow-sm lg:p-8">
-            <div className="grid gap-6 lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-8">
-              <div className="overflow-hidden rounded-md border border-border bg-[linear-gradient(135deg,rgb(var(--color-brand-surface))_0%,rgb(var(--color-brand-background))_100%)]">
-                {/* Replace this placeholder with founder photo. */}
-                <div className="aspect-square bg-[radial-gradient(circle_at_35%_30%,rgba(var(--color-brand-accent),0.2),transparent_36%),radial-gradient(circle_at_70%_75%,rgba(var(--color-navy),0.1),transparent_42%)]" />
-              </div>
-              <div>
-                <h3 className="text-3xl">Founder</h3>
-                <p className="mt-2 text-sm font-semibold uppercase tracking-[0.14em] text-accent">
-                  Founder & Owner
-                </p>
-                {/* TODO: Add founder bio when provided by client. */}
-                <p className="mt-5 text-muted-foreground">
-                  Bio will be updated once provided.
+                  Musharraf Khan brings decades of industry expertise to
+                  Moralclean, having originally founded MK Enterprises Company
+                  in 2007. His early vision laid the groundwork for delivering
+                  high-quality commercial cleaning and janitorial equipment
+                  across Pakistan, building a strong industry reputation rooted
+                  in dependable machinery repair and hands-on client service.
+                  Today, as a Partner at Moralclean, his foundational experience
+                  and dedication to technical excellence continue to drive the
+                  company forward. His deep understanding of the sector ensures
+                  that our end-to-end equipment solutions consistently meet the
+                  rigorous operational standards of the country's leading
+                  pharmaceutical facilities, major hospitals, and premium 5-star
+                  hotels.
                 </p>
               </div>
             </div>
@@ -210,7 +202,9 @@ export default function AboutPage() {
             >
               <Icon className="size-6 text-accent" aria-hidden="true" />
               <h3 className="mt-3 text-xl">{title}</h3>
-              <p className="mt-2 text-sm text-muted-foreground">{description}</p>
+              <p className="mt-2 text-sm text-muted-foreground">
+                {description}
+              </p>
             </div>
           ))}
         </div>
@@ -218,71 +212,93 @@ export default function AboutPage() {
 
       <IndustriesStrip />
 
-      <section className="bg-brand-gradient py-16">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mb-6 text-center">
-            <p className="mb-2 text-xs font-bold uppercase tracking-[0.18em] text-brand-navy/75">
-              Trusted By
-            </p>
-          </div>
-          {/* Replace placeholders with real client logos. */}
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
-            {Array.from({ length: 6 }).map((_, index) => (
-              <div
-                key={index}
-                className="flex h-20 items-center justify-center rounded-md border border-dashed border-border bg-muted/60 text-sm font-semibold text-muted-foreground"
-              >
-                Logo
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="bg-brand-gradient py-14">
+      <section className="bg-background py-14">
         <div className="mx-auto grid max-w-7xl gap-8 px-4 sm:px-6 lg:grid-cols-5 lg:px-8">
-          <aside className="order-2 rounded-lg bg-brand-gradient p-8 text-brand-navy lg:order-1 lg:col-span-2">
-            <h2 className="text-2xl text-brand-navy">Reach Us Directly</h2>
-            <p className="mt-3 text-sm leading-6 text-brand-navy/75">
-              For urgent requirements, call us directly. For detailed equipment or service discussions, use the contact form.
+          <aside className="order-2 rounded-lg bg-brand-gradient p-8 lg:order-1 lg:col-span-2">
+            <h2 className="text-2xl font-bold text-brand-navy">
+              Reach Us Directly
+            </h2>
+
+            <p className="mt-3 text-sm leading-6 text-brand-navy/80">
+              For urgent requirements, call us directly. For detailed equipment
+              or service discussions, use the contact form.
             </p>
 
             <div className="mt-7 space-y-5">
               <div className="flex gap-3">
-                <MapPin className="mt-0.5 size-5 shrink-0 text-brand-navy" aria-hidden="true" />
+                <MapPin
+                  className="mt-0.5 size-5 shrink-0 text-brand-navy"
+                  aria-hidden="true"
+                />
                 <div>
-                  <p className="text-xs font-semibold uppercase tracking-[0.12em] text-brand-navy/65">Office</p>
-                  <p className="mt-1 text-sm text-brand-navy">Shop no 01, Plot no 242, Sector 11-E, North Karachi, Karachi</p>
+                  <p className="text-xs font-bold uppercase tracking-[0.12em] text-brand-navy">
+                    Office
+                  </p>
+                  <p className="mt-1 text-sm font-medium text-brand-navy">
+                    Shop no 01, Plot no 242, Sector 11-E, North Karachi, Karachi
+                  </p>
                 </div>
               </div>
 
               <div className="flex gap-3">
-                <Phone className="mt-0.5 size-5 shrink-0 text-brand-navy" aria-hidden="true" />
+                <Phone
+                  className="mt-0.5 size-5 shrink-0 text-brand-navy"
+                  aria-hidden="true"
+                />
                 <div>
-                  <p className="text-xs font-semibold uppercase tracking-[0.12em] text-brand-navy/65">Phone</p>
-                  <a href="tel:+923313195138" className="mt-1 block text-sm text-brand-navy hover:text-brand-navy">+92 331 3195138</a>
+                  <p className="text-xs font-bold uppercase tracking-[0.12em] text-brand-navy">
+                    Phone
+                  </p>
+                  <a
+                    href="tel:+923313195138"
+                    className="mt-1 block text-sm font-medium text-brand-navy transition-opacity hover:opacity-75"
+                  >
+                    +92 331 3195138
+                  </a>
                 </div>
               </div>
 
               <div className="flex gap-3">
-                <Mail className="mt-0.5 size-5 shrink-0 text-brand-navy" aria-hidden="true" />
+                <Mail
+                  className="mt-0.5 size-5 shrink-0 text-brand-navy"
+                  aria-hidden="true"
+                />
                 <div>
-                  <p className="text-xs font-semibold uppercase tracking-[0.12em] text-brand-navy/65">Email</p>
-                  <a href="mailto:info@moralclean.com" className="mt-1 block text-sm text-brand-navy hover:text-brand-navy">info@moralclean.com</a>
+                  <p className="text-xs font-bold uppercase tracking-[0.12em] text-brand-navy">
+                    Email
+                  </p>
+                  <a
+                    href="mailto:info@moralclean.com"
+                    className="mt-1 block text-sm font-medium text-brand-navy transition-opacity hover:opacity-75"
+                  >
+                    info@moralclean.com
+                  </a>
                 </div>
               </div>
 
               <div className="flex gap-3">
-                <Clock3 className="mt-0.5 size-5 shrink-0 text-brand-navy" aria-hidden="true" />
+                <Clock3
+                  className="mt-0.5 size-5 shrink-0 text-brand-navy"
+                  aria-hidden="true"
+                />
                 <div>
-                  <p className="text-xs font-semibold uppercase tracking-[0.12em] text-brand-navy/65">Hours</p>
-                  <p className="mt-1 text-sm text-brand-navy">Monday – Saturday, 9:00 AM – 6:00 PM</p>
+                  <p className="text-xs font-bold uppercase tracking-[0.12em] text-brand-navy">
+                    Hours
+                  </p>
+                  <p className="mt-1 text-sm font-medium text-brand-navy">
+                    Monday – Saturday, 9:00 AM – 6:00 PM
+                  </p>
                 </div>
               </div>
             </div>
 
-            <div className="mt-8 space-y-5 border-t border-brand-navy/20 pt-5">
-              <a href="#" className="flex w-fit items-center gap-2 rounded-full border border-brand-navy/20 px-4 py-2 text-sm font-medium text-brand-navy transition-colors hover:border-brand-navy hover:text-brand-navy">
+            <div className="mt-8 space-y-5 border-t border-brand-navy/30 pt-5">
+              <a
+                href="https://wa.me/923313195138"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex w-fit items-center gap-2 rounded-full bg-brand-navy px-4 py-2 text-sm font-semibold text-white transition-opacity hover:opacity-85"
+              >
                 <MessageCircle className="size-4" aria-hidden="true" />
                 Chat on WhatsApp
               </a>

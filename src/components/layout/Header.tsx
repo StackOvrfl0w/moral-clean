@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Building2, Camera, Droplets, Globe, Mail, Menu, Phone } from "lucide-react";
+import { FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa";
+import { Droplets, Mail, Menu, Phone } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -47,17 +48,17 @@ const socialLinks = [
   {
     label: "Facebook",
     href: "https://www.facebook.com/profile.php?id=61591695643287",
-    icon: Globe,
+    icon: FaFacebookF,
   },
   {
     label: "Instagram",
     href: "https://www.instagram.com/moral_clean/",
-    icon: Camera,
+    icon: FaInstagram,
   },
   {
     label: "LinkedIn",
     href: "https://linkedin.com/company/moralclean",
-    icon: Building2,
+    icon: FaLinkedinIn,
   },
 ];
 
@@ -72,9 +73,7 @@ function Wordmark() {
       className="flex items-center gap-4"
       aria-label="Moral Clean home"
     >
-      <span
-        className="bg-brand-gradient bg-clip-text font-etna text-3xl font-bold tracking-wide text-transparent"
-      >
+      <span className="bg-brand-gradient bg-clip-text font-etna text-3xl font-bold tracking-wide text-transparent">
         moralclean
       </span>
     </Link>
@@ -101,9 +100,7 @@ export function Header({ settings }: HeaderProps) {
   return (
     <header className="sticky top-0 z-50 bg-background">
       {/* Top bar */}
-      <div
-        className="hidden bg-brand-gradient py-2 md:block"
-      >
+      <div className="hidden bg-brand-gradient py-2 md:block">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 lg:px-8">
           <div className="flex items-center gap-5 text-xs font-medium">
             <a
@@ -248,9 +245,7 @@ export function Header({ settings }: HeaderProps) {
                       <span className="flex size-11 items-center justify-center rounded-md bg-accent text-accent-foreground">
                         <Droplets className="size-6" aria-hidden="true" />
                       </span>
-                      <span
-                        className="bg-brand-gradient bg-clip-text font-etna text-2xl font-bold uppercase tracking-wide text-transparent"
-                      >
+                      <span className="bg-brand-gradient bg-clip-text font-etna text-2xl font-bold uppercase tracking-wide text-transparent">
                         Moral Clean
                       </span>
                     </span>
