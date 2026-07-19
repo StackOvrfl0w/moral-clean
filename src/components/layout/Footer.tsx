@@ -82,7 +82,7 @@ export function Footer({ settings }: FooterProps) {
   const phone = settings.business_phone || "+92 331 3195138";
   const email = settings.business_email || "info@moralclean.com";
   const hours = settings.business_hours || "Monday – Saturday, 9:00 AM – 6:00 PM";
-  const tagline = settings.business_tagline || "Pakistan's trusted partner for commercial cleaning equipment, parts, and responsive service support.";
+  const tagline = settings.business_tagline || "Pakistan&apos;s trusted partner for commercial cleaning equipment, parts, and responsive service support.";
 
   const phoneDigits = phone.replace(/\D/g, "");
 
