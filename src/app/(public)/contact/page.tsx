@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-import type { SVGProps } from "react";
 import Link from "next/link";
-import { Clock3, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
+import { Link2, Clock3, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 
 import { env } from "@/config/env";
 import { ContactForm } from "@/components/contact/ContactForm";
@@ -24,32 +23,6 @@ export const metadata: Metadata = {
     canonical: `${siteUrl}/contact`,
   },
 };
-
-function FacebookIcon(props: SVGProps<SVGSVGElement>) {
-  return (
-    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" {...props}>
-      <path d="M14 8.5h2V5h-2.4C10.9 5 9.2 6.7 9.2 9.4v1.8H7v3.4h2.2V21h3.7v-6.4h2.7l.4-3.4h-3.1V9.7c0-.8.4-1.2 1.1-1.2Z" />
-    </svg>
-  );
-}
-
-function InstagramIcon(props: SVGProps<SVGSVGElement>) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>
-      <rect width="15" height="15" x="4.5" y="4.5" rx="4" stroke="currentColor" strokeWidth="2" />
-      <circle cx="12" cy="12" r="3.2" stroke="currentColor" strokeWidth="2" />
-      <circle cx="16.9" cy="7.4" r="1.1" fill="currentColor" />
-    </svg>
-  );
-}
-
-function LinkedinIcon(props: SVGProps<SVGSVGElement>) {
-  return (
-    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" {...props}>
-      <path d="M6.8 8.9H3.5V20h3.3V8.9ZM5.2 4a1.9 1.9 0 1 0 0 3.8 1.9 1.9 0 0 0 0-3.8ZM20.5 13.8c0-3.1-1.7-5.1-4.4-5.1-1.7 0-2.8.9-3.3 1.8V8.9H9.6V20h3.3v-5.8c0-1.6.8-2.5 2.1-2.5 1.2 0 2 .8 2 2.5V20h3.5v-6.2Z" />
-    </svg>
-  );
-}
 
 function getParam(
   searchParams: Record<string, string | string[] | undefined> | undefined,
@@ -100,22 +73,22 @@ export default async function ContactPage({
   const phoneDigits = phone.replace(/\D/g, "");
 
   const socialLinks = [
-    { label: "Facebook", href: settings.social_facebook, Icon: FacebookIcon },
-    { label: "Instagram", href: settings.social_instagram, Icon: InstagramIcon },
-    { label: "LinkedIn", href: settings.social_linkedin, Icon: LinkedinIcon },
+    { label: "Facebook", href: settings.social_facebook, Icon: Link2 },
+    { label: "Instagram", href: settings.social_instagram, Icon: Link2 },
+    { label: "LinkedIn", href: settings.social_linkedin, Icon: Link2 },
   ].filter(({ href }) => Boolean(href));
 
   return (
     <>
-      <section className="bg-muted py-16">
+      <section className="bg-brand-gradient py-16">
         <div className="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
-          <p className="mb-3 text-xs font-bold uppercase tracking-[0.18em] text-accent">
+          <p className="mb-3 text-xs font-bold uppercase tracking-[0.18em] text-brand-navy/75">
             Get In Touch
           </p>
-          <h1 className="font-display text-5xl font-extrabold text-primary lg:text-6xl">
+          <h1 className="font-display text-5xl font-extrabold text-brand-navy lg:text-6xl">
             Let&apos;s Talk About Your Equipment Needs
           </h1>
-          <p className="mt-5 text-base text-muted-foreground sm:text-lg">
+          <p className="mt-5 text-base text-brand-navy/75 sm:text-lg">
             Send us your quote request, service inquiry, or general question.
             Our team will respond with clear next steps.
           </p>
@@ -124,72 +97,58 @@ export default async function ContactPage({
 
       <section className="bg-background py-14">
         <div className="mx-auto grid max-w-7xl gap-8 px-4 sm:px-6 lg:grid-cols-5 lg:px-8">
-          <aside className="order-2 rounded-lg bg-primary p-8 text-primary-foreground lg:order-1 lg:col-span-2">
-            <h2 className="text-2xl text-white">Reach Us Directly</h2>
-            <p className="mt-3 text-sm leading-6 text-white/75">
+          <aside className="order-2 rounded-lg bg-brand-gradient p-8 text-brand-navy lg:order-1 lg:col-span-2">
+            <h2 className="text-2xl text-brand-navy">Reach Us Directly</h2>
+            <p className="mt-3 text-sm leading-6 text-brand-navy/75">
               For urgent requirements, call us directly. For detailed equipment
               or service discussions, use the contact form.
             </p>
 
             <div className="mt-7 space-y-5">
               <div className="flex gap-3">
-                <MapPin className="mt-0.5 size-5 shrink-0 text-accent" aria-hidden="true" />
+                <MapPin className="mt-0.5 size-5 shrink-0 text-brand-navy" aria-hidden="true" />
                 <div>
-                  <p className="text-xs font-semibold uppercase tracking-[0.12em] text-white/65">
-                    Office
-                  </p>
-                  <p className="mt-1 text-sm text-white/90">{address}</p>
+                  <p className="text-xs font-semibold uppercase tracking-[0.12em] text-brand-navy/65">Office</p>
+                  <p className="mt-1 text-sm text-brand-navy">{address}</p>
                 </div>
               </div>
 
               <div className="flex gap-3">
-                <Phone className="mt-0.5 size-5 shrink-0 text-accent" aria-hidden="true" />
+                <Phone className="mt-0.5 size-5 shrink-0 text-brand-navy" aria-hidden="true" />
                 <div>
-                  <p className="text-xs font-semibold uppercase tracking-[0.12em] text-white/65">
-                    Phone
-                  </p>
-                  <Link
-                    href={`tel:+${phoneDigits}`}
-                    className="mt-1 block text-sm text-white hover:text-accent"
-                  >
+                  <p className="text-xs font-semibold uppercase tracking-[0.12em] text-brand-navy/65">Phone</p>
+                  <Link href={`tel:+${phoneDigits}`} className="mt-1 block text-sm text-brand-navy hover:text-brand-navy">
                     {phone}
                   </Link>
                 </div>
               </div>
 
               <div className="flex gap-3">
-                <Mail className="mt-0.5 size-5 shrink-0 text-accent" aria-hidden="true" />
+                <Mail className="mt-0.5 size-5 shrink-0 text-brand-navy" aria-hidden="true" />
                 <div>
-                  <p className="text-xs font-semibold uppercase tracking-[0.12em] text-white/65">
-                    Email
-                  </p>
-                  <Link
-                    href={`mailto:${email}`}
-                    className="mt-1 block text-sm text-white hover:text-accent"
-                  >
+                  <p className="text-xs font-semibold uppercase tracking-[0.12em] text-brand-navy/65">Email</p>
+                  <Link href={`mailto:${email}`} className="mt-1 block text-sm text-brand-navy hover:text-brand-navy">
                     {email}
                   </Link>
                 </div>
               </div>
 
               <div className="flex gap-3">
-                <Clock3 className="mt-0.5 size-5 shrink-0 text-accent" aria-hidden="true" />
+                <Clock3 className="mt-0.5 size-5 shrink-0 text-brand-navy" aria-hidden="true" />
                 <div>
-                  <p className="text-xs font-semibold uppercase tracking-[0.12em] text-white/65">
-                    Hours
-                  </p>
-                  <p className="mt-1 text-sm text-white/90">{hours}</p>
+                  <p className="text-xs font-semibold uppercase tracking-[0.12em] text-brand-navy/65">Hours</p>
+                  <p className="mt-1 text-sm text-brand-navy">{hours}</p>
                 </div>
               </div>
             </div>
 
-            <div className="mt-8 space-y-5 border-t border-white/15 pt-5">
+            <div className="mt-8 space-y-5 border-t border-brand-navy/20 pt-5">
               {whatsappDigits ? (
                 <a
                   href={`https://wa.me/${whatsappDigits}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex w-fit items-center gap-2 rounded-full border border-white/20 px-4 py-2 text-sm font-medium text-white transition-colors hover:border-accent hover:text-accent"
+                  className="flex w-fit items-center gap-2 rounded-full border border-brand-navy/20 px-4 py-2 text-sm font-medium text-brand-navy transition-colors hover:border-brand-navy hover:text-brand-navy"
                 >
                   <MessageCircle className="size-4" aria-hidden="true" />
                   Chat on WhatsApp
@@ -198,7 +157,7 @@ export default async function ContactPage({
 
               {socialLinks.length > 0 ? (
                 <div>
-                  <p className="text-sm font-semibold text-white">Follow Us</p>
+                  <p className="text-sm font-semibold text-brand-navy">Follow Us</p>
                   <div className="mt-3 flex items-center gap-3">
                     {socialLinks.map(({ label, href, Icon }) => (
                       <Link
@@ -207,7 +166,7 @@ export default async function ContactPage({
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label={label}
-                        className="flex size-9 items-center justify-center rounded-full border border-white/20 text-white/85 transition-colors hover:border-accent hover:text-accent"
+                        className="flex size-9 items-center justify-center rounded-full border border-brand-navy/30 text-brand-navy/70 transition-colors hover:border-brand-navy hover:text-brand-navy"
                       >
                         <Icon className="size-4" />
                       </Link>

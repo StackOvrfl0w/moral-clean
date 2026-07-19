@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 700" role="img" aria-labelledby="title desc">
+  <title id="title">Pakistan Service Coverage Map</title>
+  <desc id="desc">Stylized map of Pakistan with city coverage markers.</desc>
+  <rect width="900" height="700" fill="white"/>
+  <path
+    d="M264 98l113-29 93 32 61 77 70 45 31 66-35 70 20 81-48 55-111 37-127-16-74-81-34-100 20-79-30-59 54-99z"
+    fill="lightgray"
+    stroke="black"
+    stroke-width="8"
+    stroke-linejoin="round"
+  />
+  <g fill="black">
+    <circle cx="228" cy="455" r="8"/>
+    <circle cx="321" cy="383" r="8"/>
+    <circle cx="389" cy="328" r="8"/>
+    <circle cx="418" cy="306" r="8"/>
+    <circle cx="470" cy="383" r="8"/>
+    <circle cx="544" cy="452" r="8"/>
+    <circle cx="612" cy="258" r="8"/>
+  </g>
+  <g fill="black" font-family="Arial, sans-serif" font-size="24" font-weight="700">
+    <text x="246" y="482">Karachi</text>
+    <text x="338" y="401">Lahore</text>
+    <text x="406" y="346">Islamabad</text>
+    <text x="438" y="325">Rawalpindi</text>
+    <text x="490" y="401">Faisalabad</text>
+    <text x="564" y="470">Multan</text>
+    <text x="632" y="276">Peshawar</text>
+  </g>
+</svg>

@@ -20,8 +20,7 @@ export function CtaBanner({
 }) {
   return (
     <section
-      className="py-16 text-accent-foreground"
-      style={{ background: "linear-gradient(to right, #00defc, #00a8ff)" }}
+      className="bg-brand-gradient py-16 text-accent-foreground"
     >
       <div className="mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
         <h2 className="mx-auto max-w-3xl text-primary">{heading}</h2>

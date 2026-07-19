@@ -12,13 +12,17 @@ const config: Config = {
     extend: {
       colors: {
         brand: {
-          primary: "var(--brand-primary)",
-          accent: "var(--brand-accent)",
-          background: "var(--brand-background)",
-          surface: "var(--brand-surface)",
-          border: "var(--brand-border)",
-          foreground: "var(--brand-foreground)",
-          "muted-foreground": "var(--brand-muted-foreground)",
+          gradient: {
+            from: "rgb(var(--color-brand-gradient-from) / <alpha-value>)",
+            to: "rgb(var(--color-brand-gradient-to) / <alpha-value>)",
+          },
+          navy: "rgb(var(--color-navy) / <alpha-value>)",
+          accent: "rgb(var(--color-brand-accent) / <alpha-value>)",
+          background: "rgb(var(--color-brand-background) / <alpha-value>)",
+          surface: "rgb(var(--color-brand-surface) / <alpha-value>)",
+          border: "rgb(var(--color-brand-border) / <alpha-value>)",
+          foreground: "rgb(var(--color-brand-foreground) / <alpha-value>)",
+          "muted-foreground": "rgb(var(--color-brand-muted-foreground) / <alpha-value>)",
         },
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
@@ -70,6 +74,10 @@ const config: Config = {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+      },
+      backgroundImage: {
+        "brand-gradient":
+          "linear-gradient(to right, rgb(var(--color-brand-gradient-from)), rgb(var(--color-brand-gradient-to)))",
       },
       fontFamily: {
         sans: ["var(--font-inter)", ...fontFamily.sans],

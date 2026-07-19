@@ -5,28 +5,11 @@ import Image from "next/image";
 import { PackageCheck } from "lucide-react";
 
 import type { ProductImage } from "@/lib/types";
+import { productGalleryFallbackImage } from "@/lib/fallback-images";
 import { cn } from "@/lib/utils";
 
 const blurDataUrl =
   "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";
-
-const fallbackImage = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(`
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000">
-  <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#f8fafc"/>
-      <stop offset="1" stop-color="#e0f2fe"/>
-    </linearGradient>
-  </defs>
-  <rect width="1000" height="1000" fill="url(#bg)"/>
-  <circle cx="760" cy="230" r="210" fill="#0ea5e9" opacity="0.16"/>
-  <circle cx="240" cy="760" r="260" fill="#0a2540" opacity="0.08"/>
-  <rect x="270" y="390" width="460" height="200" rx="34" fill="#fff" opacity="0.9"/>
-  <path d="M350 590h300l48 132H302l48-132Z" fill="#0a2540" opacity="0.16"/>
-  <circle cx="410" cy="746" r="44" fill="#0a2540" opacity="0.24"/>
-  <circle cx="610" cy="746" r="44" fill="#0a2540" opacity="0.24"/>
-</svg>
-`)}`;
 
 export function ProductGallery({
   images,
@@ -43,7 +26,7 @@ export function ProductGallery({
           {
             id: "fallback",
             product_id: null,
-            url: fallbackImage,
+            url: productGalleryFallbackImage,
             alt_text: productName,
             is_primary: true,
             sort_order: 0,

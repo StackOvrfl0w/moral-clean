@@ -205,21 +205,21 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
 
   return (
     <>
-      <section className="bg-muted py-14">
+      <section className="bg-brand-gradient py-14">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <nav
-            className="mb-6 flex items-center gap-2 text-sm text-muted-foreground"
+            className="mb-6 flex items-center gap-2 text-sm text-brand-navy/75"
             aria-label="Breadcrumb"
           >
-            <Link href="/" className="inline-flex items-center gap-1 hover:text-primary">
+            <Link href="/" className="inline-flex items-center gap-1 hover:text-brand-navy">
               <Home className="size-4" aria-hidden="true" />
               Home
             </Link>
             <span aria-hidden="true">/</span>
-            <span className="text-foreground">Products</span>
+            <span className="text-brand-navy">Products</span>
           </nav>
-          <h1>Our Products</h1>
-          <p className="mt-4 max-w-3xl text-base text-muted-foreground sm:text-lg">
+          <h1 className="text-brand-navy">Our Products</h1>
+          <p className="mt-4 max-w-3xl text-base text-brand-navy/80 sm:text-lg">
             Browse professional cleaning equipment for commercial sites,
             factories, hospitals, hotels, warehouses, and cleaning service
             operators across Pakistan.

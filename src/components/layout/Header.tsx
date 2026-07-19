@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Droplets, Mail, Menu, Phone } from "lucide-react";
+import { Building2, Camera, Droplets, Globe, Mail, Menu, Phone } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -47,61 +47,17 @@ const socialLinks = [
   {
     label: "Facebook",
     href: "https://www.facebook.com/profile.php?id=61591695643287",
-    icon: (
-      <svg
-        viewBox="0 0 24 24"
-        className="size-4 fill-current"
-        aria-hidden="true"
-      >
-        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
-      </svg>
-    ),
+    icon: Globe,
   },
   {
     label: "Instagram",
     href: "https://www.instagram.com/moral_clean/",
-    icon: (
-      <svg
-        viewBox="0 0 24 24"
-        className="size-4 fill-current"
-        aria-hidden="true"
-      >
-        <rect
-          x="2"
-          y="2"
-          width="20"
-          height="20"
-          rx="5"
-          ry="5"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-        />
-        <circle
-          cx="12"
-          cy="12"
-          r="4"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-        />
-        <circle cx="17.5" cy="6.5" r="1" />
-      </svg>
-    ),
+    icon: Camera,
   },
   {
     label: "LinkedIn",
     href: "https://linkedin.com/company/moralclean",
-    icon: (
-      <svg
-        viewBox="0 0 24 24"
-        className="size-4 fill-current"
-        aria-hidden="true"
-      >
-        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z" />
-        <circle cx="4" cy="4" r="2" />
-      </svg>
-    ),
+    icon: Building2,
   },
 ];
 
@@ -117,13 +73,7 @@ function Wordmark() {
       aria-label="Moral Clean home"
     >
       <span
-        className="font-etna text-3xl font-bold tracking-wide"
-        style={{
-          background: "linear-gradient(to right, #00defc, #00a8ff)",
-          WebkitBackgroundClip: "text",
-          WebkitTextFillColor: "transparent",
-          backgroundClip: "text",
-        }}
+        className="bg-brand-gradient bg-clip-text font-etna text-3xl font-bold tracking-wide text-transparent"
       >
         moralclean
       </span>
@@ -152,8 +102,7 @@ export function Header({ settings }: HeaderProps) {
     <header className="sticky top-0 z-50 bg-background">
       {/* Top bar */}
       <div
-        className="hidden md:block py-2"
-        style={{ background: "linear-gradient(to right, #00defc, #00a8ff)" }}
+        className="hidden bg-brand-gradient py-2 md:block"
       >
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 lg:px-8">
           <div className="flex items-center gap-5 text-xs font-medium">
@@ -175,7 +124,7 @@ export function Header({ settings }: HeaderProps) {
           </div>
 
           <div className="flex items-center gap-1">
-            {socialLinks.map(({ label, href, icon }) => (
+            {socialLinks.map(({ label, href, icon: Icon }) => (
               <a
                 key={label}
                 href={href}
@@ -184,7 +133,7 @@ export function Header({ settings }: HeaderProps) {
                 aria-label={label}
                 className="flex size-8 items-center justify-center rounded-full border border-white/40 text-white transition-all duration-200 hover:border-white hover:bg-white/15 hover:shadow-[0_0_8px_rgba(255,255,255,0.3)]"
               >
-                {icon}
+                <Icon className="size-4" aria-hidden="true" />
               </a>
             ))}
           </div>
@@ -279,10 +228,7 @@ export function Header({ settings }: HeaderProps) {
           <div className="hidden items-center gap-3 lg:flex">
             <Button
               asChild
-              className="border-0 text-white hover:opacity-90"
-              style={{
-                background: "linear-gradient(to right, #00defc, #00a8ff)",
-              }}
+              className="border-0 bg-brand-gradient text-white hover:opacity-90"
             >
               <Link href="/contact">Get a Quote</Link>
             </Button>
@@ -303,14 +249,7 @@ export function Header({ settings }: HeaderProps) {
                         <Droplets className="size-6" aria-hidden="true" />
                       </span>
                       <span
-                        className="font-etna text-2xl font-bold uppercase tracking-wide"
-                        style={{
-                          background:
-                            "linear-gradient(to right, #00defc, #00a8ff)",
-                          WebkitBackgroundClip: "text",
-                          WebkitTextFillColor: "transparent",
-                          backgroundClip: "text",
-                        }}
+                        className="bg-brand-gradient bg-clip-text font-etna text-2xl font-bold uppercase tracking-wide text-transparent"
                       >
                         Moral Clean
                       </span>
@@ -391,7 +330,7 @@ export function Header({ settings }: HeaderProps) {
 
                 {/* Mobile social icons */}
                 <div className="mt-6 flex items-center gap-2">
-                  {socialLinks.map(({ label, href, icon }) => (
+                  {socialLinks.map(({ label, href, icon: Icon }) => (
                     <a
                       key={label}
                       href={href}
@@ -400,7 +339,7 @@ export function Header({ settings }: HeaderProps) {
                       aria-label={label}
                       className="flex size-8 items-center justify-center rounded border border-border text-muted-foreground hover:border-accent hover:text-primary"
                     >
-                      {icon}
+                      <Icon className="size-4" aria-hidden="true" />
                     </a>
                   ))}
                 </div>

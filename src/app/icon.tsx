@@ -12,18 +12,7 @@ export default function Icon() {
   return new ImageResponse(
     (
       <div
-        style={{
-          width: "100%",
-          height: "100%",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          background: "#0A2540",
-          color: "#FFFFFF",
-          fontWeight: 800,
-          fontSize: 16,
-          fontFamily: "Arial, sans-serif",
-        }}
+        tw="flex h-full w-full items-center justify-center bg-[rgb(var(--color-navy))] text-white"
       >
         MC
       </div>
