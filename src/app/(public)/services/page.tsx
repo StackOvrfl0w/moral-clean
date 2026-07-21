@@ -11,7 +11,6 @@ import {
 } from "lucide-react";
 
 import { CtaBanner } from "@/components/sections/CtaBanner";
-import { IndustriesStrip } from "@/components/sections/IndustriesStrip";
 import { SectionHeader } from "@/components/ui/section-header";
 import {
   Accordion,
