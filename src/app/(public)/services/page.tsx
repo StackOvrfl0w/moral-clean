@@ -118,12 +118,119 @@ function serviceIcon(iconName: string | null) {
   return Cog;
 }
 
-
 export default async function ServicesPage() {
   const services = await getServices();
 
   return (
     <>
+      <section className="bg-background py-20">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <SectionHeader eyebrow="What We Offer" title="Our Services" />
+
+          <div className="space-y-8">
+            {services.map((service, index) => {
+              const Icon = serviceIcon(service.icon_name);
+              const mediaFirst = index % 2 === 0;
+
+              return (
+                <article
+                  key={service.id}
+                  className="grid gap-6 rounded-lg border border-border bg-white p-6 shadow-sm lg:grid-cols-2 lg:gap-8"
+                >
+                  <div
+                    className={cn(
+                      "relative order-2 overflow-hidden rounded-md border border-border lg:order-1",
+                      service.image_url
+                        ? "bg-muted"
+                        : "bg-[linear-gradient(130deg,rgb(var(--color-brand-surface))_0%,rgb(var(--color-brand-background))_100%)] p-6",
+                      !mediaFirst && "lg:order-2",
+                    )}
+                  >
+                    {service.image_url ? (
+                      <div className="min-h-[240px]">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={service.image_url}
+                          alt={service.name}
+                          className="h-full w-full object-contain rounded-md"
+                        />
+                      </div>
+                    ) : (
+                      <>
+                        <div className="absolute inset-0 bg-[radial-gradient(circle_at_25%_25%,rgba(var(--color-brand-accent),0.2),transparent_35%),radial-gradient(circle_at_75%_75%,rgba(var(--color-navy),0.08),transparent_40%)]" />
+                        <div className="relative flex h-full min-h-[240px] items-center justify-center">
+                          <Icon
+                            className="size-20 text-primary/65"
+                            aria-hidden="true"
+                          />
+                        </div>
+                      </>
+                    )}
+                  </div>
+
+                  <div
+                    className={cn(
+                      "order-1 lg:order-2",
+                      !mediaFirst && "lg:order-1",
+                    )}
+                  >
+                    <h2 className="font-display text-3xl">{service.name}</h2>
+                    <p className="mt-4 text-lg text-muted-foreground">
+                      {service.short_description ||
+                        "Professional service support for commercial cleaning equipment."}
+                    </p>
+                    <p className="mt-4 text-sm leading-7 text-muted-foreground">
+                      {service.long_description ||
+                        "Detailed service scope is shared after an initial technical assessment."}
+                    </p>
+
+                    <Button
+                      asChild
+                      className="mt-6 border-0 bg-brand-gradient text-white hover:opacity-100 hover:brightness-110 transition-all"
+                    >
+                      <Link href={`/contact?service=${service.slug}`}>
+                        Request This Service
+                      </Link>
+                    </Button>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      <section id="faq" className="bg-brand-gradient py-20">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <SectionHeader
+            eyebrow="How It Works"
+            title="Our Service Process"
+            descriptionClassName="text-brand-navy/80"
+            className="[&>p:first-child]:text-brand-navy/80 [&>h2]:text-brand-navy"
+          />
+
+          <div className="grid gap-4 md:grid-cols-4 md:gap-6">
+            {processSteps.map((step, index) => (
+              <div
+                key={step.title}
+                className="relative rounded-md border border-brand-navy/15 bg-white p-5 shadow-sm"
+              >
+                {index < processSteps.length - 1 ? (
+                  <div className="absolute left-[calc(100%+0.5rem)] top-9 hidden h-px w-6 bg-brand-navy/20 md:block" />
+                ) : null}
+                <div className="mb-4 inline-flex size-9 items-center justify-center rounded-full bg-accent text-sm font-bold text-accent-foreground">
+                  {index + 1}
+                </div>
+                <h3 className="text-xl text-brand-navy">{step.title}</h3>
+                <p className="mt-2 text-sm text-brand-navy/75">
+                  {step.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="bg-background py-20">
         <div className="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-2 lg:items-center lg:px-8">
           <div>
@@ -173,102 +280,14 @@ export default async function ServicesPage() {
                 index === 1 && "md:border-x",
               )}
             >
-              <p className="text-2xl font-extrabold text-primary">{item.value}</p>
+              <p className="text-2xl font-extrabold text-primary">
+                {item.value}
+              </p>
               <p className="mt-2 text-sm text-muted-foreground">{item.label}</p>
             </div>
           ))}
         </div>
       </section>
-
-      <section className="bg-background py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <SectionHeader eyebrow="What We Offer" title="Our Services" />
-
-          <div className="space-y-8">
-            {services.map((service, index) => {
-              const Icon = serviceIcon(service.icon_name);
-              const mediaFirst = index % 2 === 0;
-
-              return (
-                <article
-                  key={service.id}
-                  className="grid gap-6 rounded-lg border border-border bg-white p-6 shadow-sm lg:grid-cols-2 lg:gap-8"
-                >
-                  <div
-                    className={cn(
-                        "relative order-2 overflow-hidden rounded-md border border-border lg:order-1",
-                        service.image_url
-                          ? "bg-muted"
-                          : "bg-[linear-gradient(130deg,rgb(var(--color-brand-surface))_0%,rgb(var(--color-brand-background))_100%)] p-6",
-                        !mediaFirst && "lg:order-2",
-                      )}
-                  >
-                    {service.image_url ? (
-                      <div className="min-h-[240px]">
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img
-                          src={service.image_url}
-                          alt={service.name}
-                          className="h-full w-full object-contain rounded-md"
-                        />
-                      </div>
-                    ) : (
-                      <>
-                        <div className="absolute inset-0 bg-[radial-gradient(circle_at_25%_25%,rgba(var(--color-brand-accent),0.2),transparent_35%),radial-gradient(circle_at_75%_75%,rgba(var(--color-navy),0.08),transparent_40%)]" />
-                        <div className="relative flex h-full min-h-[240px] items-center justify-center">
-                          <Icon className="size-20 text-primary/65" aria-hidden="true" />
-                        </div>
-                      </>
-                    )}
-                  </div>
-
-                  <div className={cn("order-1 lg:order-2", !mediaFirst && "lg:order-1")}>
-                    <h2 className="font-display text-3xl">{service.name}</h2>
-                    <p className="mt-4 text-lg text-muted-foreground">
-                      {service.short_description || "Professional service support for commercial cleaning equipment."}
-                    </p>
-                    <p className="mt-4 text-sm leading-7 text-muted-foreground">
-                      {service.long_description || "Detailed service scope is shared after an initial technical assessment."}
-                    </p>
-
-                    <Button asChild className="mt-6 bg-primary text-primary-foreground hover:bg-primary/90">
-                      <Link href={`/contact?service=${service.slug}`}>Request This Service</Link>
-                    </Button>
-                  </div>
-                </article>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      <section id="faq" className="bg-brand-gradient py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <SectionHeader
-            eyebrow="How It Works"
-            title="Our Service Process"
-            descriptionClassName="text-brand-navy/80"
-            className="[&>p:first-child]:text-brand-navy/80 [&>h2]:text-brand-navy"
-          />
-
-          <div className="grid gap-4 md:grid-cols-4 md:gap-6">
-            {processSteps.map((step, index) => (
-              <div key={step.title} className="relative rounded-md border border-brand-navy/15 bg-white p-5 shadow-sm">
-                {index < processSteps.length - 1 ? (
-                  <div className="absolute left-[calc(100%+0.5rem)] top-9 hidden h-px w-6 bg-brand-navy/20 md:block" />
-                ) : null}
-                <div className="mb-4 inline-flex size-9 items-center justify-center rounded-full bg-accent text-sm font-bold text-accent-foreground">
-                  {index + 1}
-                </div>
-                <h3 className="text-xl text-brand-navy">{step.title}</h3>
-                <p className="mt-2 text-sm text-brand-navy/75">{step.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <IndustriesStrip />
 
       <section className="bg-background py-20">
         <div className="mx-auto grid max-w-7xl gap-8 px-4 sm:px-6 lg:grid-cols-2 lg:px-8">
@@ -281,7 +300,10 @@ export default async function ServicesPage() {
             </p>
             <ul className="mt-6 grid gap-3 sm:grid-cols-2">
               {cities.map((city) => (
-                <li key={city} className="flex items-center gap-2 text-sm font-medium text-primary">
+                <li
+                  key={city}
+                  className="flex items-center gap-2 text-sm font-medium text-primary"
+                >
                   <MapPin className="size-4 text-accent" aria-hidden="true" />
                   <span>{city}</span>
                 </li>

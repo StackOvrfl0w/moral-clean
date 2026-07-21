@@ -537,7 +537,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
           <Button
             asChild
             size="lg"
-            className="w-fit bg-accent text-accent-foreground hover:bg-accent/90"
+            className="w-fit bg-black text-white hover:bg-brand-black/90"
           >
             <Link href="/contact">Talk to Our Team</Link>
           </Button>

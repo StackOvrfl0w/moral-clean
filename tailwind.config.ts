@@ -22,7 +22,8 @@ const config: Config = {
           surface: "rgb(var(--color-brand-surface) / <alpha-value>)",
           border: "rgb(var(--color-brand-border) / <alpha-value>)",
           foreground: "rgb(var(--color-brand-foreground) / <alpha-value>)",
-          "muted-foreground": "rgb(var(--color-brand-muted-foreground) / <alpha-value>)",
+          "muted-foreground":
+            "rgb(var(--color-brand-muted-foreground) / <alpha-value>)",
         },
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
