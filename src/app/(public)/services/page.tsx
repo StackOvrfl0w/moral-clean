@@ -215,7 +215,7 @@ export default async function ServicesPage() {
                 className="relative rounded-md border border-brand-navy/15 bg-white p-5 shadow-sm"
               >
                 {index < processSteps.length - 1 ? (
-                  <div className="absolute left-[calc(100%+0.5rem)] top-9 hidden h-px w-6 bg-brand-navy/20 md:block" />
+                  <div className="absolute left-[calc(100%+1px)] top-9 hidden h-[calc(100%+1.5rem)] w-[calc(gap)] bg-transparent md:block" />
                 ) : null}
                 <div className="mb-4 inline-flex size-9 items-center justify-center rounded-full bg-accent text-sm font-bold text-accent-foreground">
                   {index + 1}
@@ -227,64 +227,6 @@ export default async function ServicesPage() {
               </div>
             ))}
           </div>
-        </div>
-      </section>
-
-      <section className="bg-background py-20">
-        <div className="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-2 lg:items-center lg:px-8">
-          <div>
-            <p className="mb-4 text-xs font-bold uppercase tracking-[0.18em] text-accent">
-              After-Sales Support
-            </p>
-            <h1 className="font-display text-5xl font-extrabold text-primary lg:text-6xl">
-              We Keep Your Equipment Running
-            </h1>
-            <p className="mt-6 max-w-2xl text-lg text-muted-foreground">
-              At Moral Clean, sales is only half the job. We support your
-              operations with responsive maintenance, technical diagnosis, and
-              parts availability to minimize downtime.
-            </p>
-            <Button
-              asChild
-              size="lg"
-              className="mt-8 bg-brand-gradient text-brand-navy hover:opacity-90"
-            >
-              <Link href="/contact">
-                Request Service
-                <ArrowRight className="size-4" aria-hidden="true" />
-              </Link>
-            </Button>
-          </div>
-
-          <div className="relative overflow-hidden rounded-lg border border-border bg-[linear-gradient(140deg,rgb(var(--color-brand-surface))_0%,rgb(var(--color-brand-background))_100%)] p-8 shadow-sm">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(var(--color-brand-accent),0.2),transparent_40%),radial-gradient(circle_at_80%_80%,rgba(var(--color-navy),0.1),transparent_45%)]" />
-            <div className="relative flex aspect-[4/3] items-center justify-center">
-              <Wrench className="size-28 text-primary/70" aria-hidden="true" />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="bg-muted py-8">
-        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-4 px-4 sm:px-6 md:grid-cols-3 md:gap-0 lg:px-8">
-          {[
-            { value: "20+ Years", label: "Combined service expertise" },
-            { value: "Nationwide", label: "Service coverage across Pakistan" },
-            { value: "Original Parts", label: "Authentic manufacturer parts" },
-          ].map((item, index) => (
-            <div
-              key={item.value}
-              className={cn(
-                "rounded-md border border-border bg-white px-6 py-6 text-center md:rounded-none md:border-y md:bg-transparent",
-                index === 1 && "md:border-x",
-              )}
-            >
-              <p className="text-2xl font-extrabold text-primary">
-                {item.value}
-              </p>
-              <p className="mt-2 text-sm text-muted-foreground">{item.label}</p>
-            </div>
-          ))}
         </div>
       </section>
 

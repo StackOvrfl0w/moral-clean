@@ -4,7 +4,6 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 import { BlogCard } from "@/components/blog/BlogCard";
-import { NewsletterStrip } from "@/components/blog/NewsletterStrip";
 import { Button } from "@/components/ui/button";
 import { env } from "@/config/env";
 import { blogFallbackImage } from "@/lib/fallback-images";
@@ -73,7 +72,10 @@ export default async function BlogPage({
   const showFeatured = result.totalCount >= 4 && result.posts.length > 0;
   const featuredPost = showFeatured ? result.posts[0] : null;
   const gridPosts = featuredPost ? result.posts.slice(1) : result.posts;
-  const pages = Array.from({ length: result.pageCount }, (_, index) => index + 1);
+  const pages = Array.from(
+    { length: result.pageCount },
+    (_, index) => index + 1,
+  );
 
   return (
     <>
@@ -111,7 +113,9 @@ export default async function BlogPage({
                   <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
                     {formatDate(featuredPost.published_at)}
                   </p>
-                  <h2 className="mt-4 text-3xl lg:text-4xl">{featuredPost.title}</h2>
+                  <h2 className="mt-4 text-3xl lg:text-4xl">
+                    {featuredPost.title}
+                  </h2>
                   <p className="mt-4 overflow-hidden text-muted-foreground [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3]">
                     {featuredPost.excerpt ||
                       "Read practical guidance from the Moral Clean team."}
@@ -131,7 +135,7 @@ export default async function BlogPage({
       ) : null}
 
       <section className="bg-background py-6">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mb-8">
           <h2 className="mb-6 text-3xl">Latest Articles</h2>
 
           {gridPosts.length > 0 ? (
@@ -186,8 +190,6 @@ export default async function BlogPage({
           ) : null}
         </div>
       </section>
-
-      <NewsletterStrip />
     </>
   );
 }

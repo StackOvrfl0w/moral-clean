@@ -166,7 +166,7 @@ export function Footer({ settings }: FooterProps) {
           <p className="text-center">
             © {new Date().getFullYear()} Moral Clean. All rights reserved.
           </p>
-          {socialLinks.length > 0 ? (
+          {/* {socialLinks.length > 0 ? (
             <div className="flex items-center gap-3" aria-label="Social links">
               {socialLinks.map(({ label, href, Icon }) => (
                 <Link
@@ -181,7 +181,7 @@ export function Footer({ settings }: FooterProps) {
                 </Link>
               ))}
             </div>
-          ) : null}
+          ) : null} */}
         </div>
       </div>
     </footer>
