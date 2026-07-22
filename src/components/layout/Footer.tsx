@@ -29,28 +29,6 @@ interface FooterProps {
 }
 
 export function Footer({ settings }: FooterProps) {
-  const socialLinks = [
-    {
-      label: "Facebook",
-      href:
-        settings.social_facebook ||
-        "https://www.facebook.com/profile.php?id=61591695643287",
-      Icon: FaFacebookF,
-    },
-    {
-      label: "Instagram",
-      href:
-        settings.social_instagram || "https://www.instagram.com/moral_clean/",
-      Icon: FaInstagram,
-    },
-    {
-      label: "LinkedIn",
-      href:
-        settings.social_linkedin || "https://linkedin.com/company/moralclean",
-      Icon: FaLinkedinIn,
-    },
-  ].filter(({ href }) => Boolean(href));
-
   const address =
     settings.business_address ||
     "Shop no 01, Plot no 242, Sector 11-E, North Karachi, Karachi";
@@ -166,22 +144,6 @@ export function Footer({ settings }: FooterProps) {
           <p className="text-center">
             © {new Date().getFullYear()} Moral Clean. All rights reserved.
           </p>
-          {/* {socialLinks.length > 0 ? (
-            <div className="flex items-center gap-3" aria-label="Social links">
-              {socialLinks.map(({ label, href, Icon }) => (
-                <Link
-                  key={label}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex size-9 items-center justify-center rounded-full border border-brand-navy/30 text-brand-navy/70 transition-all duration-200 hover:border-brand-navy hover:text-brand-navy"
-                  aria-label={label}
-                >
-                  <Icon className="size-4" />
-                </Link>
-              ))}
-            </div>
-          ) : null} */}
         </div>
       </div>
     </footer>

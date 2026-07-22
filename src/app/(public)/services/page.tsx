@@ -1,14 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import {
-  ArrowRight,
-  BrushCleaning,
-  Cog,
-  MapPin,
-  Settings,
-  Wrench,
-} from "lucide-react";
+import { BrushCleaning, Cog, MapPin, Settings, Wrench } from "lucide-react";
 
 import { CtaBanner } from "@/components/sections/CtaBanner";
 import { SectionHeader } from "@/components/ui/section-header";
