@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-// import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import localFont from "next/font/local";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 

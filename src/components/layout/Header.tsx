@@ -70,11 +70,14 @@ function Wordmark() {
   return (
     <Link
       href="/"
-      className="flex items-center gap-4"
+      className="flex flex-col items-start gap-0.5"
       aria-label="Moral Clean home"
     >
       <span className="bg-brand-gradient bg-clip-text font-etna text-3xl font-bold tracking-wide text-transparent">
         moralclean
+      </span>
+      <span className="text-[9px] font-medium uppercase tracking-[0.15em] text-muted-foreground">
+        Commercial Cleaning Equipment Supplier
       </span>
     </Link>
   );
