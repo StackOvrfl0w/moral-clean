@@ -69,11 +69,7 @@ const socialLinks = [
 
 function Wordmark() {
   return (
-    <Link
-      href="/"
-      className="flex flex-col items-start gap-0.5"
-      aria-label="Moral Clean home"
-    >
+    <Link href="/" className="flex items-center" aria-label="Moral Clean home">
       <span className="bg-brand-gradient bg-clip-text font-etna text-3xl font-bold tracking-wide text-transparent">
         moralclean
       </span>
@@ -163,7 +159,7 @@ export function Header({ settings, categories }: HeaderProps) {
                     <Link
                       className={cn(
                         navigationMenuTriggerStyle(),
-                        "h-12 px-5 text-[16px] font-medium",
+                        "h-10 rounded-md px-5 text-[16px] font-medium hover:text-white",
                       )}
                       href="/"
                     >
@@ -173,7 +169,7 @@ export function Header({ settings, categories }: HeaderProps) {
                 </NavigationMenuItem>
 
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger className="h-12 px-5 text-[16px] font-medium">
+                  <NavigationMenuTrigger className="h-10 rounded-md px-5 text-[16px] font-medium">
                     Products
                   </NavigationMenuTrigger>
                   <NavigationMenuContent>
@@ -216,7 +212,7 @@ export function Header({ settings, categories }: HeaderProps) {
                       <Link
                         className={cn(
                           navigationMenuTriggerStyle(),
-                          "h-12 px-5 text-[16px] font-medium",
+                          "h-10 rounded-md px-5 text-[16px] font-medium hover:text-white",
                         )}
                         href={item.href}
                       >
