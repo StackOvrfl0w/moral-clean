@@ -10,12 +10,6 @@ import { BreadcrumbSchema } from "@/components/seo/BreadcrumbSchema";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import {
   getAllCategories,
   getCategoryBySlug,
   getProductsByCategory,
