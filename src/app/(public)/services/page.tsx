@@ -248,7 +248,7 @@ export default async function ServicesPage() {
           <div className="overflow-hidden rounded-lg border border-border bg-white p-4">
             <div className="relative aspect-[4/3]">
               <Image
-                src="/assets/pakistan-map.svg"
+                src="/assets/map.jpg"
                 alt="Map of Pakistan showing Moral Clean service coverage in major cities"
                 fill
                 sizes="(min-width: 1024px) 40vw, 100vw"

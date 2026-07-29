@@ -103,7 +103,9 @@ function HiddenFilterInputs({
 }) {
   return (
     <>
-      {category ? <input type="hidden" name="category" value={category} /> : null}
+      {category ? (
+        <input type="hidden" name="category" value={category} />
+      ) : null}
       {brand ? <input type="hidden" name="brand" value={brand} /> : null}
       {tag ? <input type="hidden" name="tag" value={tag} /> : null}
       {sort ? <input type="hidden" name="sort" value={sort} /> : null}
@@ -149,7 +151,9 @@ function Pagination({
           asChild={pageNumber !== page}
           variant={pageNumber === page ? "default" : "outline"}
           size="sm"
-          className={cn(pageNumber === page && "bg-primary text-primary-foreground")}
+          className={cn(
+            pageNumber === page && "bg-primary text-primary-foreground",
+          )}
         >
           {pageNumber === page ? (
             <span>{pageNumber}</span>
@@ -176,7 +180,9 @@ function Pagination({
   );
 }
 
-export default async function ProductsPage({ searchParams }: ProductsPageProps) {
+export default async function ProductsPage({
+  searchParams,
+}: ProductsPageProps) {
   const category = getParam(searchParams, "category");
   const brand = getParam(searchParams, "brand");
   const tag = getParam(searchParams, "tag");
@@ -211,7 +217,10 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
             className="mb-6 flex items-center gap-2 text-sm text-brand-navy/75"
             aria-label="Breadcrumb"
           >
-            <Link href="/" className="inline-flex items-center gap-1 hover:text-brand-navy">
+            <Link
+              href="/"
+              className="inline-flex items-center gap-1 hover:text-brand-navy"
+            >
               <Home className="size-4" aria-hidden="true" />
               Home
             </Link>
@@ -242,7 +251,8 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
             <div className="mb-6 flex flex-col gap-4 rounded-md border border-border bg-white p-4 shadow-sm lg:flex-row lg:items-center lg:justify-between">
               <div>
                 <p className="text-sm font-semibold text-primary">
-                  Showing {result.products.length} of {result.totalCount} products
+                  Showing {result.products.length} of {result.totalCount}{" "}
+                  products
                 </p>
                 {result.usingSeedData ? (
                   <p className="mt-1 text-xs text-muted-foreground">
@@ -256,7 +266,10 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
                 <Sheet>
                   <SheetTrigger asChild>
                     <Button variant="outline" className="lg:hidden">
-                      <SlidersHorizontal className="size-4" aria-hidden="true" />
+                      <SlidersHorizontal
+                        className="size-4"
+                        aria-hidden="true"
+                      />
                       Filters
                     </Button>
                   </SheetTrigger>
@@ -274,7 +287,11 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
                   </SheetContent>
                 </Sheet>
 
-                <form action="/products" className="flex min-w-0 gap-2" method="get">
+                <form
+                  action="/products"
+                  className="flex min-w-0 gap-2"
+                  method="get"
+                >
                   <HiddenFilterInputs
                     category={category}
                     brand={brand}
@@ -293,14 +310,20 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
                       className="pl-9"
                     />
                   </div>
-                  <Button type="submit" className="bg-primary text-primary-foreground">
+                  <Button
+                    type="submit"
+                    className="bg-primary text-primary-foreground"
+                  >
                     Search
                   </Button>
                 </form>
 
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <Button variant="outline" className="justify-between sm:w-40">
+                    <Button
+                      variant="outline"
+                      className="justify-between sm:w-40"
+                    >
                       {activeSort}
                       <ChevronDown className="size-4" aria-hidden="true" />
                     </Button>
@@ -317,7 +340,8 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
                             page: undefined,
                           })}
                           className={cn(
-                            option.value === sort && "font-semibold text-primary",
+                            option.value === sort &&
+                              "font-semibold text-primary",
                           )}
                         >
                           {option.label}

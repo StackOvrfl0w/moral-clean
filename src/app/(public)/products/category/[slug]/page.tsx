@@ -1,14 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import {
-  ChevronRight,
-  Home,
-  Layers,
-} from "lucide-react";
+import { Home } from "lucide-react";
+import { CategorySortDropdown } from "@/components/products/CategorySortDropdown";
 
 import { ProductCard } from "@/components/products/ProductCard";
-import { QuickQuoteForm } from "@/components/products/QuickQuoteForm";
+import { ProductFilters } from "@/components/products/ProductFilters";
 import { BreadcrumbSchema } from "@/components/seo/BreadcrumbSchema";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -74,7 +71,9 @@ function createCategoryHref(
 
   const query = params.toString();
 
-  return query ? `/products/category/${slug}?${query}` : `/products/category/${slug}`;
+  return query
+    ? `/products/category/${slug}?${query}`
+    : `/products/category/${slug}`;
 }
 
 function CategoryPagination({
@@ -101,7 +100,9 @@ function CategoryPagination({
     >
       {page > 1 ? (
         <Button asChild variant="outline" size="sm">
-          <Link href={createCategoryHref(slug, { page: page - 1, sort })}>Previous</Link>
+          <Link href={createCategoryHref(slug, { page: page - 1, sort })}>
+            Previous
+          </Link>
         </Button>
       ) : (
         <Button variant="outline" size="sm" disabled>
@@ -115,7 +116,9 @@ function CategoryPagination({
           asChild={pageNumber !== page}
           variant={pageNumber === page ? "default" : "outline"}
           size="sm"
-          className={cn(pageNumber === page && "bg-primary text-primary-foreground")}
+          className={cn(
+            pageNumber === page && "bg-primary text-primary-foreground",
+          )}
         >
           {pageNumber === page ? (
             <span>{pageNumber}</span>
@@ -129,7 +132,9 @@ function CategoryPagination({
 
       {page < pageCount ? (
         <Button asChild variant="outline" size="sm">
-          <Link href={createCategoryHref(slug, { page: page + 1, sort })}>Next</Link>
+          <Link href={createCategoryHref(slug, { page: page + 1, sort })}>
+            Next
+          </Link>
         </Button>
       ) : (
         <Button variant="outline" size="sm" disabled>
@@ -194,9 +199,7 @@ export default async function CategoryPage({
     tag,
   });
   const allCategories = await getAllCategories();
-  const relatedCategories = allCategories
-    .filter((item) => item.slug !== category.slug)
-    .slice(0, 6);
+  const relatedProducts = productsResult.products.slice(0, 6);
   const activeSort =
     sortOptions.find((option) => option.value === sort)?.label ?? "Featured";
 
@@ -211,14 +214,17 @@ export default async function CategoryPage({
       />
       <section className="relative overflow-hidden py-20 text-white">
         {/* Replace this gradient with a real category hero image when assets are available. */}
-        <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(10,37,64,0.93),rgba(10,37,64,0.85),rgba(14,165,233,0.55))]" />
+        <div className="absolute inset-0 bg-brand-gradient opacity-90" />
         <div className="relative mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
           <h1 className="text-white">{category.name}</h1>
           <nav
             className="mt-5 flex flex-wrap items-center justify-center gap-2 text-sm text-white/70"
             aria-label="Breadcrumb"
           >
-            <Link href="/" className="inline-flex items-center gap-1 text-white/85 hover:text-white">
+            <Link
+              href="/"
+              className="inline-flex items-center gap-1 text-white/85 hover:text-white"
+            >
               <Home className="size-4" aria-hidden="true" />
               Home
             </Link>
@@ -234,51 +240,21 @@ export default async function CategoryPage({
 
       <section className="bg-background py-12">
         <div className="mx-auto grid max-w-7xl gap-8 px-4 sm:px-6 lg:grid-cols-[280px_minmax(0,1fr)] lg:px-8">
-          <aside className="space-y-6 lg:sticky lg:top-24 lg:h-fit">
-            <section className="rounded-md border border-border bg-white p-4 shadow-sm">
-              <div className="mb-4 flex items-center gap-2 border-b border-border pb-3">
-                <Layers className="size-4 text-accent" aria-hidden="true" />
-                <h2 className="text-base">Product Categories</h2>
-              </div>
-              <div className="space-y-1">
-                {allCategories.map((item) => {
-                  const isActive = item.slug === category.slug;
-
-                  return (
-                    <Link
-                      key={item.id}
-                      href={`/products/category/${item.slug}`}
-                      className={cn(
-                        "flex items-center gap-2 rounded-md px-3 py-2 text-sm transition-colors",
-                        isActive
-                          ? "bg-accent text-white hover:bg-accent/90"
-                          : "hover:bg-muted",
-                      )}
-                    >
-                      <span className="min-w-0 flex-1 truncate">{item.name}</span>
-                      <span
-                        className={cn(
-                          "rounded-full px-2 py-0.5 text-xs",
-                          isActive ? "bg-white/20 text-white" : "bg-muted text-muted-foreground",
-                        )}
-                      >
-                        {item.product_count}
-                      </span>
-                      <ChevronRight
-                        className={cn(
-                          "size-4 shrink-0",
-                          isActive ? "text-white" : "text-muted-foreground",
-                        )}
-                        aria-hidden="true"
-                      />
-                    </Link>
-                  );
-                })}
-              </div>
-            </section>
-
-            <QuickQuoteForm categorySlug={category.slug} categoryName={category.name} />
-          </aside>
+          <ProductFilters
+            categories={allCategories}
+            categoryCounts={Object.fromEntries(
+              allCategories.map((c) => [c.slug, c.product_count]),
+            )}
+            brands={productsResult.products
+              .map((p) => p.brand)
+              .filter((b): b is string => Boolean(b))
+              .filter((b, i, arr) => arr.indexOf(b) === i)}
+            tags={productsResult.products
+              .flatMap((p) => p.tags)
+              .filter((t, i, arr) => arr.findIndex((x) => x.id === t.id) === i)}
+            activeFilters={{ category: category.slug }}
+            className="sticky top-28 hidden h-fit w-[280px] shrink-0 rounded-md border border-border bg-white p-5 lg:block"
+          />
 
           <div className="min-w-0">
             <div className="mb-6 rounded-md border border-border bg-white p-5 shadow-sm">
@@ -298,31 +274,11 @@ export default async function CategoryPage({
             </div>
 
             <div className="mb-6 flex justify-end">
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="outline" className="justify-between sm:w-40">
-                    {activeSort}
-                    <ChevronRight className="size-4 rotate-90" aria-hidden="true" />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="w-44">
-                  {sortOptions.map((option) => (
-                    <DropdownMenuItem key={option.value} asChild>
-                      <Link
-                        href={createCategoryHref(category.slug, {
-                          sort: option.value === "featured" ? undefined : option.value,
-                          page: undefined,
-                        })}
-                        className={cn(
-                          option.value === sort && "font-semibold text-primary",
-                        )}
-                      >
-                        {option.label}
-                      </Link>
-                    </DropdownMenuItem>
-                  ))}
-                </DropdownMenuContent>
-              </DropdownMenu>
+              <CategorySortDropdown
+                slug={category.slug}
+                activeSort={activeSort}
+                currentSort={sort}
+              />
             </div>
 
             {productsResult.products.length > 0 ? (
@@ -333,7 +289,9 @@ export default async function CategoryPage({
               </div>
             ) : (
               <div className="flex min-h-[320px] flex-col items-center justify-center rounded-md border border-dashed border-border bg-muted/50 px-6 text-center">
-                <h3 className="text-xl">Products coming soon for this category</h3>
+                <h3 className="text-xl">
+                  Products coming soon for this category
+                </h3>
                 <Link
                   href="/products"
                   className="mt-4 text-sm font-semibold text-primary hover:text-accent"
@@ -353,20 +311,13 @@ export default async function CategoryPage({
         </div>
       </section>
 
-      {relatedCategories.length > 0 ? (
+      {relatedProducts.length > 0 ? (
         <section className="bg-muted py-12">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <h2 className="mb-6 text-2xl">Related Categories</h2>
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
-              {relatedCategories.map((item) => (
-                <Link
-                  key={item.id}
-                  href={`/products/category/${item.slug}`}
-                  className="rounded-md border border-border bg-white p-4 transition hover:-translate-y-1 hover:border-accent"
-                >
-                  <Layers className="size-5 text-accent" aria-hidden="true" />
-                  <p className="mt-3 text-sm font-semibold text-primary">{item.name}</p>
-                </Link>
+            <h2 className="mb-6 text-2xl">Related Products</h2>
+            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              {relatedProducts.map((product) => (
+                <ProductCard key={product.id} product={product} />
               ))}
             </div>
           </div>

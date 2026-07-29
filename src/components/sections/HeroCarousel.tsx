@@ -7,9 +7,12 @@ import { cn } from "@/lib/utils";
 
 const slides = [
   { src: "/hero-placeholder.png", alt: "Commercial floor scrubber dryer" },
-  { src: "/assets/categories/Single-disk-machine.png", alt: "Single disk machine" },
   {
-    src: "/assets/categories/Pressure-washer.png",
+    src: "/assets/categories/Single-disk-machine.png",
+    alt: "Single disk machine",
+  },
+  {
+    src: "/assets/categories/Ride-on-scrubber-dryer.png",
     alt: "High pressure cleaning machine",
   },
   { src: "/assets/categories/Vaccumcleaners.png", alt: "Vacuum cleaner" },

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa";
 import { Droplets, Mail, Menu, Phone } from "lucide-react";
+import type { CategoryWithCount } from "@/lib/queries/categories";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -25,16 +26,16 @@ import {
 } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
 
-const productCategories = [
-  "Floor Cleaning Machines",
-  "Vacuum Cleaners",
-  "High Pressure Cleaners",
-  "Steam Cleaners",
-  "Sweepers",
-  "Single Disc Machines",
-  "Cleaning Chemicals",
-  "Janitorial Equipment",
-];
+// const productCategories = [
+//   "Floor Cleaning Machines",
+//   "Vacuum Cleaners",
+//   "High Pressure Cleaners",
+//   "Steam Cleaners",
+//   "Sweepers",
+//   "Single Disc Machines",
+//   "Cleaning Chemicals",
+//   "Janitorial Equipment",
+// ];
 
 const navItems = [
   { label: "Home", href: "/" },
@@ -62,9 +63,9 @@ const socialLinks = [
   },
 ];
 
-function categoryHref(category: string) {
-  return `/products?category=${category.toLowerCase().replaceAll(" ", "-")}`;
-}
+// function categoryHref(category: string) {
+//   return `/products?category=${category.toLowerCase().replaceAll(" ", "-")}`;
+// }
 
 function Wordmark() {
   return (
@@ -76,18 +77,19 @@ function Wordmark() {
       <span className="bg-brand-gradient bg-clip-text font-etna text-3xl font-bold tracking-wide text-transparent">
         moralclean
       </span>
-      <span className="text-[9px] font-medium uppercase tracking-[0.15em] text-muted-foreground">
+      {/* <span className="text-[9px] font-medium uppercase tracking-[0.15em] text-muted-foreground">
         Commercial Cleaning Equipment Supplier
-      </span>
+      </span> */}
     </Link>
   );
 }
 
 interface HeaderProps {
   settings: Record<string, string>;
+  categories: CategoryWithCount[];
 }
 
-export function Header({ settings }: HeaderProps) {
+export function Header({ settings, categories }: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
@@ -171,7 +173,9 @@ export function Header({ settings }: HeaderProps) {
                 </NavigationMenuItem>
 
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger>Products</NavigationMenuTrigger>
+                  <NavigationMenuTrigger className="h-12 px-5 text-[16px] font-medium">
+                    Products
+                  </NavigationMenuTrigger>
                   <NavigationMenuContent>
                     <div className="w-[640px] p-5">
                       <div className="mb-4 border-b border-border pb-4">
@@ -191,13 +195,13 @@ export function Header({ settings }: HeaderProps) {
                         </NavigationMenuLink>
                       </div>
                       <div className="grid grid-cols-2 gap-2">
-                        {productCategories.map((category) => (
-                          <NavigationMenuLink key={category} asChild>
+                        {categories.map((category) => (
+                          <NavigationMenuLink key={category.slug} asChild>
                             <Link
-                              href={categoryHref(category)}
+                              href={`/products/category/${category.slug}`}
                               className="rounded-md px-3 py-2 text-sm font-medium text-foreground transition-colors hover:bg-muted hover:text-primary"
                             >
-                              {category}
+                              {category.name}
                             </Link>
                           </NavigationMenuLink>
                         ))}
@@ -294,13 +298,13 @@ export function Header({ settings }: HeaderProps) {
                     </Link>
                   </SheetClose>
                   <div className="mb-2 grid gap-1 border-l border-border pl-3">
-                    {productCategories.map((category) => (
-                      <SheetClose key={category} asChild>
+                    {categories.map((category) => (
+                      <SheetClose key={category.slug} asChild>
                         <Link
-                          href={categoryHref(category)}
+                          href={`/products/category/${category.slug}`}
                           className="rounded-md px-2 py-2 text-sm text-muted-foreground hover:bg-muted hover:text-foreground"
                         >
-                          {category}
+                          {category.name}
                         </Link>
                       </SheetClose>
                     ))}
