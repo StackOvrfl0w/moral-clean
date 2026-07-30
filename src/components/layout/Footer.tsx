@@ -47,14 +47,14 @@ export function Footer({ settings }: FooterProps) {
         <div>
           <Link
             href="/"
-            className="flex items-center gap-3"
+            className="flex items-center"
             aria-label="Moral Clean home"
           >
-            <span className="font-etna text-lg font-bold uppercase tracking-wide text-brand-navy">
-              Moral Clean
+            <span className="font-etna text-3xl tracking-wide text-white">
+              moralclean
             </span>
           </Link>
-          <p className="mt-5 max-w-sm text-sm leading-6 text-brand-navy/80">
+          <p className="mt-4 max-w-[220px] text-sm font-medium leading-6 tracking-tight text-brand-navy">
             {tagline}
           </p>
         </div>

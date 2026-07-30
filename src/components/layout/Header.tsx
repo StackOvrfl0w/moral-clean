@@ -70,7 +70,7 @@ const socialLinks = [
 function Wordmark() {
   return (
     <Link href="/" className="flex items-center" aria-label="Moral Clean home">
-      <span className="bg-brand-gradient bg-clip-text font-etna text-3xl font-bold tracking-wide text-transparent">
+      <span className="bg-brand-gradient bg-clip-text font-etna text-3xl tracking-wide text-transparent">
         moralclean
       </span>
       {/* <span className="text-[9px] font-medium uppercase tracking-[0.15em] text-muted-foreground">
