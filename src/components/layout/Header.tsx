@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa";
-import { Droplets, Mail, Menu, Phone } from "lucide-react";
+import { Mail, Menu, Phone } from "lucide-react";
 import type { CategoryWithCount } from "@/lib/queries/categories";
 
 import { Button } from "@/components/ui/button";
