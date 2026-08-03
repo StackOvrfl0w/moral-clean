@@ -73,9 +73,6 @@ function Wordmark() {
       <span className="bg-brand-gradient bg-clip-text font-etna text-3xl tracking-wide text-transparent">
         moralclean
       </span>
-      {/* <span className="text-[9px] font-medium uppercase tracking-[0.15em] text-muted-foreground">
-        Commercial Cleaning Equipment Supplier
-      </span> */}
     </Link>
   );
 }
@@ -245,11 +242,8 @@ export function Header({ settings, categories }: HeaderProps) {
                 <SheetHeader className="mb-8 text-left">
                   <SheetTitle asChild>
                     <span className="flex items-center gap-3">
-                      <span className="flex size-11 items-center justify-center rounded-md bg-accent text-accent-foreground">
-                        <Droplets className="size-6" aria-hidden="true" />
-                      </span>
-                      <span className="bg-brand-gradient bg-clip-text font-etna text-2xl font-bold uppercase tracking-wide text-transparent">
-                        Moral Clean
+                      <span className="bg-brand-gradient bg-clip-text font-etna font-normal text-2xl tracking-wide text-transparent">
+                        moralclean
                       </span>
                     </span>
                   </SheetTitle>
