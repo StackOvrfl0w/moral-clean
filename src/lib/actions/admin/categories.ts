@@ -16,10 +16,12 @@ async function uploadCategoryImage(file: File) {
   const ext = file.name.split(".").pop() || "jpg";
   const path = `categories/${Date.now()}-${crypto.randomUUID()}.${ext}`;
   const supabase = createClient();
-  const { error } = await supabase.storage.from("product images").upload(path, file, {
-    contentType: file.type,
-    upsert: false,
-  });
+  const { error } = await supabase.storage
+    .from("product images")
+    .upload(path, file, {
+      contentType: file.type,
+      upsert: false,
+    });
   if (error) {
     throw new Error(error.message);
   }
@@ -56,6 +58,7 @@ export async function createCategory(formData: FormData) {
 
   revalidatePath("/admin/categories");
   revalidatePath(`/products/category/${slug}`);
+  revalidatePath("/");
   redirect("/admin/categories");
 }
 
@@ -73,7 +76,8 @@ export async function updateCategory(formData: FormData) {
   }
   const sort_order = Number(formData.get("sort_order") ?? 0);
 
-  if (!id || !name || !slug) throw new Error("Category ID, name and slug are required.");
+  if (!id || !name || !slug)
+    throw new Error("Category ID, name and slug are required.");
 
   const supabase = createClient();
   const { error } = await supabase
@@ -84,6 +88,7 @@ export async function updateCategory(formData: FormData) {
 
   revalidatePath("/admin/categories");
   revalidatePath(`/products/category/${slug}`);
+  revalidatePath("/");
   redirect("/admin/categories");
 }
 
@@ -93,11 +98,15 @@ export async function deleteCategory(formData: FormData) {
   if (!id) throw new Error("Category ID required.");
 
   const supabase = createClient();
-  await supabase.from("products").update({ category_id: null }).eq("category_id", id);
+  await supabase
+    .from("products")
+    .update({ category_id: null })
+    .eq("category_id", id);
   const { error } = await supabase.from("categories").delete().eq("id", id);
   if (error) throw new Error(error.message);
   revalidatePath("/admin/categories");
   revalidatePath("/products");
+  revalidatePath("/");
 }
 
 export async function reorderCategories(formData: FormData) {
@@ -114,4 +123,5 @@ export async function reorderCategories(formData: FormData) {
   }
 
   revalidatePath("/admin/categories");
+  revalidatePath("/");
 }
