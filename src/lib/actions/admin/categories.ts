@@ -12,7 +12,13 @@ function normalize(value: FormDataEntryValue | null) {
   return text || null;
 }
 
-async function uploadCategoryImage(file: File) {
+export async function uploadCategoryImage(
+  formData: FormData,
+): Promise<{ url: string }> {
+  await requireAdmin();
+  const file = formData.get("file");
+  if (!(file instanceof File)) throw new Error("No file selected.");
+
   const ext = file.name.split(".").pop() || "jpg";
   const path = `categories/${Date.now()}-${crypto.randomUUID()}.${ext}`;
   const supabase = createClient();
@@ -22,13 +28,13 @@ async function uploadCategoryImage(file: File) {
       contentType: file.type,
       upsert: false,
     });
-  if (error) {
-    throw new Error(error.message);
-  }
+  if (error) throw new Error(error.message);
+
   const {
     data: { publicUrl },
   } = supabase.storage.from("product images").getPublicUrl(path);
-  return publicUrl;
+
+  return { url: publicUrl };
 }
 
 export async function createCategory(formData: FormData) {
@@ -37,11 +43,7 @@ export async function createCategory(formData: FormData) {
   const slugInput = normalize(formData.get("slug"));
   const slug = slugInput ? slugify(slugInput) : name ? slugify(name) : null;
   const description = normalize(formData.get("description"));
-  let image_url = normalize(formData.get("image_url"));
-  const imageFile = formData.get("image_file");
-  if (imageFile instanceof File && imageFile.size > 0) {
-    image_url = await uploadCategoryImage(imageFile);
-  }
+  const image_url = normalize(formData.get("image_url"));
   const sort_order = Number(formData.get("sort_order") ?? 0);
 
   if (!name || !slug) throw new Error("Name and slug are required.");
@@ -58,6 +60,7 @@ export async function createCategory(formData: FormData) {
 
   revalidatePath("/admin/categories");
   revalidatePath(`/products/category/${slug}`);
+  revalidatePath("/products");
   revalidatePath("/");
   redirect("/admin/categories");
 }
@@ -69,11 +72,7 @@ export async function updateCategory(formData: FormData) {
   const slugInput = normalize(formData.get("slug"));
   const slug = slugInput ? slugify(slugInput) : name ? slugify(name) : null;
   const description = normalize(formData.get("description"));
-  let image_url = normalize(formData.get("image_url"));
-  const imageFile = formData.get("image_file");
-  if (imageFile instanceof File && imageFile.size > 0) {
-    image_url = await uploadCategoryImage(imageFile);
-  }
+  const image_url = normalize(formData.get("image_url"));
   const sort_order = Number(formData.get("sort_order") ?? 0);
 
   if (!id || !name || !slug)
@@ -88,6 +87,7 @@ export async function updateCategory(formData: FormData) {
 
   revalidatePath("/admin/categories");
   revalidatePath(`/products/category/${slug}`);
+  revalidatePath("/products");
   revalidatePath("/");
   redirect("/admin/categories");
 }
@@ -123,5 +123,6 @@ export async function reorderCategories(formData: FormData) {
   }
 
   revalidatePath("/admin/categories");
+  revalidatePath("/products");
   revalidatePath("/");
 }
