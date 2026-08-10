@@ -154,10 +154,6 @@ const trustSignals = [
   { label: "20+ Years Combined Expertise", icon: Building2 },
 ];
 
-function slugify(value: string) {
-  return value.toLowerCase().replaceAll("&", "and").replaceAll(" ", "-");
-}
-
 function SectionReveal({
   children,
   className,
