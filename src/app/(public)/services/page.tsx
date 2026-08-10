@@ -171,7 +171,7 @@ export default async function ServicesPage() {
                       {service.short_description ||
                         "Professional service support for commercial cleaning equipment."}
                     </p>
-                    <p className="mt-4 text-sm leading-7 text-muted-foreground">
+                    <p className="mt-4 text-sm leading-7 text-muted-foreground whitespace-pre-line">
                       {service.long_description ||
                         "Detailed service scope is shared after an initial technical assessment."}
                     </p>

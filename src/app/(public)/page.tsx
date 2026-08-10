@@ -2,6 +2,7 @@ import type { ComponentType, ReactNode, SVGProps } from "react";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { getAllCategories } from "@/lib/queries/categories";
 import {
   ArrowRight,
   BadgeCheck,
@@ -46,49 +47,6 @@ export const metadata: Metadata = {
 };
 
 type IconComponent = ComponentType<SVGProps<SVGSVGElement>>;
-
-const categories = [
-  {
-    name: "Walk Behind Scrubber Dryer",
-    icon: BrushCleaning,
-    image: "/assets/categories/walk-behind-scrubber-dryer.png",
-  },
-  {
-    name: "Vacuum Cleaners",
-    icon: Gauge,
-    image: "/assets/categories/Vaccumcleaners.png",
-  },
-  {
-    name: "High Pressure Cleaners",
-    icon: SprayCan,
-    image: "/assets/categories/Pressure-washer.png",
-  },
-  {
-    name: "Steam Cleaners",
-    icon: Droplets,
-    image: "/assets/categories/steam-cleaner.png",
-  },
-  {
-    name: "Ride On Scrubber Dryer",
-    icon: Sparkles,
-    image: "/assets/categories/Ride-on-scrubber-dryer.png",
-  },
-  {
-    name: "Single Disc Machines",
-    icon: Settings,
-    image: "/assets/categories/Single-disk-machine.png",
-  },
-  {
-    name: "Cleaning Chemicals",
-    icon: PackageCheck,
-    image: "/assets/categories/Cleaning-chemical.png",
-  },
-  {
-    name: "Janitorial Equipment",
-    icon: Boxes,
-    image: "/assets/categories/mop-bucket.png",
-  },
-];
 
 const valueProps = [
   {
@@ -236,6 +194,10 @@ function MediaPlaceholder({
 
 export default async function Home() {
   const settings = await getAllSettings();
+  const categories = await getAllCategories();
+  const HOME_CATEGORY_LIMIT = 8;
+  const visibleCategories = categories.slice(0, HOME_CATEGORY_LIMIT);
+  const hasMoreCategories = categories.length > HOME_CATEGORY_LIMIT;
 
   const heroLine1 = settings.homepage_hero_heading_line1 || "Industrial-Grade";
   const heroLine2 =
@@ -336,23 +298,27 @@ export default async function Home() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeader eyebrow="Product Range" title="Explore by Category" />
           <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
-            {categories.map(({ name, image }) => (
+            {visibleCategories.map((category) => (
               <Link
-                key={name}
-                href={`/products?category=${slugify(name)}`}
+                key={category.id}
+                href={`/products?category=${category.slug}`}
                 className="group rounded-md border border-border bg-white p-3 transition duration-200 hover:-translate-y-1 hover:border-accent hover:shadow-lg hover:shadow-primary/5"
               >
                 <div className="relative aspect-square overflow-hidden rounded-md border border-border bg-[linear-gradient(135deg,#f8fafc_0%,#eef6fb_100%)]">
-                  <Image
-                    src={image}
-                    alt={name}
-                    fill
-                    sizes="(min-width:1024px) 25vw, (min-width:768px) 33vw, 50vw"
-                    className="object-contain p-4 transition duration-300 group-hover:scale-105"
-                  />
+                  {category.image_url ? (
+                    <Image
+                      src={category.image_url}
+                      alt={category.name}
+                      fill
+                      sizes="(min-width:1024px) 25vw, (min-width:768px) 33vw, 50vw"
+                      className="object-contain p-4 transition duration-300 group-hover:scale-105"
+                    />
+                  ) : (
+                    <MediaPlaceholder Icon={Boxes} className="h-full w-full" />
+                  )}
                 </div>
                 <div className="mt-4 flex items-center justify-between gap-3">
-                  <h3 className="text-base">{name}</h3>
+                  <h3 className="text-base">{category.name}</h3>
                   <ArrowRight
                     className="size-4 shrink-0 text-accent transition-transform group-hover:translate-x-1"
                     aria-hidden="true"
@@ -361,6 +327,16 @@ export default async function Home() {
               </Link>
             ))}
           </div>
+          {hasMoreCategories ? (
+            <div className="mt-8 flex justify-center">
+              <Button asChild variant="outline">
+                <Link href="/products">
+                  Show More
+                  <ArrowRight className="size-4" aria-hidden="true" />
+                </Link>
+              </Button>
+            </div>
+          ) : null}
         </div>
       </SectionReveal>
 

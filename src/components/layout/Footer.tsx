@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { Mail, MapPin, Phone } from "lucide-react";
 
+import type { Category } from "@/lib/types";
+
 const quickLinks = [
   { label: "Home", href: "/" },
   { label: "Products", href: "/products" },
@@ -10,24 +12,18 @@ const quickLinks = [
   { label: "Blog", href: "/blog" },
 ];
 
-const productCategories = [
-  "Floor Cleaning Machines",
-  "Vacuum Cleaners",
-  "High Pressure Cleaners",
-  "Steam Cleaners",
-  "Sweepers",
-  "Single Disc Machines",
-];
+const FOOTER_CATEGORY_LIMIT = 6;
 
-function categoryHref(category: string) {
-  return `/products?category=${category.toLowerCase().replaceAll(" ", "-")}`;
+function categoryHref(slug: string) {
+  return `/products?category=${slug}`;
 }
 
 interface FooterProps {
   settings: Record<string, string>;
+  categories: Category[];
 }
 
-export function Footer({ settings }: FooterProps) {
+export function Footer({ settings, categories }: FooterProps) {
   const address =
     settings.business_address ||
     "Shop no 01, Plot no 242, Sector 11-E, North Karachi, Karachi";
@@ -40,6 +36,9 @@ export function Footer({ settings }: FooterProps) {
     "A trusted provider of commercial cleaning equipment and expert repair services across Pakistan.";
 
   const phoneDigits = phone.replace(/\D/g, "");
+
+  const visibleCategories = categories.slice(0, FOOTER_CATEGORY_LIMIT);
+  const hasMoreCategories = categories.length > FOOTER_CATEGORY_LIMIT;
 
   return (
     <footer className="bg-brand-gradient text-brand-navy">
@@ -82,16 +81,26 @@ export function Footer({ settings }: FooterProps) {
             Product Categories
           </h2>
           <ul className="mt-5 space-y-3 text-sm text-brand-navy/80">
-            {productCategories.map((category) => (
-              <li key={category}>
+            {visibleCategories.map((category) => (
+              <li key={category.id}>
                 <Link
-                  href={categoryHref(category)}
+                  href={categoryHref(category.slug)}
                   className="transition-colors hover:text-brand-navy"
                 >
-                  {category}
+                  {category.name}
                 </Link>
               </li>
             ))}
+            {hasMoreCategories ? (
+              <li>
+                <Link
+                  href="/products"
+                  className="font-semibold text-brand-navy transition-colors hover:text-brand-navy/70"
+                >
+                  Show More
+                </Link>
+              </li>
+            ) : null}
           </ul>
         </nav>
 

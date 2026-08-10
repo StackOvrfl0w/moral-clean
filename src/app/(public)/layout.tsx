@@ -18,7 +18,7 @@ export default async function PublicLayout({
     <>
       <Header settings={settings} categories={categories} />
       <main>{children}</main>
-      <Footer settings={settings} />
+      <Footer settings={settings} categories={categories} />
       <WhatsAppButton whatsapp={settings.contact_form_whatsapp ?? ""} />
     </>
   );
