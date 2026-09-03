@@ -18,6 +18,7 @@ import {
 import { cn } from "@/lib/utils";
 
 import { env } from "@/config/env";
+import { RelatedProductsCarousel } from "@/components/products/RelatedProductsCarousel";
 
 export const revalidate = 3600;
 const siteUrl = env.siteUrl;
@@ -277,7 +278,7 @@ export default async function CategoryPage({
 
             {productsResult.products.length > 0 ? (
               <div className="grid grid-cols-2 gap-5 xl:grid-cols-3">
-                {productsResult.products.map((product) => (
+                {relatedProducts.map((product) => (
                   <ProductCard key={product.id} product={product} />
                 ))}
               </div>
@@ -309,11 +310,7 @@ export default async function CategoryPage({
         <section className="bg-muted py-12">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <h2 className="mb-6 text-2xl">Related Products</h2>
-            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-              {relatedProducts.map((product) => (
-                <ProductCard key={product.id} product={product} />
-              ))}
-            </div>
+            <RelatedProductsCarousel products={relatedProducts} />
           </div>
         </section>
       ) : null}
