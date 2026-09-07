@@ -92,9 +92,14 @@ export default async function AdminProductsPage({ searchParams }: ProductsPagePr
     <div className="space-y-5">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <h1 className="text-3xl font-display font-bold text-primary">Products</h1>
-        <Button asChild>
-          <Link href="/admin/products/new">Add Product</Link>
-        </Button>
+        <div className="flex flex-wrap gap-2">
+          <Button asChild variant="outline">
+            <Link href="/admin/products/import">Import CSV</Link>
+          </Button>
+          <Button asChild>
+            <Link href="/admin/products/new">Add Product</Link>
+          </Button>
+        </div>
       </div>
 
       <form className="flex flex-wrap gap-3 rounded-md border bg-white p-4" method="get">

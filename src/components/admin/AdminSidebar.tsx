@@ -7,6 +7,7 @@ import {
   FolderTree,
   LayoutDashboard,
   Package,
+  Tags,
   Settings,
   Wrench,
   Mailbox,
@@ -16,6 +17,7 @@ import { cn } from "@/lib/utils";
 export const adminNavItems = [
   { label: "Dashboard", href: "/admin", icon: LayoutDashboard },
   { label: "Products", href: "/admin/products", icon: Package },
+  { label: "Tags", href: "/admin/tags", icon: Tags },
   { label: "Categories", href: "/admin/categories", icon: FolderTree },
   { label: "Services", href: "/admin/services", icon: Wrench },
   { label: "Blog Posts", href: "/admin/blog", icon: FileText },

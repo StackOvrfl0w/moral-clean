@@ -259,11 +259,6 @@ async function getSupabaseCatalog() {
     (productsResponse.data ?? []) as unknown as RawSupabaseProduct[],
   );
 
-  if (products.length === 0) {
-    console.warn("Supabase product catalog is empty; using seeded fallback product data.");
-    return null;
-  }
-
   return {
     categories: categoriesResponse.data ?? [],
     tags: tagsResponse.data ?? [],
@@ -329,12 +324,12 @@ export async function getProductBySlug(slug: string) {
     .eq("slug", slug)
     .maybeSingle();
 
-  if (error || !data) {
-    console.warn(
-      `Supabase product "${slug}" was not found; checking seeded fallback data.`,
-    );
+  if (error) {
+    console.warn(`Supabase product query failed for "${slug}"; checking seeded fallback data.`);
     return findSeedProductBySlug(slug);
   }
+
+  if (!data) return null;
 
   return normalizeProducts([data as unknown as RawSupabaseProduct])[0] ?? null;
 }
@@ -370,9 +365,8 @@ export async function getRelatedProducts(
     .order("sort_order", { ascending: true })
     .limit(limit);
 
-  if (error || !data || data.length === 0) {
-    return getSeedRelatedProducts(productId, categoryId, limit);
-  }
+  if (error) return getSeedRelatedProducts(productId, categoryId, limit);
+  if (!data || data.length === 0) return [];
 
   return normalizeProducts(data as unknown as RawSupabaseProduct[]).slice(
     0,
@@ -397,5 +391,5 @@ export async function getProductSlugs() {
     return mockProducts.map((product) => product.slug);
   }
 
-  return data.map((product) => product.slug);
+  return (data ?? []).map((product) => product.slug);
 }

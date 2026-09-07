@@ -212,18 +212,47 @@ export async function deleteProduct(formData: FormData) {
   if (!productId) throw new Error("Product ID is required.");
 
   const supabase = createClient();
-  const { data } = await supabase
+  const { data, error: lookupError } = await supabase
     .from("products")
     .select("slug")
     .eq("id", productId)
     .maybeSingle();
+  if (lookupError) throw new Error(lookupError.message);
+
+  const { data: images, error: imagesError } = await supabase
+    .from("product_images")
+    .select("url")
+    .eq("product_id", productId);
+  if (imagesError) throw new Error(imagesError.message);
+
   const { error } = await supabase.from("products").delete().eq("id", productId);
 
   if (error) {
     throw new Error(error.message);
   }
 
+  const storagePaths = (images ?? [])
+    .map((image) => {
+      try {
+        const path = decodeURIComponent(new URL(image.url).pathname);
+        const marker = "/storage/v1/object/public/product images/";
+        return path.startsWith(marker) ? path.slice(marker.length) : null;
+      } catch {
+        return null;
+      }
+    })
+    .filter((path): path is string => Boolean(path));
+
+  if (storagePaths.length > 0) {
+    const { error: storageError } = await supabase.storage
+      .from("product images")
+      .remove(storagePaths);
+    if (storageError) throw new Error(storageError.message);
+  }
+
   revalidatePath("/admin/products");
+  revalidatePath("/products");
+  revalidatePath("/products/category/[slug]", "page");
   if (data?.slug) {
     revalidatePath(`/products/${data.slug}`);
   }

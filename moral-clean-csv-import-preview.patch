@@ -1,0 +1,1683 @@
+diff --git a/next.config.mjs b/next.config.mjs
+--- a/next.config.mjs
++++ b/next.config.mjs
+@@ -1,4 +1,19 @@
+ /** @type {import('next').NextConfig} */
+-const nextConfig = {};
++const nextConfig = {
++  experimental: {
++    serverActions: {
++      bodySizeLimit: "8mb",
++    },
++  },
++  images: {
++    remotePatterns: [
++      {
++        protocol: "https",
++        hostname: "ik.imagekit.io",
++        pathname: "/**",
++      },
++    ],
++  },
++};
+ 
+ export default nextConfig;
+diff --git a/src/app/admin/(protected)/products/import/page.tsx b/src/app/admin/(protected)/products/import/page.tsx
+new file mode 100644
+--- /dev/null
++++ b/src/app/admin/(protected)/products/import/page.tsx
+@@ -0,0 +1,39 @@
++import Link from "next/link";
++import { ArrowLeft } from "lucide-react";
++
++import { ProductCsvImporter } from "@/components/admin/ProductCsvImporter";
++import { Button } from "@/components/ui/button";
++import { requireAdmin } from "@/lib/auth";
++import { createClient } from "@/lib/supabase/server";
++
++export default async function ProductCsvImportPage() {
++  await requireAdmin();
++  const supabase = createClient();
++  const { data: categories } = await supabase
++    .from("categories")
++    .select("name,slug")
++    .order("name", { ascending: true });
++
++  return (
++    <div className="space-y-6">
++      <div className="flex flex-wrap items-start justify-between gap-3">
++        <div>
++          <h1 className="text-3xl font-display font-bold text-primary">
++            Import Products from CSV
++          </h1>
++          <p className="mt-2 max-w-3xl text-sm text-muted-foreground">
++            Bulk-create products without editing them one by one. Download the template,
++            follow the rules below, preview the file, and import only after the rows look correct.
++          </p>
++        </div>
++        <Button asChild variant="outline">
++          <Link href="/admin/products">
++            <ArrowLeft className="size-4" /> Back to Products
++          </Link>
++        </Button>
++      </div>
++
++      <ProductCsvImporter categories={categories ?? []} />
++    </div>
++  );
++}
+diff --git a/src/components/admin/ProductCsvImporter.tsx b/src/components/admin/ProductCsvImporter.tsx
+new file mode 100644
+--- /dev/null
++++ b/src/components/admin/ProductCsvImporter.tsx
+@@ -0,0 +1,565 @@
++"use client";
++
++import { useMemo, useState } from "react";
++import {
++  AlertTriangle,
++  CheckCircle2,
++  Download,
++  ExternalLink,
++  FileSpreadsheet,
++  ImageIcon,
++  Loader2,
++  UploadCloud,
++} from "lucide-react";
++
++import { Button } from "@/components/ui/button";
++import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
++import { importProductsCsv } from "@/lib/actions/admin/product-csv-import";
++import {
++  createProductCsvTemplate,
++  MAX_PRODUCT_CSV_BYTES,
++  MAX_PRODUCT_CSV_ROWS,
++  MAX_PRODUCT_IMAGE_BYTES,
++  MAX_PRODUCT_LOCAL_IMAGES,
++  parseProductCsv,
++  type ParsedProductCsv,
++  type ProductCsvImportResult,
++} from "@/lib/product-csv";
++
++type CategoryOption = {
++  name: string;
++  slug: string;
++};
++
++type ProductCsvImporterProps = {
++  categories: CategoryOption[];
++};
++
++const ACCEPTED_IMAGE_TYPES = new Set([
++  "image/jpeg",
++  "image/png",
++  "image/webp",
++  "image/avif",
++]);
++
++const columnRules = [
++  ["name", "Required", "Product name shown on the website."],
++  ["slug", "Optional", "Website URL name. Leave blank to generate it from the product name. Include it when updating an existing product."],
++  ["category", "Optional", "Existing category name or slug. Missing categories can be created automatically if you enable that option."],
++  ["brand", "Optional", "Brand/manufacturer name."],
++  ["model_code", "Optional", "Model number or product code."],
++  ["short_description", "Optional", "Short text used on product cards and summaries."],
++  ["long_description", "Optional", "Full product description."],
++  ["specifications", "Optional", "Use Label=Value|Label=Value, e.g. Power=1200 W|Tank=70 L. JSON objects are also accepted."],
++  ["tags", "Optional", "Separate tags with |, e.g. vacuum|industrial|wet and dry."],
++  ["featured", "Optional", "yes/no, true/false, or 1/0. Blank means no for new products."],
++  ["in_stock", "Optional", "yes/no, true/false, or 1/0. Blank means yes for new products."],
++  ["sort_order", "Optional", "Whole number. Smaller numbers appear first when sort order is used."],
++  ["meta_title", "Optional", "SEO page title."],
++  ["meta_description", "Optional", "SEO meta description."],
++  ["primary_image", "Optional", "One optimized ImageKit URL or exact attached local filename. Required when gallery_images is used."],
++  ["primary_image_alt", "Optional", "Accessible description for the primary image. Product name is used when blank."],
++  ["gallery_images", "Optional", "Additional ImageKit URLs or attached local filenames separated with |."],
++  ["gallery_image_alts", "Optional", "Alt text for gallery images in the same order, separated with |. Missing values fall back to product name."],
++];
++
++function formatKb(bytes: number) {
++  return `${(bytes / 1024).toFixed(1)} KB`;
++}
++
++export function ProductCsvImporter({ categories }: ProductCsvImporterProps) {
++  const [csvFile, setCsvFile] = useState<File | null>(null);
++  const [parsed, setParsed] = useState<ParsedProductCsv | null>(null);
++  const [parseMessage, setParseMessage] = useState<string | null>(null);
++  const [imageFiles, setImageFiles] = useState<File[]>([]);
++  const [mode, setMode] = useState<"create" | "upsert">("create");
++  const [createMissingCategories, setCreateMissingCategories] = useState(false);
++  const [submitting, setSubmitting] = useState(false);
++  const [result, setResult] = useState<ProductCsvImportResult | null>(null);
++
++  const categoryNames = useMemo(
++    () => new Set(categories.flatMap((category) => [category.name.toLowerCase(), category.slug.toLowerCase()])),
++    [categories],
++  );
++
++  const localImageProblems = useMemo(() => {
++    const problems: string[] = [];
++    const seen = new Set<string>();
++
++    if (imageFiles.length > MAX_PRODUCT_LOCAL_IMAGES) {
++      problems.push(`Attach no more than ${MAX_PRODUCT_LOCAL_IMAGES} local images per import.`);
++    }
++
++    for (const file of imageFiles) {
++      const key = file.name.toLowerCase();
++      if (seen.has(key)) problems.push(`Duplicate local image filename: ${file.name}.`);
++      seen.add(key);
++
++      if (file.size > MAX_PRODUCT_IMAGE_BYTES) {
++        problems.push(`${file.name} is ${formatKb(file.size)}; local images must be 50 KB or smaller.`);
++      }
++      if (!ACCEPTED_IMAGE_TYPES.has(file.type)) {
++        problems.push(`${file.name} is not JPG, PNG, WebP, or AVIF.`);
++      }
++    }
++
++    return problems;
++  }, [imageFiles]);
++
++  const unknownCategories = useMemo(() => {
++    if (!parsed || createMissingCategories) return [];
++    return Array.from(
++      new Set(
++        parsed.rows
++          .map((row) => row.values.category.trim())
++          .filter(Boolean)
++          .filter((category) => !categoryNames.has(category.toLowerCase())),
++      ),
++    );
++  }, [parsed, createMissingCategories, categoryNames]);
++
++  const imageCsvProblems = useMemo(() => {
++    if (!parsed) return [];
++
++    const problems: string[] = [];
++    for (const row of parsed.rows) {
++      const primaryImages = row.values.primary_image
++        .split(/[|;]/)
++        .map((value) => value.trim())
++        .filter(Boolean);
++      const galleryImages = row.values.gallery_images
++        .split(/[|;]/)
++        .map((value) => value.trim())
++        .filter(Boolean);
++      const galleryAlts = row.values.gallery_image_alts
++        .split("|")
++        .map((value) => value.trim())
++        .filter(Boolean);
++
++      if (primaryImages.length > 1) {
++        problems.push(`Row ${row.line}: primary_image accepts only one image.`);
++      }
++      if (galleryImages.length > 0 && primaryImages.length === 0) {
++        problems.push(`Row ${row.line}: add primary_image before gallery_images.`);
++      }
++      if (row.values.primary_image_alt.trim() && primaryImages.length === 0) {
++        problems.push(`Row ${row.line}: primary_image_alt needs a primary_image.`);
++      }
++      if (galleryAlts.length > 0 && galleryImages.length === 0) {
++        problems.push(`Row ${row.line}: gallery_image_alts needs gallery_images.`);
++      }
++      if (galleryAlts.length > galleryImages.length) {
++        problems.push(`Row ${row.line}: more gallery alt texts than gallery images.`);
++      }
++    }
++
++    return problems;
++  }, [parsed]);
++
++  async function handleCsvSelection(file: File | null) {
++    setCsvFile(file);
++    setParsed(null);
++    setParseMessage(null);
++    setResult(null);
++
++    if (!file) return;
++    if (!file.name.toLowerCase().endsWith(".csv")) {
++      setParseMessage("Select a .csv file.");
++      return;
++    }
++    if (file.size > MAX_PRODUCT_CSV_BYTES) {
++      setParseMessage("CSV file is too large. Maximum size is 1 MB.");
++      return;
++    }
++
++    const nextParsed = parseProductCsv(await file.text());
++    setParsed(nextParsed);
++    if (nextParsed.rows.length > MAX_PRODUCT_CSV_ROWS) {
++      setParseMessage(`Import up to ${MAX_PRODUCT_CSV_ROWS} product rows at a time.`);
++    }
++  }
++
++  function downloadTemplate() {
++    const blob = new Blob([createProductCsvTemplate()], {
++      type: "text/csv;charset=utf-8",
++    });
++    const url = URL.createObjectURL(blob);
++    const anchor = document.createElement("a");
++    anchor.href = url;
++    anchor.download = "moral-clean-products-template.csv";
++    document.body.appendChild(anchor);
++    anchor.click();
++    anchor.remove();
++    URL.revokeObjectURL(url);
++  }
++
++  async function runImport() {
++    if (!csvFile || !parsed) return;
++    if (parsed.errors.length > 0 || parseMessage || localImageProblems.length > 0) return;
++
++    setSubmitting(true);
++    setResult(null);
++    try {
++      const formData = new FormData();
++      formData.append("csv", csvFile);
++      imageFiles.forEach((file) => formData.append("images", file));
++      formData.append("mode", mode);
++      formData.append("createMissingCategories", String(createMissingCategories));
++      const response = await importProductsCsv(formData);
++      setResult(response);
++    } catch {
++      setResult({
++        success: false,
++        created: 0,
++        updated: 0,
++        skipped: 0,
++        errors: [],
++        message: "Import failed before completion. Check server logs and try again.",
++      });
++    } finally {
++      setSubmitting(false);
++    }
++  }
++
++  const canImport =
++    Boolean(csvFile && parsed && parsed.rows.length > 0) &&
++    !parseMessage &&
++    (parsed?.errors.length ?? 0) === 0 &&
++    localImageProblems.length === 0 &&
++    unknownCategories.length === 0 &&
++    imageCsvProblems.length === 0 &&
++    !submitting;
++
++  return (
++    <div className="space-y-6">
++      <Card>
++        <CardHeader className="gap-3 sm:flex-row sm:items-center sm:justify-between">
++          <div>
++            <CardTitle>1. Download the template</CardTitle>
++            <p className="mt-1 text-sm text-muted-foreground">
++              Keep the column names unchanged. Delete the example product before entering real products.
++            </p>
++          </div>
++          <Button type="button" variant="outline" onClick={downloadTemplate}>
++            <Download className="size-4" />
++            Download CSV Template
++          </Button>
++        </CardHeader>
++      </Card>
++
++      <Card>
++        <CardHeader>
++          <CardTitle>2. Image rules</CardTitle>
++        </CardHeader>
++        <CardContent className="grid gap-4 lg:grid-cols-2">
++          <div className="rounded-md border border-accent/30 bg-accent/5 p-4">
++            <div className="flex items-center gap-2 font-semibold text-primary">
++              <ImageIcon className="size-5" />
++              Recommended: ImageKit URL
++            </div>
++            <p className="mt-2 text-sm text-muted-foreground">
++              Upload product images to ImageKit and paste the optimized HTTPS URL into
++              <code className="mx-1 rounded bg-muted px-1 py-0.5 text-xs">primary_image</code>
++              or <code className="mx-1 rounded bg-muted px-1 py-0.5 text-xs">gallery_images</code>.
++              The images stay in ImageKit and do not consume Supabase Storage.
++            </p>
++            <p className="mt-2 break-all rounded bg-muted p-2 font-mono text-xs text-primary">
++              https://ik.imagekit.io/your_id/tr:w-900,q-65/products/machine.webp
++            </p>
++            <a
++              href="https://imagekit.io/"
++              target="_blank"
++              rel="noreferrer"
++              className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-accent hover:underline"
++            >
++              Open ImageKit <ExternalLink className="size-3.5" />
++            </a>
++          </div>
++
++          <div className="rounded-md border p-4">
++            <div className="flex items-center gap-2 font-semibold text-primary">
++              <UploadCloud className="size-5" />
++              Alternative: attach local images
++            </div>
++            <p className="mt-2 text-sm text-muted-foreground">
++              Put the exact filename in <code className="mx-1 rounded bg-muted px-1 py-0.5 text-xs">primary_image</code>
++              or <code className="mx-1 rounded bg-muted px-1 py-0.5 text-xs">gallery_images</code>,
++              then attach that file below. Every local file is strictly limited to 50 KB before it can be uploaded to Supabase.
++            </p>
++            <p className="mt-2 text-xs font-medium text-destructive">
++              Local limit: 50 KB each. Formats: JPG, PNG, WebP, AVIF. Maximum {MAX_PRODUCT_LOCAL_IMAGES} files per batch.
++            </p>
++          </div>
++
++          <div className="lg:col-span-2 rounded-md border border-amber-200 bg-amber-50 p-3 text-sm text-amber-950">
++            <strong>Important:</strong> the 50 KB limit can be enforced exactly for files uploaded through this form.
++            ImageKit URLs are external assets; use an ImageKit transformation and keep the delivered image small. The importer requires a transformed ImageKit URL but does not copy the remote image into Supabase.
++          </div>
++        </CardContent>
++      </Card>
++
++      <Card>
++        <CardHeader>
++          <CardTitle>3. Accepted CSV columns</CardTitle>
++        </CardHeader>
++        <CardContent>
++          <div className="overflow-x-auto rounded-md border">
++            <table className="w-full min-w-[760px] text-left text-sm">
++              <thead className="bg-muted/80 text-xs uppercase tracking-wide text-muted-foreground">
++                <tr>
++                  <th className="px-3 py-3">Column</th>
++                  <th className="px-3 py-3">Rule</th>
++                  <th className="px-3 py-3">What to enter</th>
++                </tr>
++              </thead>
++              <tbody>
++                {columnRules.map(([column, rule, explanation]) => (
++                  <tr key={column} className="border-t align-top">
++                    <td className="px-3 py-3 font-mono text-xs font-semibold text-primary">{column}</td>
++                    <td className="px-3 py-3 font-medium">{rule}</td>
++                    <td className="px-3 py-3 text-muted-foreground">{explanation}</td>
++                  </tr>
++                ))}
++              </tbody>
++            </table>
++          </div>
++          <div className="mt-4 grid gap-2 text-sm text-muted-foreground md:grid-cols-2">
++            <p>• CSV maximum: 1 MB and {MAX_PRODUCT_CSV_ROWS} product rows per import.</p>
++            <p>• Multiple tags, specifications, gallery images, and gallery alt texts use the | separator.</p>
++            <p>• Commas and line breaks are allowed inside properly quoted CSV cells.</p>
++            <p>• Unknown extra columns are ignored, but shown as a warning before import.</p>
++            <p>• Create-only mode skips products whose slug already exists.</p>
++            <p>• Update mode matches by slug; blank optional cells preserve existing values.</p>
++          </div>
++        </CardContent>
++      </Card>
++
++      <Card>
++        <CardHeader>
++          <CardTitle>4. Select CSV and optional local images</CardTitle>
++        </CardHeader>
++        <CardContent className="space-y-5">
++          <div className="grid gap-4 lg:grid-cols-2">
++            <label className="block rounded-md border border-dashed p-4">
++              <span className="flex items-center gap-2 font-medium text-primary">
++                <FileSpreadsheet className="size-5" /> Product CSV
++              </span>
++              <input
++                type="file"
++                accept=".csv,text/csv"
++                className="mt-3 block w-full text-sm"
++                onChange={(event) => handleCsvSelection(event.target.files?.[0] ?? null)}
++              />
++              <span className="mt-2 block text-xs text-muted-foreground">Maximum 1 MB.</span>
++            </label>
++
++            <label className="block rounded-md border border-dashed p-4">
++              <span className="flex items-center gap-2 font-medium text-primary">
++                <ImageIcon className="size-5" /> Local images (only if CSV uses filenames)
++              </span>
++              <input
++                type="file"
++                multiple
++                accept="image/jpeg,image/png,image/webp,image/avif"
++                className="mt-3 block w-full text-sm"
++                onChange={(event) => setImageFiles(Array.from(event.target.files ?? []))}
++              />
++              <span className="mt-2 block text-xs text-muted-foreground">50 KB maximum per image.</span>
++            </label>
++          </div>
++
++          {parseMessage ? (
++            <div className="flex gap-2 rounded-md border border-destructive/30 bg-destructive/5 p-3 text-sm text-destructive">
++              <AlertTriangle className="mt-0.5 size-4 shrink-0" /> {parseMessage}
++            </div>
++          ) : null}
++
++          {localImageProblems.length > 0 ? (
++            <div className="rounded-md border border-destructive/30 bg-destructive/5 p-3 text-sm text-destructive">
++              <div className="mb-1 flex items-center gap-2 font-semibold">
++                <AlertTriangle className="size-4" /> Fix local image problems
++              </div>
++              <ul className="list-disc space-y-1 pl-5">
++                {localImageProblems.map((problem) => <li key={problem}>{problem}</li>)}
++              </ul>
++            </div>
++          ) : null}
++
++          {parsed ? (
++            <div className="space-y-4">
++              <div className="flex flex-wrap gap-3 text-sm">
++                <span className="rounded bg-muted px-2 py-1">{parsed.rows.length} product rows</span>
++                <span className="rounded bg-muted px-2 py-1">{imageFiles.length} local images attached</span>
++              </div>
++
++              {parsed.errors.length > 0 ? (
++                <div className="rounded-md border border-destructive/30 bg-destructive/5 p-3 text-sm text-destructive">
++                  <ul className="list-disc space-y-1 pl-5">
++                    {parsed.errors.map((error) => <li key={error}>{error}</li>)}
++                  </ul>
++                </div>
++              ) : null}
++
++              {parsed.unknownHeaders.length > 0 ? (
++                <div className="rounded-md border border-amber-200 bg-amber-50 p-3 text-sm text-amber-950">
++                  Unknown columns will be ignored: {parsed.unknownHeaders.join(", ")}.
++                </div>
++              ) : null}
++
++              {unknownCategories.length > 0 ? (
++                <div className="rounded-md border border-amber-200 bg-amber-50 p-3 text-sm text-amber-950">
++                  These categories do not exist: {unknownCategories.join(", ")}. Create them first or enable “Create missing categories” below.
++                </div>
++              ) : null}
++
++              {imageCsvProblems.length > 0 ? (
++                <div className="rounded-md border border-destructive/30 bg-destructive/5 p-3 text-sm text-destructive">
++                  <ul className="list-disc space-y-1 pl-5">
++                    {imageCsvProblems.map((problem) => <li key={problem}>{problem}</li>)}
++                  </ul>
++                </div>
++              ) : null}
++
++              <div className="overflow-x-auto rounded-md border">
++                <table className="w-full min-w-[720px] text-left text-sm">
++                  <thead className="bg-muted/80 text-xs uppercase tracking-wide text-muted-foreground">
++                    <tr>
++                      <th className="px-3 py-2">CSV row</th>
++                      <th className="px-3 py-2">Product</th>
++                      <th className="px-3 py-2">Category</th>
++                      <th className="px-3 py-2">Brand</th>
++                      <th className="px-3 py-2">Primary image</th>
++                      <th className="px-3 py-2">Gallery</th>
++                    </tr>
++                  </thead>
++                  <tbody>
++                    {parsed.rows.slice(0, 10).map((row) => (
++                      <tr key={row.line} className="border-t">
++                        <td className="px-3 py-2">{row.line}</td>
++                        <td className="px-3 py-2 font-medium text-primary">{row.values.name || "—"}</td>
++                        <td className="px-3 py-2">{row.values.category || "—"}</td>
++                        <td className="px-3 py-2">{row.values.brand || "—"}</td>
++                        <td className="max-w-[260px] truncate px-3 py-2" title={row.values.primary_image}>
++                          {row.values.primary_image || "—"}
++                        </td>
++                        <td className="px-3 py-2">
++                          {row.values.gallery_images
++                            ? `${row.values.gallery_images.split("|").filter(Boolean).length} image(s)`
++                            : "—"}
++                        </td>
++                      </tr>
++                    ))}
++                  </tbody>
++                </table>
++              </div>
++              {parsed.rows.length > 10 ? (
++                <p className="text-xs text-muted-foreground">Preview shows the first 10 rows only.</p>
++              ) : null}
++            </div>
++          ) : null}
++        </CardContent>
++      </Card>
++
++      <Card>
++        <CardHeader>
++          <CardTitle>5. Import options</CardTitle>
++        </CardHeader>
++        <CardContent className="space-y-4">
++          <div className="grid gap-3 md:grid-cols-2">
++            <label className={`cursor-pointer rounded-md border p-4 ${mode === "create" ? "border-accent bg-accent/5" : ""}`}>
++              <input
++                type="radio"
++                name="import-mode"
++                value="create"
++                checked={mode === "create"}
++                onChange={() => setMode("create")}
++                className="mr-2"
++              />
++              <span className="font-semibold text-primary">Create new products only</span>
++              <p className="mt-1 text-sm text-muted-foreground">Safest option. Existing slugs are skipped instead of changed.</p>
++            </label>
++            <label className={`cursor-pointer rounded-md border p-4 ${mode === "upsert" ? "border-accent bg-accent/5" : ""}`}>
++              <input
++                type="radio"
++                name="import-mode"
++                value="upsert"
++                checked={mode === "upsert"}
++                onChange={() => setMode("upsert")}
++                className="mr-2"
++              />
++              <span className="font-semibold text-primary">Create or update by slug</span>
++              <p className="mt-1 text-sm text-muted-foreground">Existing products with the same slug are updated. Blank optional cells keep their current value.</p>
++            </label>
++          </div>
++
++          <label className="flex items-start gap-3 rounded-md border p-4">
++            <input
++              type="checkbox"
++              checked={createMissingCategories}
++              onChange={(event) => setCreateMissingCategories(event.target.checked)}
++              className="mt-1"
++            />
++            <span>
++              <span className="font-semibold text-primary">Create missing categories automatically</span>
++              <span className="mt-1 block text-sm text-muted-foreground">
++                A category not already in the admin will be created using the CSV category text. Leave this off if you want typos to stop the affected rows.
++              </span>
++            </span>
++          </label>
++
++          <Button type="button" size="lg" onClick={runImport} disabled={!canImport}>
++            {submitting ? <Loader2 className="size-4 animate-spin" /> : <UploadCloud className="size-4" />}
++            {submitting ? "Importing Products…" : "Import Products"}
++          </Button>
++        </CardContent>
++      </Card>
++
++      {result ? (
++        <Card className={result.errors.length === 0 && result.created + result.updated > 0 ? "border-emerald-300" : "border-amber-300"}>
++          <CardHeader>
++            <CardTitle className="flex items-center gap-2">
++              {result.errors.length === 0 && result.created + result.updated > 0 ? (
++                <CheckCircle2 className="size-5 text-emerald-600" />
++              ) : (
++                <AlertTriangle className="size-5 text-amber-600" />
++              )}
++              Import result
++            </CardTitle>
++          </CardHeader>
++          <CardContent className="space-y-4">
++            <p className="text-sm">{result.message}</p>
++            <div className="flex flex-wrap gap-2 text-sm">
++              <span className="rounded bg-emerald-50 px-2 py-1 text-emerald-800">Created: {result.created}</span>
++              <span className="rounded bg-sky-50 px-2 py-1 text-sky-800">Updated: {result.updated}</span>
++              <span className="rounded bg-muted px-2 py-1">Skipped: {result.skipped}</span>
++              <span className="rounded bg-amber-50 px-2 py-1 text-amber-800">Errors: {result.errors.length}</span>
++            </div>
++
++            {result.errors.length > 0 ? (
++              <div className="overflow-x-auto rounded-md border">
++                <table className="w-full min-w-[680px] text-left text-sm">
++                  <thead className="bg-muted/80 text-xs uppercase tracking-wide text-muted-foreground">
++                    <tr>
++                      <th className="px-3 py-2">CSV row</th>
++                      <th className="px-3 py-2">Product</th>
++                      <th className="px-3 py-2">Problem</th>
++                    </tr>
++                  </thead>
++                  <tbody>
++                    {result.errors.map((error, index) => (
++                      <tr key={`${error.row}-${error.product}-${index}`} className="border-t align-top">
++                        <td className="px-3 py-2">{error.row}</td>
++                        <td className="px-3 py-2 font-medium">{error.product}</td>
++                        <td className="px-3 py-2 text-destructive">{error.message}</td>
++                      </tr>
++                    ))}
++                  </tbody>
++                </table>
++              </div>
++            ) : null}
++          </CardContent>
++        </Card>
++      ) : null}
++    </div>
++  );
++}
+diff --git a/src/lib/actions/admin/product-csv-import.ts b/src/lib/actions/admin/product-csv-import.ts
+new file mode 100644
+--- /dev/null
++++ b/src/lib/actions/admin/product-csv-import.ts
+@@ -0,0 +1,751 @@
++"use server";
++
++import { revalidatePath } from "next/cache";
++
++import { requireAdmin } from "@/lib/auth";
++import {
++  MAX_PRODUCT_CSV_BYTES,
++  MAX_PRODUCT_CSV_ROWS,
++  MAX_PRODUCT_IMAGE_BYTES,
++  MAX_PRODUCT_LOCAL_IMAGES,
++  parseProductCsv,
++  type ProductCsvImportError,
++  type ProductCsvImportResult,
++  type ProductCsvRecord,
++} from "@/lib/product-csv";
++import { createClient } from "@/lib/supabase/server";
++import type { Json, Product } from "@/lib/types";
++import { slugify } from "@/lib/utils";
++
++const PRODUCT_IMAGE_BUCKET = "product images";
++const ALLOWED_IMAGE_TYPES = new Set([
++  "image/jpeg",
++  "image/png",
++  "image/webp",
++  "image/avif",
++]);
++
++const TRUE_VALUES = new Set(["1", "true", "yes", "y", "on", "in stock"]);
++const FALSE_VALUES = new Set(["0", "false", "no", "n", "off", "out of stock"]);
++
++type ImportMode = "create" | "upsert";
++
++type CategoryOption = {
++  id: string;
++  name: string;
++  slug: string;
++};
++
++type PreparedImages = {
++  urls: string[];
++  uploadedPaths: string[];
++};
++
++type PreparedProductImage = {
++  url: string;
++  altText: string;
++  isPrimary: boolean;
++  sortOrder: number;
++};
++
++function textOrNull(value: string) {
++  const normalized = value.trim();
++  return normalized ? normalized : null;
++}
++
++function splitList(value: string) {
++  return Array.from(
++    new Set(
++      value
++        .split(/[|;]/)
++        .map((item) => item.trim())
++        .filter(Boolean),
++    ),
++  );
++}
++
++function splitOrderedList(value: string) {
++  return value
++    .split("|")
++    .map((item) => item.trim())
++    .filter(Boolean);
++}
++
++function parseBoolean(value: string, fallback: boolean) {
++  const normalized = value.trim().toLowerCase();
++  if (!normalized) return { value: fallback, error: null as string | null };
++  if (TRUE_VALUES.has(normalized)) return { value: true, error: null as string | null };
++  if (FALSE_VALUES.has(normalized)) return { value: false, error: null as string | null };
++  return {
++    value: fallback,
++    error: `Invalid yes/no value "${value}". Use yes/no, true/false, or 1/0.`,
++  };
++}
++
++function parseSortOrder(value: string, fallback: number) {
++  if (!value.trim()) return { value: fallback, error: null as string | null };
++  const parsed = Number(value);
++  if (!Number.isInteger(parsed)) {
++    return {
++      value: fallback,
++      error: `Sort order "${value}" must be a whole number.`,
++    };
++  }
++  return { value: parsed, error: null as string | null };
++}
++
++function parseSpecifications(value: string): { value: Json; error: string | null } {
++  const normalized = value.trim();
++  if (!normalized) return { value: {}, error: null };
++
++  if (normalized.startsWith("{")) {
++    try {
++      const parsed = JSON.parse(normalized) as Json;
++      if (!parsed || Array.isArray(parsed) || typeof parsed !== "object") {
++        return {
++          value: {},
++          error: "Specifications JSON must be an object, for example {\"Power\":\"1200 W\"}.",
++        };
++      }
++      return { value: parsed, error: null };
++    } catch {
++      return { value: {}, error: "Specifications contains invalid JSON." };
++    }
++  }
++
++  const result: Record<string, string> = {};
++  for (const item of normalized.split("|")) {
++    const entry = item.trim();
++    if (!entry) continue;
++    const separatorIndex = entry.includes("=")
++      ? entry.indexOf("=")
++      : entry.indexOf(":");
++
++    if (separatorIndex <= 0) {
++      return {
++        value: {},
++        error: `Invalid specification "${entry}". Use Label=Value and separate specifications with |.`,
++      };
++    }
++
++    const key = entry.slice(0, separatorIndex).trim();
++    const specValue = entry.slice(separatorIndex + 1).trim();
++    if (!key || !specValue) {
++      return {
++        value: {},
++        error: `Invalid specification "${entry}". Both label and value are required.`,
++      };
++    }
++    result[key] = specValue;
++  }
++
++  return { value: result, error: null };
++}
++
++function fileExtension(file: File) {
++  const byType: Record<string, string> = {
++    "image/jpeg": "jpg",
++    "image/png": "png",
++    "image/webp": "webp",
++    "image/avif": "avif",
++  };
++  return byType[file.type] ?? file.name.split(".").pop()?.toLowerCase() ?? "jpg";
++}
++
++function validateImageKitUrl(source: string) {
++  let url: URL;
++  try {
++    url = new URL(source);
++  } catch {
++    return { url: null, error: `Invalid image URL "${source}".` };
++  }
++
++  if (url.protocol !== "https:" || url.hostname !== "ik.imagekit.io") {
++    return {
++      url: null,
++      error:
++        "External image URLs must use the standard HTTPS ImageKit domain (https://ik.imagekit.io/...).",
++    };
++  }
++
++  const hasTransformation = url.pathname.includes("/tr:") || url.searchParams.has("tr");
++  if (!hasTransformation) {
++    return {
++      url: null,
++      error:
++        "Use an optimized ImageKit URL containing a transformation, for example /tr:w-900,q-65/.",
++    };
++  }
++
++  return { url: url.toString(), error: null };
++}
++
++async function cleanupUploadedImages(paths: string[]) {
++  if (paths.length === 0) return;
++  const supabase = createClient();
++  await supabase.storage.from(PRODUCT_IMAGE_BUCKET).remove(paths);
++}
++
++async function prepareImages(
++  slug: string,
++  imageValue: string,
++  localFiles: Map<string, File>,
++): Promise<PreparedImages> {
++  const sources = splitList(imageValue);
++  const supabase = createClient();
++  const urls: string[] = [];
++  const uploadedPaths: string[] = [];
++
++  try {
++    for (const source of sources) {
++      if (/^https?:\/\//i.test(source)) {
++        const checked = validateImageKitUrl(source);
++        if (checked.error || !checked.url) throw new Error(checked.error ?? "Invalid image URL.");
++        urls.push(checked.url);
++        continue;
++      }
++
++      const file = localFiles.get(source.toLowerCase());
++      if (!file) {
++        throw new Error(
++          `Image file "${source}" was not attached. Select a matching local image file or use an ImageKit URL.`,
++        );
++      }
++
++      if (file.size > MAX_PRODUCT_IMAGE_BYTES) {
++        throw new Error(
++          `Image "${file.name}" is ${(file.size / 1024).toFixed(1)} KB. Local images must be 50 KB or smaller.`,
++        );
++      }
++
++      if (!ALLOWED_IMAGE_TYPES.has(file.type)) {
++        throw new Error(
++          `Image "${file.name}" has an unsupported format. Use JPG, PNG, WebP, or AVIF.`,
++        );
++      }
++
++      const path = `products/csv/${slug}-${Date.now()}-${crypto.randomUUID()}.${fileExtension(file)}`;
++      const { error } = await supabase.storage
++        .from(PRODUCT_IMAGE_BUCKET)
++        .upload(path, file, {
++          contentType: file.type,
++          upsert: false,
++        });
++
++      if (error) throw new Error(`Unable to upload "${file.name}": ${error.message}`);
++
++      uploadedPaths.push(path);
++      const {
++        data: { publicUrl },
++      } = supabase.storage.from(PRODUCT_IMAGE_BUCKET).getPublicUrl(path);
++      urls.push(publicUrl);
++    }
++  } catch (error) {
++    await cleanupUploadedImages(uploadedPaths);
++    throw error;
++  }
++
++  return { urls, uploadedPaths };
++}
++
++async function replaceProductImages(
++  productId: string,
++  images: PreparedProductImage[],
++) {
++  const supabase = createClient();
++  const { error: deleteError } = await supabase
++    .from("product_images")
++    .delete()
++    .eq("product_id", productId);
++  if (deleteError) throw new Error(deleteError.message);
++
++  if (images.length === 0) return;
++
++  const { error } = await supabase.from("product_images").insert(
++    images.map((image) => ({
++      product_id: productId,
++      url: image.url,
++      alt_text: image.altText,
++      is_primary: image.isPrimary,
++      sort_order: image.sortOrder,
++    })),
++  );
++
++  if (error) throw new Error(error.message);
++}
++
++async function replaceProductTags(
++  productId: string,
++  tagNames: string[],
++  tagCache: Map<string, string>,
++) {
++  const supabase = createClient();
++  const { error: deleteError } = await supabase
++    .from("product_tags")
++    .delete()
++    .eq("product_id", productId);
++  if (deleteError) throw new Error(deleteError.message);
++
++  if (tagNames.length === 0) return;
++
++  const tagIds: string[] = [];
++  for (const tagName of tagNames) {
++    const tagSlug = slugify(tagName);
++    if (!tagSlug) continue;
++
++    let tagId = tagCache.get(tagSlug);
++    if (!tagId) {
++      const { data: existing, error: findError } = await supabase
++        .from("tags")
++        .select("id")
++        .eq("slug", tagSlug)
++        .maybeSingle();
++      if (findError) throw new Error(findError.message);
++
++      if (existing?.id) {
++        tagId = existing.id;
++      } else {
++        const { data: created, error: createError } = await supabase
++          .from("tags")
++          .insert({ slug: tagSlug, name: tagName })
++          .select("id")
++          .single();
++        if (createError || !created) {
++          throw new Error(createError?.message ?? `Unable to create tag "${tagName}".`);
++        }
++        tagId = created.id;
++      }
++      if (!tagId) throw new Error(`Unable to resolve tag "${tagName}".`);
++      tagCache.set(tagSlug, tagId);
++    }
++    if (!tagId) throw new Error(`Unable to resolve tag "${tagName}".`);
++    tagIds.push(tagId);
++  }
++
++  if (tagIds.length === 0) return;
++  const { error } = await supabase.from("product_tags").insert(
++    tagIds.map((tagId) => ({
++      product_id: productId,
++      tag_id: tagId,
++    })),
++  );
++  if (error) throw new Error(error.message);
++}
++
++function categoryMaps(categories: CategoryOption[]) {
++  const byName = new Map<string, CategoryOption>();
++  const bySlug = new Map<string, CategoryOption>();
++  for (const category of categories) {
++    byName.set(category.name.trim().toLowerCase(), category);
++    bySlug.set(category.slug.trim().toLowerCase(), category);
++  }
++  return { byName, bySlug };
++}
++
++async function resolveCategory(
++  rawValue: string,
++  createMissing: boolean,
++  categories: CategoryOption[],
++) {
++  const value = rawValue.trim();
++  if (!value) return null;
++
++  const maps = categoryMaps(categories);
++  const existing =
++    maps.byName.get(value.toLowerCase()) ?? maps.bySlug.get(value.toLowerCase());
++  if (existing) return existing.id;
++
++  if (!createMissing) {
++    throw new Error(
++      `Category "${value}" does not exist. Create it first or enable “Create missing categories”.`,
++    );
++  }
++
++  const newSlug = slugify(value);
++  if (!newSlug) throw new Error(`Category "${value}" cannot be converted to a valid slug.`);
++
++  const supabase = createClient();
++  const { data, error } = await supabase
++    .from("categories")
++    .insert({ name: value, slug: newSlug })
++    .select("id,name,slug")
++    .single();
++
++  if (error || !data) {
++    throw new Error(error?.message ?? `Unable to create category "${value}".`);
++  }
++
++  categories.push(data);
++  return data.id;
++}
++
++function buildProductPayload(
++  row: ProductCsvRecord,
++  slug: string,
++  categoryId: string | null,
++  existing: Product | undefined,
++) {
++  const update = Boolean(existing);
++  const featured = parseBoolean(
++    row.featured,
++    update ? Boolean(existing?.featured) : false,
++  );
++  if (featured.error) throw new Error(featured.error);
++
++  const inStock = parseBoolean(
++    row.in_stock,
++    update ? existing?.in_stock !== false : true,
++  );
++  if (inStock.error) throw new Error(inStock.error);
++
++  const sortOrder = parseSortOrder(
++    row.sort_order,
++    update ? existing?.sort_order ?? 0 : 0,
++  );
++  if (sortOrder.error) throw new Error(sortOrder.error);
++
++  const parsedSpecs = parseSpecifications(row.specifications);
++  if (parsedSpecs.error) throw new Error(parsedSpecs.error);
++
++  const preserveText = (raw: string, current: string | null | undefined) =>
++    update && !raw.trim() ? current ?? null : textOrNull(raw);
++
++  return {
++    name: row.name.trim(),
++    slug,
++    category_id: update && !row.category.trim() ? existing?.category_id ?? null : categoryId,
++    brand: preserveText(row.brand, existing?.brand),
++    model_code: preserveText(row.model_code, existing?.model_code),
++    short_description: preserveText(row.short_description, existing?.short_description),
++    long_description: preserveText(row.long_description, existing?.long_description),
++    specifications:
++      update && !row.specifications.trim()
++        ? existing?.specifications ?? {}
++        : parsedSpecs.value,
++    featured: featured.value,
++    in_stock: inStock.value,
++    sort_order: sortOrder.value,
++    meta_title: preserveText(row.meta_title, existing?.meta_title),
++    meta_description: preserveText(row.meta_description, existing?.meta_description),
++    updated_at: new Date().toISOString(),
++  };
++}
++
++function importError(
++  errors: ProductCsvImportError[],
++  row: number,
++  product: string,
++  error: unknown,
++) {
++  errors.push({
++    row,
++    product: product || "Unnamed product",
++    message: error instanceof Error ? error.message : "Unknown import error.",
++  });
++}
++
++export async function importProductsCsv(
++  formData: FormData,
++): Promise<ProductCsvImportResult> {
++  await requireAdmin();
++
++  const csvEntry = formData.get("csv");
++  if (typeof csvEntry === "string" || !csvEntry) {
++    return {
++      success: false,
++      created: 0,
++      updated: 0,
++      skipped: 0,
++      errors: [],
++      message: "Select a CSV file first.",
++    };
++  }
++
++  if (csvEntry.size > MAX_PRODUCT_CSV_BYTES) {
++    return {
++      success: false,
++      created: 0,
++      updated: 0,
++      skipped: 0,
++      errors: [],
++      message: "CSV file is too large. Maximum CSV size is 1 MB.",
++    };
++  }
++
++  const parsed = parseProductCsv(await csvEntry.text());
++  if (parsed.errors.length > 0) {
++    return {
++      success: false,
++      created: 0,
++      updated: 0,
++      skipped: 0,
++      errors: parsed.errors.map((message) => ({
++        row: 1,
++        product: "CSV file",
++        message,
++      })),
++      message: "Fix the CSV structure before importing.",
++    };
++  }
++
++  if (parsed.rows.length === 0) {
++    return {
++      success: false,
++      created: 0,
++      updated: 0,
++      skipped: 0,
++      errors: [],
++      message: "The CSV contains no product rows.",
++    };
++  }
++
++  if (parsed.rows.length > MAX_PRODUCT_CSV_ROWS) {
++    return {
++      success: false,
++      created: 0,
++      updated: 0,
++      skipped: 0,
++      errors: [],
++      message: `Import up to ${MAX_PRODUCT_CSV_ROWS} products at a time.`,
++    };
++  }
++
++  const imageFiles = formData
++    .getAll("images")
++    .filter((entry): entry is File => typeof entry !== "string" && entry.size > 0);
++  if (imageFiles.length > MAX_PRODUCT_LOCAL_IMAGES) {
++    return {
++      success: false,
++      created: 0,
++      updated: 0,
++      skipped: 0,
++      errors: [],
++      message: `Attach no more than ${MAX_PRODUCT_LOCAL_IMAGES} local images per import. Use ImageKit URLs for larger batches.`,
++    };
++  }
++
++  const localFiles = new Map<string, File>();
++  for (const file of imageFiles) {
++    const key = file.name.trim().toLowerCase();
++    if (localFiles.has(key)) {
++      return {
++        success: false,
++        created: 0,
++        updated: 0,
++        skipped: 0,
++        errors: [],
++        message: `Two attached images use the same filename: ${file.name}. Rename one of them.`,
++      };
++    }
++    localFiles.set(key, file);
++  }
++
++  const mode: ImportMode = formData.get("mode") === "upsert" ? "upsert" : "create";
++  const createMissingCategories = formData.get("createMissingCategories") === "true";
++  const supabase = createClient();
++
++  const { data: categoriesData, error: categoriesError } = await supabase
++    .from("categories")
++    .select("id,name,slug")
++    .order("name", { ascending: true });
++  if (categoriesError) {
++    return {
++      success: false,
++      created: 0,
++      updated: 0,
++      skipped: 0,
++      errors: [],
++      message: `Unable to load categories: ${categoriesError.message}`,
++    };
++  }
++  const categories = (categoriesData ?? []) as CategoryOption[];
++
++  const rowSlugs = parsed.rows.map(({ values }) => slugify(values.slug || values.name));
++  const validSlugs = Array.from(new Set(rowSlugs.filter(Boolean)));
++  const existingBySlug = new Map<string, Product>();
++  if (validSlugs.length > 0) {
++    const { data: existingProducts, error } = await supabase
++      .from("products")
++      .select("*")
++      .in("slug", validSlugs);
++    if (error) {
++      return {
++        success: false,
++        created: 0,
++        updated: 0,
++        skipped: 0,
++        errors: [],
++        message: `Unable to check existing products: ${error.message}`,
++      };
++    }
++    for (const product of existingProducts ?? []) {
++      existingBySlug.set(product.slug, product);
++    }
++  }
++
++  const errors: ProductCsvImportError[] = [];
++  const seenSlugs = new Set<string>();
++  const tagCache = new Map<string, string>();
++  const changedSlugs = new Set<string>();
++  let created = 0;
++  let updated = 0;
++  let skipped = 0;
++
++  for (const row of parsed.rows) {
++    const productName = row.values.name.trim();
++    let uploadedPaths: string[] = [];
++    let createdProductId: string | null = null;
++
++    try {
++      if (!productName) throw new Error("Product name is required.");
++
++      const productSlug = slugify(row.values.slug || productName);
++      if (!productSlug) throw new Error("Product slug is empty or invalid.");
++      if (seenSlugs.has(productSlug)) {
++        throw new Error(`Duplicate slug "${productSlug}" appears more than once in this CSV.`);
++      }
++      seenSlugs.add(productSlug);
++
++      const existing = existingBySlug.get(productSlug);
++      if (existing && mode === "create") {
++        skipped += 1;
++        errors.push({
++          row: row.line,
++          product: productName,
++          message: `Skipped because slug "${productSlug}" already exists. Choose “Create or update” to update it.`,
++        });
++        continue;
++      }
++
++      const categoryId = await resolveCategory(
++        row.values.category,
++        createMissingCategories,
++        categories,
++      );
++      const payload = buildProductPayload(row.values, productSlug, categoryId, existing);
++      const tags = splitList(row.values.tags);
++
++      const primaryImageSource = row.values.primary_image.trim();
++      const galleryImageSources = splitList(row.values.gallery_images);
++      const galleryImageAlts = splitOrderedList(row.values.gallery_image_alts);
++      const hasImageInput = Boolean(primaryImageSource || row.values.gallery_images.trim());
++
++      if (!primaryImageSource && galleryImageSources.length > 0) {
++        throw new Error("Primary image is required when gallery images are provided.");
++      }
++      if (!primaryImageSource && row.values.primary_image_alt.trim()) {
++        throw new Error("Primary image alt text was provided without a primary image.");
++      }
++      if (galleryImageSources.length === 0 && galleryImageAlts.length > 0) {
++        throw new Error("Gallery image alt text was provided without gallery images.");
++      }
++      if (galleryImageAlts.length > galleryImageSources.length) {
++        throw new Error("There are more gallery image alt values than gallery images.");
++      }
++
++      const preparedProductImages: PreparedProductImage[] = [];
++      if (hasImageInput) {
++        const primarySources = splitList(primaryImageSource);
++        if (primarySources.length !== 1) {
++          throw new Error("Primary image accepts exactly one ImageKit URL or local filename.");
++        }
++
++        const preparedPrimary = await prepareImages(
++          productSlug,
++          primaryImageSource,
++          localFiles,
++        );
++        uploadedPaths.push(...preparedPrimary.uploadedPaths);
++        preparedProductImages.push({
++          url: preparedPrimary.urls[0],
++          altText: row.values.primary_image_alt.trim() || productName,
++          isPrimary: true,
++          sortOrder: 0,
++        });
++
++        if (galleryImageSources.length > 0) {
++          const preparedGallery = await prepareImages(
++            productSlug,
++            row.values.gallery_images,
++            localFiles,
++          );
++          uploadedPaths.push(...preparedGallery.uploadedPaths);
++          preparedGallery.urls.forEach((url, index) => {
++            preparedProductImages.push({
++              url,
++              altText: galleryImageAlts[index] || productName,
++              isPrimary: false,
++              sortOrder: index + 1,
++            });
++          });
++        }
++      }
++
++      let productId: string;
++      if (existing) {
++        const { data, error } = await supabase
++          .from("products")
++          .update(payload)
++          .eq("id", existing.id)
++          .select("id,slug")
++          .single();
++        if (error || !data) throw new Error(error?.message ?? "Unable to update product.");
++        productId = data.id;
++      } else {
++        const { data, error } = await supabase
++          .from("products")
++          .insert(payload)
++          .select("id,slug")
++          .single();
++        if (error || !data) throw new Error(error?.message ?? "Unable to create product.");
++        productId = data.id;
++        createdProductId = data.id;
++      }
++
++      if (!existing || row.values.tags.trim()) {
++        await replaceProductTags(productId, tags, tagCache);
++      }
++
++      if (hasImageInput) {
++        await replaceProductImages(productId, preparedProductImages);
++      }
++
++      if (existing) updated += 1;
++      else created += 1;
++
++      existingBySlug.set(productSlug, { ...existing, ...payload, id: productId } as Product);
++      changedSlugs.add(productSlug);
++      uploadedPaths = [];
++    } catch (error) {
++      if (createdProductId) {
++        await supabase.from("products").delete().eq("id", createdProductId);
++      }
++      if (uploadedPaths.length > 0) await cleanupUploadedImages(uploadedPaths);
++      importError(errors, row.line, productName, error);
++    }
++  }
++
++  if (changedSlugs.size > 0) {
++    revalidatePath("/admin/products");
++    revalidatePath("/products");
++    revalidatePath("/");
++    for (const slug of changedSlugs) {
++      revalidatePath(`/products/${slug}`);
++    }
++  }
++
++  const successful = created + updated;
++  return {
++    success: successful > 0 && errors.length === 0,
++    created,
++    updated,
++    skipped,
++    errors,
++    message:
++      successful === 0
++        ? "No products were imported. Review the errors below."
++        : errors.length > 0
++          ? `${successful} product${successful === 1 ? "" : "s"} imported with some row errors.`
++          : `${successful} product${successful === 1 ? "" : "s"} imported successfully.`,
++  };
++}
+diff --git a/src/lib/product-csv.ts b/src/lib/product-csv.ts
+new file mode 100644
+--- /dev/null
++++ b/src/lib/product-csv.ts
+@@ -0,0 +1,265 @@
++export const MAX_PRODUCT_CSV_BYTES = 1024 * 1024;
++export const MAX_PRODUCT_CSV_ROWS = 250;
++export const MAX_PRODUCT_IMAGE_BYTES = 50 * 1024;
++export const MAX_PRODUCT_LOCAL_IMAGES = 100;
++
++export const PRODUCT_CSV_HEADERS = [
++  "name",
++  "slug",
++  "category",
++  "brand",
++  "model_code",
++  "short_description",
++  "long_description",
++  "specifications",
++  "tags",
++  "featured",
++  "in_stock",
++  "sort_order",
++  "meta_title",
++  "meta_description",
++  "primary_image",
++  "primary_image_alt",
++  "gallery_images",
++  "gallery_image_alts",
++] as const;
++
++export type ProductCsvColumn = (typeof PRODUCT_CSV_HEADERS)[number];
++export type ProductCsvRecord = Record<ProductCsvColumn, string>;
++
++export type ParsedProductCsvRow = {
++  line: number;
++  values: ProductCsvRecord;
++};
++
++export type ParsedProductCsv = {
++  headers: string[];
++  unknownHeaders: string[];
++  rows: ParsedProductCsvRow[];
++  errors: string[];
++};
++
++export type ProductCsvImportError = {
++  row: number;
++  product: string;
++  message: string;
++};
++
++export type ProductCsvImportResult = {
++  success: boolean;
++  created: number;
++  updated: number;
++  skipped: number;
++  errors: ProductCsvImportError[];
++  message?: string;
++};
++
++const HEADER_ALIASES: Record<string, ProductCsvColumn> = {
++  name: "name",
++  product_name: "name",
++  slug: "slug",
++  category: "category",
++  category_name: "category",
++  brand: "brand",
++  model: "model_code",
++  model_code: "model_code",
++  short_description: "short_description",
++  description: "short_description",
++  long_description: "long_description",
++  details: "long_description",
++  specifications: "specifications",
++  specs: "specifications",
++  tags: "tags",
++  featured: "featured",
++  in_stock: "in_stock",
++  stock: "in_stock",
++  sort_order: "sort_order",
++  order: "sort_order",
++  meta_title: "meta_title",
++  seo_title: "meta_title",
++  meta_description: "meta_description",
++  seo_description: "meta_description",
++  primary_image: "primary_image",
++  primary_image_url: "primary_image",
++  image: "primary_image",
++  image_url: "primary_image",
++  primary_image_alt: "primary_image_alt",
++  image_alt: "primary_image_alt",
++  alt_text: "primary_image_alt",
++  gallery_images: "gallery_images",
++  additional_images: "gallery_images",
++  other_images: "gallery_images",
++  gallery_image_alts: "gallery_image_alts",
++  additional_image_alts: "gallery_image_alts",
++  other_image_alts: "gallery_image_alts",
++};
++
++function normalizeHeader(value: string) {
++  return value
++    .replace(/^\uFEFF/, "")
++    .trim()
++    .toLowerCase()
++    .replace(/[\s-]+/g, "_");
++}
++
++function emptyRecord(): ProductCsvRecord {
++  return Object.fromEntries(
++    PRODUCT_CSV_HEADERS.map((header) => [header, ""]),
++  ) as ProductCsvRecord;
++}
++
++function parseCsvMatrix(text: string) {
++  const rows: string[][] = [];
++  let row: string[] = [];
++  let cell = "";
++  let inQuotes = false;
++  const errors: string[] = [];
++
++  for (let index = 0; index < text.length; index += 1) {
++    const char = text[index];
++
++    if (inQuotes) {
++      if (char === '"') {
++        if (text[index + 1] === '"') {
++          cell += '"';
++          index += 1;
++        } else {
++          inQuotes = false;
++        }
++      } else {
++        cell += char;
++      }
++      continue;
++    }
++
++    if (char === '"') {
++      inQuotes = true;
++      continue;
++    }
++
++    if (char === ",") {
++      row.push(cell);
++      cell = "";
++      continue;
++    }
++
++    if (char === "\n") {
++      row.push(cell);
++      rows.push(row);
++      row = [];
++      cell = "";
++      continue;
++    }
++
++    if (char !== "\r") {
++      cell += char;
++    }
++  }
++
++  if (inQuotes) {
++    errors.push("The CSV contains an unclosed quoted value.");
++  }
++
++  if (cell.length > 0 || row.length > 0) {
++    row.push(cell);
++    rows.push(row);
++  }
++
++  return { rows, errors };
++}
++
++export function parseProductCsv(text: string): ParsedProductCsv {
++  const { rows: matrix, errors } = parseCsvMatrix(text);
++
++  if (matrix.length === 0) {
++    return {
++      headers: [],
++      unknownHeaders: [],
++      rows: [],
++      errors: ["The CSV file is empty."],
++    };
++  }
++
++  const rawHeaders = matrix[0].map(normalizeHeader);
++  const mappedHeaders = rawHeaders.map(
++    (header) => HEADER_ALIASES[header] ?? null,
++  );
++  const unknownHeaders = rawHeaders.filter(
++    (header, index) => header && !mappedHeaders[index],
++  );
++  const seen = new Set<string>();
++  const duplicateHeaders = mappedHeaders
++    .filter((header): header is ProductCsvColumn => Boolean(header))
++    .filter((header) => {
++      if (seen.has(header)) return true;
++      seen.add(header);
++      return false;
++    });
++
++  if (!mappedHeaders.includes("name")) {
++    errors.push('Missing required "name" column.');
++  }
++
++  if (duplicateHeaders.length > 0) {
++    errors.push(
++      `Duplicate CSV columns detected: ${Array.from(new Set(duplicateHeaders)).join(", ")}.`,
++    );
++  }
++
++  const parsedRows = matrix
++    .slice(1)
++    .map((cells, rowIndex) => {
++      const values = emptyRecord();
++
++      mappedHeaders.forEach((header, columnIndex) => {
++        if (header) values[header] = (cells[columnIndex] ?? "").trim();
++      });
++
++      return {
++        line: rowIndex + 2,
++        values,
++      };
++    })
++    .filter((row) =>
++      Object.values(row.values).some((value) => value.trim().length > 0),
++    );
++
++  return {
++    headers: rawHeaders,
++    unknownHeaders,
++    rows: parsedRows,
++    errors,
++  };
++}
++
++function csvCell(value: string) {
++  if (!/[",\n\r]/.test(value)) return value;
++  return `"${value.replace(/"/g, '""')}"`;
++}
++
++export function createProductCsvTemplate() {
++  const example = [
++    "Ride-On Scrubber Dryer",
++    "ride-on-scrubber-dryer",
++    "Scrubber Dryers",
++    "Example Brand",
++    "MC-700",
++    "Commercial ride-on scrubber dryer for large floor areas.",
++    "Use this field for the full product description. Commas are safe when the cell is quoted.",
++    "Tank Capacity=80 L|Working Width=700 mm|Power=24 V",
++    "scrubber dryer|ride on|floor care",
++    "yes",
++    "yes",
++    "10",
++    "Ride-On Scrubber Dryer in Pakistan",
++    "Commercial ride-on scrubber dryer with service support in Pakistan.",
++    "https://ik.imagekit.io/your_imagekit_id/tr:w-900,q-65/products/ride-on-scrubber-front.webp",
++    "Ride-on scrubber dryer front view",
++    "https://ik.imagekit.io/your_imagekit_id/tr:w-900,q-65/products/ride-on-scrubber-side.webp|https://ik.imagekit.io/your_imagekit_id/tr:w-900,q-65/products/ride-on-scrubber-rear.webp",
++    "Ride-on scrubber dryer side view|Ride-on scrubber dryer rear view",
++  ];
++
++  return [PRODUCT_CSV_HEADERS, example]
++    .map((row) => row.map((value) => csvCell(String(value))).join(","))
++    .join("\r\n");
++}
+diff --git a/src/app/admin/(protected)/products/page.tsx b/src/app/admin/(protected)/products/page.tsx
+--- a/src/app/admin/(protected)/products/page.tsx
++++ b/src/app/admin/(protected)/products/page.tsx
+@@ -91,7 +91,12 @@
+       <div className="flex flex-wrap items-center justify-between gap-3">
+         <h1 className="text-3xl font-display font-bold text-primary">Products</h1>
+-        <Button asChild>
+-          <Link href="/admin/products/new">Add Product</Link>
+-        </Button>
++        <div className="flex flex-wrap gap-2">
++          <Button asChild variant="outline">
++            <Link href="/admin/products/import">Import CSV</Link>
++          </Button>
++          <Button asChild>
++            <Link href="/admin/products/new">Add Product</Link>
++          </Button>
++        </div>
+       </div>
+ 
