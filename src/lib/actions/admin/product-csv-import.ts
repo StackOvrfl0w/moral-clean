@@ -6,8 +6,6 @@ import { requireAdmin } from "@/lib/auth";
 import {
   MAX_PRODUCT_CSV_BYTES,
   MAX_PRODUCT_CSV_ROWS,
-  MAX_PRODUCT_IMAGE_BYTES,
-  MAX_PRODUCT_LOCAL_IMAGES,
   parseProductCsv,
   type ProductCsvImportError,
   type ProductCsvImportResult,
@@ -16,14 +14,6 @@ import {
 import { createClient } from "@/lib/supabase/server";
 import type { Json, Product } from "@/lib/types";
 import { slugify } from "@/lib/utils";
-
-const PRODUCT_IMAGE_BUCKET = "product images";
-const ALLOWED_IMAGE_TYPES = new Set([
-  "image/jpeg",
-  "image/png",
-  "image/webp",
-  "image/avif",
-]);
 
 const TRUE_VALUES = new Set(["1", "true", "yes", "y", "on", "in stock"]);
 const FALSE_VALUES = new Set(["0", "false", "no", "n", "off", "out of stock"]);
@@ -34,11 +24,6 @@ type CategoryOption = {
   id: string;
   name: string;
   slug: string;
-};
-
-type PreparedImages = {
-  urls: string[];
-  uploadedPaths: string[];
 };
 
 type PreparedProductImage = {
@@ -142,16 +127,6 @@ function parseSpecifications(value: string): { value: Json; error: string | null
   return { value: result, error: null };
 }
 
-function fileExtension(file: File) {
-  const byType: Record<string, string> = {
-    "image/jpeg": "jpg",
-    "image/png": "png",
-    "image/webp": "webp",
-    "image/avif": "avif",
-  };
-  return byType[file.type] ?? file.name.split(".").pop()?.toLowerCase() ?? "jpg";
-}
-
 function validateImageKitUrl(source: string) {
   let url: URL;
   try {
@@ -164,79 +139,32 @@ function validateImageKitUrl(source: string) {
     return {
       url: null,
       error:
-        "External image URLs must use the standard HTTPS ImageKit domain (https://ik.imagekit.io/...).",
+        "Image URLs must use the standard HTTPS ImageKit domain (https://ik.imagekit.io/...). Upload the image using the importer's image picker to get a valid URL.",
     };
   }
 
   return { url: url.toString(), error: null };
 }
 
-async function cleanupUploadedImages(paths: string[]) {
-  if (paths.length === 0) return;
-  const supabase = createClient();
-  await supabase.storage.from(PRODUCT_IMAGE_BUCKET).remove(paths);
-}
-
-async function prepareImages(
-  slug: string,
-  imageValue: string,
-  localFiles: Map<string, File>,
-): Promise<PreparedImages> {
+/**
+ * By the time a CSV reaches this action, every image reference is already a
+ * real ImageKit URL — the browser uploads files directly to ImageKit before
+ * submitting, since Vercel Functions cap request bodies at 4.5 MB and product
+ * photos routinely exceed that. This function only validates the URLs.
+ */
+function prepareImageUrls(imageValue: string): { urls: string[]; error: string | null } {
   const sources = splitList(imageValue);
-  const supabase = createClient();
   const urls: string[] = [];
-  const uploadedPaths: string[] = [];
 
-  try {
-    for (const source of sources) {
-      if (/^https?:\/\//i.test(source)) {
-        const checked = validateImageKitUrl(source);
-        if (checked.error || !checked.url) throw new Error(checked.error ?? "Invalid image URL.");
-        urls.push(checked.url);
-        continue;
-      }
-
-      const file = localFiles.get(source.toLowerCase());
-      if (!file) {
-        throw new Error(
-          `Image file "${source}" was not attached. Select a matching local image file or use an ImageKit URL.`,
-        );
-      }
-
-      if (file.size > MAX_PRODUCT_IMAGE_BYTES) {
-        throw new Error(
-          `Image "${file.name}" is ${(file.size / 1024).toFixed(1)} KB. Local images must be 50 KB or smaller.`,
-        );
-      }
-
-      if (!ALLOWED_IMAGE_TYPES.has(file.type)) {
-        throw new Error(
-          `Image "${file.name}" has an unsupported format. Use JPG, PNG, WebP, or AVIF.`,
-        );
-      }
-
-      const path = `products/csv/${slug}-${Date.now()}-${crypto.randomUUID()}.${fileExtension(file)}`;
-      const { error } = await supabase.storage
-        .from(PRODUCT_IMAGE_BUCKET)
-        .upload(path, file, {
-          contentType: file.type,
-          upsert: false,
-        });
-
-      if (error) throw new Error(`Unable to upload "${file.name}": ${error.message}`);
-
-      uploadedPaths.push(path);
-      const {
-        data: { publicUrl },
-      } = supabase.storage.from(PRODUCT_IMAGE_BUCKET).getPublicUrl(path);
-      urls.push(publicUrl);
+  for (const source of sources) {
+    const checked = validateImageKitUrl(source);
+    if (checked.error || !checked.url) {
+      return { urls: [], error: checked.error ?? "Invalid image URL." };
     }
-  } catch (error) {
-    await cleanupUploadedImages(uploadedPaths);
-    throw error;
+    urls.push(checked.url);
   }
 
-  return { urls, uploadedPaths };
+  return { urls, error: null };
 }
 
 async function replaceProductImages(
@@ -501,36 +429,6 @@ export async function importProductsCsv(
     };
   }
 
-  const imageFiles = formData
-    .getAll("images")
-    .filter((entry): entry is File => typeof entry !== "string" && entry.size > 0);
-  if (imageFiles.length > MAX_PRODUCT_LOCAL_IMAGES) {
-    return {
-      success: false,
-      created: 0,
-      updated: 0,
-      skipped: 0,
-      errors: [],
-      message: `Attach no more than ${MAX_PRODUCT_LOCAL_IMAGES} local images per import. Use ImageKit URLs for larger batches.`,
-    };
-  }
-
-  const localFiles = new Map<string, File>();
-  for (const file of imageFiles) {
-    const key = file.name.trim().toLowerCase();
-    if (localFiles.has(key)) {
-      return {
-        success: false,
-        created: 0,
-        updated: 0,
-        skipped: 0,
-        errors: [],
-        message: `Two attached images use the same filename: ${file.name}. Rename one of them.`,
-      };
-    }
-    localFiles.set(key, file);
-  }
-
   const mode: ImportMode = formData.get("mode") === "upsert" ? "upsert" : "create";
   const createMissingCategories = formData.get("createMissingCategories") === "true";
   const supabase = createClient();
@@ -584,7 +482,6 @@ export async function importProductsCsv(
 
   for (const row of parsed.rows) {
     const productName = row.values.name.trim();
-    let uploadedPaths: string[] = [];
     let createdProductId: string | null = null;
 
     try {
@@ -638,15 +535,11 @@ export async function importProductsCsv(
       if (hasImageInput) {
         const primarySources = splitList(primaryImageSource);
         if (primarySources.length !== 1) {
-          throw new Error("Primary image accepts exactly one ImageKit URL or local filename.");
+          throw new Error("Primary image accepts exactly one ImageKit URL.");
         }
 
-        const preparedPrimary = await prepareImages(
-          productSlug,
-          primaryImageSource,
-          localFiles,
-        );
-        uploadedPaths.push(...preparedPrimary.uploadedPaths);
+        const preparedPrimary = prepareImageUrls(primaryImageSource);
+        if (preparedPrimary.error) throw new Error(preparedPrimary.error);
         preparedProductImages.push({
           url: preparedPrimary.urls[0],
           altText: row.values.primary_image_alt.trim() || productName,
@@ -655,12 +548,8 @@ export async function importProductsCsv(
         });
 
         if (galleryImageSources.length > 0) {
-          const preparedGallery = await prepareImages(
-            productSlug,
-            row.values.gallery_images,
-            localFiles,
-          );
-          uploadedPaths.push(...preparedGallery.uploadedPaths);
+          const preparedGallery = prepareImageUrls(row.values.gallery_images);
+          if (preparedGallery.error) throw new Error(preparedGallery.error);
           preparedGallery.urls.forEach((url, index) => {
             preparedProductImages.push({
               url,
@@ -706,12 +595,10 @@ export async function importProductsCsv(
 
       existingBySlug.set(productSlug, { ...existing, ...payload, id: productId } as Product);
       changedSlugs.add(productSlug);
-      uploadedPaths = [];
     } catch (error) {
       if (createdProductId) {
         await supabase.from("products").delete().eq("id", createdProductId);
       }
-      if (uploadedPaths.length > 0) await cleanupUploadedImages(uploadedPaths);
       importError(errors, row.line, productName, error);
     }
   }

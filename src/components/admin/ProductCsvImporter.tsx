@@ -5,7 +5,6 @@ import {
   AlertTriangle,
   CheckCircle2,
   Download,
-  ExternalLink,
   FileSpreadsheet,
   ImageIcon,
   Loader2,
@@ -14,6 +13,7 @@ import {
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { getImageKitAuthParams } from "@/lib/actions/admin/imagekit-auth";
 import { importProductsCsv } from "@/lib/actions/admin/product-csv-import";
 import {
   createProductCsvTemplate,
@@ -22,6 +22,7 @@ import {
   MAX_PRODUCT_IMAGE_BYTES,
   MAX_PRODUCT_LOCAL_IMAGES,
   parseProductCsv,
+  rewriteProductCsvImageRefs,
   type ParsedProductCsv,
   type ProductCsvImportResult,
 } from "@/lib/product-csv";
@@ -42,6 +43,8 @@ const ACCEPTED_IMAGE_TYPES = new Set([
   "image/avif",
 ]);
 
+const IMAGEKIT_UPLOAD_URL = "https://upload.imagekit.io/api/v1/files/upload";
+
 const columnRules = [
   ["name", "Required", "Product name shown on the website."],
   ["slug", "Optional", "Website URL name. Leave blank to generate it from the product name. Include it when updating an existing product."],
@@ -57,14 +60,14 @@ const columnRules = [
   ["sort_order", "Optional", "Whole number. Smaller numbers appear first when sort order is used."],
   ["meta_title", "Optional", "SEO page title."],
   ["meta_description", "Optional", "SEO meta description."],
-  ["primary_image", "Optional", "One optimized ImageKit URL or exact attached local filename. Required when gallery_images is used."],
+  ["primary_image", "Optional", "Exact attached image filename, or a ready-made ImageKit URL. Required when gallery_images is used."],
   ["primary_image_alt", "Optional", "Accessible description for the primary image. Product name is used when blank."],
-  ["gallery_images", "Optional", "Additional ImageKit URLs or attached local filenames separated with |."],
+  ["gallery_images", "Optional", "Additional attached image filenames or ImageKit URLs separated with |."],
   ["gallery_image_alts", "Optional", "Alt text for gallery images in the same order, separated with |. Missing values fall back to product name."],
 ];
 
-function formatKb(bytes: number) {
-  return `${(bytes / 1024).toFixed(1)} KB`;
+function formatMb(bytes: number) {
+  return `${(bytes / 1024 / 1024).toFixed(1)} MB`;
 }
 
 export function ProductCsvImporter({ categories }: ProductCsvImporterProps) {
@@ -75,6 +78,7 @@ export function ProductCsvImporter({ categories }: ProductCsvImporterProps) {
   const [mode, setMode] = useState<"create" | "upsert">("create");
   const [createMissingCategories, setCreateMissingCategories] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [uploadStatus, setUploadStatus] = useState<string | null>(null);
   const [result, setResult] = useState<ProductCsvImportResult | null>(null);
 
   const categoryNames = useMemo(
@@ -96,7 +100,7 @@ export function ProductCsvImporter({ categories }: ProductCsvImporterProps) {
       seen.add(key);
 
       if (file.size > MAX_PRODUCT_IMAGE_BYTES) {
-        problems.push(`${file.name} is ${formatKb(file.size)}; local images must be 50 KB or smaller.`);
+        problems.push(`${file.name} is ${formatMb(file.size)}; images must be ${formatMb(MAX_PRODUCT_IMAGE_BYTES)} or smaller.`);
       }
       if (!ACCEPTED_IMAGE_TYPES.has(file.type)) {
         problems.push(`${file.name} is not JPG, PNG, WebP, or AVIF.`);
@@ -193,31 +197,90 @@ export function ProductCsvImporter({ categories }: ProductCsvImporterProps) {
     URL.revokeObjectURL(url);
   }
 
+  async function uploadFileToImageKit(file: File): Promise<string> {
+    const auth = await getImageKitAuthParams();
+
+    const form = new FormData();
+    form.append("file", file);
+    form.append("fileName", file.name);
+    form.append("useUniqueFileName", "true");
+    form.append("folder", "/products/csv");
+    form.append("token", auth.token);
+    form.append("expire", String(auth.expire));
+    form.append("signature", auth.signature);
+    form.append("publicKey", auth.publicKey);
+
+    const response = await fetch(IMAGEKIT_UPLOAD_URL, {
+      method: "POST",
+      body: form,
+    });
+
+    if (!response.ok) {
+      let detail = "";
+      try {
+        const body = (await response.json()) as { message?: string };
+        detail = body.message ?? "";
+      } catch {
+        // response wasn't JSON; ignore
+      }
+      throw new Error(`Failed to upload "${file.name}" to ImageKit: ${detail || response.statusText}`);
+    }
+
+    const data = (await response.json()) as { url?: string };
+    if (!data.url) {
+      throw new Error(`ImageKit returned an unexpected response for "${file.name}".`);
+    }
+    return data.url;
+  }
+
   async function runImport() {
     if (!csvFile || !parsed) return;
     if (parsed.errors.length > 0 || parseMessage || localImageProblems.length > 0) return;
 
     setSubmitting(true);
     setResult(null);
+    setUploadStatus(null);
+
     try {
+      const urlByFilename = new Map<string, string>();
+
+      if (imageFiles.length > 0) {
+        for (let index = 0; index < imageFiles.length; index += 1) {
+          const file = imageFiles[index];
+          setUploadStatus(`Uploading image ${index + 1} of ${imageFiles.length} to ImageKit…`);
+          const url = await uploadFileToImageKit(file);
+          urlByFilename.set(file.name.trim().toLowerCase(), url);
+        }
+      }
+
+      setUploadStatus(null);
+
+      const rewrittenCsvText = rewriteProductCsvImageRefs(parsed.rows, urlByFilename);
+      const rewrittenCsvFile = new File([rewrittenCsvText], csvFile.name, {
+        type: "text/csv",
+      });
+
       const formData = new FormData();
-      formData.append("csv", csvFile);
-      imageFiles.forEach((file) => formData.append("images", file));
+      formData.append("csv", rewrittenCsvFile);
       formData.append("mode", mode);
       formData.append("createMissingCategories", String(createMissingCategories));
       const response = await importProductsCsv(formData);
       setResult(response);
-    } catch {
+    } catch (error) {
       setResult({
         success: false,
         created: 0,
         updated: 0,
         skipped: 0,
         errors: [],
-        message: "Import failed before completion. Check server logs and try again.",
+        message:
+          error instanceof Error
+            ? `Import failed: ${error.message}`
+            : "Import failed before completion. Check server logs and try again.",
       });
     } finally {
       setSubmitting(false);
+      setUploadStatus(null);
     }
   }
 
@@ -254,46 +317,40 @@ export function ProductCsvImporter({ categories }: ProductCsvImporterProps) {
         <CardContent className="grid gap-4 lg:grid-cols-2">
           <div className="rounded-md border border-accent/30 bg-accent/5 p-4">
             <div className="flex items-center gap-2 font-semibold text-primary">
-              <ImageIcon className="size-5" />
-              Recommended: ImageKit URL
+              <UploadCloud className="size-5" />
+              Attach images, type the filename
             </div>
             <p className="mt-2 text-sm text-muted-foreground">
-              Upload product images to ImageKit and paste the HTTPS URL into
+              Put the exact attached filename in
               <code className="mx-1 rounded bg-muted px-1 py-0.5 text-xs">primary_image</code>
-              or <code className="mx-1 rounded bg-muted px-1 py-0.5 text-xs">gallery_images</code>.
-              The images stay in ImageKit and do not consume Supabase Storage.
+              or <code className="mx-1 rounded bg-muted px-1 py-0.5 text-xs">gallery_images</code>,
+              then attach that file below. Your browser uploads it straight to ImageKit before the
+              import runs — the file never touches our server or Supabase Storage.
             </p>
-            <p className="mt-2 break-all rounded bg-muted p-2 font-mono text-xs text-primary">
-              https://ik.imagekit.io/your_id/products/machine.webp
+            <p className="mt-2 text-xs font-medium text-muted-foreground">
+              Formats: JPG, PNG, WebP, AVIF. Up to {formatMb(MAX_PRODUCT_IMAGE_BYTES)} each, {MAX_PRODUCT_LOCAL_IMAGES} files per batch.
             </p>
-            <a
-              href="https://imagekit.io/"
-              target="_blank"
-              rel="noreferrer"
-              className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-accent hover:underline"
-            >
-              Open ImageKit <ExternalLink className="size-3.5" />
-            </a>
           </div>
 
           <div className="rounded-md border p-4">
             <div className="flex items-center gap-2 font-semibold text-primary">
-              <UploadCloud className="size-5" />
-              Alternative: attach local images
+              <ImageIcon className="size-5" />
+              Or paste a ready-made ImageKit URL
             </div>
             <p className="mt-2 text-sm text-muted-foreground">
-              Put the exact filename in <code className="mx-1 rounded bg-muted px-1 py-0.5 text-xs">primary_image</code>
-              or <code className="mx-1 rounded bg-muted px-1 py-0.5 text-xs">gallery_images</code>,
-              then attach that file below. Every local file is strictly limited to 50 KB before it can be uploaded to Supabase.
+              Already have an image hosted on ImageKit? Paste its HTTPS URL directly into
+              <code className="mx-1 rounded bg-muted px-1 py-0.5 text-xs">primary_image</code>
+              or <code className="mx-1 rounded bg-muted px-1 py-0.5 text-xs">gallery_images</code> —
+              no upload needed, it&apos;s used as-is.
             </p>
-            <p className="mt-2 text-xs font-medium text-destructive">
-              Local limit: 50 KB each. Formats: JPG, PNG, WebP, AVIF. Maximum {MAX_PRODUCT_LOCAL_IMAGES} files per batch.
+            <p className="mt-2 break-all rounded bg-muted p-2 font-mono text-xs text-primary">
+              https://ik.imagekit.io/your_id/products/machine.webp
             </p>
           </div>
 
           <div className="lg:col-span-2 rounded-md border border-amber-200 bg-amber-50 p-3 text-sm text-amber-950">
-            <strong>Important:</strong> the 50 KB limit can be enforced exactly for files uploaded through this form.
-            ImageKit URLs are external assets and can use ImageKit&apos;s normal default format. The importer does not copy remote images into Supabase.
+            <strong>Note:</strong> all product images are hosted on ImageKit, not Supabase Storage —
+            this keeps your Supabase storage quota free regardless of which method you use above.
           </div>
         </CardContent>
       </Card>
@@ -364,7 +421,7 @@ export function ProductCsvImporter({ categories }: ProductCsvImporterProps) {
                 className="mt-3 block w-full text-sm"
                 onChange={(event) => setImageFiles(Array.from(event.target.files ?? []))}
               />
-              <span className="mt-2 block text-xs text-muted-foreground">50 KB maximum per image.</span>
+              <span className="mt-2 block text-xs text-muted-foreground">{formatMb(MAX_PRODUCT_IMAGE_BYTES)} maximum per image.</span>
             </label>
           </div>
 
@@ -507,10 +564,17 @@ export function ProductCsvImporter({ categories }: ProductCsvImporterProps) {
             </span>
           </label>
 
-          <Button type="button" size="lg" onClick={runImport} disabled={!canImport}>
-            {submitting ? <Loader2 className="size-4 animate-spin" /> : <UploadCloud className="size-4" />}
-            {submitting ? "Importing Products…" : "Import Products"}
-          </Button>
+          <div className="flex flex-col gap-2">
+            <Button type="button" size="lg" onClick={runImport} disabled={!canImport} className="w-fit">
+              {submitting ? <Loader2 className="size-4 animate-spin" /> : <UploadCloud className="size-4" />}
+              {submitting ? (uploadStatus ?? "Importing Products…") : "Import Products"}
+            </Button>
+            {submitting && imageFiles.length > 0 ? (
+              <p className="text-xs text-muted-foreground">
+                Images upload directly to ImageKit from your browser before the product rows are saved.
+              </p>
+            ) : null}
+          </div>
         </CardContent>
       </Card>
 

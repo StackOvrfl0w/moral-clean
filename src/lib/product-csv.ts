@@ -1,6 +1,9 @@
 export const MAX_PRODUCT_CSV_BYTES = 1024 * 1024;
 export const MAX_PRODUCT_CSV_ROWS = 250;
-export const MAX_PRODUCT_IMAGE_BYTES = 50 * 1024;
+// Images upload directly from the browser to ImageKit and never pass through
+// our own server, so these are not constrained by Vercel's 4.5 MB function
+// body limit — only by ImageKit's free-tier per-file cap (20 MB for images).
+export const MAX_PRODUCT_IMAGE_BYTES = 10 * 1024 * 1024;
 export const MAX_PRODUCT_LOCAL_IMAGES = 100;
 
 export const PRODUCT_CSV_HEADERS = [
@@ -262,4 +265,42 @@ export function createProductCsvTemplate() {
   return [PRODUCT_CSV_HEADERS, example]
     .map((row) => row.map((value) => csvCell(String(value))).join(","))
     .join("\r\n");
+}
+
+/**
+ * Re-serializes already-parsed rows back into CSV text, rewriting any
+ * primary_image / gallery_images reference that matches a key in
+ * urlByFilename (matched case-insensitively) to its uploaded URL.
+ *
+ * Used on the client after uploading attached images directly to ImageKit:
+ * the admin still types local filenames into the CSV, but by the time the
+ * CSV reaches the server every image reference is a real ImageKit URL.
+ */
+export function rewriteProductCsvImageRefs(
+  rows: ParsedProductCsvRow[],
+  urlByFilename: Map<string, string>,
+): string {
+  const rewriteRef = (ref: string) => {
+    const trimmed = ref.trim();
+    if (!trimmed) return trimmed;
+    return urlByFilename.get(trimmed.toLowerCase()) ?? trimmed;
+  };
+
+  const rewriteList = (value: string) =>
+    value
+      .split(/[|;]/)
+      .map((part) => part.trim())
+      .filter(Boolean)
+      .map(rewriteRef)
+      .join("|");
+
+  const lines = rows.map((row) => {
+    const values: ProductCsvRecord = { ...row.values };
+    if (values.primary_image) values.primary_image = rewriteList(values.primary_image);
+    if (values.gallery_images) values.gallery_images = rewriteList(values.gallery_images);
+
+    return PRODUCT_CSV_HEADERS.map((header) => csvCell(values[header] ?? "")).join(",");
+  });
+
+  return [PRODUCT_CSV_HEADERS.join(","), ...lines].join("\r\n");
 }
