@@ -30,9 +30,9 @@ export type ImageKitAuthParams = {
  */
 export function generateImageKitAuthParams(): ImageKitAuthParams {
   const privateKey = getPrivateKey();
-  const publicKey = process.env.NEXT_PUBLIC_IMAGEKIT_PUBLIC_KEY;
+  const publicKey = process.env.IMAGEKIT_PUBLIC_KEY;
   if (!publicKey) {
-    throw new Error("NEXT_PUBLIC_IMAGEKIT_PUBLIC_KEY is not configured on the server.");
+    throw new Error("IMAGEKIT_PUBLIC_KEY is not configured on the server.");
   }
 
   const token = randomUUID();
