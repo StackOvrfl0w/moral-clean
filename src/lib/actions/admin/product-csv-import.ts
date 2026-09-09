@@ -49,9 +49,14 @@ function splitList(value: string) {
   );
 }
 
+// Use for anything where position matters and must stay aligned with a
+// parallel list (image sources vs. their alt texts). Never dedupes — an
+// admin may legitimately reuse the same image twice in a gallery, and
+// deduping would silently desync the images/alts count and produce a false
+// "more alts than images" error.
 function splitOrderedList(value: string) {
   return value
-    .split("|")
+    .split(/[|;]/)
     .map((item) => item.trim())
     .filter(Boolean);
 }
@@ -59,8 +64,10 @@ function splitOrderedList(value: string) {
 function parseBoolean(value: string, fallback: boolean) {
   const normalized = value.trim().toLowerCase();
   if (!normalized) return { value: fallback, error: null as string | null };
-  if (TRUE_VALUES.has(normalized)) return { value: true, error: null as string | null };
-  if (FALSE_VALUES.has(normalized)) return { value: false, error: null as string | null };
+  if (TRUE_VALUES.has(normalized))
+    return { value: true, error: null as string | null };
+  if (FALSE_VALUES.has(normalized))
+    return { value: false, error: null as string | null };
   return {
     value: fallback,
     error: `Invalid yes/no value "${value}". Use yes/no, true/false, or 1/0.`,
@@ -79,7 +86,10 @@ function parseSortOrder(value: string, fallback: number) {
   return { value: parsed, error: null as string | null };
 }
 
-function parseSpecifications(value: string): { value: Json; error: string | null } {
+function parseSpecifications(value: string): {
+  value: Json;
+  error: string | null;
+} {
   const normalized = value.trim();
   if (!normalized) return { value: {}, error: null };
 
@@ -89,7 +99,8 @@ function parseSpecifications(value: string): { value: Json; error: string | null
       if (!parsed || Array.isArray(parsed) || typeof parsed !== "object") {
         return {
           value: {},
-          error: "Specifications JSON must be an object, for example {\"Power\":\"1200 W\"}.",
+          error:
+            'Specifications JSON must be an object, for example {"Power":"1200 W"}.',
         };
       }
       return { value: parsed, error: null };
@@ -152,8 +163,11 @@ function validateImageKitUrl(source: string) {
  * submitting, since Vercel Functions cap request bodies at 4.5 MB and product
  * photos routinely exceed that. This function only validates the URLs.
  */
-function prepareImageUrls(imageValue: string): { urls: string[]; error: string | null } {
-  const sources = splitList(imageValue);
+function prepareImageUrls(imageValue: string): {
+  urls: string[];
+  error: string | null;
+} {
+  const sources = splitOrderedList(imageValue);
   const urls: string[] = [];
 
   for (const source of sources) {
@@ -230,7 +244,9 @@ async function replaceProductTags(
           .select("id")
           .single();
         if (createError || !created) {
-          throw new Error(createError?.message ?? `Unable to create tag "${tagName}".`);
+          throw new Error(
+            createError?.message ?? `Unable to create tag "${tagName}".`,
+          );
         }
         tagId = created.id;
       }
@@ -271,7 +287,8 @@ async function resolveCategory(
 
   const maps = categoryMaps(categories);
   const existing =
-    maps.byName.get(value.toLowerCase()) ?? maps.bySlug.get(value.toLowerCase());
+    maps.byName.get(value.toLowerCase()) ??
+    maps.bySlug.get(value.toLowerCase());
   if (existing) return existing.id;
 
   if (!createMissing) {
@@ -281,7 +298,8 @@ async function resolveCategory(
   }
 
   const newSlug = slugify(value);
-  if (!newSlug) throw new Error(`Category "${value}" cannot be converted to a valid slug.`);
+  if (!newSlug)
+    throw new Error(`Category "${value}" cannot be converted to a valid slug.`);
 
   const supabase = createClient();
   const { data, error } = await supabase
@@ -319,7 +337,7 @@ function buildProductPayload(
 
   const sortOrder = parseSortOrder(
     row.sort_order,
-    update ? existing?.sort_order ?? 0 : 0,
+    update ? (existing?.sort_order ?? 0) : 0,
   );
   if (sortOrder.error) throw new Error(sortOrder.error);
 
@@ -327,25 +345,37 @@ function buildProductPayload(
   if (parsedSpecs.error) throw new Error(parsedSpecs.error);
 
   const preserveText = (raw: string, current: string | null | undefined) =>
-    update && !raw.trim() ? current ?? null : textOrNull(raw);
+    update && !raw.trim() ? (current ?? null) : textOrNull(raw);
 
   return {
     name: row.name.trim(),
     slug,
-    category_id: update && !row.category.trim() ? existing?.category_id ?? null : categoryId,
+    category_id:
+      update && !row.category.trim()
+        ? (existing?.category_id ?? null)
+        : categoryId,
     brand: preserveText(row.brand, existing?.brand),
     model_code: preserveText(row.model_code, existing?.model_code),
-    short_description: preserveText(row.short_description, existing?.short_description),
-    long_description: preserveText(row.long_description, existing?.long_description),
+    short_description: preserveText(
+      row.short_description,
+      existing?.short_description,
+    ),
+    long_description: preserveText(
+      row.long_description,
+      existing?.long_description,
+    ),
     specifications:
       update && !row.specifications.trim()
-        ? existing?.specifications ?? {}
+        ? (existing?.specifications ?? {})
         : parsedSpecs.value,
     featured: featured.value,
     in_stock: inStock.value,
     sort_order: sortOrder.value,
     meta_title: preserveText(row.meta_title, existing?.meta_title),
-    meta_description: preserveText(row.meta_description, existing?.meta_description),
+    meta_description: preserveText(
+      row.meta_description,
+      existing?.meta_description,
+    ),
     updated_at: new Date().toISOString(),
   };
 }
@@ -429,8 +459,10 @@ export async function importProductsCsv(
     };
   }
 
-  const mode: ImportMode = formData.get("mode") === "upsert" ? "upsert" : "create";
-  const createMissingCategories = formData.get("createMissingCategories") === "true";
+  const mode: ImportMode =
+    formData.get("mode") === "upsert" ? "upsert" : "create";
+  const createMissingCategories =
+    formData.get("createMissingCategories") === "true";
   const supabase = createClient();
 
   const { data: categoriesData, error: categoriesError } = await supabase
@@ -449,7 +481,9 @@ export async function importProductsCsv(
   }
   const categories = (categoriesData ?? []) as CategoryOption[];
 
-  const rowSlugs = parsed.rows.map(({ values }) => slugify(values.slug || values.name));
+  const rowSlugs = parsed.rows.map(({ values }) =>
+    slugify(values.slug || values.name),
+  );
   const validSlugs = Array.from(new Set(rowSlugs.filter(Boolean)));
   const existingBySlug = new Map<string, Product>();
   if (validSlugs.length > 0) {
@@ -490,7 +524,9 @@ export async function importProductsCsv(
       const productSlug = slugify(row.values.slug || productName);
       if (!productSlug) throw new Error("Product slug is empty or invalid.");
       if (seenSlugs.has(productSlug)) {
-        throw new Error(`Duplicate slug "${productSlug}" appears more than once in this CSV.`);
+        throw new Error(
+          `Duplicate slug "${productSlug}" appears more than once in this CSV.`,
+        );
       }
       seenSlugs.add(productSlug);
 
@@ -510,25 +546,40 @@ export async function importProductsCsv(
         createMissingCategories,
         categories,
       );
-      const payload = buildProductPayload(row.values, productSlug, categoryId, existing);
+      const payload = buildProductPayload(
+        row.values,
+        productSlug,
+        categoryId,
+        existing,
+      );
       const tags = splitList(row.values.tags);
 
       const primaryImageSource = row.values.primary_image.trim();
-      const galleryImageSources = splitList(row.values.gallery_images);
+      const galleryImageSources = splitOrderedList(row.values.gallery_images);
       const galleryImageAlts = splitOrderedList(row.values.gallery_image_alts);
-      const hasImageInput = Boolean(primaryImageSource || row.values.gallery_images.trim());
+      const hasImageInput = Boolean(
+        primaryImageSource || row.values.gallery_images.trim(),
+      );
 
       if (!primaryImageSource && galleryImageSources.length > 0) {
-        throw new Error("Primary image is required when gallery images are provided.");
+        throw new Error(
+          "Primary image is required when gallery images are provided.",
+        );
       }
       if (!primaryImageSource && row.values.primary_image_alt.trim()) {
-        throw new Error("Primary image alt text was provided without a primary image.");
+        throw new Error(
+          "Primary image alt text was provided without a primary image.",
+        );
       }
       if (galleryImageSources.length === 0 && galleryImageAlts.length > 0) {
-        throw new Error("Gallery image alt text was provided without gallery images.");
+        throw new Error(
+          "Gallery image alt text was provided without gallery images.",
+        );
       }
       if (galleryImageAlts.length > galleryImageSources.length) {
-        throw new Error("There are more gallery image alt values than gallery images.");
+        throw new Error(
+          "There are more gallery image alt values than gallery images.",
+        );
       }
 
       const preparedProductImages: PreparedProductImage[] = [];
@@ -569,7 +620,8 @@ export async function importProductsCsv(
           .eq("id", existing.id)
           .select("id,slug")
           .single();
-        if (error || !data) throw new Error(error?.message ?? "Unable to update product.");
+        if (error || !data)
+          throw new Error(error?.message ?? "Unable to update product.");
         productId = data.id;
       } else {
         const { data, error } = await supabase
@@ -577,7 +629,8 @@ export async function importProductsCsv(
           .insert(payload)
           .select("id,slug")
           .single();
-        if (error || !data) throw new Error(error?.message ?? "Unable to create product.");
+        if (error || !data)
+          throw new Error(error?.message ?? "Unable to create product.");
         productId = data.id;
         createdProductId = data.id;
       }
@@ -593,7 +646,11 @@ export async function importProductsCsv(
       if (existing) updated += 1;
       else created += 1;
 
-      existingBySlug.set(productSlug, { ...existing, ...payload, id: productId } as Product);
+      existingBySlug.set(productSlug, {
+        ...existing,
+        ...payload,
+        id: productId,
+      } as Product);
       changedSlugs.add(productSlug);
     } catch (error) {
       if (createdProductId) {
