@@ -1,5 +1,12 @@
 "use server";
 
+// Hobby plan caps this at 60s regardless of what's set here — do not raise
+// past 60 without confirming the plan has changed, the deployment will fail
+// to build. Chunking the import client-side (see ProductCsvImporter) is what
+// actually makes this scale past a handful of products, this just gives each
+// individual chunk full headroom.
+export const maxDuration = 60;
+
 import { revalidatePath } from "next/cache";
 
 import { requireAdmin } from "@/lib/auth";

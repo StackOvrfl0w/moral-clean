@@ -114,6 +114,14 @@ const columnRules = [
   ],
 ];
 
+// Hobby-plan Vercel functions hard-cap at 60s regardless of maxDuration
+// config. A single importProductsCsv call inserting many rows (each with
+// category lookups, tag upserts, and image row writes) can exceed that at
+// larger batch sizes, and Vercel kills the function without a catchable
+// error when it does. Splitting into chunks keeps each server call fast
+// and lets the import scale to hundreds of products reliably.
+const IMPORT_CHUNK_SIZE = 5;
+
 function formatMb(bytes: number) {
   return `${(bytes / 1024 / 1024).toFixed(1)} MB`;
 }
@@ -268,7 +276,6 @@ export function ProductCsvImporter({ categories }: ProductCsvImporterProps) {
 
   async function uploadFileToImageKit(file: File): Promise<string> {
     const auth = await getImageKitAuthParams();
-    console.log("IMAGEKIT AUTH DEBUG:", auth);
 
     const form = new FormData();
     form.append("file", file);
@@ -336,23 +343,80 @@ export function ProductCsvImporter({ categories }: ProductCsvImporterProps) {
 
       setUploadStatus(null);
 
-      const rewrittenCsvText = rewriteProductCsvImageRefs(
-        parsed.rows,
-        urlByFilename,
-      );
-      const rewrittenCsvFile = new File([rewrittenCsvText], csvFile.name, {
-        type: "text/csv",
-      });
+      const chunks: (typeof parsed.rows)[] = [];
+      for (let i = 0; i < parsed.rows.length; i += IMPORT_CHUNK_SIZE) {
+        chunks.push(parsed.rows.slice(i, i + IMPORT_CHUNK_SIZE));
+      }
 
-      const formData = new FormData();
-      formData.append("csv", rewrittenCsvFile);
-      formData.append("mode", mode);
-      formData.append(
-        "createMissingCategories",
-        String(createMissingCategories),
-      );
-      const response = await importProductsCsv(formData);
-      setResult(response);
+      const merged: ProductCsvImportResult = {
+        success: true,
+        created: 0,
+        updated: 0,
+        skipped: 0,
+        errors: [],
+        message: "",
+      };
+
+      for (let chunkIndex = 0; chunkIndex < chunks.length; chunkIndex += 1) {
+        setUploadStatus(
+          chunks.length > 1
+            ? `Importing products ${chunkIndex * IMPORT_CHUNK_SIZE + 1}–${Math.min((chunkIndex + 1) * IMPORT_CHUNK_SIZE, parsed.rows.length)} of ${parsed.rows.length}…`
+            : "Importing Products…",
+        );
+
+        const chunkCsvText = rewriteProductCsvImageRefs(
+          chunks[chunkIndex],
+          urlByFilename,
+        );
+        const chunkCsvFile = new File([chunkCsvText], csvFile.name, {
+          type: "text/csv",
+        });
+
+        const formData = new FormData();
+        formData.append("csv", chunkCsvFile);
+        formData.append("mode", mode);
+        formData.append(
+          "createMissingCategories",
+          String(createMissingCategories),
+        );
+
+        let chunkResult: ProductCsvImportResult;
+        try {
+          chunkResult = await importProductsCsv(formData);
+        } catch (error) {
+          // A thrown error here (as opposed to a returned {success:false}
+          // result) usually means the function itself was killed — a
+          // timeout, a crash, or the connection dropping mid-request. The
+          // rows in this chunk are in an unknown state: some may have been
+          // written before the kill. Stop here rather than continuing, since
+          // continuing past an unknown-state failure risks compounding it.
+          merged.success = false;
+          merged.errors.push({
+            row: chunks[chunkIndex][0]?.line ?? 0,
+            product: "(chunk failed)",
+            message:
+              error instanceof Error
+                ? `This batch of ${chunks[chunkIndex].length} product(s) failed to complete: ${error.message}. Some rows in this batch may not have been saved — check the Products list before re-running.`
+                : `This batch of ${chunks[chunkIndex].length} product(s) failed to complete unexpectedly. Some rows in this batch may not have been saved — check the Products list before re-running.`,
+          });
+          break;
+        }
+
+        merged.created += chunkResult.created;
+        merged.updated += chunkResult.updated;
+        merged.skipped += chunkResult.skipped;
+        merged.errors.push(...chunkResult.errors);
+        if (!chunkResult.success) merged.success = false;
+      }
+
+      merged.message =
+        chunks.length > 1
+          ? `Processed ${parsed.rows.length} rows across ${chunks.length} batches. Created ${merged.created}, updated ${merged.updated}, skipped ${merged.skipped}.`
+          : merged.errors.length === 0
+            ? `Created ${merged.created}, updated ${merged.updated}, skipped ${merged.skipped}.`
+            : "Some rows could not be imported. See the errors below.";
+
+      setResult(merged);
     } catch (error) {
       setResult({
         success: false,
