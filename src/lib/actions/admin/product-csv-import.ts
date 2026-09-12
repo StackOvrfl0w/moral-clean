@@ -5,7 +5,7 @@
 // to build. Chunking the import client-side (see ProductCsvImporter) is what
 // actually makes this scale past a handful of products, this just gives each
 // individual chunk full headroom.
-export const maxDuration = 60;
+// export const maxDuration = 60;
 
 import { revalidatePath } from "next/cache";
 
