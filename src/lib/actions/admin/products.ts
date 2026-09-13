@@ -225,7 +225,10 @@ export async function deleteProduct(formData: FormData) {
     .eq("product_id", productId);
   if (imagesError) throw new Error(imagesError.message);
 
-  const { error } = await supabase.from("products").delete().eq("id", productId);
+  const { error } = await supabase
+    .from("products")
+    .delete()
+    .eq("id", productId);
 
   if (error) {
     throw new Error(error.message);
@@ -258,6 +261,77 @@ export async function deleteProduct(formData: FormData) {
   }
 }
 
+export async function bulkDeleteProducts(formData: FormData) {
+  await requireAdmin();
+
+  const raw = String(formData.get("productIds") ?? "[]");
+  let productIds: string[];
+  try {
+    productIds = JSON.parse(raw) as string[];
+  } catch {
+    throw new Error("Invalid product ID list.");
+  }
+
+  productIds = Array.from(new Set(productIds.filter(Boolean)));
+  if (productIds.length === 0) {
+    throw new Error("No products selected.");
+  }
+
+  const supabase = createClient();
+
+  const { data: slugRows, error: slugLookupError } = await supabase
+    .from("products")
+    .select("slug")
+    .in("id", productIds);
+  if (slugLookupError) throw new Error(slugLookupError.message);
+
+  const { data: images, error: imagesError } = await supabase
+    .from("product_images")
+    .select("url")
+    .in("product_id", productIds);
+  if (imagesError) throw new Error(imagesError.message);
+
+  const { error: deleteError, count } = await supabase
+    .from("products")
+    .delete({ count: "exact" })
+    .in("id", productIds);
+  if (deleteError) {
+    throw new Error(deleteError.message);
+  }
+
+  const storagePaths = (images ?? [])
+    .map((image) => {
+      try {
+        const path = decodeURIComponent(new URL(image.url).pathname);
+        const marker = "/storage/v1/object/public/product images/";
+        return path.startsWith(marker) ? path.slice(marker.length) : null;
+      } catch {
+        return null;
+      }
+    })
+    .filter((path): path is string => Boolean(path));
+
+  if (storagePaths.length > 0) {
+    const { error: storageError } = await supabase.storage
+      .from("product images")
+      .remove(storagePaths);
+    if (storageError) {
+      throw new Error(
+        `Products deleted, but ${storagePaths.length} storage file(s) failed to remove: ${storageError.message}`,
+      );
+    }
+  }
+
+  revalidatePath("/admin/products");
+  revalidatePath("/products");
+  revalidatePath("/products/category/[slug]", "page");
+  for (const row of slugRows ?? []) {
+    if (row.slug) revalidatePath(`/products/${row.slug}`);
+  }
+
+  return { deletedCount: count ?? productIds.length };
+}
+
 export async function toggleFeatured(formData: FormData) {
   await requireAdmin();
   const productId = String(formData.get("productId") ?? "");
@@ -276,7 +350,10 @@ export async function toggleInStock(formData: FormData) {
   if (!productId) throw new Error("Product ID is required.");
 
   const supabase = createClient();
-  await supabase.from("products").update({ in_stock: inStock }).eq("id", productId);
+  await supabase
+    .from("products")
+    .update({ in_stock: inStock })
+    .eq("id", productId);
   revalidatePath("/admin/products");
 }
 
@@ -291,10 +368,12 @@ export async function uploadProductImage(formData: FormData) {
   const path = `products/${Date.now()}-${crypto.randomUUID()}.${ext}`;
 
   const supabase = createClient();
-  const { error } = await supabase.storage.from("product images").upload(path, file, {
-    contentType: file.type,
-    upsert: false,
-  });
+  const { error } = await supabase.storage
+    .from("product images")
+    .upload(path, file, {
+      contentType: file.type,
+      upsert: false,
+    });
 
   if (error) {
     throw new Error(error.message);
@@ -320,7 +399,11 @@ export async function deleteProductImage(formData: FormData) {
 export async function reorderProductImages(formData: FormData) {
   await requireAdmin();
   const raw = String(formData.get("items") ?? "[]");
-  const items = JSON.parse(raw) as Array<{ id: string; sort_order: number; is_primary?: boolean }>;
+  const items = JSON.parse(raw) as Array<{
+    id: string;
+    sort_order: number;
+    is_primary?: boolean;
+  }>;
 
   const supabase = createClient();
   for (const item of items) {
