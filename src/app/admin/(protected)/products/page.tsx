@@ -1,3 +1,5 @@
+// FILE PATH: src/app/admin/(protected)/products/page.tsx
+
 import Link from "next/link";
 
 import { ProductBulkTable } from "@/components/admin/ProductBulkTable";

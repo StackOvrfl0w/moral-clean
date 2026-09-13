@@ -1,3 +1,5 @@
+// FILE PATH: src/lib/actions/admin/product-csv-import.ts
+
 "use server";
 
 // Hobby plan caps this at 60s regardless of what's set here — do not raise
@@ -9,7 +11,7 @@
 
 import { revalidatePath } from "next/cache";
 
-import { requireAdmin } from "@/lib/auth";
+import { requireAdminNoRedirect } from "@/lib/auth";
 import {
   MAX_PRODUCT_CSV_BYTES,
   MAX_PRODUCT_CSV_ROWS,
@@ -403,7 +405,13 @@ function importError(
 export async function importProductsCsv(
   formData: FormData,
 ): Promise<ProductCsvImportResult> {
-  await requireAdmin();
+  // requireAdminNoRedirect(), not requireAdmin(): this runs once per CSV
+  // chunk during a multi-batch import. redirect() thrown from inside that
+  // loop would force-navigate the admin's browser to the login page and
+  // abandon whatever chunks hadn't run yet, even on a transient auth blip.
+  // A thrown Error here is caught by the importer's per-chunk try/catch and
+  // reported as a failed batch instead. See requireAdminNoRedirect's docstring.
+  await requireAdminNoRedirect();
 
   const csvEntry = formData.get("csv");
   if (typeof csvEntry === "string" || !csvEntry) {

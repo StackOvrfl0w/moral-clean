@@ -1,3 +1,5 @@
+// FILE PATH: src/lib/actions/admin/products.ts
+
 "use server";
 
 import { revalidatePath } from "next/cache";
@@ -316,6 +318,9 @@ export async function bulkDeleteProducts(formData: FormData) {
       .from("product images")
       .remove(storagePaths);
     if (storageError) {
+      // Row rows are already gone (and product_images/product_tags cascaded).
+      // Surface this distinctly: it is a leaked storage object, not a data-integrity
+      // problem — no slug or product record survives regardless.
       throw new Error(
         `Products deleted, but ${storagePaths.length} storage file(s) failed to remove: ${storageError.message}`,
       );

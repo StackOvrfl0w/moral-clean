@@ -1,3 +1,5 @@
+// FILE PATH: src/components/admin/ProductBulkTable.tsx
+
 "use client";
 
 import Image from "next/image";

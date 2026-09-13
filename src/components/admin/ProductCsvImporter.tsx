@@ -1,3 +1,5 @@
+// FILE PATH: src/components/admin/ProductCsvImporter.tsx
+
 "use client";
 
 import { useMemo, useState } from "react";
@@ -121,6 +123,49 @@ const columnRules = [
 // error when it does. Splitting into chunks keeps each server call fast
 // and lets the import scale to hundreds of products reliably.
 const IMPORT_CHUNK_SIZE = 5;
+
+// How many chunks (and, separately, how many image uploads) are allowed to
+// be in flight at once. Each chunk is an independent serverless invocation
+// with its own 60s budget, so running several concurrently doesn't risk the
+// Hobby-plan timeout the way making one chunk bigger would — it just uses
+// more of Vercel's concurrent-invocation headroom. Keep this modest: too
+// high and a slow Supabase response on one chunk stacks up alongside many
+// others and can look like a stall instead of steady progress.
+const MAX_CONCURRENT_CHUNKS = 3;
+const MAX_CONCURRENT_IMAGE_UPLOADS = 4;
+
+/**
+ * Runs `worker` over `items` with at most `concurrency` in flight at once,
+ * preserving input order in the returned array. Used instead of
+ * Promise.all(items.map(worker)) because that would fire every request
+ * simultaneously with no cap — fine for a handful of items, but with up to
+ * 100 images or 50 chunks that risks tripping ImageKit/Supabase rate limits
+ * or Vercel's concurrent-invocation limits all at once.
+ */
+async function runWithConcurrency<T, R>(
+  items: T[],
+  concurrency: number,
+  worker: (item: T, index: number) => Promise<R>,
+): Promise<R[]> {
+  const results: R[] = new Array(items.length);
+  let nextIndex = 0;
+
+  async function runNext(): Promise<void> {
+    const currentIndex = nextIndex;
+    nextIndex += 1;
+    if (currentIndex >= items.length) return;
+
+    results[currentIndex] = await worker(items[currentIndex], currentIndex);
+    await runNext();
+  }
+
+  const workers = Array.from(
+    { length: Math.min(concurrency, items.length) },
+    () => runNext(),
+  );
+  await Promise.all(workers);
+  return results;
+}
 
 function formatMb(bytes: number) {
   return `${(bytes / 1024 / 1024).toFixed(1)} MB`;
@@ -331,13 +376,26 @@ export function ProductCsvImporter({ categories }: ProductCsvImporterProps) {
       const urlByFilename = new Map<string, string>();
 
       if (imageFiles.length > 0) {
-        for (let index = 0; index < imageFiles.length; index += 1) {
-          const file = imageFiles[index];
-          setUploadStatus(
-            `Uploading image ${index + 1} of ${imageFiles.length} to ImageKit…`,
-          );
-          const url = await uploadFileToImageKit(file);
-          urlByFilename.set(file.name.trim().toLowerCase(), url);
+        let completed = 0;
+        setUploadStatus(
+          `Uploading images to ImageKit (0 of ${imageFiles.length})…`,
+        );
+
+        const uploaded = await runWithConcurrency(
+          imageFiles,
+          MAX_CONCURRENT_IMAGE_UPLOADS,
+          async (file) => {
+            const url = await uploadFileToImageKit(file);
+            completed += 1;
+            setUploadStatus(
+              `Uploading images to ImageKit (${completed} of ${imageFiles.length})…`,
+            );
+            return { name: file.name, url };
+          },
+        );
+
+        for (const { name, url } of uploaded) {
+          urlByFilename.set(name.trim().toLowerCase(), url);
         }
       }
 
@@ -357,56 +415,88 @@ export function ProductCsvImporter({ categories }: ProductCsvImporterProps) {
         message: "",
       };
 
-      for (let chunkIndex = 0; chunkIndex < chunks.length; chunkIndex += 1) {
+      // Chunks run in waves of up to MAX_CONCURRENT_CHUNKS at a time, rather
+      // than one at a time (faster) or all at once (risks stacking too many
+      // concurrent Supabase/Vercel invocations). Within a wave, chunks are
+      // independent — a failure in one doesn't affect the others already in
+      // flight. Between waves, a failure stops the import from starting more
+      // work: rows already written stay written (each chunk's rows are self-
+      // contained), but we don't want to keep piling on new unknown-state
+      // batches after one has already failed unexpectedly.
+      let stopped = false;
+      let chunksCompleted = 0;
+
+      for (
+        let waveStart = 0;
+        waveStart < chunks.length && !stopped;
+        waveStart += MAX_CONCURRENT_CHUNKS
+      ) {
+        const wave = chunks.slice(waveStart, waveStart + MAX_CONCURRENT_CHUNKS);
+
         setUploadStatus(
           chunks.length > 1
-            ? `Importing products ${chunkIndex * IMPORT_CHUNK_SIZE + 1}–${Math.min((chunkIndex + 1) * IMPORT_CHUNK_SIZE, parsed.rows.length)} of ${parsed.rows.length}…`
+            ? `Importing products (${chunksCompleted} of ${parsed.rows.length} rows done)…`
             : "Importing Products…",
         );
 
-        const chunkCsvText = rewriteProductCsvImageRefs(
-          chunks[chunkIndex],
-          urlByFilename,
-        );
-        const chunkCsvFile = new File([chunkCsvText], csvFile.name, {
-          type: "text/csv",
-        });
+        const waveResults = await Promise.all(
+          wave.map(async (chunk) => {
+            const chunkCsvText = rewriteProductCsvImageRefs(
+              chunk,
+              urlByFilename,
+            );
+            const chunkCsvFile = new File([chunkCsvText], csvFile.name, {
+              type: "text/csv",
+            });
 
-        const formData = new FormData();
-        formData.append("csv", chunkCsvFile);
-        formData.append("mode", mode);
-        formData.append(
-          "createMissingCategories",
-          String(createMissingCategories),
+            const formData = new FormData();
+            formData.append("csv", chunkCsvFile);
+            formData.append("mode", mode);
+            formData.append(
+              "createMissingCategories",
+              String(createMissingCategories),
+            );
+
+            try {
+              const chunkResult = await importProductsCsv(formData);
+              return { chunk, chunkResult, thrown: null as unknown };
+            } catch (error) {
+              return { chunk, chunkResult: null, thrown: error };
+            }
+          }),
         );
 
-        let chunkResult: ProductCsvImportResult;
-        try {
-          chunkResult = await importProductsCsv(formData);
-        } catch (error) {
-          // A thrown error here (as opposed to a returned {success:false}
-          // result) usually means the function itself was killed — a
-          // timeout, a crash, or the connection dropping mid-request. The
-          // rows in this chunk are in an unknown state: some may have been
-          // written before the kill. Stop here rather than continuing, since
-          // continuing past an unknown-state failure risks compounding it.
-          merged.success = false;
-          merged.errors.push({
-            row: chunks[chunkIndex][0]?.line ?? 0,
-            product: "(chunk failed)",
-            message:
-              error instanceof Error
-                ? `This batch of ${chunks[chunkIndex].length} product(s) failed to complete: ${error.message}. Some rows in this batch may not have been saved — check the Products list before re-running.`
-                : `This batch of ${chunks[chunkIndex].length} product(s) failed to complete unexpectedly. Some rows in this batch may not have been saved — check the Products list before re-running.`,
-          });
-          break;
+        for (const { chunk, chunkResult, thrown } of waveResults) {
+          if (thrown !== null) {
+            // A thrown error here (as opposed to a returned {success:false}
+            // result) usually means the function itself was killed — a
+            // timeout, a crash, an auth failure, or the connection dropping
+            // mid-request. The rows in this chunk are in an unknown state:
+            // some may have been written before the kill. Stop starting new
+            // waves after this, since continuing past an unknown-state
+            // failure risks compounding it.
+            merged.success = false;
+            merged.errors.push({
+              row: chunk[0]?.line ?? 0,
+              product: "(chunk failed)",
+              message:
+                thrown instanceof Error
+                  ? `This batch of ${chunk.length} product(s) failed to complete: ${thrown.message}. Some rows in this batch may not have been saved — check the Products list before re-running.`
+                  : `This batch of ${chunk.length} product(s) failed to complete unexpectedly. Some rows in this batch may not have been saved — check the Products list before re-running.`,
+            });
+            stopped = true;
+            continue;
+          }
+
+          if (chunkResult) {
+            merged.created += chunkResult.created;
+            merged.updated += chunkResult.updated;
+            merged.skipped += chunkResult.skipped;
+            merged.errors.push(...chunkResult.errors);
+            if (!chunkResult.success) merged.success = false;
+            chunksCompleted += chunk.length;
+          }
         }
-
-        merged.created += chunkResult.created;
-        merged.updated += chunkResult.updated;
-        merged.skipped += chunkResult.skipped;
-        merged.errors.push(...chunkResult.errors);
-        if (!chunkResult.success) merged.success = false;
       }
 
       merged.message =
