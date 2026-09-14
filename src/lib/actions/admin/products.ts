@@ -9,7 +9,7 @@ import { requireAdmin } from "@/lib/auth";
 import { validateImageUpload } from "@/lib/image-upload";
 import { sanitizeRichText } from "@/lib/sanitize-html";
 import { createClient } from "@/lib/supabase/server";
-import { slugify } from "@/lib/utils";
+import { normalizeSafeUrl, slugify } from "@/lib/utils";
 
 type ProductImagePayload = {
   id?: string;
@@ -108,13 +108,17 @@ async function persistProductImages(
 
   const sanitized = images
     .filter((image) => image.url?.trim())
-    .map((image, index) => ({
-      product_id: productId,
-      url: image.url,
-      alt_text: normalizeText(image.alt_text),
-      is_primary: image.is_primary ?? index === 0,
-      sort_order: image.sort_order ?? index,
-    }));
+    .map((image, index) => {
+      const url = normalizeSafeUrl(image.url);
+      if (!url) throw new Error("Product image URLs must use HTTPS.");
+      return {
+        product_id: productId,
+        url,
+        alt_text: normalizeText(image.alt_text),
+        is_primary: image.is_primary ?? index === 0,
+        sort_order: image.sort_order ?? index,
+      };
+    });
 
   if (sanitized.length === 0) return;
 

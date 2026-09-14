@@ -6,7 +6,7 @@ import { redirect } from "next/navigation";
 import { requireAdmin } from "@/lib/auth";
 import { validateImageUpload } from "@/lib/image-upload";
 import { createClient } from "@/lib/supabase/server";
-import { slugify } from "@/lib/utils";
+import { normalizeSafeUrl, slugify } from "@/lib/utils";
 
 function normalize(value: FormDataEntryValue | null) {
   const text = typeof value === "string" ? value.trim() : "";
@@ -44,10 +44,12 @@ export async function createCategory(formData: FormData) {
   const slugInput = normalize(formData.get("slug"));
   const slug = slugInput ? slugify(slugInput) : name ? slugify(name) : null;
   const description = normalize(formData.get("description"));
-  const image_url = normalize(formData.get("image_url"));
+  const imageInput = normalize(formData.get("image_url"));
+  const image_url = normalizeSafeUrl(imageInput);
   const sort_order = Number(formData.get("sort_order") ?? 0);
 
   if (!name || !slug) throw new Error("Name and slug are required.");
+  if (imageInput && !image_url) throw new Error("Image URL must use HTTPS.");
 
   const supabase = createClient();
   const { error } = await supabase.from("categories").insert({
@@ -73,11 +75,13 @@ export async function updateCategory(formData: FormData) {
   const slugInput = normalize(formData.get("slug"));
   const slug = slugInput ? slugify(slugInput) : name ? slugify(name) : null;
   const description = normalize(formData.get("description"));
-  const image_url = normalize(formData.get("image_url"));
+  const imageInput = normalize(formData.get("image_url"));
+  const image_url = normalizeSafeUrl(imageInput);
   const sort_order = Number(formData.get("sort_order") ?? 0);
 
   if (!id || !name || !slug)
     throw new Error("Category ID, name and slug are required.");
+  if (imageInput && !image_url) throw new Error("Image URL must use HTTPS.");
 
   const supabase = createClient();
   const { error } = await supabase

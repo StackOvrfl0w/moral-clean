@@ -1,6 +1,7 @@
 "use client";
 
 import { useTransition } from "react";
+import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
@@ -23,6 +24,7 @@ export function ConfirmActionButton({
   values,
 }: ConfirmActionButtonProps) {
   const [pending, startTransition] = useTransition();
+  const router = useRouter();
 
   function handleClick() {
     if (!window.confirm(message)) return;
@@ -35,6 +37,7 @@ export function ConfirmActionButton({
     startTransition(async () => {
       try {
         await action(formData);
+        router.refresh();
       } catch (error) {
         toast.error(error instanceof Error ? error.message : "Action failed.");
       }

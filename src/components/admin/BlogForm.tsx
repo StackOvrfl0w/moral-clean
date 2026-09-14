@@ -11,7 +11,11 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { uploadBlogImage } from "@/lib/actions/admin/blog";
+import { getImageKitAuthParams } from "@/lib/actions/admin/imagekit-auth";
 import { slugify } from "@/lib/utils";
+
+const IMAGEKIT_UPLOAD_URL = "https://upload.imagekit.io/api/v1/files/upload";
+const MAX_IMAGEKIT_IMAGE_BYTES = 10 * 1024 * 1024;
 
 type BlogFormData = {
   id?: string;
@@ -82,6 +86,39 @@ export function BlogForm({ mode, initialData, submitAction }: BlogFormProps) {
     }
   }
 
+  async function handleImageKitUpload(fileList: FileList | null) {
+    const file = fileList?.[0];
+    if (!file) return;
+    if (!file.type.startsWith("image/") || file.size > MAX_IMAGEKIT_IMAGE_BYTES) {
+      toast.error("Choose an image up to 10 MB.");
+      return;
+    }
+
+    setUploading(true);
+    try {
+      const auth = await getImageKitAuthParams();
+      const uploadData = new FormData();
+      uploadData.append("file", file);
+      uploadData.append("fileName", file.name);
+      uploadData.append("useUniqueFileName", "true");
+      uploadData.append("folder", "/blog");
+      uploadData.append("token", auth.token);
+      uploadData.append("expire", String(auth.expire));
+      uploadData.append("signature", auth.signature);
+      uploadData.append("publicKey", auth.publicKey);
+
+      const response = await fetch(IMAGEKIT_UPLOAD_URL, { method: "POST", body: uploadData });
+      const result = (await response.json()) as { url?: string; message?: string };
+      if (!response.ok || !result.url) throw new Error(result.message || "ImageKit upload failed.");
+      setCoverImage(result.url);
+      toast.success("ImageKit cover image uploaded.");
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : "ImageKit upload failed.");
+    } finally {
+      setUploading(false);
+    }
+  }
+
   async function submit(formData: FormData) {
     startTransition(async () => {
       try {
@@ -147,6 +184,11 @@ export function BlogForm({ mode, initialData, submitAction }: BlogFormProps) {
           <Upload className="size-4" />
           {uploading ? "Uploading..." : "Upload image"}
           <input type="file" accept="image/*" className="hidden" onChange={(event) => void handleCoverUpload(event.target.files)} />
+        </label>
+        <label className="inline-flex h-9 cursor-pointer items-center gap-2 rounded-md border border-accent px-3 text-sm text-accent hover:bg-accent/10">
+          <Upload className="size-4" />
+          {uploading ? "Uploading..." : "Upload to ImageKit"}
+          <input type="file" accept="image/jpeg,image/png,image/webp,image/avif" className="hidden" onChange={(event) => void handleImageKitUpload(event.target.files)} />
         </label>
       </div>
 

@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { Droplets } from "lucide-react";
 
 import { AdminLoginForm } from "@/components/admin/AdminLoginForm";
@@ -19,10 +18,6 @@ export default function AdminLoginPage() {
         </CardHeader>
         <CardContent className="space-y-4">
           <AdminLoginForm />
-          {/* TODO: Wire forgot-password recovery flow when email templates are finalized. */}
-          <Link href="#" className="block text-center text-xs text-muted-foreground hover:text-primary">
-            Forgot password?
-          </Link>
         </CardContent>
       </Card>
     </div>
