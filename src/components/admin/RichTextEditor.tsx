@@ -48,7 +48,14 @@ export function RichTextEditor({ value, onChange }: RichTextEditorProps) {
 
   const editor = useEditor({
     immediatelyRender: false,
-    extensions: [StarterKit, Link.configure({ openOnClick: false }), Image],
+    extensions: [
+      StarterKit,
+      Link.configure({
+        openOnClick: false,
+        protocols: ["http", "https", "mailto"],
+      }),
+      Image,
+    ],
     content: value,
     onUpdate({ editor: currentEditor }) {
       onChange(currentEditor.getHTML());

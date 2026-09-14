@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 import { requireAdmin } from "@/lib/auth";
+import { validateImageUpload } from "@/lib/image-upload";
 import { createClient } from "@/lib/supabase/server";
 import { slugify } from "@/lib/utils";
 
@@ -19,13 +20,13 @@ export async function uploadCategoryImage(
   const file = formData.get("file");
   if (!(file instanceof File)) throw new Error("No file selected.");
 
-  const ext = file.name.split(".").pop() || "jpg";
-  const path = `categories/${Date.now()}-${crypto.randomUUID()}.${ext}`;
+  const image = await validateImageUpload(file);
+  const path = `categories/${Date.now()}-${crypto.randomUUID()}.${image.extension}`;
   const supabase = createClient();
   const { error } = await supabase.storage
     .from("product images")
-    .upload(path, file, {
-      contentType: file.type,
+    .upload(path, image.file, {
+      contentType: image.contentType,
       upsert: false,
     });
   if (error) throw new Error(error.message);

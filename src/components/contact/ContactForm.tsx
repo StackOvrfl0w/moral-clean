@@ -111,6 +111,14 @@ export function ContactForm({
     <div className="rounded-lg border border-border bg-white p-8 shadow-sm">
       <h2 className="text-2xl">Send Us a Message</h2>
       <form key={formKey} action={formAction} className="mt-6 space-y-5">
+        <input
+          name="website"
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+          aria-hidden="true"
+          className="absolute -left-[9999px] h-px w-px overflow-hidden"
+        />
         <div className="space-y-2">
           <Label htmlFor="name">Full Name</Label>
           <Input id="name" name="name" required />

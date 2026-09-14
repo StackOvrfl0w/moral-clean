@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import {
   DndContext,
   PointerSensor,
@@ -51,7 +52,14 @@ function SortableRow({
       </td>
       <td className="px-3 py-3">
         {category.image_url ? (
-          <img src={category.image_url} alt={category.name} className="size-12 rounded object-cover" />
+          <Image
+            src={category.image_url}
+            alt={category.name}
+            width={48}
+            height={48}
+            unoptimized
+            className="size-12 rounded object-cover"
+          />
         ) : (
           <div className="size-12 rounded bg-muted" />
         )}

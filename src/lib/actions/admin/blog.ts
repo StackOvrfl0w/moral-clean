@@ -4,7 +4,9 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 import { requireAdmin } from "@/lib/auth";
+import { validateImageUpload } from "@/lib/image-upload";
 import { createClient } from "@/lib/supabase/server";
+import { sanitizeRichText } from "@/lib/sanitize-html";
 import { slugify } from "@/lib/utils";
 
 function normalize(value: FormDataEntryValue | null) {
@@ -30,7 +32,7 @@ export async function createBlogPost(formData: FormData) {
     excerpt: normalize(formData.get("excerpt")),
     cover_image_url: normalize(formData.get("cover_image_url")),
     author_name: normalize(formData.get("author_name")) || "Moral Clean",
-    content: String(formData.get("content") ?? ""),
+    content: sanitizeRichText(String(formData.get("content") ?? "")),
     published,
     published_at: published ? publishedAt || new Date().toISOString() : null,
     meta_title: normalize(formData.get("meta_title")),
@@ -64,7 +66,7 @@ export async function updateBlogPost(formData: FormData) {
       excerpt: normalize(formData.get("excerpt")),
       cover_image_url: normalize(formData.get("cover_image_url")),
       author_name: normalize(formData.get("author_name")) || "Moral Clean",
-      content: String(formData.get("content") ?? ""),
+      content: sanitizeRichText(String(formData.get("content") ?? "")),
       published,
       published_at: published ? publishedAt || new Date().toISOString() : null,
       meta_title: normalize(formData.get("meta_title")),
@@ -99,11 +101,11 @@ export async function uploadBlogImage(formData: FormData) {
     throw new Error("No file selected.");
   }
 
-  const ext = file.name.split(".").pop() || "jpg";
-  const path = `blog/${Date.now()}-${crypto.randomUUID()}.${ext}`;
+  const image = await validateImageUpload(file);
+  const path = `blog/${Date.now()}-${crypto.randomUUID()}.${image.extension}`;
   const supabase = createClient();
-  const { error } = await supabase.storage.from("product images").upload(path, file, {
-    contentType: file.type,
+  const { error } = await supabase.storage.from("product images").upload(path, image.file, {
+    contentType: image.contentType,
     upsert: false,
   });
 

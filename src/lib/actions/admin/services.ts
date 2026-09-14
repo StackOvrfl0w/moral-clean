@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 import { requireAdmin } from "@/lib/auth";
+import { validateImageUpload } from "@/lib/image-upload";
 import { createClient } from "@/lib/supabase/server";
 import { slugify } from "@/lib/utils";
 
@@ -17,11 +18,11 @@ export async function uploadServiceImage(formData: FormData): Promise<{ url: str
   const file = formData.get("file");
   if (!(file instanceof File)) throw new Error("No file selected.");
 
-  const ext = file.name.split(".").pop() || "jpg";
-  const path = `services/${Date.now()}-${crypto.randomUUID()}.${ext}`;
+  const image = await validateImageUpload(file);
+  const path = `services/${Date.now()}-${crypto.randomUUID()}.${image.extension}`;
   const supabase = createClient();
-  const { error } = await supabase.storage.from("product images").upload(path, file, {
-    contentType: file.type,
+  const { error } = await supabase.storage.from("product images").upload(path, image.file, {
+    contentType: image.contentType,
     upsert: false,
   });
   if (error) throw new Error(error.message);

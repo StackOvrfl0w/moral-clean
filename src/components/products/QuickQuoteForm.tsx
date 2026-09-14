@@ -68,6 +68,14 @@ export function QuickQuoteForm({
       <form ref={formRef} action={formAction} className="mt-5 space-y-3">
         <input type="hidden" name="categorySlug" value={categorySlug} />
         <input type="hidden" name="categoryName" value={categoryName} />
+        <input
+          name="website"
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+          aria-hidden="true"
+          className="absolute -left-[9999px] h-px w-px overflow-hidden"
+        />
 
         <Input
           name="name"

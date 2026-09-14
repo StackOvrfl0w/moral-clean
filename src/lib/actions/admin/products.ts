@@ -6,6 +6,8 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 import { requireAdmin } from "@/lib/auth";
+import { validateImageUpload } from "@/lib/image-upload";
+import { sanitizeRichText } from "@/lib/sanitize-html";
 import { createClient } from "@/lib/supabase/server";
 import { slugify } from "@/lib/utils";
 
@@ -141,7 +143,9 @@ export async function createProduct(formData: FormData) {
       model_code: normalizeText(payload.model_code),
       category_id: normalizeText(payload.category_id),
       short_description: normalizeText(payload.short_description),
-      long_description: normalizeText(payload.long_description),
+      long_description: payload.long_description
+        ? sanitizeRichText(payload.long_description)
+        : null,
       specifications: payload.specifications ?? {},
       featured: Boolean(payload.featured),
       in_stock: payload.in_stock !== false,
@@ -183,7 +187,9 @@ export async function updateProduct(formData: FormData) {
       model_code: normalizeText(payload.model_code),
       category_id: normalizeText(payload.category_id),
       short_description: normalizeText(payload.short_description),
-      long_description: normalizeText(payload.long_description),
+      long_description: payload.long_description
+        ? sanitizeRichText(payload.long_description)
+        : null,
       specifications: payload.specifications ?? {},
       featured: Boolean(payload.featured),
       in_stock: payload.in_stock !== false,
@@ -369,14 +375,14 @@ export async function uploadProductImage(formData: FormData) {
     throw new Error("No file selected.");
   }
 
-  const ext = file.name.split(".").pop() || "jpg";
-  const path = `products/${Date.now()}-${crypto.randomUUID()}.${ext}`;
+  const image = await validateImageUpload(file);
+  const path = `products/${Date.now()}-${crypto.randomUUID()}.${image.extension}`;
 
   const supabase = createClient();
   const { error } = await supabase.storage
     .from("product images")
-    .upload(path, file, {
-      contentType: file.type,
+    .upload(path, image.file, {
+      contentType: image.contentType,
       upsert: false,
     });
 

@@ -16,6 +16,7 @@ import {
 
 import { env } from "@/config/env";
 import { blogFallbackImage } from "@/lib/fallback-images";
+import { sanitizeRichText } from "@/lib/sanitize-html";
 
 export const revalidate = 3600;
 const siteUrl = env.siteUrl;
@@ -199,7 +200,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         <article className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
           <div
             className="prose prose-lg prose-headings:font-display prose-a:text-accent prose-img:rounded-lg max-w-none"
-            dangerouslySetInnerHTML={{ __html: post.content }}
+            dangerouslySetInnerHTML={{ __html: sanitizeRichText(post.content) }}
           />
 
           <div className="mt-10 rounded-md border border-border bg-muted/40 p-4">
