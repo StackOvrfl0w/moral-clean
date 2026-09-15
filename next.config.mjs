@@ -29,7 +29,7 @@ const nextConfig = {
           {
             key: "Content-Security-Policy",
             value:
-              "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://va.vercel-scripts.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://sjlmjakninsenljyastk.supabase.co https://ik.imagekit.io; font-src 'self' data:; connect-src 'self' https://*.supabase.co https://va.vercel-scripts.com https://us.i.posthog.com https://*.posthog.com; frame-src 'self' https://www.google.com https://maps.google.com; frame-ancestors 'self'; object-src 'none'; base-uri 'self'; form-action 'self'",
+              "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://va.vercel-scripts.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://sjlmjakninsenljyastk.supabase.co https://ik.imagekit.io; font-src 'self' data:; connect-src 'self' https://*.supabase.co https://va.vercel-scripts.com https://us.i.posthog.com https://*.posthog.com; frame-src 'self' https://www.google.com https://maps.google.com https://us.posthog.com; frame-ancestors 'self'; object-src 'none'; base-uri 'self'; form-action 'self'",
           },
           { key: "X-Content-Type-Options", value: "nosniff" },
           { key: "X-Frame-Options", value: "SAMEORIGIN" },
