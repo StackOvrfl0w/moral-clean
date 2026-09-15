@@ -11,6 +11,7 @@ import {
   Settings,
   Wrench,
   Mailbox,
+  ChartNoAxesCombined,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -22,6 +23,7 @@ export const adminNavItems = [
   { label: "Services", href: "/admin/services", icon: Wrench },
   { label: "Blog Posts", href: "/admin/blog", icon: FileText },
   { label: "Submissions", href: "/admin/submissions", icon: Mailbox },
+  { label: "Analytics", href: "/admin/analytics", icon: ChartNoAxesCombined },
   { label: "Settings", href: "/admin/settings", icon: Settings },
 ];
 
