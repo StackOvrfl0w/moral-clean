@@ -6,8 +6,10 @@ import "server-only";
 
 import { createHmac, randomUUID } from "node:crypto";
 
+import { env } from "@/config/env";
+
 function getPrivateKey() {
-  const key = process.env.IMAGEKIT_PRIVATE_KEY;
+  const key = env.imagekitPrivateKey;
   if (!key) {
     throw new Error("IMAGEKIT_PRIVATE_KEY is not configured on the server.");
   }
@@ -30,7 +32,7 @@ export type ImageKitAuthParams = {
  */
 export function generateImageKitAuthParams(): ImageKitAuthParams {
   const privateKey = getPrivateKey();
-  const publicKey = process.env.IMAGEKIT_PUBLIC_KEY;
+  const publicKey = env.imagekitPublicKey;
   if (!publicKey) {
     throw new Error("IMAGEKIT_PUBLIC_KEY is not configured on the server.");
   }
