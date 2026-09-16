@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState, useTransition } from "react";
+import Image from "next/image";
 import { toast } from "sonner";
 import {
   DndContext,
@@ -92,7 +93,14 @@ function SortableImage({
         >
           <GripVertical className="size-4" />
         </button>
-        <img src={item.url} alt={item.alt_text || "Product image"} className="size-16 rounded-md object-cover" />
+        <Image
+          src={item.url}
+          alt={item.alt_text || "Product image"}
+          width={64}
+          height={64}
+          unoptimized
+          className="size-16 rounded-md object-cover"
+        />
         <div className="min-w-0 flex-1 space-y-2">
           <Input
             value={item.alt_text}

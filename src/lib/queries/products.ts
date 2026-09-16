@@ -2,11 +2,7 @@ import { createClient as createSupabaseClient } from "@supabase/supabase-js";
 
 import { env } from "@/config/env";
 import { createClient as createServerSupabaseClient } from "@/lib/supabase/server";
-import {
-  mockCategories,
-  mockProducts,
-  mockTags,
-} from "@/lib/seed-data";
+import { mockCategories, mockProducts, mockTags } from "@/lib/seed-data";
 import type {
   Category,
   Database,
@@ -42,7 +38,10 @@ export type ProductQueryResult = {
   usingSeedData: boolean;
 };
 
-type RawSupabaseProduct = Omit<ProductWithRelations, "category" | "images" | "tags"> & {
+type RawSupabaseProduct = Omit<
+  ProductWithRelations,
+  "category" | "images" | "tags"
+> & {
   category: Category | null;
   images: ProductImage[] | null;
   product_tags:
@@ -61,16 +60,12 @@ function createPublicCatalogClient() {
     return null;
   }
 
-  return createSupabaseClient<Database>(
-    env.supabaseUrl,
-    env.supabaseAnonKey,
-    {
-      auth: {
-        autoRefreshToken: false,
-        persistSession: false,
-      },
+  return createSupabaseClient<Database>(env.supabaseUrl, env.supabaseAnonKey, {
+    auth: {
+      autoRefreshToken: false,
+      persistSession: false,
     },
-  );
+  });
 }
 
 function normalizeSort(sort?: string): ProductSort {
@@ -92,8 +87,9 @@ function normalizePage(page?: string | number) {
 }
 
 function uniqueSorted(values: Array<string | null>) {
-  return Array.from(new Set(values.filter((value): value is string => Boolean(value))))
-    .sort((a, b) => a.localeCompare(b));
+  return Array.from(
+    new Set(values.filter((value): value is string => Boolean(value))),
+  ).sort((a, b) => a.localeCompare(b));
 }
 
 function productMatchesSearch(product: ProductWithRelations, query: string) {
@@ -156,7 +152,9 @@ function sortProducts(products: ProductWithRelations[], sort: ProductSort) {
       return featuredDelta;
     }
 
-    return (a.sort_order ?? 0) - (b.sort_order ?? 0) || a.name.localeCompare(b.name);
+    return (
+      (a.sort_order ?? 0) - (b.sort_order ?? 0) || a.name.localeCompare(b.name)
+    );
   });
 }
 
@@ -173,7 +171,9 @@ function buildCategoryCounts(products: ProductWithRelations[]) {
   }, {});
 }
 
-function normalizeProducts(products: RawSupabaseProduct[]): ProductWithRelations[] {
+function normalizeProducts(
+  products: RawSupabaseProduct[],
+): ProductWithRelations[] {
   return products.map((product) => {
     const { product_tags, images, ...rest } = product;
 
@@ -220,49 +220,55 @@ function getSeedRelatedProducts(
 
 async function getSupabaseCatalog() {
   if (!hasSupabaseConfig()) {
-    console.warn("Supabase env vars are missing; using seeded fallback product data.");
+    console.warn(
+      "Supabase env vars are missing; using seeded fallback product data.",
+    );
     return null;
   }
 
   const supabase = createServerSupabaseClient();
 
-  const [categoriesResponse, tagsResponse, productsResponse] = await Promise.all([
-    supabase
-      .from("categories")
-      .select("*")
-      .order("sort_order", { ascending: true })
-      .order("name", { ascending: true }),
-    supabase
-      .from("tags")
-      .select("*")
-      .order("name", { ascending: true }),
-    supabase
-      .from("products")
-      .select(
-        `
-          *,
-          category:categories(*),
-          images:product_images(*),
-          product_tags(tags(*))
-        `,
-      )
-      .order("sort_order", { ascending: true })
-      .order("name", { ascending: true }),
-  ]);
+  const [categoriesResponse, tagsResponse, productsResponse] =
+    await Promise.all([
+      supabase
+        .from("categories")
+        .select("*")
+        .order("sort_order", { ascending: true })
+        .order("name", { ascending: true }),
+      supabase.from("tags").select("*").order("name", { ascending: true }),
+      supabase
+        .from("products")
+        .select(
+          `*, category:categories(*), images:product_images(*), product_tags(tags(*))`,
+        )
+        .order("sort_order", { ascending: true })
+        .order("name", { ascending: true }),
+    ]);
 
-  if (categoriesResponse.error || tagsResponse.error || productsResponse.error) {
-    console.warn("Supabase product query failed; using seeded fallback product data.");
+  // Log the ACTUAL error instead of swallowing it and silently
+  // falling back to seed data. This is why CSV rows "disappear" —
+  // the page was rendering mockProducts, not your DB.
+  if (categoriesResponse.error) {
+    console.error("categories query failed:", categoriesResponse.error);
+  }
+  if (tagsResponse.error) {
+    console.error("tags query failed:", tagsResponse.error);
+  }
+  if (productsResponse.error) {
+    console.error("products query failed:", productsResponse.error);
+  }
+
+  if (
+    categoriesResponse.error ||
+    tagsResponse.error ||
+    productsResponse.error
+  ) {
     return null;
   }
 
   const products = normalizeProducts(
     (productsResponse.data ?? []) as unknown as RawSupabaseProduct[],
   );
-
-  if (products.length === 0) {
-    console.warn("Supabase product catalog is empty; using seeded fallback product data.");
-    return null;
-  }
 
   return {
     categories: categoriesResponse.data ?? [],
@@ -282,7 +288,10 @@ export async function getProducts(
   const sort = normalizeSort(params.sort);
   const page = normalizePage(params.page);
 
-  const filteredProducts = sortProducts(filterProducts(productsSource, params), sort);
+  const filteredProducts = sortProducts(
+    filterProducts(productsSource, params),
+    sort,
+  );
   const totalCount = filteredProducts.length;
   const pageCount = Math.max(1, Math.ceil(totalCount / PRODUCTS_PER_PAGE));
   const safePage = Math.min(page, pageCount);
@@ -306,14 +315,18 @@ export async function getProducts(
 
 export async function getProductBySlug(slug: string) {
   if (!hasSupabaseConfig()) {
-    console.warn("Supabase env vars are missing; using seeded fallback product data.");
+    console.warn(
+      "Supabase env vars are missing; using seeded fallback product data.",
+    );
     return findSeedProductBySlug(slug);
   }
 
   const supabase = createPublicCatalogClient();
 
   if (!supabase) {
-    console.warn("Supabase env vars are missing; using seeded fallback product data.");
+    console.warn(
+      "Supabase env vars are missing; using seeded fallback product data.",
+    );
     return findSeedProductBySlug(slug);
   }
   const { data, error } = await supabase
@@ -329,12 +342,14 @@ export async function getProductBySlug(slug: string) {
     .eq("slug", slug)
     .maybeSingle();
 
-  if (error || !data) {
+  if (error) {
     console.warn(
-      `Supabase product "${slug}" was not found; checking seeded fallback data.`,
+      `Supabase product query failed for "${slug}"; checking seeded fallback data.`,
     );
     return findSeedProductBySlug(slug);
   }
+
+  if (!data) return null;
 
   return normalizeProducts([data as unknown as RawSupabaseProduct])[0] ?? null;
 }
@@ -370,9 +385,8 @@ export async function getRelatedProducts(
     .order("sort_order", { ascending: true })
     .limit(limit);
 
-  if (error || !data || data.length === 0) {
-    return getSeedRelatedProducts(productId, categoryId, limit);
-  }
+  if (error) return getSeedRelatedProducts(productId, categoryId, limit);
+  if (!data || data.length === 0) return [];
 
   return normalizeProducts(data as unknown as RawSupabaseProduct[]).slice(
     0,
@@ -397,5 +411,5 @@ export async function getProductSlugs() {
     return mockProducts.map((product) => product.slug);
   }
 
-  return data.map((product) => product.slug);
+  return (data ?? []).map((product) => product.slug);
 }

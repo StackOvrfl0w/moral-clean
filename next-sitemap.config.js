@@ -1,6 +1,10 @@
 const { createClient } = require("@supabase/supabase-js");
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://moralclean.com";
+const configuredSiteUrl = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+const siteUrl =
+  configuredSiteUrl && !/localhost|127\.0\.0\.1/i.test(configuredSiteUrl)
+    ? configuredSiteUrl.replace(/\/$/, "")
+    : "https://moralclean.com";
 
 function createSupabase() {
   if (

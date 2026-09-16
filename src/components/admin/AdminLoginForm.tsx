@@ -10,6 +10,14 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { createClient } from "@/lib/supabase/client";
 
+function getSafeAdminPath(value: string | null) {
+  if (!value || !/^\/admin(?:\/|$)/.test(value) || value.startsWith("//") || value.includes("\\")) {
+    return "/admin";
+  }
+
+  return value;
+}
+
 export function AdminLoginForm() {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
@@ -34,7 +42,7 @@ export function AdminLoginForm() {
       return;
     }
 
-    const next = searchParams.get("next") || "/admin";
+    const next = getSafeAdminPath(searchParams.get("next"));
     router.push(next);
     router.refresh();
   }

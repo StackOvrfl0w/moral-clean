@@ -27,6 +27,7 @@ import {
 } from "@/lib/queries/products";
 import type { Json, ProductWithRelations } from "@/lib/types";
 import { cn } from "@/lib/utils";
+import { sanitizeRichText } from "@/lib/sanitize-html";
 
 import { env } from "@/config/env";
 
@@ -132,7 +133,7 @@ function renderDescription(product: ProductWithRelations) {
     return (
       <div
         className="prose prose-sm max-w-none text-muted-foreground"
-        dangerouslySetInnerHTML={{ __html: content }}
+        dangerouslySetInnerHTML={{ __html: sanitizeRichText(content) }}
       />
     );
   }

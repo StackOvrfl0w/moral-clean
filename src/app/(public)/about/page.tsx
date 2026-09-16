@@ -150,7 +150,7 @@ export default function AboutPage() {
             </article>
 
             {/* Musharraf Khan */}
-            <article className="rounded-lg border border-border bg-white p-6 shadow-sm lg:p-8">
+            {/* <article className="rounded-lg border border-border bg-white p-6 shadow-sm lg:p-8">
               <div className="grid gap-6 lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-8">
                 <div className="overflow-hidden rounded-md border border-border bg-[linear-gradient(135deg,#f8fafc_0%,#e8f4ff_100%)]">
                   <div className="aspect-square bg-[radial-gradient(circle_at_35%_30%,rgba(14,165,233,0.2),transparent_36%),radial-gradient(circle_at_70%_75%,rgba(10,37,64,0.1),transparent_42%)]" />
@@ -180,7 +180,7 @@ export default function AboutPage() {
                   </p>
                 </div>
               </div>
-            </article>
+            </article> */}
           </div>
         </div>
       </section>

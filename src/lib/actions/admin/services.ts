@@ -4,8 +4,9 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 import { requireAdmin } from "@/lib/auth";
+import { validateImageUpload } from "@/lib/image-upload";
 import { createClient } from "@/lib/supabase/server";
-import { slugify } from "@/lib/utils";
+import { normalizeSafeUrl, slugify } from "@/lib/utils";
 
 function normalize(value: FormDataEntryValue | null) {
   const text = typeof value === "string" ? value.trim() : "";
@@ -17,11 +18,11 @@ export async function uploadServiceImage(formData: FormData): Promise<{ url: str
   const file = formData.get("file");
   if (!(file instanceof File)) throw new Error("No file selected.");
 
-  const ext = file.name.split(".").pop() || "jpg";
-  const path = `services/${Date.now()}-${crypto.randomUUID()}.${ext}`;
+  const image = await validateImageUpload(file);
+  const path = `services/${Date.now()}-${crypto.randomUUID()}.${image.extension}`;
   const supabase = createClient();
-  const { error } = await supabase.storage.from("product images").upload(path, file, {
-    contentType: file.type,
+  const { error } = await supabase.storage.from("product images").upload(path, image.file, {
+    contentType: image.contentType,
     upsert: false,
   });
   if (error) throw new Error(error.message);
@@ -39,7 +40,10 @@ export async function createService(formData: FormData) {
   const slugInput = normalize(formData.get("slug"));
   const slug = slugInput ? slugify(slugInput) : name ? slugify(name) : null;
 
+  const imageInput = normalize(formData.get("image_url"));
+  const image_url = normalizeSafeUrl(imageInput);
   if (!name || !slug) throw new Error("Name and slug are required.");
+  if (imageInput && !image_url) throw new Error("Image URL must use HTTPS.");
 
   const supabase = createClient();
   const { error } = await supabase.from("services").insert({
@@ -48,7 +52,7 @@ export async function createService(formData: FormData) {
     short_description: normalize(formData.get("short_description")),
     long_description: normalize(formData.get("long_description")),
     icon_name: normalize(formData.get("icon_name")),
-    image_url: normalize(formData.get("image_url")),
+    image_url,
     sort_order: Number(formData.get("sort_order") ?? 0),
   });
   if (error) throw new Error(error.message);
@@ -65,7 +69,10 @@ export async function updateService(formData: FormData) {
   const slugInput = normalize(formData.get("slug"));
   const slug = slugInput ? slugify(slugInput) : name ? slugify(name) : null;
 
+  const imageInput = normalize(formData.get("image_url"));
+  const image_url = normalizeSafeUrl(imageInput);
   if (!id || !name || !slug) throw new Error("ID, name and slug are required.");
+  if (imageInput && !image_url) throw new Error("Image URL must use HTTPS.");
 
   const supabase = createClient();
   const { error } = await supabase
@@ -76,7 +83,7 @@ export async function updateService(formData: FormData) {
       short_description: normalize(formData.get("short_description")),
       long_description: normalize(formData.get("long_description")),
       icon_name: normalize(formData.get("icon_name")),
-      image_url: normalize(formData.get("image_url")),
+      image_url,
       sort_order: Number(formData.get("sort_order") ?? 0),
     })
     .eq("id", id);
@@ -93,8 +100,39 @@ export async function deleteService(formData: FormData) {
   if (!id) throw new Error("ID required.");
 
   const supabase = createClient();
-  const { error } = await supabase.from("services").delete().eq("id", id);
+  const { error, count } = await supabase
+    .from("services")
+    .delete({ count: "exact" })
+    .eq("id", id);
   if (error) throw new Error(error.message);
+  if (count !== 1) throw new Error("Service was not found or was not deleted.");
   revalidatePath("/admin/services");
   revalidatePath("/services");
+}
+
+export async function bulkDeleteServices(formData: FormData) {
+  await requireAdmin();
+  let ids: string[];
+  try {
+    ids = JSON.parse(String(formData.get("ids") ?? "[]")) as string[];
+  } catch {
+    throw new Error("Invalid service selection.");
+  }
+
+  ids = Array.from(new Set(ids.filter((id) => /^[0-9a-f-]{36}$/i.test(id))));
+  if (ids.length === 0) throw new Error("No services selected.");
+
+  const supabase = createClient();
+  const { error, count } = await supabase
+    .from("services")
+    .delete({ count: "exact" })
+    .in("id", ids);
+  if (error) throw new Error(error.message);
+  if ((count ?? 0) !== ids.length) {
+    throw new Error(`Only ${count ?? 0} of ${ids.length} services were deleted.`);
+  }
+
+  revalidatePath("/admin/services");
+  revalidatePath("/services");
+  return { deletedCount: count ?? 0 };
 }

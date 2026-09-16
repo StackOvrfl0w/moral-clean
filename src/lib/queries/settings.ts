@@ -3,12 +3,13 @@ import "server-only";
 import { unstable_cache } from "next/cache";
 import { createClient as createSupabaseClient } from "@supabase/supabase-js";
 
+import { env } from "@/config/env";
 import type { Database } from "@/lib/types";
 
 const fetchAllSettings = unstable_cache(
   async (): Promise<Record<string, string>> => {
-    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-    const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+    const supabaseUrl = env.supabaseUrl;
+    const supabaseAnonKey = env.supabaseAnonKey;
 
     if (!supabaseUrl || !supabaseAnonKey) {
       return {};

@@ -16,6 +16,7 @@ import {
 
 import { env } from "@/config/env";
 import { blogFallbackImage } from "@/lib/fallback-images";
+import { sanitizeRichText } from "@/lib/sanitize-html";
 
 export const revalidate = 3600;
 const siteUrl = env.siteUrl;
@@ -93,6 +94,24 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const authorName = post.author_name || "The Moral Clean Team";
   const minutes = readingTime(post.content);
   const imageUrl = post.cover_image_url || blogFallbackImage;
+  const articleUrl = `${siteUrl}/blog/${post.slug}`;
+  const shareLinks = [
+    {
+      label: "LinkedIn",
+      href: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(articleUrl)}`,
+      Icon: Link2,
+    },
+    {
+      label: "Twitter",
+      href: `https://twitter.com/intent/tweet?url=${encodeURIComponent(articleUrl)}&text=${encodeURIComponent(post.title)}`,
+      Icon: MessageCircle,
+    },
+    {
+      label: "WhatsApp",
+      href: `https://wa.me/?text=${encodeURIComponent(`${post.title} ${articleUrl}`)}`,
+      Icon: MessageCircle,
+    },
+  ];
   const articleJsonLd = {
     "@context": "https://schema.org",
     "@type": "Article",
@@ -199,27 +218,24 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         <article className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
           <div
             className="prose prose-lg prose-headings:font-display prose-a:text-accent prose-img:rounded-lg max-w-none"
-            dangerouslySetInnerHTML={{ __html: post.content }}
+            dangerouslySetInnerHTML={{ __html: sanitizeRichText(post.content) }}
           />
 
           <div className="mt-10 rounded-md border border-border bg-muted/40 p-4">
             <p className="text-sm font-semibold text-primary">Share this article</p>
-            {/* TODO: Replace placeholder share links with generated share URLs. */}
             <div className="mt-3 flex items-center gap-2">
-              {[
-                { label: "LinkedIn", href: "#", Icon: Link2 },
-                { label: "Twitter", href: "#", Icon: MessageCircle },
-                { label: "WhatsApp", href: "#", Icon: MessageCircle },
-              ].map(({ label, href, Icon }) => (
-                <Link
+              {shareLinks.map(({ label, href, Icon }) => (
+                <a
                   key={label}
                   href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   aria-label={label}
                   className="inline-flex items-center gap-2 rounded-md border border-border bg-white px-3 py-2 text-xs font-semibold text-primary hover:border-accent hover:text-accent"
                 >
                   <Icon className="size-4" aria-hidden="true" />
                   {label}
-                </Link>
+                </a>
               ))}
             </div>
           </div>
