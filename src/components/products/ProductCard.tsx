@@ -2,13 +2,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, PackageCheck } from "lucide-react";
 
-import type { ProductWithRelations } from "@/lib/types";
+import type { ProductCardData } from "@/lib/types";
 import { productCardFallbackImage } from "@/lib/fallback-images";
 
 const blurDataUrl =
   "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";
 
-export function ProductCard({ product }: { product: ProductWithRelations }) {
+export function ProductCard({ product }: { product: ProductCardData }) {
   const image = product.images[0];
   const imageUrl = image?.url || productCardFallbackImage;
 

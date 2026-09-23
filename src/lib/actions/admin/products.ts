@@ -2,7 +2,7 @@
 
 "use server";
 
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { redirect } from "next/navigation";
 
 import { requireAdmin } from "@/lib/auth";
@@ -10,6 +10,10 @@ import { validateImageUpload } from "@/lib/image-upload";
 import { sanitizeRichText } from "@/lib/sanitize-html";
 import { createClient } from "@/lib/supabase/server";
 import { normalizeSafeUrl, slugify } from "@/lib/utils";
+
+function invalidateCatalog() {
+  revalidateTag("catalog");
+}
 
 type ProductImagePayload = {
   id?: string;
@@ -57,34 +61,35 @@ async function upsertProductTags(productId: string, tags: string[]) {
   const supabase = createClient();
   await supabase.from("product_tags").delete().eq("product_id", productId);
 
-  const cleaned = Array.from(
-    new Set(tags.map((tag) => tag.trim()).filter(Boolean)),
-  );
-  if (cleaned.length === 0) return;
-
-  const tagIds: string[] = [];
-  for (const tagName of cleaned) {
-    const slug = slugify(tagName);
-    const { data: existing } = await supabase
-      .from("tags")
-      .select("id")
-      .eq("slug", slug)
-      .maybeSingle();
-
-    if (existing?.id) {
-      tagIds.push(existing.id);
-      continue;
+  const tagsBySlug = new Map<string, { name: string; slug: string }>();
+  for (const value of tags) {
+    const name = value.trim();
+    const slug = slugify(name);
+    if (name && slug && !tagsBySlug.has(slug)) {
+      tagsBySlug.set(slug, { name, slug });
     }
+  }
+  const tagRows = Array.from(tagsBySlug.values());
+  if (tagRows.length === 0) return;
 
-    const { data: created, error } = await supabase
-      .from("tags")
-      .insert({ name: tagName, slug })
-      .select("id")
-      .single();
+  const { error: upsertError } = await supabase.from("tags").upsert(tagRows, {
+    onConflict: "slug",
+    ignoreDuplicates: true,
+  });
+  if (upsertError) throw new Error(upsertError.message);
 
-    if (!error && created?.id) {
-      tagIds.push(created.id);
-    }
+  const { data: resolvedTags, error: resolveError } = await supabase
+    .from("tags")
+    .select("id,slug")
+    .in(
+      "slug",
+      tagRows.map((tag) => tag.slug),
+    );
+  if (resolveError) throw new Error(resolveError.message);
+
+  const tagIds = (resolvedTags ?? []).map((tag) => tag.id);
+  if (tagIds.length !== tagRows.length) {
+    throw new Error("Unable to resolve all product tags.");
   }
 
   if (tagIds.length > 0) {
@@ -168,6 +173,7 @@ export async function createProduct(formData: FormData) {
   await upsertProductTags(data.id, payload.tags ?? []);
   await persistProductImages(data.id, payload.images);
 
+  invalidateCatalog();
   revalidatePath("/admin/products");
   revalidatePath("/");
   revalidatePath("/catalog-sitemap.xml");
@@ -217,6 +223,7 @@ export async function updateProduct(formData: FormData) {
   await upsertProductTags(data.id, payload.tags ?? []);
   await persistProductImages(data.id, payload.images);
 
+  invalidateCatalog();
   revalidatePath("/admin/products");
   revalidatePath("/");
   revalidatePath("/catalog-sitemap.xml");
@@ -271,6 +278,7 @@ export async function deleteProduct(formData: FormData) {
     if (storageError) throw new Error(storageError.message);
   }
 
+  invalidateCatalog();
   revalidatePath("/admin/products");
   revalidatePath("/");
   revalidatePath("/catalog-sitemap.xml");
@@ -345,6 +353,7 @@ export async function bulkDeleteProducts(formData: FormData) {
     }
   }
 
+  invalidateCatalog();
   revalidatePath("/admin/products");
   revalidatePath("/");
   revalidatePath("/catalog-sitemap.xml");
@@ -365,6 +374,7 @@ export async function toggleFeatured(formData: FormData) {
 
   const supabase = createClient();
   await supabase.from("products").update({ featured }).eq("id", productId);
+  invalidateCatalog();
   revalidatePath("/admin/products");
   revalidatePath("/");
   revalidatePath("/catalog-sitemap.xml");
@@ -381,6 +391,7 @@ export async function toggleInStock(formData: FormData) {
     .from("products")
     .update({ in_stock: inStock })
     .eq("id", productId);
+  invalidateCatalog();
   revalidatePath("/admin/products");
   revalidatePath("/");
   revalidatePath("/catalog-sitemap.xml");
@@ -422,6 +433,7 @@ export async function deleteProductImage(formData: FormData) {
 
   const supabase = createClient();
   await supabase.from("product_images").delete().eq("id", imageId);
+  invalidateCatalog();
   revalidatePath("/admin/products");
   revalidatePath("/");
   revalidatePath("/catalog-sitemap.xml");
@@ -446,6 +458,7 @@ export async function reorderProductImages(formData: FormData) {
       })
       .eq("id", item.id);
   }
+  invalidateCatalog();
   revalidatePath("/admin/products");
   revalidatePath("/");
   revalidatePath("/catalog-sitemap.xml");

@@ -144,7 +144,7 @@ export default function RootLayout({
         <WebsiteSchema />
         {children}
         <Toaster />
-        <SpeedInsights />
+        {process.env.VERCEL ? <SpeedInsights /> : null}
       </body>
     </html>
   );

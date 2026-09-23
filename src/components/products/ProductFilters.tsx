@@ -1,7 +1,4 @@
-"use client";
-
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { Check, X } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -53,19 +50,16 @@ function CheckboxFilter({
   href,
   checked,
   children,
-  onClick,
 }: {
   href: string;
   checked: boolean;
   children: React.ReactNode;
-  onClick: (href: string) => void;
 }) {
   return (
-    <button
-      type="button"
-      role="checkbox"
-      aria-checked={checked}
-      onClick={() => onClick(href)}
+    <Link
+      href={href}
+      aria-current={checked ? "page" : undefined}
+      scroll={false}
       className={cn(
         "flex w-full items-center gap-3 rounded-md px-2 py-2 text-sm transition-colors hover:bg-muted",
         checked && "bg-accent/10 text-primary",
@@ -81,7 +75,7 @@ function CheckboxFilter({
         {checked ? <Check className="size-3" /> : null}
       </span>
       {children}
-    </button>
+    </Link>
   );
 }
 
@@ -93,8 +87,6 @@ export function ProductFilters({
   activeFilters,
   className,
 }: ProductFiltersProps) {
-  const router = useRouter();
-
   const hasFilters = Boolean(
     activeFilters.category ||
     activeFilters.brand ||
@@ -103,23 +95,16 @@ export function ProductFilters({
     activeFilters.sort,
   );
 
-  function navigate(href: string) {
-    router.push(href, { scroll: false });
-  }
-
   return (
     <aside className={cn("space-y-8", className)}>
       <div className="flex items-center justify-between gap-4">
         <h2 className="text-base">Categories</h2>
         {hasFilters ? (
-          <Button
-            variant="ghost"
-            size="sm"
-            className="h-8 px-2"
-            onClick={() => navigate("/products")}
-          >
-            <X className="size-4" aria-hidden="true" />
-            Clear
+          <Button asChild variant="ghost" size="sm" className="h-8 px-2">
+            <Link href="/products">
+              <X className="size-4" aria-hidden="true" />
+              Clear
+            </Link>
           </Button>
         ) : null}
       </div>
@@ -154,7 +139,6 @@ export function ProductFilters({
               key={brand}
               href={createFilterHref(activeFilters, "brand", brand)}
               checked={activeFilters.brand === brand}
-              onClick={navigate}
             >
               <span>{brand}</span>
             </CheckboxFilter>
@@ -170,7 +154,6 @@ export function ProductFilters({
               key={tag.id}
               href={createFilterHref(activeFilters, "tag", tag.slug)}
               checked={activeFilters.tag === tag.slug}
-              onClick={navigate}
             >
               <span>{tag.name}</span>
             </CheckboxFilter>
@@ -178,12 +161,8 @@ export function ProductFilters({
         </div>
       </div>
 
-      <Button
-        variant="outline"
-        className="w-full"
-        onClick={() => navigate("/products")}
-      >
-        Clear Filters
+      <Button asChild variant="outline" className="w-full">
+        <Link href="/products">Clear Filters</Link>
       </Button>
     </aside>
   );

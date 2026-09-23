@@ -1,4 +1,5 @@
 create extension if not exists pgcrypto;
+create extension if not exists pg_trgm with schema extensions;
 
 create table if not exists public.categories (
   id uuid primary key default gen_random_uuid(),
@@ -87,14 +88,36 @@ create table if not exists public.contact_submissions (
   created_at timestamptz default now()
 );
 
-create index if not exists categories_slug_idx on public.categories(slug);
 create index if not exists categories_parent_id_idx on public.categories(parent_id);
-create index if not exists products_category_id_idx on public.products(category_id);
-create index if not exists products_slug_idx on public.products(slug);
-create index if not exists products_featured_idx on public.products(featured);
-create index if not exists blog_posts_slug_idx on public.blog_posts(slug);
+create index if not exists categories_sort_name_idx
+  on public.categories(sort_order asc, name asc);
+create index if not exists products_featured_sort_name_idx
+  on public.products(featured desc, sort_order asc, name asc);
+create index if not exists products_category_featured_sort_name_idx
+  on public.products(category_id, featured desc, sort_order asc, name asc);
+create index if not exists products_brand_featured_sort_name_idx
+  on public.products(brand, featured desc, sort_order asc, name asc)
+  where brand is not null;
+create index if not exists products_created_at_idx
+  on public.products(created_at desc);
+create index if not exists products_name_trgm_idx
+  on public.products using gin (name extensions.gin_trgm_ops);
+create index if not exists products_short_description_trgm_idx
+  on public.products using gin (short_description extensions.gin_trgm_ops);
+create index if not exists products_brand_trgm_idx
+  on public.products using gin (brand extensions.gin_trgm_ops);
+create index if not exists products_model_code_trgm_idx
+  on public.products using gin (model_code extensions.gin_trgm_ops);
+create index if not exists product_images_product_sort_idx
+  on public.product_images(product_id, is_primary desc, sort_order asc);
+create index if not exists product_tags_tag_product_idx
+  on public.product_tags(tag_id, product_id);
+create index if not exists services_sort_name_idx
+  on public.services(sort_order asc, name asc);
 create index if not exists blog_posts_published_published_at_idx
   on public.blog_posts(published, published_at desc);
+create index if not exists contact_submissions_created_at_idx
+  on public.contact_submissions(created_at desc);
 
 alter table public.categories enable row level security;
 alter table public.products enable row level security;

@@ -1,9 +1,16 @@
+import "server-only";
+
+import { unstable_cache } from "next/cache";
 import { cache } from "react";
 import { createClient as createSupabaseClient } from "@supabase/supabase-js";
 
 import { env } from "@/config/env";
 import { mockBlogPosts } from "@/lib/seed-data";
-import type { BlogPost, Database } from "@/lib/types";
+import type { BlogCardData, BlogPost, Database } from "@/lib/types";
+
+const PUBLIC_CACHE_SECONDS = 900;
+const BLOG_CARD_COLUMNS =
+  "id,slug,title,excerpt,cover_image_url,published_at";
 
 type GetAllPostsOptions = {
   page?: string | number;
@@ -11,42 +18,36 @@ type GetAllPostsOptions = {
 };
 
 type GetAllPostsResult = {
-  posts: BlogPost[];
+  posts: BlogCardData[];
   totalCount: number;
   page: number;
   pageCount: number;
   limit: number;
 };
 
-function hasSupabaseConfig() {
-  return Boolean(env.supabaseUrl?.trim() && env.supabaseAnonKey?.trim());
-}
-
 function createPublicClient() {
-  if (!hasSupabaseConfig()) {
+  if (!env.supabaseUrl?.trim() || !env.supabaseAnonKey?.trim()) {
     return null;
   }
 
-  return createSupabaseClient<Database>(
-    env.supabaseUrl,
-    env.supabaseAnonKey,
-    {
-      auth: {
-        autoRefreshToken: false,
-        persistSession: false,
-      },
+  return createSupabaseClient<Database>(env.supabaseUrl, env.supabaseAnonKey, {
+    auth: {
+      autoRefreshToken: false,
+      persistSession: false,
     },
-  );
+  });
 }
 
 function normalizePage(page?: string | number) {
   const value = Number(page ?? 1);
+  return Number.isFinite(value) && value >= 1 ? Math.floor(value) : 1;
+}
 
-  if (!Number.isFinite(value) || value < 1) {
-    return 1;
-  }
-
-  return Math.floor(value);
+function normalizeLimit(limit?: number) {
+  const value = Number(limit ?? 9);
+  return Number.isFinite(value)
+    ? Math.max(1, Math.min(24, Math.floor(value)))
+    : 9;
 }
 
 function getSeedPublishedPosts() {
@@ -55,11 +56,10 @@ function getSeedPublishedPosts() {
     .sort((a, b) => (b.published_at ?? "").localeCompare(a.published_at ?? ""));
 }
 
-export async function getAllPosts(
-  options: GetAllPostsOptions = {},
+async function queryAllPosts(
+  page: number,
+  limit: number,
 ): Promise<GetAllPostsResult> {
-  const limit = options.limit ?? 9;
-  const page = normalizePage(options.page);
   const supabase = createPublicClient();
 
   if (!supabase) {
@@ -79,24 +79,23 @@ export async function getAllPosts(
   }
 
   const from = (page - 1) * limit;
-  const to = from + limit - 1;
   const { data, error, count } = await supabase
     .from("blog_posts")
-    .select("*", { count: "exact" })
+    .select(BLOG_CARD_COLUMNS, { count: "exact" })
     .eq("published", true)
     .order("published_at", { ascending: false })
-    .range(from, to);
+    .range(from, from + limit - 1);
 
   if (error) {
     console.error("Unable to load published articles:", error.message);
-    return { posts: [], totalCount: 0, page: 1, pageCount: 1, limit };
+    throw new Error("Unable to load published articles");
   }
 
-  const totalCount = count ?? data.length;
+  const totalCount = count ?? 0;
   const pageCount = Math.max(1, Math.ceil(totalCount / limit));
 
   return {
-    posts: data ?? [],
+    posts: (data ?? []) as BlogCardData[],
     totalCount,
     page: Math.min(page, pageCount),
     pageCount,
@@ -104,7 +103,22 @@ export async function getAllPosts(
   };
 }
 
-async function query_getPostBySlug(slug: string) {
+const getCachedAllPosts = unstable_cache(
+  queryAllPosts,
+  ["published-blog-list-v2"],
+  { revalidate: PUBLIC_CACHE_SECONDS, tags: ["blog"] },
+);
+
+export function getAllPosts(
+  options: GetAllPostsOptions = {},
+): Promise<GetAllPostsResult> {
+  return getCachedAllPosts(
+    normalizePage(options.page),
+    normalizeLimit(options.limit),
+  );
+}
+
+async function queryPostBySlug(slug: string): Promise<BlogPost | null> {
   const supabase = createPublicClient();
 
   if (!supabase) {
@@ -119,12 +133,18 @@ async function query_getPostBySlug(slug: string) {
     .maybeSingle();
 
   if (error) throw new Error("Unable to load article");
-  if (!data) return null;
-
-  return data;
+  return data ?? null;
 }
 
-export async function getRelatedPosts(currentSlug: string, limit = 3) {
+const getCachedPostBySlug = unstable_cache(
+  queryPostBySlug,
+  ["published-blog-post-v2"],
+  { revalidate: PUBLIC_CACHE_SECONDS, tags: ["blog"] },
+);
+
+export const getPostBySlug = cache(getCachedPostBySlug);
+
+async function queryRelatedPosts(currentSlug: string, limit: number) {
   const supabase = createPublicClient();
 
   if (!supabase) {
@@ -135,23 +155,32 @@ export async function getRelatedPosts(currentSlug: string, limit = 3) {
 
   const { data, error } = await supabase
     .from("blog_posts")
-    .select("*")
+    .select(BLOG_CARD_COLUMNS)
     .eq("published", true)
     .neq("slug", currentSlug)
     .order("published_at", { ascending: false })
     .limit(limit);
 
-  if (error) return [];
-
-  return data ?? [];
+  if (error) throw new Error("Unable to load related articles");
+  return (data ?? []) as BlogCardData[];
 }
 
-export async function getPublishedPostSlugs() {
-  const supabase = createPublicClient();
+const getCachedRelatedPosts = unstable_cache(
+  queryRelatedPosts,
+  ["published-blog-related-v2"],
+  { revalidate: PUBLIC_CACHE_SECONDS, tags: ["blog"] },
+);
 
-  if (!supabase) {
-    return getSeedPublishedPosts().map((post) => post.slug);
-  }
+export function getRelatedPosts(currentSlug: string, limit = 3) {
+  return getCachedRelatedPosts(
+    currentSlug,
+    Math.max(1, Math.min(12, Math.floor(limit))),
+  );
+}
+
+async function queryPublishedPostSlugs() {
+  const supabase = createPublicClient();
+  if (!supabase) return getSeedPublishedPosts().map((post) => post.slug);
 
   const { data, error } = await supabase
     .from("blog_posts")
@@ -159,8 +188,11 @@ export async function getPublishedPostSlugs() {
     .eq("published", true);
 
   if (error) throw new Error("Unable to load published article URLs");
-
   return (data ?? []).map((post) => post.slug);
 }
 
-export const getPostBySlug = cache(query_getPostBySlug);
+export const getPublishedPostSlugs = unstable_cache(
+  queryPublishedPostSlugs,
+  ["published-blog-slugs-v2"],
+  { revalidate: PUBLIC_CACHE_SECONDS, tags: ["blog"] },
+);

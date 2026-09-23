@@ -1,12 +1,16 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { redirect } from "next/navigation";
 
 import { requireAdmin } from "@/lib/auth";
 import { validateImageUpload } from "@/lib/image-upload";
 import { createClient } from "@/lib/supabase/server";
 import { normalizeSafeUrl, slugify } from "@/lib/utils";
+
+function invalidateServices() {
+  revalidateTag("services");
+}
 
 function normalize(value: FormDataEntryValue | null) {
   const text = typeof value === "string" ? value.trim() : "";
@@ -57,6 +61,7 @@ export async function createService(formData: FormData) {
   });
   if (error) throw new Error(error.message);
 
+  invalidateServices();
   revalidatePath("/admin/services");
   revalidatePath("/services");
   redirect("/admin/services");
@@ -89,6 +94,7 @@ export async function updateService(formData: FormData) {
     .eq("id", id);
   if (error) throw new Error(error.message);
 
+  invalidateServices();
   revalidatePath("/admin/services");
   revalidatePath("/services");
   redirect("/admin/services");
@@ -106,6 +112,7 @@ export async function deleteService(formData: FormData) {
     .eq("id", id);
   if (error) throw new Error(error.message);
   if (count !== 1) throw new Error("Service was not found or was not deleted.");
+  invalidateServices();
   revalidatePath("/admin/services");
   revalidatePath("/services");
 }
@@ -132,6 +139,7 @@ export async function bulkDeleteServices(formData: FormData) {
     throw new Error(`Only ${count ?? 0} of ${ids.length} services were deleted.`);
   }
 
+  invalidateServices();
   revalidatePath("/admin/services");
   revalidatePath("/services");
   return { deletedCount: count ?? 0 };

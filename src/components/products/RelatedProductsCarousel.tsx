@@ -4,13 +4,13 @@ import { useRef, useState, useEffect, useCallback } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 import { ProductCard } from "@/components/products/ProductCard";
-import type { ProductWithRelations } from "@/lib/types";
+import type { ProductCardData } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
 export function RelatedProductsCarousel({
   products,
 }: {
-  products: ProductWithRelations[];
+  products: ProductCardData[];
 }) {
   const scrollerRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);

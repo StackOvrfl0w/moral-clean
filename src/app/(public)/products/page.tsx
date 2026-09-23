@@ -22,6 +22,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { getProducts, type ProductSort } from "@/lib/queries/products";
+import { getPaginationItems } from "@/lib/pagination";
 import { cn } from "@/lib/utils";
 
 
@@ -116,7 +117,7 @@ function Pagination({
     return null;
   }
 
-  const pages = Array.from({ length: pageCount }, (_, index) => index + 1);
+  const pages = getPaginationItems(page, pageCount);
 
   return (
     <nav
@@ -135,7 +136,12 @@ function Pagination({
         </Button>
       )}
 
-      {pages.map((pageNumber) => (
+      {pages.map((pageNumber) =>
+        typeof pageNumber === "string" ? (
+          <span key={pageNumber} className="px-2 text-muted-foreground">
+            …
+          </span>
+        ) : (
         <Button
           key={pageNumber}
           asChild={pageNumber !== page}
@@ -153,7 +159,8 @@ function Pagination({
             </Link>
           )}
         </Button>
-      ))}
+        ),
+      )}
 
       {page < pageCount ? (
         <Button asChild variant="outline" size="sm">

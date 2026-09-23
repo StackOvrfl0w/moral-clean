@@ -1,3 +1,6 @@
+import "server-only";
+
+import { unstable_cache } from "next/cache";
 import { createClient as createSupabaseClient } from "@supabase/supabase-js";
 
 import { env } from "@/config/env";
@@ -25,7 +28,7 @@ function createPublicClient() {
   );
 }
 
-export async function getServices(): Promise<Service[]> {
+async function queryServices(): Promise<Service[]> {
   const supabase = createPublicClient();
 
   if (!supabase) {
@@ -44,6 +47,12 @@ export async function getServices(): Promise<Service[]> {
 
   return data;
 }
+
+export const getServices = unstable_cache(
+  queryServices,
+  ["public-services-v2"],
+  { revalidate: 900, tags: ["services"] },
+);
 
 export async function getServiceBySlug(slug: string) {
   const services = await getServices();

@@ -10,6 +10,7 @@ import { ProductFilters } from "@/components/products/ProductFilters";
 import { BreadcrumbSchema } from "@/components/seo/BreadcrumbSchema";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { getPaginationItems } from "@/lib/pagination";
 import {
   getAllCategories,
   getCategoryBySlug,
@@ -85,7 +86,7 @@ function CategoryPagination({
     return null;
   }
 
-  const pages = Array.from({ length: pageCount }, (_, index) => index + 1);
+  const pages = getPaginationItems(page, pageCount);
 
   return (
     <nav
@@ -104,7 +105,12 @@ function CategoryPagination({
         </Button>
       )}
 
-      {pages.map((pageNumber) => (
+      {pages.map((pageNumber) =>
+        typeof pageNumber === "string" ? (
+          <span key={pageNumber} className="px-2 text-muted-foreground">
+            …
+          </span>
+        ) : (
         <Button
           key={pageNumber}
           asChild={pageNumber !== page}
@@ -122,7 +128,8 @@ function CategoryPagination({
             </Link>
           )}
         </Button>
-      ))}
+        ),
+      )}
 
       {page < pageCount ? (
         <Button asChild variant="outline" size="sm">
@@ -226,14 +233,14 @@ export default async function CategoryPage({
             categoryCounts={Object.fromEntries(
               allCategories.map((c) => [c.slug, c.product_count]),
             )}
-            brands={productsResult.products
-              .map((p) => p.brand)
-              .filter((b): b is string => Boolean(b))
-              .filter((b, i, arr) => arr.indexOf(b) === i)}
-            tags={productsResult.products
-              .flatMap((p) => p.tags)
-              .filter((t, i, arr) => arr.findIndex((x) => x.id === t.id) === i)}
-            activeFilters={{ category: category.slug }}
+            brands={productsResult.brands}
+            tags={productsResult.tags}
+            activeFilters={{
+              category: category.slug,
+              brand,
+              tag,
+              sort: sort === "featured" ? undefined : sort,
+            }}
             className="sticky top-28 hidden h-fit w-[280px] shrink-0 rounded-md border border-border bg-white p-5 lg:block"
           />
 

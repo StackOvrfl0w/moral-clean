@@ -9,7 +9,7 @@
     --color-brand-gradient-deep: 14 44 77;
     --color-brand-gradient-darker: 16 54 94;
     --color-navy: 10 37 64;
-    --color-brand-accent: 14 165 233;
+    --color-brand-accent: 3 105 161;
     --color-brand-background: 255 255 255;
     --color-brand-surface: 248 250 252;
     --color-brand-border: 226 232 240;
@@ -36,13 +36,13 @@
     --secondary-foreground: 210 73% 15%;
     --muted: 210 40% 98%;
     --muted-foreground: 215 16% 47%;
-    --accent: 199 89% 48%;
-    --accent-foreground: 210 73% 15%;
+    --accent: 201 96% 32%;
+    --accent-foreground: 0 0% 100%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
     --border: 214 32% 91%;
     --input: 214 32% 91%;
-    --ring: 199 89% 48%;
+    --ring: 201 96% 32%;
     --chart-1: 210 73% 15%;
     --chart-2: 199 89% 48%;
     --chart-3: 215 16% 47%;
@@ -53,10 +53,10 @@
     --sidebar-foreground: 222 47% 11%;
     --sidebar-primary: 210 73% 15%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 199 89% 48%;
-    --sidebar-accent-foreground: 210 73% 15%;
+    --sidebar-accent: 201 96% 32%;
+    --sidebar-accent-foreground: 0 0% 100%;
     --sidebar-border: 214 32% 91%;
-    --sidebar-ring: 199 89% 48%;
+    --sidebar-ring: 201 96% 32%;
   }
 
   .dark {

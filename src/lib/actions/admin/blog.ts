@@ -1,6 +1,6 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { redirect } from "next/navigation";
 
 import { requireAdmin } from "@/lib/auth";
@@ -8,6 +8,10 @@ import { validateImageUpload } from "@/lib/image-upload";
 import { createClient } from "@/lib/supabase/server";
 import { sanitizeRichText } from "@/lib/sanitize-html";
 import { normalizeSafeUrl, slugify } from "@/lib/utils";
+
+function invalidateBlog() {
+  revalidateTag("blog");
+}
 
 function normalize(value: FormDataEntryValue | null) {
   const text = typeof value === "string" ? value.trim() : "";
@@ -44,6 +48,7 @@ export async function createBlogPost(formData: FormData) {
   });
   if (error) throw new Error(error.message);
 
+  invalidateBlog();
   revalidatePath("/admin/blog");
   revalidatePath("/");
   revalidatePath("/catalog-sitemap.xml");
@@ -86,6 +91,7 @@ export async function updateBlogPost(formData: FormData) {
     .eq("id", id);
   if (error) throw new Error(error.message);
 
+  invalidateBlog();
   revalidatePath("/admin/blog");
   revalidatePath("/");
   revalidatePath("/catalog-sitemap.xml");
@@ -106,6 +112,7 @@ export async function deleteBlogPost(formData: FormData) {
   if (error) throw new Error(error.message);
   if (count !== 1) throw new Error("Blog post was not found or was not deleted.");
 
+  invalidateBlog();
   revalidatePath("/admin/blog");
   revalidatePath("/");
   revalidatePath("/catalog-sitemap.xml");
@@ -134,6 +141,7 @@ export async function bulkDeleteBlogPosts(formData: FormData) {
     throw new Error(`Only ${count ?? 0} of ${ids.length} blog posts were deleted.`);
   }
 
+  invalidateBlog();
   revalidatePath("/admin/blog");
   revalidatePath("/");
   revalidatePath("/catalog-sitemap.xml");

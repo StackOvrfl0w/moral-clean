@@ -8,6 +8,7 @@ import { ArrowRight } from "lucide-react";
 import { BlogCard } from "@/components/blog/BlogCard";
 import { Button } from "@/components/ui/button";
 import { blogFallbackImage } from "@/lib/fallback-images";
+import { getPaginationItems } from "@/lib/pagination";
 import { getAllPosts } from "@/lib/queries/blog";
 
 
@@ -64,10 +65,7 @@ export default async function BlogPage({
   const showFeatured = result.totalCount >= 4 && result.posts.length > 0;
   const featuredPost = showFeatured ? result.posts[0] : null;
   const gridPosts = featuredPost ? result.posts.slice(1) : result.posts;
-  const pages = Array.from(
-    { length: result.pageCount },
-    (_, index) => index + 1,
-  );
+  const pages = getPaginationItems(result.page, result.pageCount);
 
   return (
     <>
@@ -154,7 +152,12 @@ export default async function BlogPage({
                 </Button>
               )}
 
-              {pages.map((pageNumber) => (
+              {pages.map((pageNumber) =>
+                typeof pageNumber === "string" ? (
+                  <span key={pageNumber} className="px-2 text-muted-foreground">
+                    …
+                  </span>
+                ) : (
                 <Button
                   key={pageNumber}
                   asChild={pageNumber !== result.page}
@@ -167,7 +170,8 @@ export default async function BlogPage({
                     <Link href={createPageHref(pageNumber)}>{pageNumber}</Link>
                   )}
                 </Button>
-              ))}
+                ),
+              )}
 
               {result.page < result.pageCount ? (
                 <Button asChild variant="outline" size="sm">

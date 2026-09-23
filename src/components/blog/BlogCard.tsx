@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
-import type { BlogPost } from "@/lib/types";
+import type { BlogCardData } from "@/lib/types";
 import { blogCardFallbackImage } from "@/lib/fallback-images";
 
 const blurDataUrl =
@@ -20,7 +20,7 @@ function formatDate(value: string | null) {
   });
 }
 
-export function BlogCard({ post }: { post: BlogPost }) {
+export function BlogCard({ post }: { post: BlogCardData }) {
   const imageUrl = post.cover_image_url || blogCardFallbackImage;
 
   return (

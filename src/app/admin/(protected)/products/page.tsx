@@ -33,7 +33,7 @@ export default async function AdminProductsPage({
   const from = (page - 1) * pageSize;
   const to = from + pageSize - 1;
 
-  const categoriesResult = await supabase
+  const categoriesQuery = supabase
     .from("categories")
     .select("id,name")
     .order("name", { ascending: true });
@@ -56,32 +56,30 @@ export default async function AdminProductsPage({
     dataQuery = dataQuery.eq("category_id", categoryFilter);
   }
 
-  const [countResult, productsResult] = await Promise.all([
+  const [categoriesResult, countResult, productsResult] = await Promise.all([
+    categoriesQuery,
     countQuery,
     dataQuery,
   ]);
   const products = productsResult.data ?? [];
 
-  const [imagesResult, categoriesMapResult] = await Promise.all([
-    products.length > 0
-      ? supabase
-          .from("product_images")
-          .select("product_id,url,is_primary,sort_order")
-          .in(
-            "product_id",
-            products.map((product) => product.id),
-          )
-          .order("sort_order", { ascending: true })
-      : Promise.resolve({
-          data: [] as Array<{
-            product_id: string | null;
-            url: string;
-            is_primary: boolean | null;
-            sort_order: number | null;
-          }>,
-        }),
-    supabase.from("categories").select("id,name"),
-  ]);
+  const imagesResult = products.length > 0
+    ? await supabase
+        .from("product_images")
+        .select("product_id,url,is_primary,sort_order")
+        .in(
+          "product_id",
+          products.map((product) => product.id),
+        )
+        .order("sort_order", { ascending: true })
+    : {
+        data: [] as Array<{
+          product_id: string | null;
+          url: string;
+          is_primary: boolean | null;
+          sort_order: number | null;
+        }>,
+      };
 
   const imageMap = new Map<
     string,
@@ -94,7 +92,7 @@ export default async function AdminProductsPage({
     imageMap.set(image.product_id, current);
   }
   const categoryMap = new Map(
-    (categoriesMapResult.data ?? []).map((category) => [
+    (categoriesResult.data ?? []).map((category) => [
       category.id,
       category.name,
     ]),
