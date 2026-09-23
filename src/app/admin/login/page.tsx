@@ -13,7 +13,7 @@ export default function AdminLoginPage() {
           <div className="mx-auto flex size-12 items-center justify-center rounded-md bg-primary text-white">
             <Droplets className="size-6" aria-hidden="true" />
           </div>
-          <CardTitle>Admin Login</CardTitle>
+          <CardTitle><h1 className="text-2xl">Admin Login</h1></CardTitle>
           <p className="text-sm text-muted-foreground">Moral Clean administration panel</p>
         </CardHeader>
         <CardContent className="space-y-4">

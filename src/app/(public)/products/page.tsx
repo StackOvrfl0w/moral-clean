@@ -1,3 +1,5 @@
+import { notFound } from "next/navigation";
+import { listingMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ChevronDown, Home, Search, SlidersHorizontal } from "lucide-react";
@@ -19,25 +21,13 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { env } from "@/config/env";
 import { getProducts, type ProductSort } from "@/lib/queries/products";
 import { cn } from "@/lib/utils";
 
-const siteUrl = env.siteUrl;
 
-export const metadata: Metadata = {
-  title: "Products",
-  description:
-    "Browse Moral Clean's professional cleaning machines, industrial vacuums, pressure cleaners, scrubber dryers, chemicals, parts, and janitorial equipment in Pakistan.",
-  openGraph: {
-    title: "Products | Moral Clean",
-    description:
-      "Browse Moral Clean's professional cleaning machines, industrial vacuums, pressure cleaners, scrubber dryers, chemicals, parts, and janitorial equipment in Pakistan.",
-  },
-  alternates: {
-    canonical: `${siteUrl}/products`,
-  },
-};
+export function generateMetadata({ searchParams }: { searchParams?: Record<string, string | string[] | undefined> }): Metadata {
+  return listingMetadata('Commercial Cleaning Machines & Equipment', 'Browse scrubber dryers, industrial vacuums, pressure washers and janitorial equipment. Compare specifications and request a quote from Moral Clean.', '/products', searchParams);
+}
 
 type ProductsPageProps = {
   searchParams?: Record<string, string | string[] | undefined>;
@@ -199,6 +189,8 @@ export default async function ProductsPage({
     page,
   });
 
+  if (Number(page) > result.pageCount) notFound();
+
   const activeFilters = {
     category,
     brand,
@@ -353,6 +345,7 @@ export default async function ProductsPage({
               </div>
             </div>
 
+            <h2 className="mb-5 text-2xl">Cleaning equipment</h2>
             <ProductGrid products={result.products} clearHref="/products" />
 
             <Pagination

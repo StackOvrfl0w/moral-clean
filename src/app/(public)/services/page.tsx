@@ -1,3 +1,4 @@
+import { pageMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -12,25 +13,15 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
-import { env } from "@/config/env";
 import { getServices } from "@/lib/queries/services";
 import { cn } from "@/lib/utils";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { absoluteUrl } from "@/lib/seo";
 
-const siteUrl = env.siteUrl;
 
-export const metadata: Metadata = {
-  title: "Services",
-  description:
-    "Moral Clean provides after-sales service for commercial cleaning equipment, including motor repair, parts replacement, and scheduled maintenance support across Pakistan.",
-  openGraph: {
-    title: "Services | Moral Clean",
-    description:
-      "Moral Clean provides after-sales service for commercial cleaning equipment, including motor repair, parts replacement, and scheduled maintenance support across Pakistan.",
-  },
-  alternates: {
-    canonical: `${siteUrl}/services`,
-  },
-};
+export const metadata: Metadata = pageMetadata({
+  title: 'Cleaning Machine Repair & Maintenance in Pakistan', description: 'Get motor repair, parts replacement, brush refilling and maintenance for commercial cleaning equipment. Contact Moral Clean for service across Pakistan.', path: '/services',
+});
 
 type Step = {
   title: string;
@@ -115,9 +106,22 @@ export default async function ServicesPage() {
 
   return (
     <>
+      <JsonLd data={{
+        "@context": "https://schema.org",
+        "@graph": services.map((service) => ({
+          "@type": "Service",
+          "@id": absoluteUrl(`/services#${service.slug}`),
+          url: absoluteUrl(`/services#${service.slug}`),
+          name: service.name,
+          description: service.short_description || undefined,
+          serviceType: service.name,
+          provider: { "@id": absoluteUrl("/#organization") },
+          areaServed: { "@type": "Country", name: "Pakistan" },
+        })),
+      }} />
       <section className="bg-background py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <SectionHeader eyebrow="What We Offer" title="Our Services" />
+          <SectionHeader eyebrow="What We Offer" title="Our Services" as="h1" />
 
           <div className="space-y-8">
             {services.map((service, index) => {
@@ -127,6 +131,7 @@ export default async function ServicesPage() {
               return (
                 <article
                   key={service.id}
+                  id={service.slug}
                   className="grid gap-6 rounded-lg border border-border bg-white p-6 shadow-sm lg:grid-cols-2 lg:gap-8"
                 >
                   <div
@@ -139,11 +144,12 @@ export default async function ServicesPage() {
                     )}
                   >
                     {service.image_url ? (
-                      <div className="min-h-[240px]">
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img
+                      <div className="relative min-h-[240px] aspect-[4/3]">
+                        <Image
                           src={service.image_url}
-                          alt={service.name}
+                          alt={`${service.name} for commercial cleaning equipment`}
+                          fill
+                          sizes="(min-width: 1024px) 50vw, 100vw"
                           className="h-full w-full object-contain rounded-md"
                         />
                       </div>
@@ -192,7 +198,7 @@ export default async function ServicesPage() {
         </div>
       </section>
 
-      <section id="faq" className="bg-brand-gradient py-20">
+      <section id="service-process" className="bg-brand-gradient py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeader
             eyebrow="How It Works"
@@ -270,7 +276,7 @@ export default async function ServicesPage() {
       <section className="bg-muted py-20">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
           <div className="mb-8 text-center">
-            <h2>Frequently Asked Questions</h2>
+            <h2 id="faq">Frequently Asked Questions</h2>
           </div>
           <div className="rounded-md border border-border bg-white px-6">
             <Accordion type="single" collapsible>

@@ -1,3 +1,4 @@
+import { listingMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -17,11 +18,9 @@ import {
 } from "@/lib/queries/categories";
 import { cn } from "@/lib/utils";
 
-import { env } from "@/config/env";
 import { RelatedProductsCarousel } from "@/components/products/RelatedProductsCarousel";
 
 export const revalidate = 3600;
-const siteUrl = env.siteUrl;
 
 type CategoryPageProps = {
   params: {
@@ -140,32 +139,17 @@ function CategoryPagination({
   );
 }
 
-export async function generateMetadata({
-  params,
-}: CategoryPageProps): Promise<Metadata> {
+export async function generateMetadata({ params, searchParams }: CategoryPageProps): Promise<Metadata> {
   const category = await getCategoryBySlug(params.slug);
-
-  if (!category) {
-    return {
-      title: "Category Not Found",
-    };
-  }
-
-  return {
-    title: category.name,
-    description:
-      category.description ||
-      `Browse ${category.name} from leading international brands. Professional commercial cleaning equipment available across Pakistan.`,
-    openGraph: {
-      title: `${category.name} | Moral Clean`,
-      description:
-        category.description ||
-        `Browse ${category.name} from leading international brands. Professional commercial cleaning equipment available across Pakistan.`,
-    },
-    alternates: {
-      canonical: `${siteUrl}/products/category/${category.slug}`,
-    },
-  };
+  if (!category) notFound();
+  const suppliedDescription = category.description?.replace(/\s+/g, " ").trim();
+  return listingMetadata(
+    `${category.name} in Pakistan`,
+    suppliedDescription && suppliedDescription.length >= 60
+      ? suppliedDescription
+      : `Browse ${category.name.toLowerCase()} for commercial facilities in Pakistan. Compare specifications and request equipment, parts and service from Moral Clean.`,
+    `/products/category/${category.slug}`, searchParams,
+  );
 }
 
 export async function generateStaticParams() {
@@ -193,6 +177,8 @@ export default async function CategoryPage({
     brand,
     tag,
   });
+  if (Number(page) > productsResult.pageCount) notFound();
+
   const allCategories = await getAllCategories();
   const relatedProducts = productsResult.products.slice(0, 6);
   const activeSort =

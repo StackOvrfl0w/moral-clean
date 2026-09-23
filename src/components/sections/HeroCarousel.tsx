@@ -13,7 +13,7 @@ const slides = [
   },
   {
     src: "/assets/categories/Ride-on-scrubber-dryer.png",
-    alt: "High pressure cleaning machine",
+    alt: "Ride-on scrubber dryer",
   },
   { src: "/assets/categories/Vaccumcleaners.png", alt: "Vacuum cleaner" },
 ];
@@ -58,14 +58,14 @@ export function HeroCarousel() {
           )}
           aria-hidden={index !== current}
         >
-          <Image
+          {(index === 0 || index === current) && <Image
             src={slide.src}
             alt={slide.alt}
             fill
             priority={index === 0}
             sizes="(min-width:1024px) 45vw, 100vw"
             className="object-contain object-center"
-          />
+          />}
         </div>
       ))}
 

@@ -1,3 +1,4 @@
+import { pageMetadata, absoluteUrl } from "@/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -115,7 +116,7 @@ function getDescription(product: ProductWithRelations) {
   }
 
   if (product.long_description) {
-    return product.long_description.replace(/\s+/g, " ").slice(0, 160);
+    return product.long_description.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim().slice(0, 160);
   }
 
   return `${product.name} from Moral Clean's commercial cleaning equipment range.`;
@@ -158,33 +159,13 @@ export async function generateMetadata({
 }: ProductPageProps): Promise<Metadata> {
   const product = await getProductBySlug(params.slug);
 
-  if (!product) {
-    return {
-      title: "Product Not Found",
-    };
-  }
-
-  const description = getDescription(product);
-  const primaryImage = getPrimaryImage(product);
-
-  return {
-    title: product.name,
-    description,
-    alternates: {
-      canonical: `${siteUrl}/products/${product.slug}`,
-    },
-    openGraph: {
-      title: product.name,
-      description,
-      images: primaryImage?.url ? [{ url: primaryImage.url }] : undefined,
-    },
-    twitter: {
-      card: primaryImage?.url ? "summary_large_image" : "summary",
-      title: product.name,
-      description,
-      images: primaryImage?.url ? [primaryImage.url] : undefined,
-    },
-  };
+  if (!product) notFound();
+  return pageMetadata({
+    title: product.meta_title?.trim() || product.name,
+    description: product.meta_description?.trim() || getDescription(product),
+    path: `/products/${product.slug}`,
+    image: getPrimaryImage(product)?.url,
+  });
 }
 
 export async function generateStaticParams() {
@@ -208,9 +189,9 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
   const brochureUrl = getBrochureUrl(product.specifications);
   const productUrl = `${siteUrl}/products/${product.slug}`;
   const imageUrls =
-    product.images.map((image) => image.url).filter(Boolean).length > 0
-      ? product.images.map((image) => image.url)
-      : [`${siteUrl}/og-image.jpg`];
+    product.images.map((image) => absoluteUrl(image.url)).filter(Boolean).length > 0
+      ? product.images.map((image) => absoluteUrl(image.url))
+      : [`${siteUrl}/opengraph-image`];
   const productJsonLd = {
     "@context": "https://schema.org",
     "@type": "Product",
@@ -226,14 +207,6 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
       : undefined,
     sku: product.model_code || undefined,
     category: product.category?.name,
-    offers: {
-      "@type": "Offer",
-      availability: product.in_stock
-        ? "https://schema.org/InStock"
-        : "https://schema.org/OutOfStock",
-      priceCurrency: "PKR",
-      url: productUrl,
-    },
   };
 
   return (
@@ -281,7 +254,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
               <>
                 <span aria-hidden="true">/</span>
                 <Link
-                  href={`/products?category=${product.category.slug}`}
+                  href={`/products/category/${product.category.slug}`}
                   className="hover:text-primary"
                 >
                   {product.category.name}
@@ -315,7 +288,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
 
             {product.category ? (
               <Link
-                href={`/products?category=${product.category.slug}`}
+                href={`/products/category/${product.category.slug}`}
                 className="mt-5 inline-flex"
               >
                 <Badge

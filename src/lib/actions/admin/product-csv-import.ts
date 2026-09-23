@@ -677,6 +677,7 @@ export async function importProductsCsv(
 
   if (changedSlugs.size > 0) {
     revalidatePath("/admin/products");
+    revalidatePath("/catalog-sitemap.xml");
     revalidatePath("/products");
     revalidatePath("/");
     changedSlugs.forEach((slug) => revalidatePath(`/products/${slug}`));

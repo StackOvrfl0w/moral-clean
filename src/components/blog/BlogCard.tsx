@@ -36,7 +36,7 @@ export function BlogCard({ post }: { post: BlogPost }) {
           sizes="(min-width: 1280px) 25vw, (min-width: 768px) 50vw, 100vw"
           placeholder="blur"
           blurDataURL={blurDataUrl}
-          unoptimized
+
           className="object-cover transition duration-300 group-hover:scale-105"
         />
       </div>

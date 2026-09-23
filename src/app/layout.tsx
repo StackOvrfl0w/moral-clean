@@ -53,6 +53,7 @@ const jakarta = localFont({
       style: "normal",
     },
   ],
+  preload: false,
   variable: "--font-jakarta",
   display: "swap",
 });
@@ -106,11 +107,11 @@ export const metadata: Metadata = {
     title,
     description,
     siteName: "Moral Clean",
-    locale: "en_US",
+    locale: "en_PK",
     type: "website",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "/opengraph-image",
       },
     ],
   },
@@ -118,22 +119,15 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title,
     description,
-    images: ["/og-image.jpg"],
+    images: ["/opengraph-image"],
   },
   robots: {
-    index: true,
-    follow: true,
     googleBot: {
-      index: true,
-      follow: true,
       "max-image-preview": "large",
       "max-snippet": -1,
     },
   },
-  alternates: {
-    canonical: siteUrl,
-  },
-  verification: {},
+  verification: { google: process.env.GOOGLE_SITE_VERIFICATION?.trim() || undefined },
 };
 
 export default function RootLayout({

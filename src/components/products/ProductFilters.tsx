@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Check, X } from "lucide-react";
 
@@ -128,10 +129,9 @@ export function ProductFilters({
           const checked = activeFilters.category === category.slug;
 
           return (
-            <button
+            <Link
               key={category.id}
-              type="button"
-              onClick={() => navigate(`/products/category/${category.slug}`)}
+              href={`/products/category/${category.slug}`}
               className={cn(
                 "flex w-full items-center justify-between gap-3 rounded-md px-2 py-2 text-sm transition-colors hover:bg-muted",
                 checked && "bg-accent/10 font-semibold text-primary",
@@ -141,7 +141,7 @@ export function ProductFilters({
               <span className="rounded-full bg-muted px-2 py-0.5 text-xs text-muted-foreground">
                 {categoryCounts[category.slug] ?? 0}
               </span>
-            </button>
+            </Link>
           );
         })}
       </div>

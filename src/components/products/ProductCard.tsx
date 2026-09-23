@@ -23,7 +23,7 @@ export function ProductCard({ product }: { product: ProductWithRelations }) {
             sizes="(min-width: 1024px) 25vw, (min-width: 768px) 50vw, 100vw"
             placeholder="blur"
             blurDataURL={blurDataUrl}
-            unoptimized
+
             className="object-cover transition duration-300 group-hover:scale-105"
           />
           {!image ? (

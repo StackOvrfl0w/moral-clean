@@ -1,7 +1,7 @@
+import { cache } from "react";
 import { createClient as createSupabaseClient } from "@supabase/supabase-js";
 
 import { env } from "@/config/env";
-import { createClient as createServerSupabaseClient } from "@/lib/supabase/server";
 import { mockCategories, mockProducts, mockTags } from "@/lib/seed-data";
 import type {
   Category,
@@ -218,7 +218,7 @@ function getSeedRelatedProducts(
     .slice(0, limit);
 }
 
-async function getSupabaseCatalog() {
+async function query_getSupabaseCatalog() {
   if (!hasSupabaseConfig()) {
     console.warn(
       "Supabase env vars are missing; using seeded fallback product data.",
@@ -226,7 +226,7 @@ async function getSupabaseCatalog() {
     return null;
   }
 
-  const supabase = createServerSupabaseClient();
+  const supabase = createPublicCatalogClient()!;
 
   const [categoriesResponse, tagsResponse, productsResponse] =
     await Promise.all([
@@ -263,7 +263,7 @@ async function getSupabaseCatalog() {
     tagsResponse.error ||
     productsResponse.error
   ) {
-    return null;
+    throw new Error("Unable to load the product catalog");
   }
 
   const products = normalizeProducts(
@@ -313,7 +313,7 @@ export async function getProducts(
   };
 }
 
-export async function getProductBySlug(slug: string) {
+async function query_getProductBySlug(slug: string) {
   if (!hasSupabaseConfig()) {
     console.warn(
       "Supabase env vars are missing; using seeded fallback product data.",
@@ -342,12 +342,7 @@ export async function getProductBySlug(slug: string) {
     .eq("slug", slug)
     .maybeSingle();
 
-  if (error) {
-    console.warn(
-      `Supabase product query failed for "${slug}"; checking seeded fallback data.`,
-    );
-    return findSeedProductBySlug(slug);
-  }
+  if (error) throw new Error("Unable to load product");
 
   if (!data) return null;
 
@@ -407,9 +402,11 @@ export async function getProductSlugs() {
 
   const { data, error } = await supabase.from("products").select("slug");
 
-  if (error || !data || data.length === 0) {
-    return mockProducts.map((product) => product.slug);
-  }
+  if (error) throw new Error("Unable to load product URLs");
 
   return (data ?? []).map((product) => product.slug);
 }
+
+export const getProductBySlug = cache(query_getProductBySlug);
+
+const getSupabaseCatalog = cache(query_getSupabaseCatalog);

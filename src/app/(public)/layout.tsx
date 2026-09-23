@@ -5,6 +5,8 @@ import { PostHogProvider } from "@/components/analytics/PostHogProvider";
 import { getAllCategories } from "@/lib/queries/categories";
 import { getAllSettings } from "@/lib/queries/settings";
 
+export const revalidate = 3600;
+
 export default async function PublicLayout({
   children,
 }: Readonly<{

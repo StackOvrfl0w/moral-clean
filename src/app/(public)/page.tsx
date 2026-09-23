@@ -1,3 +1,4 @@
+import { pageMetadata } from "@/lib/seo";
 import type { ComponentType, ReactNode, SVGProps } from "react";
 import type { Metadata } from "next";
 import Image from "next/image";
@@ -11,37 +12,26 @@ import {
   Building2,
   Gauge,
   MapPinned,
-  Settings,
   ShieldCheck,
-  SprayCan,
   Truck,
   Wrench,
 } from "lucide-react";
 
-import { env } from "@/config/env";
 import { CtaBanner } from "@/components/sections/CtaBanner";
 import { IndustriesStrip } from "@/components/sections/IndustriesStrip";
 import { SectionHeader } from "@/components/ui/section-header";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { getAllSettings } from "@/lib/queries/settings";
-import { HeroCarousel } from "@/components/sections/HeroCarousel"; // ← new import
+import { getProducts } from "@/lib/queries/products";
+import { getAllPosts } from "@/lib/queries/blog";
+import { ProductCard } from "@/components/products/ProductCard";
+import { HeroCarousel } from "@/components/sections/HeroCarousel";
 
-const siteUrl = env.siteUrl;
 
-export const metadata: Metadata = {
-  title: "Home",
-  description:
-    "Moral Clean supplies commercial cleaning equipment, replacement parts, and technical service support for industrial and facility operations across Pakistan.",
-  openGraph: {
-    title: "Moral Clean — Commercial Cleaning Equipment & Service in Pakistan",
-    description:
-      "Moral Clean supplies commercial cleaning equipment, replacement parts, and technical service support for industrial and facility operations across Pakistan.",
-  },
-  alternates: {
-    canonical: `${siteUrl}/`,
-  },
-};
+export const metadata: Metadata = pageMetadata({
+  title: 'Commercial Cleaning Equipment in Pakistan', description: 'Compare commercial cleaning machines, industrial vacuums and scrubber dryers. Get equipment, spare parts and repair support from Moral Clean in Pakistan.', path: '/',
+});
 
 type IconComponent = ComponentType<SVGProps<SVGSVGElement>>;
 
@@ -66,36 +56,6 @@ const valueProps = [
   },
 ];
 
-const featuredProducts = [
-  {
-    brand: "Scrubber Dryer Series",
-    name: "Ride-On Scrubber Dryer",
-    spec: "High-capacity floor cleaning for warehouses, malls, and factories.",
-    slug: "ride-on-scrubber-dryer",
-    icon: BrushCleaning,
-  },
-  {
-    brand: "Industrial Vacuum Series",
-    name: "Industrial Wet & Dry Vacuum 70L",
-    spec: "Heavy-duty suction, stainless tank, and continuous commercial use.",
-    slug: "industrial-wet-dry-vacuum-70l",
-    icon: Gauge,
-  },
-  {
-    brand: "Pressure Cleaning Series",
-    name: "Hot Water High Pressure Cleaner",
-    spec: "Built for oil, grease, transport yards, and industrial wash bays.",
-    slug: "hot-water-high-pressure-cleaner",
-    icon: SprayCan,
-  },
-  {
-    brand: "Floor Care Series",
-    name: "Single Disc Floor Machine 17 inch",
-    spec: "Reliable scrubbing, polishing, buffing, and restoration work.",
-    slug: "single-disc-floor-machine-17-inch",
-    icon: Settings,
-  },
-];
 
 const services = [
   {
@@ -124,29 +84,6 @@ const services = [
   },
 ];
 
-const blogPosts = [
-  {
-    date: "May 8, 2026",
-    title: "How to Select the Right Scrubber Dryer for Your Facility",
-    excerpt:
-      "Match tank size, brush pressure, runtime, and aisle width to the actual cleaning load before buying.",
-    href: "/blog/selecting-scrubber-dryer",
-  },
-  {
-    date: "April 26, 2026",
-    title: "When Repair Beats Replacement for Cleaning Machines",
-    excerpt:
-      "A practical checklist for deciding whether motor repair, parts replacement, or a new machine makes sense.",
-    href: "/blog/repair-vs-replacement",
-  },
-  {
-    date: "April 14, 2026",
-    title: "Industrial Vacuum Specs Procurement Teams Should Check",
-    excerpt:
-      "Tank capacity, filtration, hose diameter, and duty cycle matter more than headline suction numbers.",
-    href: "/blog/industrial-vacuum-specs",
-  },
-];
 
 const trustSignals = [
   { label: "Authorized Distributor", icon: BadgeCheck },
@@ -186,8 +123,14 @@ function MediaPlaceholder({
 }
 
 export default async function Home() {
-  const settings = await getAllSettings();
-  const categories = await getAllCategories();
+  const [settings, categories, catalog, posts] = await Promise.all([
+    getAllSettings(), getAllCategories(), getProducts({ sort: "featured" }), getAllPosts({ limit: 9 }),
+  ]);
+  const featuredProducts = catalog.products.slice(0, 4);
+  const blogPosts = posts.posts.slice(0, 3).map((post) => ({
+    title: post.title, excerpt: post.excerpt, href: `/blog/${post.slug}`,
+    date: post.published_at ? new Date(post.published_at).toLocaleDateString("en-US", { dateStyle: "long" }) : "",
+  }));
   const HOME_CATEGORY_LIMIT = 8;
   const visibleCategories = categories.slice(0, HOME_CATEGORY_LIMIT);
   const hasMoreCategories = categories.length > HOME_CATEGORY_LIMIT;
@@ -294,7 +237,7 @@ export default async function Home() {
             {visibleCategories.map((category) => (
               <Link
                 key={category.id}
-                href={`/products?category=${category.slug}`}
+                href={`/products/category/${category.slug}`}
                 className="group rounded-md border border-border bg-white p-3 transition duration-200 hover:-translate-y-1 hover:border-accent hover:shadow-lg hover:shadow-primary/5"
               >
                 <div className="relative aspect-square overflow-hidden rounded-md border border-border bg-[linear-gradient(135deg,#f8fafc_0%,#eef6fb_100%)]">
@@ -392,25 +335,8 @@ export default async function Home() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeader eyebrow="Top Picks" title="Featured Equipment" />
           <div className="-mx-4 flex snap-x gap-4 overflow-x-auto px-4 pb-2 lg:mx-0 lg:grid lg:grid-cols-4 lg:overflow-visible lg:px-0">
-            {featuredProducts.map(({ brand, name, spec, slug, icon: Icon }) => (
-              <article
-                key={slug}
-                className="min-w-[250px] snap-start rounded-md border border-border bg-white p-3 shadow-sm transition duration-200 hover:-translate-y-1 hover:border-accent hover:shadow-lg hover:shadow-primary/5 lg:min-w-0"
-              >
-                <MediaPlaceholder Icon={Icon} className="aspect-[4/3]" />
-                <p className="mt-4 text-[11px] font-bold uppercase tracking-[0.14em] text-accent">
-                  {brand}
-                </p>
-                <h3 className="mt-1 text-lg">{name}</h3>
-                <p className="mt-2 text-sm text-muted-foreground">{spec}</p>
-                <Link
-                  href={`/products/${slug}`}
-                  className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-accent"
-                >
-                  View Details
-                  <ArrowRight className="size-4" aria-hidden="true" />
-                </Link>
-              </article>
+            {featuredProducts.map((product) => (
+              <div key={product.id} className="min-w-[250px] snap-start lg:min-w-0"><ProductCard product={product} /></div>
             ))}
           </div>
         </div>
@@ -420,7 +346,7 @@ export default async function Home() {
         <CtaBanner />
       </SectionReveal>
 
-      <SectionReveal className="bg-muted py-12">
+      {blogPosts.length > 0 && <SectionReveal className="bg-muted py-12">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeader title="Insights & Guides" />
           <div className="grid gap-4 lg:grid-cols-3">
@@ -451,7 +377,7 @@ export default async function Home() {
             ))}
           </div>
         </div>
-      </SectionReveal>
+      </SectionReveal>}
     </>
   );
 }

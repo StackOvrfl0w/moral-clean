@@ -6,6 +6,8 @@ export function WebsiteSchema() {
   const schema = {
     "@context": "https://schema.org",
     "@type": "WebSite",
+    "@id": `${siteUrl}/#website`,
+    publisher: { "@id": `${siteUrl}/#organization` },
     name: "Moral Clean",
     url: siteUrl,
     potentialAction: {

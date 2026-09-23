@@ -1,3 +1,4 @@
+import { cache } from "react";
 import { createClient as createSupabaseClient } from "@supabase/supabase-js";
 
 import { env } from "@/config/env";
@@ -86,27 +87,16 @@ export async function getAllPosts(
     .order("published_at", { ascending: false })
     .range(from, to);
 
-  if (error || !data || data.length === 0) {
-    const allPosts = getSeedPublishedPosts();
-    const totalCount = allPosts.length;
-    const pageCount = Math.max(1, Math.ceil(totalCount / limit));
-    const safePage = Math.min(page, pageCount);
-    const start = (safePage - 1) * limit;
-
-    return {
-      posts: allPosts.slice(start, start + limit),
-      totalCount,
-      page: safePage,
-      pageCount,
-      limit,
-    };
+  if (error) {
+    console.error("Unable to load published articles:", error.message);
+    return { posts: [], totalCount: 0, page: 1, pageCount: 1, limit };
   }
 
   const totalCount = count ?? data.length;
   const pageCount = Math.max(1, Math.ceil(totalCount / limit));
 
   return {
-    posts: data,
+    posts: data ?? [],
     totalCount,
     page: Math.min(page, pageCount),
     pageCount,
@@ -114,7 +104,7 @@ export async function getAllPosts(
   };
 }
 
-export async function getPostBySlug(slug: string) {
+async function query_getPostBySlug(slug: string) {
   const supabase = createPublicClient();
 
   if (!supabase) {
@@ -128,9 +118,8 @@ export async function getPostBySlug(slug: string) {
     .eq("published", true)
     .maybeSingle();
 
-  if (error || !data) {
-    return getSeedPublishedPosts().find((post) => post.slug === slug) ?? null;
-  }
+  if (error) throw new Error("Unable to load article");
+  if (!data) return null;
 
   return data;
 }
@@ -152,13 +141,9 @@ export async function getRelatedPosts(currentSlug: string, limit = 3) {
     .order("published_at", { ascending: false })
     .limit(limit);
 
-  if (error || !data || data.length === 0) {
-    return getSeedPublishedPosts()
-      .filter((post) => post.slug !== currentSlug)
-      .slice(0, limit);
-  }
+  if (error) return [];
 
-  return data;
+  return data ?? [];
 }
 
 export async function getPublishedPostSlugs() {
@@ -173,9 +158,9 @@ export async function getPublishedPostSlugs() {
     .select("slug")
     .eq("published", true);
 
-  if (error || !data || data.length === 0) {
-    return getSeedPublishedPosts().map((post) => post.slug);
-  }
+  if (error) throw new Error("Unable to load published article URLs");
 
-  return data.map((post) => post.slug);
+  return (data ?? []).map((post) => post.slug);
 }
+
+export const getPostBySlug = cache(query_getPostBySlug);

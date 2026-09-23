@@ -24,13 +24,13 @@ export async function OrganizationSchema() {
     "@type": ["Organization", "LocalBusiness"],
     name,
     url: siteUrl,
-    logo: `${siteUrl}/logo.png`,
-    image: `${siteUrl}/og-image.jpg`,
+    "@id": `${siteUrl}/#organization`,
+    image: `${siteUrl}/opengraph-image`,
     description:
       "Moral Clean supplies industrial cleaning machines, replacement parts, and repair services for commercial and facility cleaning teams across Pakistan.",
     address: {
       "@type": "PostalAddress",
-      streetAddress: "Shop no 01, Plot no 242, Sector 11-E",
+      streetAddress: settings.business_address || "Shop no 01, Plot no 242, Sector 11-E",
       addressLocality: "North Karachi",
       addressRegion: "Sindh",
       postalCode: "75850",
@@ -38,7 +38,7 @@ export async function OrganizationSchema() {
     },
     telephone,
     email,
-    openingHoursSpecification: [
+    openingHoursSpecification: !settings.business_hours ? [
       {
         "@type": "OpeningHoursSpecification",
         dayOfWeek: [
@@ -52,10 +52,9 @@ export async function OrganizationSchema() {
         opens: "09:00",
         closes: "18:00",
       },
-    ],
+    ] : undefined,
     sameAs: sameAs.length > 0 ? sameAs : undefined,
     areaServed: "PK",
-    priceRange: "$$",
   };
 
   return (

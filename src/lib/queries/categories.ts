@@ -1,3 +1,4 @@
+import { cache } from "react";
 import { createClient as createSupabaseClient } from "@supabase/supabase-js";
 
 import { env } from "@/config/env";
@@ -140,7 +141,7 @@ function getSeedCategories(): CategoryWithCount[] {
     }));
 }
 
-export async function getAllCategories(): Promise<CategoryWithCount[]> {
+async function query_getAllCategories(): Promise<CategoryWithCount[]> {
   const supabase = createPublicCatalogClient();
 
   if (!supabase) {
@@ -157,9 +158,8 @@ export async function getAllCategories(): Promise<CategoryWithCount[]> {
     .order("sort_order", { ascending: true })
     .order("name", { ascending: true });
 
-  if (error || !data) {
-    return getSeedCategories();
-  }
+  if (error) throw new Error("Unable to load categories");
+  if (!data) return [];
 
   return data.map((row) => {
     const productsCountRow = Array.isArray(row.products) ? row.products[0] : null;
@@ -298,3 +298,5 @@ export async function getProductsByCategory(
     perPage: CATEGORY_PRODUCTS_PER_PAGE,
   };
 }
+
+export const getAllCategories = cache(query_getAllCategories);

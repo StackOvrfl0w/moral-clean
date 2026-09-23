@@ -133,6 +133,7 @@ async function persistProductImages(
 export async function createProduct(formData: FormData) {
   await requireAdmin();
   const payload = parseProductPayload(formData);
+  if (payload) payload.slug = slugify(payload.slug || payload.name);
   if (!payload?.name || !payload?.slug) {
     throw new Error("Name and slug are required.");
   }
@@ -168,6 +169,8 @@ export async function createProduct(formData: FormData) {
   await persistProductImages(data.id, payload.images);
 
   revalidatePath("/admin/products");
+  revalidatePath("/");
+  revalidatePath("/catalog-sitemap.xml");
   revalidatePath(`/products/${data.slug}`);
   redirect("/admin/products");
 }
@@ -176,6 +179,7 @@ export async function updateProduct(formData: FormData) {
   await requireAdmin();
   const productId = String(formData.get("productId") ?? "");
   const payload = parseProductPayload(formData);
+  if (payload) payload.slug = slugify(payload.slug || payload.name);
 
   if (!productId || !payload?.name || !payload?.slug) {
     throw new Error("Product ID, name, and slug are required.");
@@ -214,6 +218,8 @@ export async function updateProduct(formData: FormData) {
   await persistProductImages(data.id, payload.images);
 
   revalidatePath("/admin/products");
+  revalidatePath("/");
+  revalidatePath("/catalog-sitemap.xml");
   revalidatePath(`/products/${data.slug}`);
   redirect("/admin/products");
 }
@@ -266,6 +272,8 @@ export async function deleteProduct(formData: FormData) {
   }
 
   revalidatePath("/admin/products");
+  revalidatePath("/");
+  revalidatePath("/catalog-sitemap.xml");
   revalidatePath("/products");
   revalidatePath("/products/category/[slug]", "page");
   if (data?.slug) {
@@ -338,6 +346,8 @@ export async function bulkDeleteProducts(formData: FormData) {
   }
 
   revalidatePath("/admin/products");
+  revalidatePath("/");
+  revalidatePath("/catalog-sitemap.xml");
   revalidatePath("/products");
   revalidatePath("/products/category/[slug]", "page");
   for (const row of slugRows ?? []) {
@@ -356,6 +366,8 @@ export async function toggleFeatured(formData: FormData) {
   const supabase = createClient();
   await supabase.from("products").update({ featured }).eq("id", productId);
   revalidatePath("/admin/products");
+  revalidatePath("/");
+  revalidatePath("/catalog-sitemap.xml");
 }
 
 export async function toggleInStock(formData: FormData) {
@@ -370,6 +382,8 @@ export async function toggleInStock(formData: FormData) {
     .update({ in_stock: inStock })
     .eq("id", productId);
   revalidatePath("/admin/products");
+  revalidatePath("/");
+  revalidatePath("/catalog-sitemap.xml");
 }
 
 export async function uploadProductImage(formData: FormData) {
@@ -409,6 +423,8 @@ export async function deleteProductImage(formData: FormData) {
   const supabase = createClient();
   await supabase.from("product_images").delete().eq("id", imageId);
   revalidatePath("/admin/products");
+  revalidatePath("/");
+  revalidatePath("/catalog-sitemap.xml");
 }
 
 export async function reorderProductImages(formData: FormData) {
@@ -431,4 +447,6 @@ export async function reorderProductImages(formData: FormData) {
       .eq("id", item.id);
   }
   revalidatePath("/admin/products");
+  revalidatePath("/");
+  revalidatePath("/catalog-sitemap.xml");
 }

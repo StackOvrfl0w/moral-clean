@@ -62,6 +62,8 @@ export async function createCategory(formData: FormData) {
   if (error) throw new Error(error.message);
 
   revalidatePath("/admin/categories");
+  revalidatePath("/");
+  revalidatePath("/catalog-sitemap.xml");
   revalidatePath(`/products/category/${slug}`);
   revalidatePath("/products");
   revalidatePath("/");
@@ -91,6 +93,8 @@ export async function updateCategory(formData: FormData) {
   if (error) throw new Error(error.message);
 
   revalidatePath("/admin/categories");
+  revalidatePath("/");
+  revalidatePath("/catalog-sitemap.xml");
   revalidatePath(`/products/category/${slug}`);
   revalidatePath("/products");
   revalidatePath("/");
@@ -110,6 +114,8 @@ export async function deleteCategory(formData: FormData) {
   const { error } = await supabase.from("categories").delete().eq("id", id);
   if (error) throw new Error(error.message);
   revalidatePath("/admin/categories");
+  revalidatePath("/");
+  revalidatePath("/catalog-sitemap.xml");
   revalidatePath("/products");
   revalidatePath("/");
 }
@@ -128,6 +134,8 @@ export async function reorderCategories(formData: FormData) {
   }
 
   revalidatePath("/admin/categories");
+  revalidatePath("/");
+  revalidatePath("/catalog-sitemap.xml");
   revalidatePath("/products");
   revalidatePath("/");
 }

@@ -45,6 +45,8 @@ export async function createBlogPost(formData: FormData) {
   if (error) throw new Error(error.message);
 
   revalidatePath("/admin/blog");
+  revalidatePath("/");
+  revalidatePath("/catalog-sitemap.xml");
   revalidatePath("/blog");
   redirect("/admin/blog");
 }
@@ -85,6 +87,8 @@ export async function updateBlogPost(formData: FormData) {
   if (error) throw new Error(error.message);
 
   revalidatePath("/admin/blog");
+  revalidatePath("/");
+  revalidatePath("/catalog-sitemap.xml");
   revalidatePath("/blog");
   redirect("/admin/blog");
 }
@@ -103,6 +107,8 @@ export async function deleteBlogPost(formData: FormData) {
   if (count !== 1) throw new Error("Blog post was not found or was not deleted.");
 
   revalidatePath("/admin/blog");
+  revalidatePath("/");
+  revalidatePath("/catalog-sitemap.xml");
   revalidatePath("/blog");
 }
 
@@ -129,6 +135,8 @@ export async function bulkDeleteBlogPosts(formData: FormData) {
   }
 
   revalidatePath("/admin/blog");
+  revalidatePath("/");
+  revalidatePath("/catalog-sitemap.xml");
   revalidatePath("/blog");
   return { deletedCount: count ?? 0 };
 }
