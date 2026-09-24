@@ -1,5 +1,6 @@
 import { pageMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
+import Image from "next/image";
 import {
   BadgeCheck,
   Handshake,
@@ -30,8 +31,15 @@ export default function AboutPage() {
       {/* Our Story */}
       <section className="bg-background py-20">
         <div className="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-2 lg:items-center lg:px-8">
-          <div className="relative overflow-hidden rounded-lg border border-border bg-[linear-gradient(140deg,#f8fafc_0%,#ebf5ff_100%)]">
-            <div className="aspect-[4/3] bg-[radial-gradient(circle_at_20%_25%,rgba(14,165,233,0.22),transparent_40%),radial-gradient(circle_at_80%_75%,rgba(10,37,64,0.12),transparent_45%)]" />
+          <div className="relative aspect-[4/5] overflow-hidden rounded-lg border border-border bg-muted shadow-sm">
+            <Image
+              src="/assets/about/muhammad-moiz-khan.webp"
+              alt="Muhammad Moiz Khan, CEO of Moral Clean"
+              fill
+              priority
+              sizes="(min-width: 1024px) 50vw, 100vw"
+              className="object-cover object-top"
+            />
           </div>
           <div>
             <p className="mb-3 text-xs font-bold uppercase tracking-[0.18em] text-accent">
