@@ -3,46 +3,78 @@
 import { revalidatePath } from "next/cache";
 
 import { requireAdmin } from "@/lib/auth";
-import { createClient } from "@/lib/supabase/server";
+import { createAdminClient } from "@/lib/supabase/admin";
 
-export async function deleteSubmission(formData: FormData) {
+export type SubmissionActionResult =
+  | { success: true; deletedCount: number }
+  | { success: false; error: string };
+
+export async function deleteSubmission(
+  formData: FormData,
+): Promise<SubmissionActionResult> {
   await requireAdmin();
   const id = String(formData.get("id") ?? "");
-  if (!id) throw new Error("Submission ID required.");
+  if (!/^[0-9a-f-]{36}$/i.test(id)) {
+    return { success: false, error: "A valid submission ID is required." };
+  }
 
-  const supabase = createClient();
+  const supabase = createAdminClient();
   const { error, count } = await supabase
     .from("contact_submissions")
     .delete({ count: "exact" })
     .eq("id", id);
-  if (error) throw new Error(error.message);
-  if (count !== 1) throw new Error("Submission was not found or was not deleted.");
-
-  revalidatePath("/admin/submissions");
-}
-
-export async function bulkDeleteSubmissions(formData: FormData) {
-  await requireAdmin();
-  let ids: string[];
-  try {
-    ids = JSON.parse(String(formData.get("ids") ?? "[]")) as string[];
-  } catch {
-    throw new Error("Invalid submission selection.");
+  if (error) return { success: false, error: error.message };
+  if (count !== 1) {
+    return {
+      success: false,
+      error: "Submission was not found or was already deleted.",
+    };
   }
 
-  ids = Array.from(new Set(ids.filter((id) => /^[0-9a-f-]{36}$/i.test(id))));
-  if (ids.length === 0) throw new Error("No submissions selected.");
+  revalidatePath("/admin/submissions");
+  return { success: true, deletedCount: 1 };
+}
 
-  const supabase = createClient();
+export async function bulkDeleteSubmissions(
+  formData: FormData,
+): Promise<SubmissionActionResult> {
+  await requireAdmin();
+  let submittedIds: unknown;
+  try {
+    submittedIds = JSON.parse(String(formData.get("ids") ?? "[]"));
+  } catch {
+    return { success: false, error: "Invalid submission selection." };
+  }
+
+  if (!Array.isArray(submittedIds)) {
+    return { success: false, error: "Invalid submission selection." };
+  }
+
+  const ids = Array.from(
+    new Set(
+      submittedIds.filter(
+        (id): id is string =>
+          typeof id === "string" && /^[0-9a-f-]{36}$/i.test(id),
+      ),
+    ),
+  );
+  if (ids.length === 0) {
+    return { success: false, error: "No submissions selected." };
+  }
+
+  const supabase = createAdminClient();
   const { error, count } = await supabase
     .from("contact_submissions")
     .delete({ count: "exact" })
     .in("id", ids);
-  if (error) throw new Error(error.message);
+  if (error) return { success: false, error: error.message };
   if ((count ?? 0) !== ids.length) {
-    throw new Error(`Only ${count ?? 0} of ${ids.length} submissions were deleted.`);
+    return {
+      success: false,
+      error: `Only ${count ?? 0} of ${ids.length} submissions were deleted. Refresh the page and try again.`,
+    };
   }
 
   revalidatePath("/admin/submissions");
-  return { deletedCount: count ?? 0 };
+  return { success: true, deletedCount: count ?? 0 };
 }

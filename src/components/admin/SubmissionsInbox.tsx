@@ -118,6 +118,10 @@ export function SubmissionsInbox({
     startTransition(async () => {
       try {
         const result = await bulkDeleteSubmissions(formData);
+        if (!result.success) {
+          toast.error(result.error);
+          return;
+        }
         setSelected(new Set());
         toast.success(`Deleted ${result.deletedCount} submission${result.deletedCount === 1 ? "" : "s"}.`);
         router.refresh();
