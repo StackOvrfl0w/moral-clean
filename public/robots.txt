@@ -1,11 +1,11 @@
 # *
 User-agent: *
 Allow: /
-Disallow: /admin
-Disallow: /api
+Disallow: /api/
 
 # Host
-Host: http://localhost:3000
+Host: https://moralclean.com
 
 # Sitemaps
-Sitemap: http://localhost:3000/sitemap.xml
+Sitemap: https://moralclean.com/sitemap.xml
+Sitemap: https://moralclean.com/catalog-sitemap.xml

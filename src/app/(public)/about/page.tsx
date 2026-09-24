@@ -1,3 +1,4 @@
+import { pageMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
 import {
   BadgeCheck,
@@ -8,25 +9,13 @@ import {
 } from "lucide-react";
 import { MapPin, Phone, Mail, Clock3, MessageCircle } from "lucide-react";
 
-import { env } from "@/config/env";
 import { IndustriesStrip } from "@/components/sections/IndustriesStrip";
 import { ContactForm } from "@/components/contact/ContactForm";
 
-const siteUrl = env.siteUrl;
 
-export const metadata: Metadata = {
-  title: "About Us",
-  description:
-    "Moral Clean is the trusted partner for commercial cleaning equipment supply, technical service, and reliable after-sales support in Pakistan.",
-  openGraph: {
-    title: "About Us | Moral Clean",
-    description:
-      "Moral Clean is the trusted partner for commercial cleaning equipment supply, technical service, and reliable after-sales support in Pakistan.",
-  },
-  alternates: {
-    canonical: `${siteUrl}/about`,
-  },
-};
+export const metadata: Metadata = pageMetadata({
+  title: 'About Our Cleaning Equipment Company', description: 'Meet Moral Clean, a Pakistan supplier of commercial cleaning equipment since 2007, with machine repair, spare parts and after-sales support.', path: '/about',
+});
 
 const address = "Shop no 01, Plot no 242, Sector 11-E, North Karachi, Karachi";
 const phone = "+92 309 8783242";
@@ -48,7 +37,7 @@ export default function AboutPage() {
             <p className="mb-3 text-xs font-bold uppercase tracking-[0.18em] text-accent">
               Our Story
             </p>
-            <h2>About Us</h2>
+            <h1>About Moral Clean</h1>
             <p className="mt-4 font-semibold text-primary">
               Your Trusted Partner in Cleaning Equipment and Service
             </p>
@@ -73,6 +62,7 @@ export default function AboutPage() {
       {/* Values */}
       <section className="bg-brand-gradient py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <h2 className="mb-8 text-brand-navy">Our Values</h2>
           <div className="grid gap-6 md:grid-cols-3">
             {[
               {

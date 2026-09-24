@@ -6,12 +6,35 @@ import { env } from "@/config/env";
 import { createClient } from "@/lib/supabase/server";
 import type { ContactFormState, QuickQuoteFormState } from "./contact-types";
 
+const MAX_NAME_LENGTH = 120;
+const MAX_PHONE_LENGTH = 32;
+const MAX_EMAIL_LENGTH = 254;
+const MAX_SUBJECT_LENGTH = 80;
+const MAX_REQUIREMENT_LENGTH = 4000;
+const MAX_MESSAGE_LENGTH = 6000;
+const MAX_CATEGORY_LENGTH = 120;
+const allowedSubjects = new Set([
+  "Product Inquiry",
+  "Service Request",
+  "Parts & Replacement",
+  "Quotation",
+  "General Question",
+]);
+
 function normalizeValue(value: FormDataEntryValue | null) {
   return typeof value === "string" ? value.trim() : "";
 }
 
 function isValidEmail(email: string) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  return email.length <= MAX_EMAIL_LENGTH && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+function isValidPhone(phone: string) {
+  return phone.length <= MAX_PHONE_LENGTH && /^[+()\-\s\d]{7,32}$/.test(phone);
+}
+
+function isWithinLength(value: string, max: number) {
+  return value.length > 0 && value.length <= max;
 }
 
 function escapeHtml(value: string) {
@@ -105,8 +128,20 @@ export async function submitQuickQuote(
   const requirement = normalizeValue(formData.get("requirement"));
   const categorySlug = normalizeValue(formData.get("categorySlug"));
   const categoryName = normalizeValue(formData.get("categoryName"));
+  const honeypot = normalizeValue(formData.get("website"));
 
-  if (!name || !phone || !requirement) {
+  if (honeypot) {
+    return { success: true, error: null };
+  }
+
+  if (
+    !isWithinLength(name, MAX_NAME_LENGTH) ||
+    !isValidPhone(phone) ||
+    !isWithinLength(requirement, MAX_REQUIREMENT_LENGTH) ||
+    categorySlug.length > MAX_CATEGORY_LENGTH ||
+    categoryName.length > MAX_CATEGORY_LENGTH ||
+    (email && !isValidEmail(email))
+  ) {
     return {
       success: false,
       error: "Name, phone number, and product/requirement are required.",
@@ -161,8 +196,19 @@ export async function submitContactForm(
   const phone = normalizeValue(formData.get("phone"));
   const subject = normalizeValue(formData.get("subject"));
   const message = normalizeValue(formData.get("message"));
+  const honeypot = normalizeValue(formData.get("website"));
 
-  if (!name || !email || !phone || !message) {
+  if (honeypot) {
+    return { success: true, error: null };
+  }
+
+  if (
+    !isWithinLength(name, MAX_NAME_LENGTH) ||
+    !isValidPhone(phone) ||
+    !isWithinLength(message, MAX_MESSAGE_LENGTH) ||
+    subject.length > MAX_SUBJECT_LENGTH ||
+    (subject && !allowedSubjects.has(subject))
+  ) {
     return {
       success: false,
       error: "Please fill in all required fields.",

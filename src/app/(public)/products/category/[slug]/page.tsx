@@ -1,3 +1,4 @@
+import { listingMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -9,6 +10,7 @@ import { ProductFilters } from "@/components/products/ProductFilters";
 import { BreadcrumbSchema } from "@/components/seo/BreadcrumbSchema";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { getPaginationItems } from "@/lib/pagination";
 import {
   getAllCategories,
   getCategoryBySlug,
@@ -17,11 +19,9 @@ import {
 } from "@/lib/queries/categories";
 import { cn } from "@/lib/utils";
 
-import { env } from "@/config/env";
 import { RelatedProductsCarousel } from "@/components/products/RelatedProductsCarousel";
 
 export const revalidate = 3600;
-const siteUrl = env.siteUrl;
 
 type CategoryPageProps = {
   params: {
@@ -86,7 +86,7 @@ function CategoryPagination({
     return null;
   }
 
-  const pages = Array.from({ length: pageCount }, (_, index) => index + 1);
+  const pages = getPaginationItems(page, pageCount);
 
   return (
     <nav
@@ -105,7 +105,12 @@ function CategoryPagination({
         </Button>
       )}
 
-      {pages.map((pageNumber) => (
+      {pages.map((pageNumber) =>
+        typeof pageNumber === "string" ? (
+          <span key={pageNumber} className="px-2 text-muted-foreground">
+            …
+          </span>
+        ) : (
         <Button
           key={pageNumber}
           asChild={pageNumber !== page}
@@ -123,7 +128,8 @@ function CategoryPagination({
             </Link>
           )}
         </Button>
-      ))}
+        ),
+      )}
 
       {page < pageCount ? (
         <Button asChild variant="outline" size="sm">
@@ -140,32 +146,17 @@ function CategoryPagination({
   );
 }
 
-export async function generateMetadata({
-  params,
-}: CategoryPageProps): Promise<Metadata> {
+export async function generateMetadata({ params, searchParams }: CategoryPageProps): Promise<Metadata> {
   const category = await getCategoryBySlug(params.slug);
-
-  if (!category) {
-    return {
-      title: "Category Not Found",
-    };
-  }
-
-  return {
-    title: category.name,
-    description:
-      category.description ||
-      `Browse ${category.name} from leading international brands. Professional commercial cleaning equipment available across Pakistan.`,
-    openGraph: {
-      title: `${category.name} | Moral Clean`,
-      description:
-        category.description ||
-        `Browse ${category.name} from leading international brands. Professional commercial cleaning equipment available across Pakistan.`,
-    },
-    alternates: {
-      canonical: `${siteUrl}/products/category/${category.slug}`,
-    },
-  };
+  if (!category) notFound();
+  const suppliedDescription = category.description?.replace(/\s+/g, " ").trim();
+  return listingMetadata(
+    `${category.name} in Pakistan`,
+    suppliedDescription && suppliedDescription.length >= 60
+      ? suppliedDescription
+      : `Browse ${category.name.toLowerCase()} for commercial facilities in Pakistan. Compare specifications and request equipment, parts and service from Moral Clean.`,
+    `/products/category/${category.slug}`, searchParams,
+  );
 }
 
 export async function generateStaticParams() {
@@ -193,6 +184,8 @@ export default async function CategoryPage({
     brand,
     tag,
   });
+  if (Number(page) > productsResult.pageCount) notFound();
+
   const allCategories = await getAllCategories();
   const relatedProducts = productsResult.products.slice(0, 6);
   const activeSort =
@@ -240,14 +233,14 @@ export default async function CategoryPage({
             categoryCounts={Object.fromEntries(
               allCategories.map((c) => [c.slug, c.product_count]),
             )}
-            brands={productsResult.products
-              .map((p) => p.brand)
-              .filter((b): b is string => Boolean(b))
-              .filter((b, i, arr) => arr.indexOf(b) === i)}
-            tags={productsResult.products
-              .flatMap((p) => p.tags)
-              .filter((t, i, arr) => arr.findIndex((x) => x.id === t.id) === i)}
-            activeFilters={{ category: category.slug }}
+            brands={productsResult.brands}
+            tags={productsResult.tags}
+            activeFilters={{
+              category: category.slug,
+              brand,
+              tag,
+              sort: sort === "featured" ? undefined : sort,
+            }}
             className="sticky top-28 hidden h-fit w-[280px] shrink-0 rounded-md border border-border bg-white p-5 lg:block"
           />
 
@@ -278,7 +271,7 @@ export default async function CategoryPage({
 
             {productsResult.products.length > 0 ? (
               <div className="grid grid-cols-2 gap-5 xl:grid-cols-3">
-                {relatedProducts.map((product) => (
+                {productsResult.products.map((product) => (
                   <ProductCard key={product.id} product={product} />
                 ))}
               </div>

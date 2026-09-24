@@ -1,11 +1,16 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { redirect } from "next/navigation";
 
 import { requireAdmin } from "@/lib/auth";
+import { validateImageUpload } from "@/lib/image-upload";
 import { createClient } from "@/lib/supabase/server";
-import { slugify } from "@/lib/utils";
+import { normalizeSafeUrl, slugify } from "@/lib/utils";
+
+function invalidateCatalog() {
+  revalidateTag("catalog");
+}
 
 function normalize(value: FormDataEntryValue | null) {
   const text = typeof value === "string" ? value.trim() : "";
@@ -19,13 +24,13 @@ export async function uploadCategoryImage(
   const file = formData.get("file");
   if (!(file instanceof File)) throw new Error("No file selected.");
 
-  const ext = file.name.split(".").pop() || "jpg";
-  const path = `categories/${Date.now()}-${crypto.randomUUID()}.${ext}`;
+  const image = await validateImageUpload(file);
+  const path = `categories/${Date.now()}-${crypto.randomUUID()}.${image.extension}`;
   const supabase = createClient();
   const { error } = await supabase.storage
     .from("product images")
-    .upload(path, file, {
-      contentType: file.type,
+    .upload(path, image.file, {
+      contentType: image.contentType,
       upsert: false,
     });
   if (error) throw new Error(error.message);
@@ -43,10 +48,12 @@ export async function createCategory(formData: FormData) {
   const slugInput = normalize(formData.get("slug"));
   const slug = slugInput ? slugify(slugInput) : name ? slugify(name) : null;
   const description = normalize(formData.get("description"));
-  const image_url = normalize(formData.get("image_url"));
+  const imageInput = normalize(formData.get("image_url"));
+  const image_url = normalizeSafeUrl(imageInput);
   const sort_order = Number(formData.get("sort_order") ?? 0);
 
   if (!name || !slug) throw new Error("Name and slug are required.");
+  if (imageInput && !image_url) throw new Error("Image URL must use HTTPS.");
 
   const supabase = createClient();
   const { error } = await supabase.from("categories").insert({
@@ -58,7 +65,10 @@ export async function createCategory(formData: FormData) {
   });
   if (error) throw new Error(error.message);
 
+  invalidateCatalog();
   revalidatePath("/admin/categories");
+  revalidatePath("/");
+  revalidatePath("/catalog-sitemap.xml");
   revalidatePath(`/products/category/${slug}`);
   revalidatePath("/products");
   revalidatePath("/");
@@ -72,11 +82,13 @@ export async function updateCategory(formData: FormData) {
   const slugInput = normalize(formData.get("slug"));
   const slug = slugInput ? slugify(slugInput) : name ? slugify(name) : null;
   const description = normalize(formData.get("description"));
-  const image_url = normalize(formData.get("image_url"));
+  const imageInput = normalize(formData.get("image_url"));
+  const image_url = normalizeSafeUrl(imageInput);
   const sort_order = Number(formData.get("sort_order") ?? 0);
 
   if (!id || !name || !slug)
     throw new Error("Category ID, name and slug are required.");
+  if (imageInput && !image_url) throw new Error("Image URL must use HTTPS.");
 
   const supabase = createClient();
   const { error } = await supabase
@@ -85,7 +97,10 @@ export async function updateCategory(formData: FormData) {
     .eq("id", id);
   if (error) throw new Error(error.message);
 
+  invalidateCatalog();
   revalidatePath("/admin/categories");
+  revalidatePath("/");
+  revalidatePath("/catalog-sitemap.xml");
   revalidatePath(`/products/category/${slug}`);
   revalidatePath("/products");
   revalidatePath("/");
@@ -104,7 +119,10 @@ export async function deleteCategory(formData: FormData) {
     .eq("category_id", id);
   const { error } = await supabase.from("categories").delete().eq("id", id);
   if (error) throw new Error(error.message);
+  invalidateCatalog();
   revalidatePath("/admin/categories");
+  revalidatePath("/");
+  revalidatePath("/catalog-sitemap.xml");
   revalidatePath("/products");
   revalidatePath("/");
 }
@@ -122,7 +140,10 @@ export async function reorderCategories(formData: FormData) {
       .eq("id", item.id);
   }
 
+  invalidateCatalog();
   revalidatePath("/admin/categories");
+  revalidatePath("/");
+  revalidatePath("/catalog-sitemap.xml");
   revalidatePath("/products");
   revalidatePath("/");
 }

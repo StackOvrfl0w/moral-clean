@@ -35,15 +35,15 @@ export default async function AdminDashboardPage() {
     recentCountResult,
     recentSubmissionsResult,
   ] = await Promise.all([
-    supabase.from("products").select("*", { count: "exact", head: true }),
-    supabase.from("categories").select("*", { count: "exact", head: true }),
+    supabase.from("products").select("id", { count: "exact", head: true }),
+    supabase.from("categories").select("id", { count: "exact", head: true }),
     supabase
       .from("blog_posts")
-      .select("*", { count: "exact", head: true })
+      .select("id", { count: "exact", head: true })
       .eq("published", true),
     supabase
       .from("contact_submissions")
-      .select("*", { count: "exact", head: true })
+      .select("id", { count: "exact", head: true })
       .gte("created_at", weekAgo),
     supabase
       .from("contact_submissions")

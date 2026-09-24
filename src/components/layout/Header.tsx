@@ -86,10 +86,23 @@ export function Header({ settings, categories }: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 8);
-    handleScroll();
+    let frame: number | null = null;
+    const update = () => {
+      frame = null;
+      const nextValue = window.scrollY > 8;
+      setIsScrolled((current) =>
+        current === nextValue ? current : nextValue,
+      );
+    };
+    const handleScroll = () => {
+      if (frame === null) frame = window.requestAnimationFrame(update);
+    };
+    update();
     window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (frame !== null) window.cancelAnimationFrame(frame);
+    };
   }, []);
 
   const phone = settings.contact_phone || "+92 309 8783242";

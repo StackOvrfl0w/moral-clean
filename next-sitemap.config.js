@@ -1,89 +1,19 @@
-const { createClient } = require("@supabase/supabase-js");
-
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://moralclean.com";
-
-function createSupabase() {
-  if (
-    !process.env.NEXT_PUBLIC_SUPABASE_URL ||
-    !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-  ) {
-    return null;
-  }
-
-  return createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
-    {
-      auth: {
-        autoRefreshToken: false,
-        persistSession: false,
-      },
-    },
-  );
-}
+const configuredSiteUrl = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+const siteUrl = configuredSiteUrl && !/localhost|127\.0\.0\.1/i.test(configuredSiteUrl)
+  ? configuredSiteUrl.replace(/\/$/, "") : "https://moralclean.com";
+const pages = ["/", "/about", "/services", "/contact", "/products", "/blog"];
 
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
   siteUrl,
   generateRobotsTxt: true,
-  sitemapSize: 5000,
-  changefreq: "weekly",
-  priority: 0.7,
-  exclude: ["/admin", "/admin/*", "/api/*"],
+  autoLastmod: false,
+  exclude: ["/admin", "/admin/*", "/api/*", "/catalog-sitemap.xml"],
+  transform: async (_config, path) => pages.includes(path) ? { loc: path } : null,
+  additionalPaths: async () => pages.map((loc) => ({ loc })),
   robotsTxtOptions: {
-    policies: [
-      {
-        userAgent: "*",
-        allow: "/",
-        disallow: ["/admin", "/api"],
-      },
-    ],
-    additionalSitemaps: [],
-  },
-  additionalPaths: async () => {
-    const supabase = createSupabase();
-
-    if (!supabase) {
-      return [];
-    }
-
-    const [productsResponse, categoriesResponse, postsResponse] =
-      await Promise.all([
-        supabase.from("products").select("slug"),
-        supabase.from("categories").select("slug"),
-        supabase.from("blog_posts").select("slug").eq("published", true),
-      ]);
-
-    const additional = [];
-    const nowIso = new Date().toISOString();
-
-    for (const product of productsResponse.data ?? []) {
-      additional.push({
-        loc: `/products/${product.slug}`,
-        changefreq: "weekly",
-        priority: 0.8,
-        lastmod: nowIso,
-      });
-    }
-
-    for (const category of categoriesResponse.data ?? []) {
-      additional.push({
-        loc: `/products/category/${category.slug}`,
-        changefreq: "weekly",
-        priority: 0.7,
-        lastmod: nowIso,
-      });
-    }
-
-    for (const post of postsResponse.data ?? []) {
-      additional.push({
-        loc: `/blog/${post.slug}`,
-        changefreq: "weekly",
-        priority: 0.7,
-        lastmod: nowIso,
-      });
-    }
-
-    return additional;
+    additionalSitemaps: [`${siteUrl}/catalog-sitemap.xml`],
+    // Allow admin crawling so its noindex meta/header can be read. Auth protects data.
+    policies: [{ userAgent: "*", allow: "/", disallow: ["/api/"] }],
   },
 };

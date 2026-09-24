@@ -1,3 +1,4 @@
+import { pageMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
 import {
@@ -9,27 +10,15 @@ import {
   Phone,
 } from "lucide-react";
 
-import { env } from "@/config/env";
 import { ContactForm } from "@/components/contact/ContactForm";
 import { getProductBySlug } from "@/lib/queries/products";
 import { getServiceBySlug } from "@/lib/queries/services";
 import { getAllSettings } from "@/lib/queries/settings";
 
-const siteUrl = env.siteUrl;
 
-export const metadata: Metadata = {
-  title: "Contact Us",
-  description:
-    "Contact Moral Clean at Shop no 01, Plot no 242, Sector 11-E, North Karachi, Karachi or call +92 331 3195138 for equipment and service inquiries.",
-  openGraph: {
-    title: "Contact Us | Moral Clean",
-    description:
-      "Contact Moral Clean at Shop no 01, Plot no 242, Sector 11-E, North Karachi, Karachi or call +92 331 3195138 for equipment and service inquiries.",
-  },
-  alternates: {
-    canonical: `${siteUrl}/contact`,
-  },
-};
+export const metadata: Metadata = pageMetadata({
+  title: 'Contact Moral Clean for Equipment & Repairs', description: 'Contact Moral Clean in Karachi for cleaning equipment quotes, spare parts and repair support. Share your machine model and facility requirements.', path: '/contact',
+});
 
 function getParam(
   searchParams: Record<string, string | string[] | undefined> | undefined,

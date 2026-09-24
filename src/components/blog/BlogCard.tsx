@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
-import type { BlogPost } from "@/lib/types";
+import type { BlogCardData } from "@/lib/types";
 import { blogCardFallbackImage } from "@/lib/fallback-images";
 
 const blurDataUrl =
@@ -20,7 +20,7 @@ function formatDate(value: string | null) {
   });
 }
 
-export function BlogCard({ post }: { post: BlogPost }) {
+export function BlogCard({ post }: { post: BlogCardData }) {
   const imageUrl = post.cover_image_url || blogCardFallbackImage;
 
   return (
@@ -36,7 +36,7 @@ export function BlogCard({ post }: { post: BlogPost }) {
           sizes="(min-width: 1280px) 25vw, (min-width: 768px) 50vw, 100vw"
           placeholder="blur"
           blurDataURL={blurDataUrl}
-          unoptimized
+
           className="object-cover transition duration-300 group-hover:scale-105"
         />
       </div>

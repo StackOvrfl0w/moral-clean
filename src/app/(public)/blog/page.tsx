@@ -1,3 +1,5 @@
+import { notFound } from "next/navigation";
+import { listingMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -5,25 +7,14 @@ import { ArrowRight } from "lucide-react";
 
 import { BlogCard } from "@/components/blog/BlogCard";
 import { Button } from "@/components/ui/button";
-import { env } from "@/config/env";
 import { blogFallbackImage } from "@/lib/fallback-images";
+import { getPaginationItems } from "@/lib/pagination";
 import { getAllPosts } from "@/lib/queries/blog";
 
-const siteUrl = env.siteUrl;
 
-export const metadata: Metadata = {
-  title: "Blog",
-  description:
-    "Read industry insights, cleaning equipment guides, and maintenance tips from the Moral Clean team.",
-  openGraph: {
-    title: "Blog | Moral Clean",
-    description:
-      "Read industry insights, cleaning equipment guides, and maintenance tips from the Moral Clean team.",
-  },
-  alternates: {
-    canonical: `${siteUrl}/blog`,
-  },
-};
+export function generateMetadata({ searchParams }: { searchParams?: Record<string, string | string[] | undefined> }): Metadata {
+  return listingMetadata('Cleaning Equipment Guides & Maintenance Tips', 'Read Moral Clean guides on choosing commercial cleaning machines, maintaining equipment and planning cleaning operations for facilities in Pakistan.', '/blog', searchParams);
+}
 
 const POSTS_PER_PAGE = 9;
 
@@ -69,13 +60,12 @@ export default async function BlogPage({
 }) {
   const page = normalizePage(getParam(searchParams, "page"));
   const result = await getAllPosts({ page, limit: POSTS_PER_PAGE });
+  if (page > result.pageCount) notFound();
+
   const showFeatured = result.totalCount >= 4 && result.posts.length > 0;
   const featuredPost = showFeatured ? result.posts[0] : null;
   const gridPosts = featuredPost ? result.posts.slice(1) : result.posts;
-  const pages = Array.from(
-    { length: result.pageCount },
-    (_, index) => index + 1,
-  );
+  const pages = getPaginationItems(result.page, result.pageCount);
 
   return (
     <>
@@ -105,7 +95,7 @@ export default async function BlogPage({
                     alt={featuredPost.title}
                     fill
                     sizes="(min-width: 1024px) 50vw, 100vw"
-                    unoptimized
+
                     className="object-cover"
                   />
                 </div>
@@ -162,7 +152,12 @@ export default async function BlogPage({
                 </Button>
               )}
 
-              {pages.map((pageNumber) => (
+              {pages.map((pageNumber) =>
+                typeof pageNumber === "string" ? (
+                  <span key={pageNumber} className="px-2 text-muted-foreground">
+                    …
+                  </span>
+                ) : (
                 <Button
                   key={pageNumber}
                   asChild={pageNumber !== result.page}
@@ -175,7 +170,8 @@ export default async function BlogPage({
                     <Link href={createPageHref(pageNumber)}>{pageNumber}</Link>
                   )}
                 </Button>
-              ))}
+                ),
+              )}
 
               {result.page < result.pageCount ? (
                 <Button asChild variant="outline" size="sm">

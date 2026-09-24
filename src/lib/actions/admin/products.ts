@@ -1,11 +1,19 @@
+// FILE PATH: src/lib/actions/admin/products.ts
+
 "use server";
 
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { redirect } from "next/navigation";
 
 import { requireAdmin } from "@/lib/auth";
+import { validateImageUpload } from "@/lib/image-upload";
+import { sanitizeRichText } from "@/lib/sanitize-html";
 import { createClient } from "@/lib/supabase/server";
-import { slugify } from "@/lib/utils";
+import { normalizeSafeUrl, slugify } from "@/lib/utils";
+
+function invalidateCatalog() {
+  revalidateTag("catalog");
+}
 
 type ProductImagePayload = {
   id?: string;
@@ -53,34 +61,35 @@ async function upsertProductTags(productId: string, tags: string[]) {
   const supabase = createClient();
   await supabase.from("product_tags").delete().eq("product_id", productId);
 
-  const cleaned = Array.from(
-    new Set(tags.map((tag) => tag.trim()).filter(Boolean)),
-  );
-  if (cleaned.length === 0) return;
-
-  const tagIds: string[] = [];
-  for (const tagName of cleaned) {
-    const slug = slugify(tagName);
-    const { data: existing } = await supabase
-      .from("tags")
-      .select("id")
-      .eq("slug", slug)
-      .maybeSingle();
-
-    if (existing?.id) {
-      tagIds.push(existing.id);
-      continue;
+  const tagsBySlug = new Map<string, { name: string; slug: string }>();
+  for (const value of tags) {
+    const name = value.trim();
+    const slug = slugify(name);
+    if (name && slug && !tagsBySlug.has(slug)) {
+      tagsBySlug.set(slug, { name, slug });
     }
+  }
+  const tagRows = Array.from(tagsBySlug.values());
+  if (tagRows.length === 0) return;
 
-    const { data: created, error } = await supabase
-      .from("tags")
-      .insert({ name: tagName, slug })
-      .select("id")
-      .single();
+  const { error: upsertError } = await supabase.from("tags").upsert(tagRows, {
+    onConflict: "slug",
+    ignoreDuplicates: true,
+  });
+  if (upsertError) throw new Error(upsertError.message);
 
-    if (!error && created?.id) {
-      tagIds.push(created.id);
-    }
+  const { data: resolvedTags, error: resolveError } = await supabase
+    .from("tags")
+    .select("id,slug")
+    .in(
+      "slug",
+      tagRows.map((tag) => tag.slug),
+    );
+  if (resolveError) throw new Error(resolveError.message);
+
+  const tagIds = (resolvedTags ?? []).map((tag) => tag.id);
+  if (tagIds.length !== tagRows.length) {
+    throw new Error("Unable to resolve all product tags.");
   }
 
   if (tagIds.length > 0) {
@@ -104,13 +113,17 @@ async function persistProductImages(
 
   const sanitized = images
     .filter((image) => image.url?.trim())
-    .map((image, index) => ({
-      product_id: productId,
-      url: image.url,
-      alt_text: normalizeText(image.alt_text),
-      is_primary: image.is_primary ?? index === 0,
-      sort_order: image.sort_order ?? index,
-    }));
+    .map((image, index) => {
+      const url = normalizeSafeUrl(image.url);
+      if (!url) throw new Error("Product image URLs must use HTTPS.");
+      return {
+        product_id: productId,
+        url,
+        alt_text: normalizeText(image.alt_text),
+        is_primary: image.is_primary ?? index === 0,
+        sort_order: image.sort_order ?? index,
+      };
+    });
 
   if (sanitized.length === 0) return;
 
@@ -125,6 +138,7 @@ async function persistProductImages(
 export async function createProduct(formData: FormData) {
   await requireAdmin();
   const payload = parseProductPayload(formData);
+  if (payload) payload.slug = slugify(payload.slug || payload.name);
   if (!payload?.name || !payload?.slug) {
     throw new Error("Name and slug are required.");
   }
@@ -139,7 +153,9 @@ export async function createProduct(formData: FormData) {
       model_code: normalizeText(payload.model_code),
       category_id: normalizeText(payload.category_id),
       short_description: normalizeText(payload.short_description),
-      long_description: normalizeText(payload.long_description),
+      long_description: payload.long_description
+        ? sanitizeRichText(payload.long_description)
+        : null,
       specifications: payload.specifications ?? {},
       featured: Boolean(payload.featured),
       in_stock: payload.in_stock !== false,
@@ -157,7 +173,10 @@ export async function createProduct(formData: FormData) {
   await upsertProductTags(data.id, payload.tags ?? []);
   await persistProductImages(data.id, payload.images);
 
+  invalidateCatalog();
   revalidatePath("/admin/products");
+  revalidatePath("/");
+  revalidatePath("/catalog-sitemap.xml");
   revalidatePath(`/products/${data.slug}`);
   redirect("/admin/products");
 }
@@ -166,6 +185,7 @@ export async function updateProduct(formData: FormData) {
   await requireAdmin();
   const productId = String(formData.get("productId") ?? "");
   const payload = parseProductPayload(formData);
+  if (payload) payload.slug = slugify(payload.slug || payload.name);
 
   if (!productId || !payload?.name || !payload?.slug) {
     throw new Error("Product ID, name, and slug are required.");
@@ -181,7 +201,9 @@ export async function updateProduct(formData: FormData) {
       model_code: normalizeText(payload.model_code),
       category_id: normalizeText(payload.category_id),
       short_description: normalizeText(payload.short_description),
-      long_description: normalizeText(payload.long_description),
+      long_description: payload.long_description
+        ? sanitizeRichText(payload.long_description)
+        : null,
       specifications: payload.specifications ?? {},
       featured: Boolean(payload.featured),
       in_stock: payload.in_stock !== false,
@@ -201,7 +223,10 @@ export async function updateProduct(formData: FormData) {
   await upsertProductTags(data.id, payload.tags ?? []);
   await persistProductImages(data.id, payload.images);
 
+  invalidateCatalog();
   revalidatePath("/admin/products");
+  revalidatePath("/");
+  revalidatePath("/catalog-sitemap.xml");
   revalidatePath(`/products/${data.slug}`);
   redirect("/admin/products");
 }
@@ -212,21 +237,133 @@ export async function deleteProduct(formData: FormData) {
   if (!productId) throw new Error("Product ID is required.");
 
   const supabase = createClient();
-  const { data } = await supabase
+  const { data, error: lookupError } = await supabase
     .from("products")
     .select("slug")
     .eq("id", productId)
     .maybeSingle();
-  const { error } = await supabase.from("products").delete().eq("id", productId);
+  if (lookupError) throw new Error(lookupError.message);
+
+  const { data: images, error: imagesError } = await supabase
+    .from("product_images")
+    .select("url")
+    .eq("product_id", productId);
+  if (imagesError) throw new Error(imagesError.message);
+
+  const { error } = await supabase
+    .from("products")
+    .delete()
+    .eq("id", productId);
 
   if (error) {
     throw new Error(error.message);
   }
 
+  const storagePaths = (images ?? [])
+    .map((image) => {
+      try {
+        const path = decodeURIComponent(new URL(image.url).pathname);
+        const marker = "/storage/v1/object/public/product images/";
+        return path.startsWith(marker) ? path.slice(marker.length) : null;
+      } catch {
+        return null;
+      }
+    })
+    .filter((path): path is string => Boolean(path));
+
+  if (storagePaths.length > 0) {
+    const { error: storageError } = await supabase.storage
+      .from("product images")
+      .remove(storagePaths);
+    if (storageError) throw new Error(storageError.message);
+  }
+
+  invalidateCatalog();
   revalidatePath("/admin/products");
+  revalidatePath("/");
+  revalidatePath("/catalog-sitemap.xml");
+  revalidatePath("/products");
+  revalidatePath("/products/category/[slug]", "page");
   if (data?.slug) {
     revalidatePath(`/products/${data.slug}`);
   }
+}
+
+export async function bulkDeleteProducts(formData: FormData) {
+  await requireAdmin();
+
+  const raw = String(formData.get("productIds") ?? "[]");
+  let productIds: string[];
+  try {
+    productIds = JSON.parse(raw) as string[];
+  } catch {
+    throw new Error("Invalid product ID list.");
+  }
+
+  productIds = Array.from(new Set(productIds.filter(Boolean)));
+  if (productIds.length === 0) {
+    throw new Error("No products selected.");
+  }
+
+  const supabase = createClient();
+
+  const { data: slugRows, error: slugLookupError } = await supabase
+    .from("products")
+    .select("slug")
+    .in("id", productIds);
+  if (slugLookupError) throw new Error(slugLookupError.message);
+
+  const { data: images, error: imagesError } = await supabase
+    .from("product_images")
+    .select("url")
+    .in("product_id", productIds);
+  if (imagesError) throw new Error(imagesError.message);
+
+  const { error: deleteError, count } = await supabase
+    .from("products")
+    .delete({ count: "exact" })
+    .in("id", productIds);
+  if (deleteError) {
+    throw new Error(deleteError.message);
+  }
+
+  const storagePaths = (images ?? [])
+    .map((image) => {
+      try {
+        const path = decodeURIComponent(new URL(image.url).pathname);
+        const marker = "/storage/v1/object/public/product images/";
+        return path.startsWith(marker) ? path.slice(marker.length) : null;
+      } catch {
+        return null;
+      }
+    })
+    .filter((path): path is string => Boolean(path));
+
+  if (storagePaths.length > 0) {
+    const { error: storageError } = await supabase.storage
+      .from("product images")
+      .remove(storagePaths);
+    if (storageError) {
+      // Row rows are already gone (and product_images/product_tags cascaded).
+      // Surface this distinctly: it is a leaked storage object, not a data-integrity
+      // problem — no slug or product record survives regardless.
+      throw new Error(
+        `Products deleted, but ${storagePaths.length} storage file(s) failed to remove: ${storageError.message}`,
+      );
+    }
+  }
+
+  invalidateCatalog();
+  revalidatePath("/admin/products");
+  revalidatePath("/");
+  revalidatePath("/catalog-sitemap.xml");
+  revalidatePath("/products");
+  revalidatePath("/products/category/[slug]", "page");
+  for (const row of slugRows ?? []) {
+    if (row.slug) revalidatePath(`/products/${row.slug}`);
+  }
+
+  return { deletedCount: count ?? productIds.length };
 }
 
 export async function toggleFeatured(formData: FormData) {
@@ -237,7 +374,10 @@ export async function toggleFeatured(formData: FormData) {
 
   const supabase = createClient();
   await supabase.from("products").update({ featured }).eq("id", productId);
+  invalidateCatalog();
   revalidatePath("/admin/products");
+  revalidatePath("/");
+  revalidatePath("/catalog-sitemap.xml");
 }
 
 export async function toggleInStock(formData: FormData) {
@@ -247,8 +387,14 @@ export async function toggleInStock(formData: FormData) {
   if (!productId) throw new Error("Product ID is required.");
 
   const supabase = createClient();
-  await supabase.from("products").update({ in_stock: inStock }).eq("id", productId);
+  await supabase
+    .from("products")
+    .update({ in_stock: inStock })
+    .eq("id", productId);
+  invalidateCatalog();
   revalidatePath("/admin/products");
+  revalidatePath("/");
+  revalidatePath("/catalog-sitemap.xml");
 }
 
 export async function uploadProductImage(formData: FormData) {
@@ -258,14 +404,16 @@ export async function uploadProductImage(formData: FormData) {
     throw new Error("No file selected.");
   }
 
-  const ext = file.name.split(".").pop() || "jpg";
-  const path = `products/${Date.now()}-${crypto.randomUUID()}.${ext}`;
+  const image = await validateImageUpload(file);
+  const path = `products/${Date.now()}-${crypto.randomUUID()}.${image.extension}`;
 
   const supabase = createClient();
-  const { error } = await supabase.storage.from("product images").upload(path, file, {
-    contentType: file.type,
-    upsert: false,
-  });
+  const { error } = await supabase.storage
+    .from("product images")
+    .upload(path, image.file, {
+      contentType: image.contentType,
+      upsert: false,
+    });
 
   if (error) {
     throw new Error(error.message);
@@ -285,13 +433,20 @@ export async function deleteProductImage(formData: FormData) {
 
   const supabase = createClient();
   await supabase.from("product_images").delete().eq("id", imageId);
+  invalidateCatalog();
   revalidatePath("/admin/products");
+  revalidatePath("/");
+  revalidatePath("/catalog-sitemap.xml");
 }
 
 export async function reorderProductImages(formData: FormData) {
   await requireAdmin();
   const raw = String(formData.get("items") ?? "[]");
-  const items = JSON.parse(raw) as Array<{ id: string; sort_order: number; is_primary?: boolean }>;
+  const items = JSON.parse(raw) as Array<{
+    id: string;
+    sort_order: number;
+    is_primary?: boolean;
+  }>;
 
   const supabase = createClient();
   for (const item of items) {
@@ -303,5 +458,8 @@ export async function reorderProductImages(formData: FormData) {
       })
       .eq("id", item.id);
   }
+  invalidateCatalog();
   revalidatePath("/admin/products");
+  revalidatePath("/");
+  revalidatePath("/catalog-sitemap.xml");
 }

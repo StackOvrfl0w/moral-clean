@@ -1,12 +1,20 @@
 "use client";
 
-import { Fragment, useMemo, useState } from "react";
+import {
+  Fragment,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+  useTransition,
+} from "react";
 import { useRouter, usePathname } from "next/navigation";
 import { Search, Download, ChevronLeft, ChevronRight } from "lucide-react";
+import { toast } from "sonner";
 
 import { ConfirmActionButton } from "@/components/admin/ConfirmActionButton";
 import { Button } from "@/components/ui/button";
-import { deleteSubmission } from "@/lib/actions/admin/submissions";
+import { bulkDeleteSubmissions, deleteSubmission } from "@/lib/actions/admin/submissions";
 
 type Submission = {
   id: string;
@@ -48,6 +56,28 @@ function escapeCsv(value: string) {
   return `"${value.replace(/"/g, '""')}"`;
 }
 
+function DebouncedSearchInput({
+  onSearch,
+}: {
+  onSearch: (value: string) => void;
+}) {
+  const [value, setValue] = useState("");
+
+  useEffect(() => {
+    const timeout = window.setTimeout(() => onSearch(value), 250);
+    return () => window.clearTimeout(timeout);
+  }, [onSearch, value]);
+
+  return (
+    <input
+      value={value}
+      onChange={(event) => setValue(event.target.value)}
+      placeholder="Search name/email/phone"
+      className="h-9 w-72 rounded-md border border-input bg-background pl-9 pr-3 text-sm"
+    />
+  );
+}
+
 export function SubmissionsInbox({
   submissions,
   page,
@@ -58,6 +88,9 @@ export function SubmissionsInbox({
   const pathname = usePathname();
   const [query, setQuery] = useState("");
   const [expandedId, setExpandedId] = useState<string | null>(null);
+  const [selected, setSelected] = useState<Set<string>>(new Set());
+  const [pending, startTransition] = useTransition();
+  const handleSearch = useCallback((value: string) => setQuery(value), []);
 
   const filtered = useMemo(() => {
     if (!query.trim()) return submissions;
@@ -66,6 +99,33 @@ export function SubmissionsInbox({
       `${s.name} ${s.email ?? ""} ${s.phone ?? ""}`.toLowerCase().includes(q),
     );
   }, [submissions, query]);
+
+  const allSelected = filtered.length > 0 && filtered.every((item) => selected.has(item.id));
+
+  function toggleAll() {
+    setSelected((current) => {
+      const next = new Set(current);
+      if (allSelected) filtered.forEach((item) => next.delete(item.id));
+      else filtered.forEach((item) => next.add(item.id));
+      return next;
+    });
+  }
+
+  function deleteSelected() {
+    if (!selected.size || !window.confirm(`Permanently delete ${selected.size} submission${selected.size === 1 ? "" : "s"}?`)) return;
+    const formData = new FormData();
+    formData.set("ids", JSON.stringify(Array.from(selected)));
+    startTransition(async () => {
+      try {
+        const result = await bulkDeleteSubmissions(formData);
+        setSelected(new Set());
+        toast.success(`Deleted ${result.deletedCount} submission${result.deletedCount === 1 ? "" : "s"}.`);
+        router.refresh();
+      } catch (error) {
+        toast.error(error instanceof Error ? error.message : "Bulk delete failed.");
+      }
+    });
+  }
 
   function goToPage(p: number) {
     const params = new URLSearchParams();
@@ -105,17 +165,16 @@ export function SubmissionsInbox({
       <div className="flex flex-wrap gap-3 rounded-md border bg-white p-4">
         <div className="relative">
           <Search className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
-          <input
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search name/email/phone"
-            className="h-9 w-72 rounded-md border border-input bg-background pl-9 pr-3 text-sm"
-          />
+          <DebouncedSearchInput onSearch={handleSearch} />
         </div>
         <Button type="button" variant="outline" onClick={exportCsv}>
           <Download className="size-4" />
           Export CSV
         </Button>
+        {selected.size > 0 ? <>
+          <Button type="button" variant="outline" onClick={() => setSelected(new Set())} disabled={pending}>Clear</Button>
+          <Button type="button" variant="destructive" onClick={deleteSelected} disabled={pending}>{pending ? "Deleting..." : `Delete ${selected.size} Selected`}</Button>
+        </> : null}
       </div>
 
       <div className="rounded-lg border bg-white overflow-hidden">
@@ -123,6 +182,7 @@ export function SubmissionsInbox({
           <table className="w-full text-left text-sm">
             <thead className="sticky top-0 bg-muted/80 text-xs uppercase tracking-wide text-muted-foreground">
               <tr>
+                <th className="px-3 py-3"><input type="checkbox" checked={allSelected} ref={(element) => { if (element) element.indeterminate = selected.size > 0 && !allSelected; }} onChange={toggleAll} aria-label="Select visible submissions" /></th>
                 <th className="px-3 py-3">Date</th>
                 <th className="px-3 py-3">Name</th>
                 <th className="px-3 py-3">Phone</th>
@@ -154,6 +214,7 @@ export function SubmissionsInbox({
                           setExpandedId(expanded ? null : submission.id)
                         }
                       >
+                        <td className="px-3 py-3" onClick={(event) => event.stopPropagation()}><input type="checkbox" checked={selected.has(submission.id)} onChange={() => setSelected((current) => { const next = new Set(current); if (next.has(submission.id)) next.delete(submission.id); else next.add(submission.id); return next; })} aria-label={`Select submission from ${submission.name}`} /></td>
                         <td className="px-3 py-3">
                           {formatDate(submission.created_at)}
                         </td>
@@ -194,7 +255,7 @@ export function SubmissionsInbox({
                         <tr className="border-t bg-muted/20">
                           <td
                             className="px-3 py-3 text-sm text-muted-foreground"
-                            colSpan={7}
+                            colSpan={8}
                           >
                             <div className="whitespace-pre-wrap">{message}</div>
                             <button

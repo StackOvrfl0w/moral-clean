@@ -35,6 +35,7 @@ type DialogState = {
   open: boolean;
   mode: "link" | "image";
   inputValue: string;
+  altText: string;
 };
 
 export function RichTextEditor({ value, onChange }: RichTextEditorProps) {
@@ -44,11 +45,19 @@ export function RichTextEditor({ value, onChange }: RichTextEditorProps) {
     open: false,
     mode: "link",
     inputValue: "",
+    altText: "",
   });
 
   const editor = useEditor({
     immediatelyRender: false,
-    extensions: [StarterKit, Link.configure({ openOnClick: false }), Image],
+    extensions: [
+      StarterKit.configure({ heading: { levels: [2, 3] } }),
+      Link.configure({
+        openOnClick: false,
+        protocols: ["http", "https", "mailto"],
+      }),
+      Image,
+    ],
     content: value,
     onUpdate({ editor: currentEditor }) {
       onChange(currentEditor.getHTML());
@@ -78,11 +87,11 @@ export function RichTextEditor({ value, onChange }: RichTextEditorProps) {
       return;
     }
     const previousUrl = editor.getAttributes("link").href ?? "";
-    setDialog({ open: true, mode: "link", inputValue: previousUrl });
+    setDialog({ open: true, mode: "link", inputValue: previousUrl, altText: "" });
   }
 
   function openImageDialog() {
-    setDialog({ open: true, mode: "image", inputValue: "" });
+    setDialog({ open: true, mode: "image", inputValue: "", altText: "" });
   }
 
   function handleConfirm() {
@@ -100,7 +109,8 @@ export function RichTextEditor({ value, onChange }: RichTextEditorProps) {
           .run();
       }
     } else {
-      if (url) editor.chain().focus().setImage({ src: url }).run();
+      if (!url || !dialog.altText.trim()) return;
+      editor.chain().focus().setImage({ src: url, alt: dialog.altText.trim() }).run();
     }
     setDialog((d) => ({ ...d, open: false }));
   }
@@ -209,6 +219,12 @@ export function RichTextEditor({ value, onChange }: RichTextEditorProps) {
             onKeyDown={(e) => e.key === "Enter" && handleConfirm()}
             autoFocus
           />
+          {dialog.mode === "image" && (
+            <label className="grid gap-2 text-sm">
+              Image description (alt text)
+              <Input value={dialog.altText} onChange={(event) => setDialog((d) => ({ ...d, altText: event.target.value }))} placeholder="Describe the equipment or activity shown" />
+            </label>
+          )}
           <DialogFooter>
             <Button
               type="button"
@@ -217,7 +233,7 @@ export function RichTextEditor({ value, onChange }: RichTextEditorProps) {
             >
               Cancel
             </Button>
-            <Button type="button" onClick={handleConfirm}>
+            <Button type="button" onClick={handleConfirm} disabled={dialog.mode === "image" && (!dialog.inputValue.trim() || !dialog.altText.trim())}>
               {dialog.mode === "link" ? "Set Link" : "Insert"}
             </Button>
           </DialogFooter>

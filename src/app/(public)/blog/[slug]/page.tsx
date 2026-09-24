@@ -1,3 +1,4 @@
+import { pageMetadata, absoluteUrl } from "@/lib/seo";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -16,6 +17,7 @@ import {
 
 import { env } from "@/config/env";
 import { blogFallbackImage } from "@/lib/fallback-images";
+import { sanitizeRichText } from "@/lib/sanitize-html";
 
 export const revalidate = 3600;
 const siteUrl = env.siteUrl;
@@ -50,31 +52,12 @@ export async function generateMetadata({
 }: BlogPostPageProps): Promise<Metadata> {
   const post = await getPostBySlug(params.slug);
 
-  if (!post || !post.published) {
-    return {
-      title: "Article Not Found",
-    };
-  }
-
-  return {
-    title: post.meta_title || post.title,
-    description:
-      post.meta_description ||
-      post.excerpt ||
-      "Read practical guidance from the Moral Clean team.",
-    alternates: {
-      canonical: `${siteUrl}/blog/${post.slug}`,
-    },
-    openGraph: {
-      title: post.meta_title || post.title,
-      description:
-        post.meta_description ||
-        post.excerpt ||
-        "Read practical guidance from the Moral Clean team.",
-      images: post.cover_image_url ? [{ url: post.cover_image_url }] : undefined,
-      type: "article",
-    },
-  };
+  if (!post || !post.published) notFound();
+  return pageMetadata({
+    title: post.meta_title?.trim() || post.title,
+    description: post.meta_description?.trim() || post.excerpt || `Read ${post.title} from the Moral Clean team.`,
+    path: `/blog/${post.slug}`, image: post.cover_image_url, article: true,
+  });
 }
 
 export async function generateStaticParams() {
@@ -93,26 +76,42 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const authorName = post.author_name || "The Moral Clean Team";
   const minutes = readingTime(post.content);
   const imageUrl = post.cover_image_url || blogFallbackImage;
+  const articleUrl = `${siteUrl}/blog/${post.slug}`;
+  const shareLinks = [
+    {
+      label: "LinkedIn",
+      href: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(articleUrl)}`,
+      Icon: Link2,
+    },
+    {
+      label: "Twitter",
+      href: `https://twitter.com/intent/tweet?url=${encodeURIComponent(articleUrl)}&text=${encodeURIComponent(post.title)}`,
+      Icon: MessageCircle,
+    },
+    {
+      label: "WhatsApp",
+      href: `https://wa.me/?text=${encodeURIComponent(`${post.title} ${articleUrl}`)}`,
+      Icon: MessageCircle,
+    },
+  ];
   const articleJsonLd = {
     "@context": "https://schema.org",
     "@type": "Article",
     headline: post.title,
-    image: [imageUrl],
+    image: [absoluteUrl(post.cover_image_url || "/opengraph-image")],
     description: post.excerpt || "Read practical guidance from the Moral Clean team.",
     mainEntityOfPage: `${siteUrl}/blog/${post.slug}`,
     datePublished: post.published_at || post.created_at,
     dateModified: post.updated_at || post.published_at || post.created_at,
     author: {
-      "@type": "Person",
+      "@type": !post.author_name || /moral clean/i.test(authorName) ? "Organization" : "Person",
       name: authorName,
+      url: `${siteUrl}/about`,
     },
     publisher: {
       "@type": "Organization",
       name: "Moral Clean",
-      logo: {
-        "@type": "ImageObject",
-        url: `${siteUrl}/logo.png`,
-      },
+      "@id": `${siteUrl}/#organization`,
       url: siteUrl,
     },
   };
@@ -188,7 +187,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               alt={post.title}
               fill
               sizes="(min-width: 1024px) 80vw, 100vw"
-              unoptimized
+              priority
+
               className="object-cover"
             />
           </div>
@@ -199,27 +199,33 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         <article className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
           <div
             className="prose prose-lg prose-headings:font-display prose-a:text-accent prose-img:rounded-lg max-w-none"
-            dangerouslySetInnerHTML={{ __html: post.content }}
+            dangerouslySetInnerHTML={{ __html: sanitizeRichText(post.content) }}
           />
+
+          <aside className="mt-8 rounded-md border p-6">
+            <h2 className="text-xl">Equipment and service support</h2>
+            <p className="mt-3 text-muted-foreground">
+              <Link href="/products" className="underline">Compare cleaning equipment</Link>{" "}
+              or explore <Link href="/services" className="underline">machine repair and maintenance</Link>{" "}
+              for your facility. <Link href="/contact" className="underline">Contact our team</Link> for a quote.
+            </p>
+          </aside>
 
           <div className="mt-10 rounded-md border border-border bg-muted/40 p-4">
             <p className="text-sm font-semibold text-primary">Share this article</p>
-            {/* TODO: Replace placeholder share links with generated share URLs. */}
             <div className="mt-3 flex items-center gap-2">
-              {[
-                { label: "LinkedIn", href: "#", Icon: Link2 },
-                { label: "Twitter", href: "#", Icon: MessageCircle },
-                { label: "WhatsApp", href: "#", Icon: MessageCircle },
-              ].map(({ label, href, Icon }) => (
-                <Link
+              {shareLinks.map(({ label, href, Icon }) => (
+                <a
                   key={label}
                   href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   aria-label={label}
                   className="inline-flex items-center gap-2 rounded-md border border-border bg-white px-3 py-2 text-xs font-semibold text-primary hover:border-accent hover:text-accent"
                 >
                   <Icon className="size-4" aria-hidden="true" />
                   {label}
-                </Link>
+                </a>
               ))}
             </div>
           </div>
@@ -230,7 +236,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 MT
               </span>
               <div>
-                <h3 className="text-xl">The Moral Clean Team</h3>
+                <h2 className="text-xl">The Moral Clean Team</h2>
                 <p className="mt-2 text-sm text-muted-foreground">
                   Practical insights from our product and service teams focused
                   on commercial cleaning equipment and maintenance operations.
