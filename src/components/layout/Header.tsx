@@ -169,7 +169,7 @@ export function Header({ settings, categories }: HeaderProps) {
                     <Link
                       className={cn(
                         navigationMenuTriggerStyle(),
-                        "h-10 rounded-md px-5 text-[16px] font-medium hover:text-white",
+                        "h-10 rounded-md px-5 text-[16px] font-medium hover:bg-brand-gradient hover:text-white focus:bg-brand-gradient focus:text-white",
                       )}
                       href="/"
                     >
@@ -179,7 +179,7 @@ export function Header({ settings, categories }: HeaderProps) {
                 </NavigationMenuItem>
 
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger className="h-10 rounded-md px-5 text-[16px] font-medium">
+                  <NavigationMenuTrigger className="h-10 rounded-md px-5 text-[16px] font-medium hover:bg-brand-gradient hover:text-white focus:bg-brand-gradient focus:text-white data-[state=open]:bg-brand-gradient data-[state=open]:text-white">
                     Products
                   </NavigationMenuTrigger>
                   <NavigationMenuContent>
@@ -222,7 +222,7 @@ export function Header({ settings, categories }: HeaderProps) {
                       <Link
                         className={cn(
                           navigationMenuTriggerStyle(),
-                          "h-10 rounded-md px-5 text-[16px] font-medium hover:text-white",
+                          "h-10 rounded-md px-5 text-[16px] font-medium hover:bg-brand-gradient hover:text-white focus:bg-brand-gradient focus:text-white",
                         )}
                         href={item.href}
                       >
@@ -287,7 +287,7 @@ export function Header({ settings, categories }: HeaderProps) {
                   <SheetClose asChild>
                     <Link
                       href="/"
-                      className="rounded-md px-2 py-3 text-base font-medium text-foreground hover:bg-muted"
+                      className="rounded-md px-2 py-3 text-base font-medium text-foreground transition-colors hover:bg-brand-gradient hover:text-white"
                     >
                       Home
                     </Link>
@@ -295,7 +295,7 @@ export function Header({ settings, categories }: HeaderProps) {
                   <SheetClose asChild>
                     <Link
                       href="/products"
-                      className="rounded-md px-2 py-3 text-base font-medium text-foreground hover:bg-muted"
+                      className="rounded-md px-2 py-3 text-base font-medium text-foreground transition-colors hover:bg-brand-gradient hover:text-white"
                     >
                       Products
                     </Link>
@@ -305,7 +305,7 @@ export function Header({ settings, categories }: HeaderProps) {
                       <SheetClose key={category.slug} asChild>
                         <Link
                           href={`/products/category/${category.slug}`}
-                          className="rounded-md px-2 py-2 text-sm text-muted-foreground hover:bg-muted hover:text-foreground"
+                          className="rounded-md px-2 py-2 text-sm text-muted-foreground transition-colors hover:bg-brand-gradient hover:text-white"
                         >
                           {category.name}
                         </Link>
@@ -316,7 +316,7 @@ export function Header({ settings, categories }: HeaderProps) {
                     <SheetClose key={item.href} asChild>
                       <Link
                         href={item.href}
-                        className="rounded-md px-2 py-3 text-base font-medium text-foreground hover:bg-muted"
+                        className="rounded-md px-2 py-3 text-base font-medium text-foreground transition-colors hover:bg-brand-gradient hover:text-white"
                       >
                         {item.label}
                       </Link>
