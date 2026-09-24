@@ -11,7 +11,9 @@ type ConfirmActionButtonProps = {
   pendingLabel?: string;
   message: string;
   variant?: "default" | "destructive" | "outline" | "secondary" | "ghost" | "link";
-  action: (formData: FormData) => Promise<void>;
+  action: (
+    formData: FormData,
+  ) => Promise<void | { success: boolean; error?: string }>;
   values: Record<string, string>;
 };
 
@@ -36,7 +38,11 @@ export function ConfirmActionButton({
 
     startTransition(async () => {
       try {
-        await action(formData);
+        const result = await action(formData);
+        if (result && !result.success) {
+          toast.error(result.error || "Action failed.");
+          return;
+        }
         router.refresh();
       } catch (error) {
         toast.error(error instanceof Error ? error.message : "Action failed.");
