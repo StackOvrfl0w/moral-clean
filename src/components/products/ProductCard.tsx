@@ -13,7 +13,7 @@ export function ProductCard({ product }: { product: ProductCardData }) {
   const imageUrl = image?.url || productCardFallbackImage;
 
   return (
-    <article className="group rounded-md border border-brand-navy/10 bg-brand-gradient p-3 shadow-sm transition duration-200 hover:-translate-y-1 hover:border-brand-navy/30 hover:shadow-lg hover:shadow-brand-navy/10">
+    <article className="group rounded-md border border-border bg-white p-3 shadow-sm transition duration-200 hover:-translate-y-1 hover:border-brand-navy/30 hover:bg-brand-gradient hover:shadow-lg hover:shadow-brand-navy/10">
       <Link href={`/products/${product.slug}`} className="block" aria-label={product.name}>
         <div className="relative aspect-square overflow-hidden rounded-md border border-white/50 bg-white">
           <Image
@@ -35,21 +35,21 @@ export function ProductCard({ product }: { product: ProductCardData }) {
         </div>
       </Link>
       <div className="px-1 pb-1 pt-5">
-        <p className="text-xs font-bold uppercase tracking-[0.16em] text-brand-navy/75">
+        <p className="text-xs font-bold uppercase tracking-[0.16em] text-accent transition-colors group-hover:text-brand-navy/75">
           {product.brand || "Moral Clean"}
         </p>
-        <h3 className="mt-2 text-lg text-brand-navy">
+        <h3 className="mt-2 text-lg transition-colors group-hover:text-brand-navy">
           <Link href={`/products/${product.slug}`} className="hover:text-white">
             {product.name}
           </Link>
         </h3>
-        <p className="mt-3 overflow-hidden text-sm text-brand-navy/75 [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2]">
+        <p className="mt-3 overflow-hidden text-sm text-muted-foreground transition-colors group-hover:text-brand-navy/75 [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2]">
           {product.short_description ||
             "Professional cleaning equipment selected for commercial and industrial use."}
         </p>
         <Link
           href={`/products/${product.slug}`}
-          className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-brand-navy transition-colors hover:text-white"
+          className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-primary transition-colors group-hover:text-brand-navy hover:text-white"
         >
           View Details
           <ArrowRight className="size-4" aria-hidden="true" />
