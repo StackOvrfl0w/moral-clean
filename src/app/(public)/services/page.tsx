@@ -216,7 +216,7 @@ export default async function ServicesPage() {
                 {index < processSteps.length - 1 ? (
                   <div className="absolute left-[calc(100%+1px)] top-9 hidden h-[calc(100%+1.5rem)] w-[calc(gap)] bg-transparent md:block" />
                 ) : null}
-                <div className="mb-4 inline-flex size-9 items-center justify-center rounded-full bg-accent text-sm font-bold text-accent-foreground">
+                <div className="mb-4 inline-flex size-9 items-center justify-center rounded-full bg-brand-gradient text-sm font-bold text-white">
                   {index + 1}
                 </div>
                 <h3 className="text-xl text-brand-navy">{step.title}</h3>

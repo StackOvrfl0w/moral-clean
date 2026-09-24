@@ -26,7 +26,7 @@ const whatsappDigits = phoneDigits;
 
 export default function AboutPage() {
   return (
-    <div>
+    <>
       {/* Our Story */}
       <section className="bg-background py-20">
         <div className="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-2 lg:items-center lg:px-8">
@@ -97,121 +97,68 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Team */}
-      <section className="bg-background py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mb-10 text-center">
-            <p className="mb-3 text-xs font-bold uppercase tracking-[0.18em] text-accent">
-              Leadership
-            </p>
-            <h2>Meet the Team</h2>
-          </div>
-
-          <div className="flex flex-col gap-6">
-            {/* Muhammad Moiz Khan */}
-            <article className="rounded-lg border border-border bg-white p-6 shadow-sm lg:p-8">
-              <div className="grid gap-6 lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-8">
-                <div className="overflow-hidden rounded-md border border-border bg-[linear-gradient(135deg,#f8fafc_0%,#e8f4ff_100%)]">
-                  <div className="aspect-square bg-[radial-gradient(circle_at_35%_30%,rgba(14,165,233,0.2),transparent_36%),radial-gradient(circle_at_70%_75%,rgba(10,37,64,0.1),transparent_42%)]" />
-                </div>
-                <div>
-                  <h3 className="text-3xl">Muhammad Moiz Khan</h3>
-                  <p className="mt-2 text-sm font-semibold uppercase tracking-[0.14em] text-accent">
-                    Chief Executive Officer
-                  </p>
-                  <p className="mt-5 text-muted-foreground">
-                    Muhammad Moiz Khan leads Moralclean with a clear operational
-                    focus: delivering reliable equipment and repair support that
-                    helps clients maintain measurable cleaning standards in
-                    demanding commercial environments. Building on a foundation
-                    established in 2007, he ensures that top-tier supply is
-                    always backed by dependable service.
-                  </p>
-                  <p className="mt-4 text-muted-foreground">
-                    His direction has shaped the company into a full-service
-                    partner for Pakistan&apos;s leading pharmaceutical
-                    companies, major hospitals, and premium 5-star hotels. Under
-                    his leadership, procurement, maintenance, and technical
-                    support are handled with the strict accountability expected
-                    in professional facility operations.
-                  </p>
-                </div>
-              </div>
-            </article>
-
-            {/* Musharraf Khan */}
-            {/* <article className="rounded-lg border border-border bg-white p-6 shadow-sm lg:p-8">
-              <div className="grid gap-6 lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-8">
-                <div className="overflow-hidden rounded-md border border-border bg-[linear-gradient(135deg,#f8fafc_0%,#e8f4ff_100%)]">
-                  <div className="aspect-square bg-[radial-gradient(circle_at_35%_30%,rgba(14,165,233,0.2),transparent_36%),radial-gradient(circle_at_70%_75%,rgba(10,37,64,0.1),transparent_42%)]" />
-                </div>
-                <div>
-                  <h3 className="text-3xl">Musharraf Khan</h3>
-                  <p className="mt-2 text-sm font-semibold uppercase tracking-[0.14em] text-accent">
-                    Partner
-                  </p>
-                  <p className="mt-5 text-muted-foreground">
-                    Musharraf Khan brings decades of industry expertise to
-                    Moralclean, having originally founded MK Enterprises Company
-                    in 2007. His early vision laid the groundwork for delivering
-                    high-quality commercial cleaning and janitorial equipment
-                    across Pakistan, building a strong industry reputation
-                    rooted in dependable machinery repair and hands-on client
-                    service.
-                  </p>
-                  <p className="mt-4 text-muted-foreground">
-                    Today, as a Partner at Moralclean, his foundational
-                    experience and dedication to technical excellence continue
-                    to drive the company forward. His deep understanding of the
-                    sector ensures that our end-to-end equipment solutions
-                    consistently meet the rigorous operational standards of the
-                    country&apos;s leading pharmaceutical facilities, major
-                    hospitals, and premium 5-star hotels.
-                  </p>
-                </div>
-              </div>
-            </article> */}
-          </div>
-        </div>
-      </section>
-
       {/* Why Choose Us */}
-      <section className="bg-brand-gradient py-14">
-        <h2 className="mb-8 text-center text-brand-navy">Why Choose Moral Clean</h2>
-        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-4 px-4 sm:px-6 md:grid-cols-2 lg:grid-cols-4 lg:gap-6 lg:px-8">
-          {[
-            {
-              icon: BadgeCheck,
-              title: "Authorized Distribution",
-              description: "Sourced from leading international brands.",
-            },
-            {
-              icon: Wrench,
-              title: "After-Sales Network",
-              description: "Service and support across major cities.",
-            },
-            {
-              icon: ShieldCheck,
-              title: "Technicians and Parts",
-              description: "Trained teams with original compatible parts.",
-            },
-            {
-              icon: Sparkles,
-              title: "Transparent Pricing",
-              description: "Clear quotes before service work begins.",
-            },
-          ].map(({ icon: Icon, title, description }) => (
-            <div
-              key={title}
-              className="rounded-md border border-border bg-white p-5 shadow-sm"
-            >
-              <Icon className="size-6 text-accent" aria-hidden="true" />
-              <h3 className="mt-3 text-xl">{title}</h3>
-              <p className="mt-2 text-sm text-muted-foreground">
-                {description}
+      <section className="bg-background px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
+        <div className="relative mx-auto max-w-7xl overflow-hidden rounded-[2rem] bg-brand-gradient px-6 py-12 shadow-[0_24px_60px_rgba(10,37,64,0.18)] sm:px-10 lg:px-12 lg:py-16">
+          <div
+            className="pointer-events-none absolute -right-24 -top-32 size-80 rounded-full bg-white/20 blur-3xl"
+            aria-hidden="true"
+          />
+          <div
+            className="pointer-events-none absolute -bottom-36 -left-20 size-72 rounded-full bg-brand-navy/10 blur-3xl"
+            aria-hidden="true"
+          />
+
+          <div className="relative grid gap-10 lg:grid-cols-[0.8fr_2fr] lg:items-end">
+            <div>
+              <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand-navy/70">
+                The Moral Clean Difference
+              </p>
+              <h2 className="mt-4 text-brand-navy">Why Choose Moral Clean</h2>
+              <p className="mt-4 max-w-md text-sm leading-6 text-brand-navy/75">
+                Reliable equipment matters. The service, parts and accountability
+                behind it determine its long-term value.
               </p>
             </div>
-          ))}
+
+            <div className="grid gap-3 sm:grid-cols-2">
+              {[
+                {
+                  icon: BadgeCheck,
+                  title: "Authorized Distribution",
+                  description: "Sourced from leading international brands.",
+                },
+                {
+                  icon: Wrench,
+                  title: "After-Sales Network",
+                  description: "Service and support across major cities.",
+                },
+                {
+                  icon: ShieldCheck,
+                  title: "Technicians and Parts",
+                  description: "Trained teams with original compatible parts.",
+                },
+                {
+                  icon: Sparkles,
+                  title: "Transparent Pricing",
+                  description: "Clear quotes before service work begins.",
+                },
+              ].map(({ icon: Icon, title, description }) => (
+                <article
+                  key={title}
+                  className="group rounded-xl border border-white/50 bg-white/80 p-5 shadow-sm backdrop-blur-sm transition-colors hover:bg-white"
+                >
+                  <div className="flex size-11 items-center justify-center rounded-xl bg-brand-navy/10 ring-1 ring-inset ring-brand-navy/10">
+                    <Icon className="size-5 text-brand-navy" aria-hidden="true" />
+                  </div>
+                  <h3 className="mt-4 text-lg text-brand-navy">{title}</h3>
+                  <p className="mt-2 text-sm leading-6 text-brand-navy/70">
+                    {description}
+                  </p>
+                </article>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
@@ -312,6 +259,6 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
-    </div>
+    </>
   );
 }
