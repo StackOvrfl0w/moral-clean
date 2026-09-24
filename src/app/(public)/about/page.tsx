@@ -26,7 +26,7 @@ const whatsappDigits = phoneDigits;
 
 export default function AboutPage() {
   return (
-    <>
+    <div>
       {/* Our Story */}
       <section className="bg-background py-20">
         <div className="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-2 lg:items-center lg:px-8">
@@ -312,6 +312,6 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
-    </>
+    </div>
   );
 }
