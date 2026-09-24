@@ -10,13 +10,19 @@ import {
   Boxes,
   BrushCleaning,
   Building2,
+  Clock3,
   Gauge,
+  Mail,
+  MapPin,
   MapPinned,
+  MessageCircle,
+  Phone,
   ShieldCheck,
   Truck,
   Wrench,
 } from "lucide-react";
 
+import { ContactForm } from "@/components/contact/ContactForm";
 import { CtaBanner } from "@/components/sections/CtaBanner";
 import { IndustriesStrip } from "@/components/sections/IndustriesStrip";
 import { SectionHeader } from "@/components/ui/section-header";
@@ -134,6 +140,17 @@ export default async function Home() {
   const HOME_CATEGORY_LIMIT = 8;
   const visibleCategories = categories.slice(0, HOME_CATEGORY_LIMIT);
   const hasMoreCategories = categories.length > HOME_CATEGORY_LIMIT;
+  const address =
+    settings.business_address ||
+    "Shop no 01, Plot no 242, Sector 11-E, North Karachi, Karachi";
+  const phone = settings.business_phone || "+92 331 3195138";
+  const email = settings.business_email || "info@moralclean.com";
+  const hours =
+    settings.business_hours || "Monday – Saturday, 9:00 AM – 6:00 PM";
+  const phoneDigits = phone.replace(/\D/g, "");
+  const whatsappDigits = (
+    settings.contact_form_whatsapp || phone
+  ).replace(/\D/g, "");
 
   const heroLine1 = settings.homepage_hero_heading_line1 || "Industrial-Grade";
   const heroLine2 =
@@ -378,6 +395,100 @@ export default async function Home() {
           </div>
         </div>
       </SectionReveal>}
+
+      <SectionReveal className="border-t border-border bg-white py-16 lg:py-20">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mb-10 max-w-3xl">
+            <p className="text-xs font-bold uppercase tracking-[0.18em] text-accent">
+              Get In Touch
+            </p>
+            <h2 className="mt-3">Tell Us What Your Facility Needs</h2>
+            <p className="mt-4 text-muted-foreground">
+              Share your site type, floor area, machine requirement, or service
+              issue. Our team will respond with practical next steps.
+            </p>
+          </div>
+
+          <div className="grid gap-8 lg:grid-cols-5">
+            <aside className="rounded-lg bg-brand-navy p-8 text-white lg:col-span-2">
+              <h3 className="text-2xl text-white">Contact Moral Clean</h3>
+              <p className="mt-3 text-sm leading-6 text-white/70">
+                Call for urgent support or send the details through the form
+                for equipment, parts, quotations, and service requests.
+              </p>
+
+              <div className="mt-8 space-y-5 text-sm">
+                <div className="flex gap-3">
+                  <MapPin
+                    className="mt-0.5 size-5 shrink-0 text-cyan-300"
+                    aria-hidden="true"
+                  />
+                  <div>
+                    <p className="font-semibold text-white">Office</p>
+                    <p className="mt-1 leading-6 text-white/70">{address}</p>
+                  </div>
+                </div>
+                <div className="flex gap-3">
+                  <Phone
+                    className="mt-0.5 size-5 shrink-0 text-cyan-300"
+                    aria-hidden="true"
+                  />
+                  <div>
+                    <p className="font-semibold text-white">Phone</p>
+                    <a
+                      href={`tel:+${phoneDigits}`}
+                      className="mt-1 block text-white/70 transition-colors hover:text-cyan-300"
+                    >
+                      {phone}
+                    </a>
+                  </div>
+                </div>
+                <div className="flex gap-3">
+                  <Mail
+                    className="mt-0.5 size-5 shrink-0 text-cyan-300"
+                    aria-hidden="true"
+                  />
+                  <div>
+                    <p className="font-semibold text-white">Email</p>
+                    <a
+                      href={`mailto:${email}`}
+                      className="mt-1 block break-all text-white/70 transition-colors hover:text-cyan-300"
+                    >
+                      {email}
+                    </a>
+                  </div>
+                </div>
+                <div className="flex gap-3">
+                  <Clock3
+                    className="mt-0.5 size-5 shrink-0 text-cyan-300"
+                    aria-hidden="true"
+                  />
+                  <div>
+                    <p className="font-semibold text-white">Business Hours</p>
+                    <p className="mt-1 text-white/70">{hours}</p>
+                  </div>
+                </div>
+              </div>
+
+              {whatsappDigits ? (
+                <a
+                  href={`https://wa.me/${whatsappDigits}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-8 inline-flex items-center gap-2 rounded-md bg-brand-gradient px-4 py-2.5 text-sm font-semibold text-brand-navy transition hover:brightness-110"
+                >
+                  <MessageCircle className="size-4" aria-hidden="true" />
+                  Chat on WhatsApp
+                </a>
+              ) : null}
+            </aside>
+
+            <div className="lg:col-span-3">
+              <ContactForm />
+            </div>
+          </div>
+        </div>
+      </SectionReveal>
     </>
   );
 }

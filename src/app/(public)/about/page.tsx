@@ -1,5 +1,6 @@
 import { pageMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
+import Image from "next/image";
 import {
   BadgeCheck,
   Handshake,
@@ -30,8 +31,15 @@ export default function AboutPage() {
       {/* Our Story */}
       <section className="bg-background py-20">
         <div className="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-2 lg:items-center lg:px-8">
-          <div className="relative overflow-hidden rounded-lg border border-border bg-[linear-gradient(140deg,#f8fafc_0%,#ebf5ff_100%)]">
-            <div className="aspect-[4/3] bg-[radial-gradient(circle_at_20%_25%,rgba(14,165,233,0.22),transparent_40%),radial-gradient(circle_at_80%_75%,rgba(10,37,64,0.12),transparent_45%)]" />
+          <div className="relative aspect-[4/5] overflow-hidden rounded-lg border border-border bg-muted shadow-sm">
+            <Image
+              src="/assets/about/muhammad-moiz-khan.webp"
+              alt="Muhammad Moiz Khan, CEO of Moral Clean"
+              fill
+              priority
+              sizes="(min-width: 1024px) 50vw, 100vw"
+              className="object-cover object-top"
+            />
           </div>
           <div>
             <p className="mb-3 text-xs font-bold uppercase tracking-[0.18em] text-accent">
@@ -99,23 +107,23 @@ export default function AboutPage() {
 
       {/* Why Choose Us */}
       <section className="bg-background px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
-        <div className="relative mx-auto max-w-7xl overflow-hidden rounded-[2rem] bg-brand-navy px-6 py-12 shadow-[0_24px_60px_rgba(10,37,64,0.22)] sm:px-10 lg:px-12 lg:py-16">
+        <div className="relative mx-auto max-w-7xl overflow-hidden rounded-[2rem] bg-brand-gradient px-6 py-12 shadow-[0_24px_60px_rgba(10,37,64,0.18)] sm:px-10 lg:px-12 lg:py-16">
           <div
-            className="pointer-events-none absolute -right-24 -top-32 size-80 rounded-full bg-accent/20 blur-3xl"
+            className="pointer-events-none absolute -right-24 -top-32 size-80 rounded-full bg-white/20 blur-3xl"
             aria-hidden="true"
           />
           <div
-            className="pointer-events-none absolute -bottom-36 -left-20 size-72 rounded-full bg-sky-300/10 blur-3xl"
+            className="pointer-events-none absolute -bottom-36 -left-20 size-72 rounded-full bg-brand-navy/10 blur-3xl"
             aria-hidden="true"
           />
 
           <div className="relative grid gap-10 lg:grid-cols-[0.8fr_2fr] lg:items-end">
             <div>
-              <p className="text-xs font-bold uppercase tracking-[0.2em] text-sky-300">
+              <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand-navy/70">
                 The Moral Clean Difference
               </p>
-              <h2 className="mt-4 text-white">Why Choose Moral Clean</h2>
-              <p className="mt-4 max-w-md text-sm leading-6 text-white/70">
+              <h2 className="mt-4 text-brand-navy">Why Choose Moral Clean</h2>
+              <p className="mt-4 max-w-md text-sm leading-6 text-brand-navy/75">
                 Reliable equipment matters. The service, parts and accountability
                 behind it determine its long-term value.
               </p>
@@ -146,13 +154,13 @@ export default function AboutPage() {
               ].map(({ icon: Icon, title, description }) => (
                 <article
                   key={title}
-                  className="group rounded-xl border border-white/10 bg-white/[0.07] p-5 backdrop-blur-sm transition-colors hover:border-sky-300/40 hover:bg-white/[0.11]"
+                  className="group rounded-xl border border-white/50 bg-white/80 p-5 shadow-sm backdrop-blur-sm transition-colors hover:bg-white"
                 >
-                  <div className="flex size-11 items-center justify-center rounded-xl bg-sky-300/15 ring-1 ring-inset ring-sky-200/20">
-                    <Icon className="size-5 text-sky-300" aria-hidden="true" />
+                  <div className="flex size-11 items-center justify-center rounded-xl bg-brand-navy/10 ring-1 ring-inset ring-brand-navy/10">
+                    <Icon className="size-5 text-brand-navy" aria-hidden="true" />
                   </div>
-                  <h3 className="mt-4 text-lg text-white">{title}</h3>
-                  <p className="mt-2 text-sm leading-6 text-white/65">
+                  <h3 className="mt-4 text-lg text-brand-navy">{title}</h3>
+                  <p className="mt-2 text-sm leading-6 text-brand-navy/70">
                     {description}
                   </p>
                 </article>
