@@ -211,7 +211,7 @@ export default function AboutPage() {
                 {description}
               </p>
             </div>
-          </div>
+          ))}
         </div>
       </section>
 
