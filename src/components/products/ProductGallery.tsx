@@ -45,7 +45,7 @@ export function ProductGallery({
           sizes="(min-width: 1024px) 55vw, 100vw"
           placeholder="blur"
           blurDataURL={blurDataUrl}
-          unoptimized
+
           className="object-contain p-6"
         />
         {images.length === 0 ? (
@@ -76,7 +76,7 @@ export function ProductGallery({
                 sizes="80px"
                 placeholder="blur"
                 blurDataURL={blurDataUrl}
-                unoptimized
+
                 className="object-contain p-2"
               />
             </button>

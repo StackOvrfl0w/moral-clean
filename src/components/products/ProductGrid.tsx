@@ -3,13 +3,13 @@ import { SearchX } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { ProductCard } from "@/components/products/ProductCard";
-import type { ProductWithRelations } from "@/lib/types";
+import type { ProductCardData } from "@/lib/types";
 
 export function ProductGrid({
   products,
   clearHref = "/products",
 }: {
-  products: ProductWithRelations[];
+  products: ProductCardData[];
   clearHref?: string;
 }) {
   if (products.length === 0) {

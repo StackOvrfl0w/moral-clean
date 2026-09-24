@@ -1,11 +1,11 @@
 # *
 User-agent: *
 Allow: /
-Disallow: /admin
-Disallow: /api
+Disallow: /api/
 
 # Host
 Host: https://moralclean.com
 
 # Sitemaps
 Sitemap: https://moralclean.com/sitemap.xml
+Sitemap: https://moralclean.com/catalog-sitemap.xml

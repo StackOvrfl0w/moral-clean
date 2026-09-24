@@ -2,13 +2,19 @@ import { withSentryConfig } from "@sentry/nextjs/config";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  compress: true,
+  poweredByHeader: false,
   experimental: {
     serverActions: {
       bodySizeLimit: "1mb",
     },
   },
   images: {
+    formats: ["image/avif", "image/webp"],
+    minimumCacheTTL: 86400,
     remotePatterns: [
+      { protocol: "https", hostname: "plus.unsplash.com", pathname: "/**" },
+      { protocol: "https", hostname: "images.unsplash.com", pathname: "/**" },
       {
         protocol: "https",
         hostname: "sjlmjakninsenljyastk.supabase.co",
@@ -24,12 +30,43 @@ const nextConfig = {
   async headers() {
     return [
       {
+        source: "/assets/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value:
+              "public, max-age=86400, s-maxage=31536000, stale-while-revalidate=604800",
+          },
+        ],
+      },
+      {
+        source: "/fonts/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value:
+              "public, max-age=86400, s-maxage=31536000, stale-while-revalidate=604800",
+          },
+        ],
+      },
+      {
+        source: "/hero-placeholder.png",
+        headers: [
+          {
+            key: "Cache-Control",
+            value:
+              "public, max-age=86400, s-maxage=31536000, stale-while-revalidate=604800",
+          },
+        ],
+      },
+      { source: "/admin/:path*", headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }] },
+      {
         source: "/(.*)",
         headers: [
           {
             key: "Content-Security-Policy",
             value:
-              "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://va.vercel-scripts.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://sjlmjakninsenljyastk.supabase.co https://ik.imagekit.io; font-src 'self' data:; connect-src 'self' https://*.supabase.co https://va.vercel-scripts.com https://us.i.posthog.com https://*.posthog.com; frame-src 'self' https://www.google.com https://maps.google.com https://us.posthog.com; frame-ancestors 'self'; object-src 'none'; base-uri 'self'; form-action 'self'",
+              "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://va.vercel-scripts.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://sjlmjakninsenljyastk.supabase.co https://ik.imagekit.io https://plus.unsplash.com https://images.unsplash.com; font-src 'self' data:; connect-src 'self' https://*.supabase.co https://va.vercel-scripts.com https://us.i.posthog.com https://*.posthog.com; frame-src 'self' https://www.google.com https://maps.google.com https://us.posthog.com; frame-ancestors 'self'; object-src 'none'; base-uri 'self'; form-action 'self'",
           },
           { key: "X-Content-Type-Options", value: "nosniff" },
           { key: "X-Frame-Options", value: "SAMEORIGIN" },

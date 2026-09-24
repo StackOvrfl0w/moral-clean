@@ -9,7 +9,7 @@
 // individual chunk full headroom.
 // export const maxDuration = 60;
 
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 
 import { requireAdminNoRedirect } from "@/lib/auth";
 import {
@@ -230,41 +230,42 @@ async function replaceProductTags(
 
   if (tagNames.length === 0) return;
 
-  const tagIds: string[] = [];
+  const tagsBySlug = new Map<string, { slug: string; name: string }>();
   for (const tagName of tagNames) {
     const tagSlug = slugify(tagName);
-    if (!tagSlug) continue;
-
-    let tagId = tagCache.get(tagSlug);
-    if (!tagId) {
-      const { data: existing, error: findError } = await supabase
-        .from("tags")
-        .select("id")
-        .eq("slug", tagSlug)
-        .maybeSingle();
-      if (findError) throw new Error(findError.message);
-
-      if (existing?.id) {
-        tagId = existing.id;
-      } else {
-        const { data: created, error: createError } = await supabase
-          .from("tags")
-          .insert({ slug: tagSlug, name: tagName })
-          .select("id")
-          .single();
-        if (createError || !created) {
-          throw new Error(
-            createError?.message ?? `Unable to create tag "${tagName}".`,
-          );
-        }
-        tagId = created.id;
-      }
-      if (!tagId) throw new Error(`Unable to resolve tag "${tagName}".`);
-      tagCache.set(tagSlug, tagId);
+    if (tagSlug && !tagsBySlug.has(tagSlug)) {
+      tagsBySlug.set(tagSlug, { slug: tagSlug, name: tagName });
     }
-    if (!tagId) throw new Error(`Unable to resolve tag "${tagName}".`);
-    tagIds.push(tagId);
   }
+
+  const unresolved = Array.from(tagsBySlug.values()).filter(
+    (tag) => !tagCache.has(tag.slug),
+  );
+  if (unresolved.length > 0) {
+    const { error: upsertError } = await supabase.from("tags").upsert(unresolved, {
+      onConflict: "slug",
+      ignoreDuplicates: true,
+    });
+    if (upsertError) throw new Error(upsertError.message);
+
+    const { data: resolvedTags, error: resolveError } = await supabase
+      .from("tags")
+      .select("id,slug")
+      .in(
+        "slug",
+        unresolved.map((tag) => tag.slug),
+      );
+    if (resolveError) throw new Error(resolveError.message);
+    for (const tag of resolvedTags ?? []) {
+      tagCache.set(tag.slug, tag.id);
+    }
+  }
+
+  const tagIds = Array.from(tagsBySlug.keys()).map((slug) => {
+    const tagId = tagCache.get(slug);
+    if (!tagId) throw new Error(`Unable to resolve tag "${slug}".`);
+    return tagId;
+  });
 
   if (tagIds.length === 0) return;
   const { error } = await supabase.from("product_tags").insert(
@@ -676,7 +677,9 @@ export async function importProductsCsv(
   }
 
   if (changedSlugs.size > 0) {
+    revalidateTag("catalog");
     revalidatePath("/admin/products");
+    revalidatePath("/catalog-sitemap.xml");
     revalidatePath("/products");
     revalidatePath("/");
     changedSlugs.forEach((slug) => revalidatePath(`/products/${slug}`));

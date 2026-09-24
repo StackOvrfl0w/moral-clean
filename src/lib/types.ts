@@ -83,6 +83,11 @@ export type BlogPost = {
   updated_at: string | null;
 };
 
+export type BlogCardData = Pick<
+  BlogPost,
+  "id" | "slug" | "title" | "excerpt" | "cover_image_url" | "published_at"
+>;
+
 export type ContactSubmission = {
   id: string;
   name: string;
@@ -102,6 +107,22 @@ export type ProductWithRelations = Product & {
   images: ProductImage[];
   category: Category | null;
   tags: Tag[];
+};
+
+export type ProductCardData = Pick<
+  Product,
+  | "id"
+  | "slug"
+  | "name"
+  | "short_description"
+  | "category_id"
+  | "brand"
+  | "featured"
+  | "in_stock"
+  | "sort_order"
+  | "created_at"
+> & {
+  images: ProductImage[];
 };
 
 type Insertable<T, RequiredKeys extends keyof T> = Partial<T> &

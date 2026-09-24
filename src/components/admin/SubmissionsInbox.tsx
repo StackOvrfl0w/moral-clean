@@ -1,6 +1,13 @@
 "use client";
 
-import { Fragment, useMemo, useState, useTransition } from "react";
+import {
+  Fragment,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+  useTransition,
+} from "react";
 import { useRouter, usePathname } from "next/navigation";
 import { Search, Download, ChevronLeft, ChevronRight } from "lucide-react";
 import { toast } from "sonner";
@@ -49,6 +56,28 @@ function escapeCsv(value: string) {
   return `"${value.replace(/"/g, '""')}"`;
 }
 
+function DebouncedSearchInput({
+  onSearch,
+}: {
+  onSearch: (value: string) => void;
+}) {
+  const [value, setValue] = useState("");
+
+  useEffect(() => {
+    const timeout = window.setTimeout(() => onSearch(value), 250);
+    return () => window.clearTimeout(timeout);
+  }, [onSearch, value]);
+
+  return (
+    <input
+      value={value}
+      onChange={(event) => setValue(event.target.value)}
+      placeholder="Search name/email/phone"
+      className="h-9 w-72 rounded-md border border-input bg-background pl-9 pr-3 text-sm"
+    />
+  );
+}
+
 export function SubmissionsInbox({
   submissions,
   page,
@@ -61,6 +90,7 @@ export function SubmissionsInbox({
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const [selected, setSelected] = useState<Set<string>>(new Set());
   const [pending, startTransition] = useTransition();
+  const handleSearch = useCallback((value: string) => setQuery(value), []);
 
   const filtered = useMemo(() => {
     if (!query.trim()) return submissions;
@@ -135,12 +165,7 @@ export function SubmissionsInbox({
       <div className="flex flex-wrap gap-3 rounded-md border bg-white p-4">
         <div className="relative">
           <Search className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
-          <input
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search name/email/phone"
-            className="h-9 w-72 rounded-md border border-input bg-background pl-9 pr-3 text-sm"
-          />
+          <DebouncedSearchInput onSearch={handleSearch} />
         </div>
         <Button type="button" variant="outline" onClick={exportCsv}>
           <Download className="size-4" />

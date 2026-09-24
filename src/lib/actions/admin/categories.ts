@@ -1,12 +1,16 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { redirect } from "next/navigation";
 
 import { requireAdmin } from "@/lib/auth";
 import { validateImageUpload } from "@/lib/image-upload";
 import { createClient } from "@/lib/supabase/server";
 import { normalizeSafeUrl, slugify } from "@/lib/utils";
+
+function invalidateCatalog() {
+  revalidateTag("catalog");
+}
 
 function normalize(value: FormDataEntryValue | null) {
   const text = typeof value === "string" ? value.trim() : "";
@@ -61,7 +65,10 @@ export async function createCategory(formData: FormData) {
   });
   if (error) throw new Error(error.message);
 
+  invalidateCatalog();
   revalidatePath("/admin/categories");
+  revalidatePath("/");
+  revalidatePath("/catalog-sitemap.xml");
   revalidatePath(`/products/category/${slug}`);
   revalidatePath("/products");
   revalidatePath("/");
@@ -90,7 +97,10 @@ export async function updateCategory(formData: FormData) {
     .eq("id", id);
   if (error) throw new Error(error.message);
 
+  invalidateCatalog();
   revalidatePath("/admin/categories");
+  revalidatePath("/");
+  revalidatePath("/catalog-sitemap.xml");
   revalidatePath(`/products/category/${slug}`);
   revalidatePath("/products");
   revalidatePath("/");
@@ -109,7 +119,10 @@ export async function deleteCategory(formData: FormData) {
     .eq("category_id", id);
   const { error } = await supabase.from("categories").delete().eq("id", id);
   if (error) throw new Error(error.message);
+  invalidateCatalog();
   revalidatePath("/admin/categories");
+  revalidatePath("/");
+  revalidatePath("/catalog-sitemap.xml");
   revalidatePath("/products");
   revalidatePath("/");
 }
@@ -127,7 +140,10 @@ export async function reorderCategories(formData: FormData) {
       .eq("id", item.id);
   }
 
+  invalidateCatalog();
   revalidatePath("/admin/categories");
+  revalidatePath("/");
+  revalidatePath("/catalog-sitemap.xml");
   revalidatePath("/products");
   revalidatePath("/");
 }

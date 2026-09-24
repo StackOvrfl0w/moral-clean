@@ -1,3 +1,4 @@
+import { pageMetadata, absoluteUrl } from "@/lib/seo";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -51,31 +52,12 @@ export async function generateMetadata({
 }: BlogPostPageProps): Promise<Metadata> {
   const post = await getPostBySlug(params.slug);
 
-  if (!post || !post.published) {
-    return {
-      title: "Article Not Found",
-    };
-  }
-
-  return {
-    title: post.meta_title || post.title,
-    description:
-      post.meta_description ||
-      post.excerpt ||
-      "Read practical guidance from the Moral Clean team.",
-    alternates: {
-      canonical: `${siteUrl}/blog/${post.slug}`,
-    },
-    openGraph: {
-      title: post.meta_title || post.title,
-      description:
-        post.meta_description ||
-        post.excerpt ||
-        "Read practical guidance from the Moral Clean team.",
-      images: post.cover_image_url ? [{ url: post.cover_image_url }] : undefined,
-      type: "article",
-    },
-  };
+  if (!post || !post.published) notFound();
+  return pageMetadata({
+    title: post.meta_title?.trim() || post.title,
+    description: post.meta_description?.trim() || post.excerpt || `Read ${post.title} from the Moral Clean team.`,
+    path: `/blog/${post.slug}`, image: post.cover_image_url, article: true,
+  });
 }
 
 export async function generateStaticParams() {
@@ -116,22 +98,20 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     "@context": "https://schema.org",
     "@type": "Article",
     headline: post.title,
-    image: [imageUrl],
+    image: [absoluteUrl(post.cover_image_url || "/opengraph-image")],
     description: post.excerpt || "Read practical guidance from the Moral Clean team.",
     mainEntityOfPage: `${siteUrl}/blog/${post.slug}`,
     datePublished: post.published_at || post.created_at,
     dateModified: post.updated_at || post.published_at || post.created_at,
     author: {
-      "@type": "Person",
+      "@type": !post.author_name || /moral clean/i.test(authorName) ? "Organization" : "Person",
       name: authorName,
+      url: `${siteUrl}/about`,
     },
     publisher: {
       "@type": "Organization",
       name: "Moral Clean",
-      logo: {
-        "@type": "ImageObject",
-        url: `${siteUrl}/logo.png`,
-      },
+      "@id": `${siteUrl}/#organization`,
       url: siteUrl,
     },
   };
@@ -207,7 +187,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               alt={post.title}
               fill
               sizes="(min-width: 1024px) 80vw, 100vw"
-              unoptimized
+              priority
+
               className="object-cover"
             />
           </div>
@@ -220,6 +201,15 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             className="prose prose-lg prose-headings:font-display prose-a:text-accent prose-img:rounded-lg max-w-none"
             dangerouslySetInnerHTML={{ __html: sanitizeRichText(post.content) }}
           />
+
+          <aside className="mt-8 rounded-md border p-6">
+            <h2 className="text-xl">Equipment and service support</h2>
+            <p className="mt-3 text-muted-foreground">
+              <Link href="/products" className="underline">Compare cleaning equipment</Link>{" "}
+              or explore <Link href="/services" className="underline">machine repair and maintenance</Link>{" "}
+              for your facility. <Link href="/contact" className="underline">Contact our team</Link> for a quote.
+            </p>
+          </aside>
 
           <div className="mt-10 rounded-md border border-border bg-muted/40 p-4">
             <p className="text-sm font-semibold text-primary">Share this article</p>
@@ -246,7 +236,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 MT
               </span>
               <div>
-                <h3 className="text-xl">The Moral Clean Team</h3>
+                <h2 className="text-xl">The Moral Clean Team</h2>
                 <p className="mt-2 text-sm text-muted-foreground">
                   Practical insights from our product and service teams focused
                   on commercial cleaning equipment and maintenance operations.

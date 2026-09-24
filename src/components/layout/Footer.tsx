@@ -15,7 +15,7 @@ const quickLinks = [
 const FOOTER_CATEGORY_LIMIT = 6;
 
 function categoryHref(slug: string) {
-  return `/products?category=${slug}`;
+  return `/products/category/${slug}`;
 }
 
 interface FooterProps {

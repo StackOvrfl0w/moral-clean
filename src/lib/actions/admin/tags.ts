@@ -1,6 +1,6 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 
 import { requireAdmin } from "@/lib/auth";
 import { createClient } from "@/lib/supabase/server";
@@ -13,6 +13,7 @@ function requiredText(value: FormDataEntryValue | null, label: string) {
 }
 
 function refreshTagViews() {
+  revalidateTag("catalog");
   revalidatePath("/admin/tags");
   revalidatePath("/products");
 }
