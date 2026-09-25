@@ -1,4 +1,4 @@
-import { pageMetadata, absoluteUrl } from "@/lib/seo";
+import { pageMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -30,10 +30,7 @@ import type { Json, ProductWithRelations } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { sanitizeRichText } from "@/lib/sanitize-html";
 
-import { env } from "@/config/env";
-
 export const revalidate = 3600;
-const siteUrl = env.siteUrl;
 
 type ProductPageProps = {
   params: {
@@ -187,28 +184,6 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
   const specEntries = getSpecEntries(product.specifications);
   const keySpecEntries = specEntries.slice(0, 4);
   const brochureUrl = getBrochureUrl(product.specifications);
-  const productUrl = `${siteUrl}/products/${product.slug}`;
-  const imageUrls =
-    product.images.map((image) => absoluteUrl(image.url)).filter(Boolean).length > 0
-      ? product.images.map((image) => absoluteUrl(image.url))
-      : [`${siteUrl}/opengraph-image`];
-  const productJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Product",
-    name: product.name,
-    description: getDescription(product),
-    image: imageUrls,
-    url: productUrl,
-    brand: product.brand
-      ? {
-          "@type": "Brand",
-          name: product.brand,
-        }
-      : undefined,
-    sku: product.model_code || undefined,
-    category: product.category?.name,
-  };
-
   return (
     <>
       <BreadcrumbSchema
@@ -226,13 +201,6 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
           { name: product.name, url: `/products/${product.slug}` },
         ]}
       />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(productJsonLd).replace(/</g, "\\u003c"),
-        }}
-      />
-
       <section className="bg-muted py-3">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <nav

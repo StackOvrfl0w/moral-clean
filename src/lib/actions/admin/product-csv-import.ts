@@ -20,7 +20,7 @@ import {
   type ProductCsvImportResult,
   type ProductCsvRecord,
 } from "@/lib/product-csv";
-import { createClient } from "@/lib/supabase/server";
+import { createAdminClient } from "@/lib/supabase/admin";
 import type { Json, Product } from "@/lib/types";
 import { slugify } from "@/lib/utils";
 
@@ -194,7 +194,7 @@ async function replaceProductImages(
   productId: string,
   images: PreparedProductImage[],
 ) {
-  const supabase = createClient();
+  const supabase = createAdminClient();
   const { error: deleteError } = await supabase
     .from("product_images")
     .delete()
@@ -221,7 +221,7 @@ async function replaceProductTags(
   tagNames: string[],
   tagCache: Map<string, string>,
 ) {
-  const supabase = createClient();
+  const supabase = createAdminClient();
   const { error: deleteError } = await supabase
     .from("product_tags")
     .delete()
@@ -311,7 +311,7 @@ async function resolveCategory(
   if (!newSlug)
     throw new Error(`Category "${value}" cannot be converted to a valid slug.`);
 
-  const supabase = createClient();
+  const supabase = createAdminClient();
   const { data, error } = await supabase
     .from("categories")
     .insert({ name: value, slug: newSlug })
@@ -479,7 +479,25 @@ export async function importProductsCsv(
     formData.get("mode") === "upsert" ? "upsert" : "create";
   const createMissingCategories =
     formData.get("createMissingCategories") === "true";
-  const supabase = createClient();
+  const parsedRowOffset = Number(formData.get("rowOffset") ?? 0);
+  const rowOffset =
+    Number.isInteger(parsedRowOffset) && parsedRowOffset >= 0
+      ? parsedRowOffset
+      : 0;
+  let supabase: ReturnType<typeof createAdminClient>;
+  try {
+    supabase = createAdminClient();
+  } catch {
+    return {
+      success: false,
+      created: 0,
+      updated: 0,
+      skipped: 0,
+      errors: [],
+      message:
+        "Product import is not configured on the server. Verify NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY in Vercel, then redeploy.",
+    };
+  }
 
   const { data: categoriesData, error: categoriesError } = await supabase
     .from("categories")
@@ -550,7 +568,7 @@ export async function importProductsCsv(
       if (existing && mode === "create") {
         skipped += 1;
         errors.push({
-          row: row.line,
+          row: row.line + rowOffset,
           product: productName,
           message: `Skipped because slug "${productSlug}" already exists. Choose “Create or update” to update it.`,
         });
@@ -672,7 +690,7 @@ export async function importProductsCsv(
       if (createdProductId) {
         await supabase.from("products").delete().eq("id", createdProductId);
       }
-      importError(errors, row.line, productName, error);
+      importError(errors, row.line + rowOffset, productName, error);
     }
   }
 
