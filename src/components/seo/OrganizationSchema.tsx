@@ -21,38 +21,39 @@ export async function OrganizationSchema() {
 
   const schema = {
     "@context": "https://schema.org",
-    "@type": ["Organization", "LocalBusiness"],
+    "@type": "Organization",
     name,
     url: siteUrl,
     "@id": `${siteUrl}/#organization`,
+    logo: {
+      "@type": "ImageObject",
+      url: `${siteUrl}/icon.png`,
+      width: 48,
+      height: 48,
+    },
     image: `${siteUrl}/opengraph-image`,
     description:
       "Moral Clean supplies industrial cleaning machines, replacement parts, and repair services for commercial and facility cleaning teams across Pakistan.",
     address: {
       "@type": "PostalAddress",
-      streetAddress: settings.business_address || "Shop no 01, Plot no 242, Sector 11-E",
-      addressLocality: "North Karachi",
+      streetAddress:
+        settings.business_address ||
+        "Shop no 01, Plot no 242, Sector 11-E, North Karachi, Karachi",
+      addressLocality: "Karachi",
       addressRegion: "Sindh",
       postalCode: "75850",
       addressCountry: "PK",
     },
     telephone,
     email,
-    openingHoursSpecification: !settings.business_hours ? [
-      {
-        "@type": "OpeningHoursSpecification",
-        dayOfWeek: [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday",
-          "Saturday",
-        ],
-        opens: "09:00",
-        closes: "18:00",
-      },
-    ] : undefined,
+    contactPoint: {
+      "@type": "ContactPoint",
+      telephone,
+      email,
+      contactType: "customer service",
+      areaServed: "PK",
+      availableLanguage: ["en", "ur"],
+    },
     sameAs: sameAs.length > 0 ? sameAs : undefined,
     areaServed: "PK",
   };

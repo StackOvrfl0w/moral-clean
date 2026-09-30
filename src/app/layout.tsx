@@ -103,6 +103,9 @@ export const metadata: Metadata = {
   authors: [{ name: "Moral Clean" }],
   creator: "Moral Clean",
   publisher: "Moral Clean",
+  icons: {
+    icon: "/icon.png",
+  },
   openGraph: {
     title,
     description,
