@@ -453,7 +453,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
                 <ArrowRight className="size-4" aria-hidden="true" />
               </Link>
             </section>
-          <GuideLinks />
+          <GuideLinks categorySlug={product.category?.slug} />
         </div>
       </section>
 

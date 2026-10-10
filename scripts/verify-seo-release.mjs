@@ -47,10 +47,12 @@ async function worker() {
     const h1Count = (html.match(/<h1\b/g) || []).length;
     const schemas = Array.from(html.matchAll(/<script type="application\/ld\+json">(.*?)<\/script>/gs), (match) => JSON.parse(match[1]));
     const product = schemas.find((schema) => schema["@type"] === "Product");
+    const article = schemas.find((schema) => schema["@type"] === "Article");
     if (response.status !== 200 || !title || h1Count !== 1 || canonical !== url || noindex) errors.push(`Page checks failed: ${path}`);
     if (/(?:\|\s*Moral Clean\s*){2}/.test(title || "")) errors.push(`Repeated title suffix: ${path}`);
     if (path.startsWith("/products/") && !path.startsWith("/products/category/") && (!product || !html.includes("Technical specifications"))) errors.push(`Product details/schema missing: ${path}`);
     if (product && (product.offers || product.aggregateRating || product.review)) errors.push(`Unverified commercial schema: ${path}`);
+    if (path.startsWith("/guides/") && (!article || !article.datePublished || !article.headline || !html.includes('aria-label="Article contents"'))) errors.push(`Article metadata or contents missing: ${path}`);
     results.push({ path, status: response.status, title, canonical, noindex, h1Count, schemaTypes: schemas.map((schema) => schema["@type"]), fullSpecifications: product ? html.includes("Technical specifications") : undefined });
   }
 }

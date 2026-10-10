@@ -25,7 +25,7 @@ export async function CategoryBuyingAdvice({ slug, categoryId }: { slug: string;
       </div> : null}
       <div><h2 className="mb-4 text-2xl">Buying questions</h2>{advice.questions.map((item) => <details key={item.question} className="border-b py-4"><summary className="cursor-pointer font-semibold text-primary">{item.question}</summary><p className="mt-3 leading-7 text-muted-foreground">{item.answer}</p></details>)}</div>
       <div className="rounded-md bg-muted p-6"><h2 className="text-2xl">Request a specification-based quotation</h2><p className="mt-3 text-muted-foreground">Send your facility location, floor or surface type, cleaning area, daily workload and required quantities. Ask for the model specification, included accessories, delivery terms and service scope.</p><Link className="mt-4 inline-block font-semibold text-primary underline underline-offset-4" href={`/contact?subject=Quotation&category=${encodeURIComponent(slug)}`}>Send your requirements</Link></div>
-      <GuideLinks />
+      <GuideLinks categorySlug={slug} />
     </div>
   </section>;
 }

@@ -1,9 +1,9 @@
 import Link from "next/link";
-import guides from "@/content/guides.json";
+import { guides } from "@/content/guides";
 import { pageMetadata } from "@/lib/seo";
 import { BreadcrumbSchema } from "@/components/seo/BreadcrumbSchema";
 
-export const metadata = pageMetadata({ title: "Cleaning Equipment Buying & Maintenance Guides", description: "Practical guides to scrubber dryers, floor cleaning machine costs and maintenance enquiries for commercial facilities in Pakistan.", path: "/guides" });
+export const metadata = pageMetadata({ title: "Commercial Cleaning Equipment Guides for Pakistan", description: "Compare steam cleaners, vacuums, pressure washers, sweepers and scrubber dryers. Practical equipment selection and maintenance guides for Pakistan.", path: "/guides" });
 export default function GuidesPage() {
   return <><BreadcrumbSchema items={[{ name: "Home", url: "/" }, { name: "Guides", url: "/guides" }]} />
     <section className="bg-muted py-16"><div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"><h1>Cleaning equipment guides</h1><p className="mt-4 max-w-3xl text-muted-foreground">Compare equipment against your facility requirements, understand quotation details and prepare useful information for maintenance enquiries.</p></div></section>
