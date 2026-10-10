@@ -53,6 +53,7 @@ async function worker() {
     if (path.startsWith("/products/") && !path.startsWith("/products/category/") && (!product || !html.includes("Technical specifications"))) errors.push(`Product details/schema missing: ${path}`);
     if (product && (product.offers || product.aggregateRating || product.review)) errors.push(`Unverified commercial schema: ${path}`);
     if (path.startsWith("/guides/") && (!article || !article.datePublished || !article.headline || !html.includes('aria-label="Article contents"'))) errors.push(`Article metadata or contents missing: ${path}`);
+    if (article && (!Array.isArray(article.image) || article.image.length < 2 || !article.image.every((image) => image.startsWith("https://moralclean.com/")) || !html.includes(`${path}/social-image`))) errors.push(`Article images or social preview missing: ${path}`);
     results.push({ path, status: response.status, title, canonical, noindex, h1Count, schemaTypes: schemas.map((schema) => schema["@type"]), fullSpecifications: product ? html.includes("Technical specifications") : undefined });
   }
 }
