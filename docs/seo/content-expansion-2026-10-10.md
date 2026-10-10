@@ -33,4 +33,8 @@ All six articles are original decision guidance. They are not copied manufacture
 
 Local TypeScript and ESLint checks passed. The content check found nine unique article slugs, valid publication dates and equipment links. The vacuum-category recommendations correctly select the new vacuum guide, the single-disc comparison and the maintenance article.
 
-Final preview deployment and HTTP audit results will be recorded after the cloud build completes. The expected public sitemap total is 60 URLs, including nine articles. Invalid pagination regressions remain part of the deployment verification.
+The article-content deployment `dpl_Ec7GXb281pqMR7TBKNFyRDrA5Jye` built commit `3c07403` successfully in 2m 14s. Its authenticated HTTP audit passed: **60 sitemap URLs, nine articles, 36 product pages, 11 exclusion checks and zero errors**. Results are saved in `content-preview-verification-2026-10-10.json`. Article schema and contents were checked along with the prior canonical, H1, robots and pagination checks. All article-to-article and category targets also passed the source-link check.
+
+The follow-up commit `f9909ad` changes only the preview-indexing header and this report. Its deployment `dpl_94yHeRKPdTxPqEkhP3SWVUccAR3s` is READY; the cloud build passed in 3m 20s. Local configuration checks confirmed the global noindex rule applies in preview and is absent in production; the existing admin rule remains in both. Final HTTP checks confirmed `https://preview.moralclean.com/guides` returns 200 with `X-Robots-Tag: noindex`. The new vacuum article returns 200 with its correct 10 October date, contents anchors and manufacturer references. Production returns 200 without a global noindex header, and its alias still points to the approved pre-SEO deployment `dpl_Eet82YisYPevDFQQDFHyFJttNndE`.
+
+Review the expanded library at [preview.moralclean.com/guides](https://preview.moralclean.com/guides). No production or master release has been made.
