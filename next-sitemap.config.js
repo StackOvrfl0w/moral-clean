@@ -1,7 +1,7 @@
 const configuredSiteUrl = process.env.NEXT_PUBLIC_SITE_URL?.trim();
 const siteUrl = configuredSiteUrl && !/localhost|127\.0\.0\.1/i.test(configuredSiteUrl)
   ? configuredSiteUrl.replace(/\/$/, "") : "https://moralclean.com";
-const guides = [...require("./src/content/guides.json"), ...require("./src/content/additional-guides.json"), ...require("./src/content/expert-guides.json")];
+const guides = [...require("./src/content/planning-guides.json"), ...require("./src/content/guides.json"), ...require("./src/content/additional-guides.json"), ...require("./src/content/expert-guides.json")];
 const services = require("./src/content/service-pages.json");
 const pages = ["/", "/about", "/services", "/contact", "/products", "/blog", "/guides", ...guides.map(({ slug }) => `/guides/${slug}`), ...services.map(({ slug }) => `/services/${slug}`)];
 

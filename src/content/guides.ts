@@ -1,3 +1,4 @@
+import planningGuides from "./planning-guides.json";
 import initialGuides from "./guides.json";
 import additionalGuides from "./additional-guides.json";
 import expertGuides from "./expert-guides.json";
@@ -8,6 +9,7 @@ export type Guide = {
   description: string;
   date: string;
   intro: string;
+  tool?: string;
   sections: { heading: string; paragraphs: string[] }[];
   links: { label: string; href: string }[];
   references?: { label: string; href: string }[];
@@ -15,7 +17,7 @@ export type Guide = {
   comparison?: { caption?: string; columns: string[]; rows: string[][] };
 };
 
-export const guides: Guide[] = [...expertGuides, ...initialGuides, ...additionalGuides];
+export const guides: Guide[] = [...planningGuides, ...expertGuides, ...initialGuides, ...additionalGuides];
 
 export function getRelatedGuides(categorySlug?: string, currentSlug?: string) {
   const current = guides.find((guide) => guide.slug === currentSlug);

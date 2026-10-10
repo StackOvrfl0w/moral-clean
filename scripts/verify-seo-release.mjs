@@ -36,6 +36,9 @@ if (!locations.some((url) => url.includes("/steam-cleaners"))) errors.push("Stea
 for (const {slug} of JSON.parse(fs.readFileSync("src/content/service-pages.json", "utf8"))) {
   if (!locations.includes("https://moralclean.com/services/" + slug)) errors.push("Service page missing from sitemap: " + slug);
 }
+for (const {slug} of JSON.parse(fs.readFileSync("src/content/planning-guides.json", "utf8"))) {
+  if (!locations.includes("https://moralclean.com/guides/" + slug)) errors.push("Planning guide missing from sitemap: " + slug);
+}
 const results = [];
 const queue = [...new Set(locations)];
 async function worker() {
@@ -59,6 +62,7 @@ async function worker() {
     if (path.startsWith("/guides/") && (!article || !article.datePublished || !article.headline || !html.includes('aria-label="Article contents"'))) errors.push(`Article metadata or contents missing: ${path}`);
     if (article && (!Array.isArray(article.image) || article.image.length < 2 || !article.image.every((image) => image.startsWith("https://moralclean.com/")) || !html.includes(`${path}/social-image`))) errors.push(`Article images or social preview missing: ${path}`);
     if (path.startsWith("/services/") && (!service || service.url !== url || service.provider?.["@id"] !== "https://moralclean.com/#organization" || !html.includes('id="enquiry-checklist"') || (html.match(/<details\b/g) || []).length !== 3)) errors.push(`Service content/schema missing: ${path}`);
+    if (path === "/guides/floor-scrubber-cleaning-capacity-calculator" && (!html.includes("data-capacity-minutes") || !html.includes("205") || !html.includes("capacity-utilization-hint"))) errors.push("Calculator initial output or labelled controls missing");
     results.push({ path, status: response.status, title, canonical, noindex, h1Count, schemaTypes: schemas.map((schema) => schema["@type"]), fullSpecifications: product ? html.includes("Technical specifications") : undefined });
   }
 }

@@ -390,6 +390,7 @@
       }
     ],
     "links": [
+      {"label": "Plan scrubber capacity with explicit assumptions", "href": "/guides/floor-scrubber-cleaning-capacity-calculator"},
       {
         "label": "Compare sweeping and scrubbing processes",
         "href": "/guides/floor-sweeper-vs-scrubber-dryer"

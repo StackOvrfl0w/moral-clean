@@ -5,7 +5,7 @@ import { promisify } from "node:util";
 
 const origin = process.argv[2] || "https://preview.moralclean.com";
 const output = process.argv[3] || "docs/seo/guide-image-verification-2026-10-10.json";
-const guides = ["guides", "additional-guides", "expert-guides"].flatMap((name) => JSON.parse(fs.readFileSync(`src/content/${name}.json`, "utf8")));
+const guides = ["guides", "additional-guides", "expert-guides", "planning-guides"].flatMap((name) => JSON.parse(fs.readFileSync(`src/content/${name}.json`, "utf8")));
 const errors = [];
 const results = [];
 const queue = [...guides];
