@@ -155,6 +155,7 @@
       { "question": "What information is needed for brush refilling?", "answer": "Provide the machine model, brush dimensions and mounting photographs, the intended floor and current wear or performance issue. The brush body and proposed bristle specification need assessment before suitability or scope can be confirmed." }
     ],
     "links": [
+      {"label": "Single-disc brush refilling enquiries", "href": "/services/brush-refilling"},
       { "label": "Single disc machines and accessory enquiries", "href": "/products/category/single-disk-machine" },
       { "label": "Brush refilling and equipment service enquiries", "href": "/services" },
       { "label": "Single disc machine versus scrubber dryer", "href": "/guides/single-disc-machine-vs-scrubber-dryer" },
@@ -239,6 +240,7 @@
       { "question": "What should I send when requesting scrubber-dryer repair?", "answer": "Send the model identification, facility location, trail photographs, timing of the problem, warnings, recent maintenance and the permitted checks already completed. Confirm assessment and repair scope before authorising parts or work." }
     ],
     "links": [
+      {"label": "Request a cleaning-machine repair assessment", "href": "/services/cleaning-machine-repair"},
       { "label": "Cleaning-machine assessment and service enquiries", "href": "/services" },
       { "label": "Maintenance and repair enquiry checklist", "href": "/guides/cleaning-machine-maintenance-checklist" },
       { "label": "Walk behind scrubber equipment", "href": "/products/category/walk-behind-scrubber" },

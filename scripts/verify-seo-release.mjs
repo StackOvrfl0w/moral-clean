@@ -33,6 +33,9 @@ for (const child of children) {
 }
 if (locations.some((url) => url.includes("/cleaning-chemicals"))) errors.push("Empty chemicals category is included in the sitemap");
 if (!locations.some((url) => url.includes("/steam-cleaners"))) errors.push("Steam category is missing from the sitemap");
+for (const {slug} of JSON.parse(fs.readFileSync("src/content/service-pages.json", "utf8"))) {
+  if (!locations.includes("https://moralclean.com/services/" + slug)) errors.push("Service page missing from sitemap: " + slug);
+}
 const results = [];
 const queue = [...new Set(locations)];
 async function worker() {
@@ -47,6 +50,7 @@ async function worker() {
     const h1Count = (html.match(/<h1\b/g) || []).length;
     const schemas = Array.from(html.matchAll(/<script type="application\/ld\+json">(.*?)<\/script>/gs), (match) => JSON.parse(match[1]));
     const product = schemas.find((schema) => schema["@type"] === "Product");
+    const service = schemas.find((schema) => schema["@type"] === "Service");
     const article = schemas.find((schema) => schema["@type"] === "Article");
     if (response.status !== 200 || !title || h1Count !== 1 || canonical !== url || noindex) errors.push(`Page checks failed: ${path}`);
     if (/(?:\|\s*Moral Clean\s*){2}/.test(title || "")) errors.push(`Repeated title suffix: ${path}`);
@@ -54,12 +58,13 @@ async function worker() {
     if (product && (product.offers || product.aggregateRating || product.review)) errors.push(`Unverified commercial schema: ${path}`);
     if (path.startsWith("/guides/") && (!article || !article.datePublished || !article.headline || !html.includes('aria-label="Article contents"'))) errors.push(`Article metadata or contents missing: ${path}`);
     if (article && (!Array.isArray(article.image) || article.image.length < 2 || !article.image.every((image) => image.startsWith("https://moralclean.com/")) || !html.includes(`${path}/social-image`))) errors.push(`Article images or social preview missing: ${path}`);
+    if (path.startsWith("/services/") && (!service || service.url !== url || service.provider?.["@id"] !== "https://moralclean.com/#organization" || !html.includes('id="enquiry-checklist"') || (html.match(/<details\b/g) || []).length !== 3)) errors.push(`Service content/schema missing: ${path}`);
     results.push({ path, status: response.status, title, canonical, noindex, h1Count, schemaTypes: schemas.map((schema) => schema["@type"]), fullSpecifications: product ? html.includes("Technical specifications") : undefined });
   }
 }
 await Promise.all(Array.from({ length: 4 }, () => worker()));
 const checks = [];
-for (const [path, expected] of [["/products/test-prod", 404], ["/products/test-prod2", 404], ["/blog/blog-test", 404], ["/blog/blog-test1", 404], ["/blog/blogtest2", 404], ["/products/category/cleaning-chemicals", 200], ["/products/category/single-disk-machine?brand=Biemmedue", 200], ["/products/category/single-disk-machine?page=999", 404], ["/products/category/single-disk-machine?page=999&nxtPslug=single-disk-machine", 404], ["/products?page=999", 404], ["/blog?page=999", 404]]) {
+for (const [path, expected] of [["/services/unknown-service", 404], ["/products/test-prod", 404], ["/products/test-prod2", 404], ["/blog/blog-test", 404], ["/blog/blog-test1", 404], ["/blog/blogtest2", 404], ["/products/category/cleaning-chemicals", 200], ["/products/category/single-disk-machine?brand=Biemmedue", 200], ["/products/category/single-disk-machine?page=999", 404], ["/products/category/single-disk-machine?page=999&nxtPslug=single-disk-machine", 404], ["/products?page=999", 404], ["/blog?page=999", 404]]) {
   const response = await request(origin + path);
   const html = await response.text();
   const noindex = /<meta[^>]*name="robots"[^>]*content="[^"]*noindex/.test(html);

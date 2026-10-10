@@ -1,3 +1,4 @@
+import { getServicePageByCatalogSlug } from "@/content/service-pages";
 import { GuideLinks } from "@/components/seo/GuideLinks";
 import { pageMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
@@ -21,7 +22,7 @@ import { absoluteUrl } from "@/lib/seo";
 
 
 export const metadata: Metadata = pageMetadata({
-  title: 'Cleaning Machine Repair & Maintenance in Pakistan', description: 'Get motor repair, parts replacement, brush refilling and maintenance for commercial cleaning equipment. Contact Moral Clean for service across Pakistan.', path: '/services',
+  title: 'Cleaning Machine Repair & Maintenance in Pakistan', description: 'Get motor repair, parts replacement, brush refilling and maintenance for commercial cleaning equipment. Send your equipment details and location to confirm service arrangements.', path: '/services',
 });
 
 type Step = {
@@ -41,44 +42,36 @@ const processSteps: Step[] = [
   {
     title: "Service",
     description:
-      "Repairs performed by trained technicians using genuine parts.",
+      "Confirm the proposed parts, labour and service arrangements before authorizing work.",
   },
   {
     title: "Test & Deliver",
-    description: "Equipment tested and returned in working condition.",
+    description: "Agree the completion checks and collection or return arrangements for the job.",
   },
 ];
 
-const cities = [
-  "Karachi",
-  "Lahore",
-  "Islamabad",
-  "Rawalpindi",
-  "Faisalabad",
-  "Multan",
-  "Peshawar",
-];
+const locationDetails = ["Facility city and access", "Assessment location", "Attendance availability", "Collection and return transport"];
 
 const faqs = [
   {
     question: "How quickly can your team respond to a service request?",
     answer:
-      "Most requests are acknowledged within the same business day, and urgent cases are prioritized based on equipment criticality and location.",
+      "Send the model, fault symptoms and location. Response and assessment timing must be confirmed for your request; no fixed turnaround is promised.",
   },
   {
     question: "Do you provide on-site service or workshop-only repairs?",
     answer:
-      "We provide both. Basic diagnostics and many replacements can be done on-site, while deeper repairs are handled in workshop conditions when required.",
+      "Assessment location, on-site attendance and workshop handling depend on the equipment and location. Confirm the arrangements before moving the machine or booking work.",
   },
   {
     question: "Do you use original parts?",
     answer:
-      "Yes. We prioritize genuine manufacturer-compatible parts and confirm part availability and lead times before starting work.",
+      "Ask the quote to identify the replacement part, its compatibility and whether it is an original manufacturer component or another specified replacement. Availability and lead time need confirmation.",
   },
   {
     question: "Can you service machines not purchased from Moral Clean?",
     answer:
-      "In many cases, yes. Share machine model details and fault symptoms; we will confirm serviceability and recommended next steps.",
+      "Share the brand, model, serial plate and fault symptoms. Serviceability and parts availability must be confirmed before work is accepted.",
   },
   {
     question: "Is service work covered by warranty?",
@@ -88,7 +81,7 @@ const faqs = [
   {
     question: "What payment terms do you offer for service jobs?",
     answer:
-      "Payment terms vary by scope and client account status. For most jobs, terms are shared in writing with parts and labor breakdown before work starts.",
+      "Confirm the payment terms, assessment charges, parts and labour costs in the agreed quotation before authorizing work.",
   },
 ];
 
@@ -111,21 +104,21 @@ export default async function ServicesPage() {
         "@context": "https://schema.org",
         "@graph": services.map((service) => ({
           "@type": "Service",
-          "@id": absoluteUrl(`/services#${service.slug}`),
-          url: absoluteUrl(`/services#${service.slug}`),
+          "@id": absoluteUrl(getServicePageByCatalogSlug(service.slug) ? `/services/${getServicePageByCatalogSlug(service.slug)!.slug}#service` : `/services#${service.slug}`),
+          url: absoluteUrl(getServicePageByCatalogSlug(service.slug) ? `/services/${getServicePageByCatalogSlug(service.slug)!.slug}` : `/services#${service.slug}`),
           name: service.name,
           description: service.short_description || undefined,
           serviceType: service.name,
           provider: { "@id": absoluteUrl("/#organization") },
-          areaServed: { "@type": "Country", name: "Pakistan" },
         })),
       }} />
       <section className="bg-background py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <SectionHeader eyebrow="What We Offer" title="Our Services" as="h1" />
+          <SectionHeader eyebrow="What We Offer" title="Cleaning Machine Repair, Parts & Brush Refilling" as="h1" />
 
           <div className="space-y-8">
             {services.map((service, index) => {
+              const details = getServicePageByCatalogSlug(service.slug);
               const Icon = serviceIcon(service.icon_name);
               const mediaFirst = index % 2 === 0;
 
@@ -183,6 +176,7 @@ export default async function ServicesPage() {
                         "Detailed service scope is shared after an initial technical assessment."}
                     </p>
 
+                    {details ? <p className="mt-5"><Link className="font-semibold text-primary underline decoration-accent underline-offset-4" href={`/services/${details.slug}`}>View {details.title.toLowerCase()} details</Link></p> : null}
                     <Button
                       asChild
                       className="mt-6 border-0 bg-brand-gradient text-white hover:opacity-100 hover:brightness-110 transition-all"
@@ -233,14 +227,12 @@ export default async function ServicesPage() {
       <section className="bg-background py-20">
         <div className="mx-auto grid max-w-7xl gap-8 px-4 sm:px-6 lg:grid-cols-2 lg:px-8">
           <div>
-            <h2>Nationwide Service Network</h2>
+            <h2>Plan the Service Location and Transport</h2>
             <p className="mt-4 text-muted-foreground">
-              Our service team supports clients across major commercial and
-              industrial cities in Pakistan through workshop and field service
-              coordination.
+              Share your city and facility location with the equipment details. Confirm where assessment can take place, whether attendance is available and how the equipment will be transported before arranging service.
             </p>
             <ul className="mt-6 grid gap-3 sm:grid-cols-2">
-              {cities.map((city) => (
+              {locationDetails.map((city) => (
                 <li
                   key={city}
                   className="flex items-center gap-2 text-sm font-medium text-primary"
@@ -256,7 +248,7 @@ export default async function ServicesPage() {
             <div className="relative aspect-[4/3]">
               <Image
                 src="/assets/map.jpg"
-                alt="Map of Pakistan showing Moral Clean service coverage in major cities"
+                alt="Map of Pakistan for service-location enquiries"
                 fill
                 sizes="(min-width: 1024px) 40vw, 100vw"
                 className="object-contain"
@@ -267,7 +259,7 @@ export default async function ServicesPage() {
       </section>
 
       <CtaBanner
-        heading="Equipment Down? Let's Get You Running Again."
+        heading="Request an Equipment Assessment"
         subtitle="Share your machine model and fault details. Our service team will respond with practical next steps, parts guidance, and turnaround expectations."
         primaryLabel="Request Service Support"
         primaryHref="/contact"
