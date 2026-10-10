@@ -6,12 +6,45 @@
     "date": "2026-10-09",
     "intro": "Choose a scrubber dryer from the cleaning route and workload, then compare models. Floor area alone is insufficient: a large building with small rooms can need a different machine from an open warehouse of the same size.",
     "sections": [
-      { "heading": "Start with access and turning space", "paragraphs": ["Measure the narrowest doorway, aisle, lift and storage entrance. Include the squeegee and any protruding components, rather than checking brush width alone. Record turns, ramps and changes in surface level and check each model's operating limits.", "Walk behind machines can be practical for shorter routes, rooms and tighter aisles. Ride on machines merit consideration for long open routes where the chassis fits and pedestrians can be managed safely. Neither format is automatically better."] },
-      { "heading": "Estimate practical cleaning time", "paragraphs": ["Published productivity is usually a theoretical figure. Your route also requires turns, obstacle avoidance, refilling, emptying, preparation and cleanup. Time a representative route or request a demonstration before relying on a productivity figure for staffing.", "Compare solution and recovery capacity with the location of water and discharge points. A bigger tank reduces stops only when it is practical to refill, empty and store the machine."] },
-      { "heading": "Check power, accessories and maintenance", "paragraphs": ["Confirm batteries and charger inclusion in writing. Review charging location, electrical supply, duty cycle and storage. For a mains-powered model, plan cable management and access to suitable sockets.", "Compare brush or pad choice, replacement squeegees, filters and service access. Select accessories for the specific floor; a machine can damage a surface when used with an unsuitable pad or chemical."] },
-      { "heading": "Use a comparable quotation", "paragraphs": ["Ask both quotations to state the exact model, tank capacities, working width, batteries, charger, brushes, delivery, tax treatment and service terms. Compare total configuration and operating requirements rather than headline machine price.", "Send Moral Clean the cleaning area, surface, narrowest access, operating hours and facility location. Use the category comparisons below to shortlist models, then confirm suitability against the manufacturer's datasheet."] }
+      {
+        "heading": "Start with access and turning space",
+        "paragraphs": [
+          "Measure the narrowest doorway, aisle, lift and storage entrance. Include the squeegee and any protruding components, rather than checking brush width alone. Record turns, ramps and changes in surface level and check each model's operating limits.",
+          "Walk behind machines can be practical for shorter routes, rooms and tighter aisles. Ride on machines merit consideration for long open routes where the chassis fits and pedestrians can be managed safely. Neither format is automatically better."
+        ]
+      },
+      {
+        "heading": "Estimate practical cleaning time",
+        "paragraphs": [
+          "Published productivity is usually a theoretical figure. Your route also requires turns, obstacle avoidance, refilling, emptying, preparation and cleanup. Time a representative route or request a demonstration before relying on a productivity figure for staffing.",
+          "Compare solution and recovery capacity with the location of water and discharge points. A bigger tank reduces stops only when it is practical to refill, empty and store the machine."
+        ]
+      },
+      {
+        "heading": "Check power, accessories and maintenance",
+        "paragraphs": [
+          "Confirm batteries and charger inclusion in writing. Review charging location, electrical supply, duty cycle and storage. For a mains-powered model, plan cable management and access to suitable sockets.",
+          "Compare brush or pad choice, replacement squeegees, filters and service access. Select accessories for the specific floor; a machine can damage a surface when used with an unsuitable pad or chemical."
+        ]
+      },
+      {
+        "heading": "Use a comparable quotation",
+        "paragraphs": [
+          "Ask both quotations to state the exact model, tank capacities, working width, batteries, charger, brushes, delivery, tax treatment and service terms. Compare total configuration and operating requirements rather than headline machine price.",
+          "Send Moral Clean the cleaning area, surface, narrowest access, operating hours and facility location. Use the category comparisons below to shortlist models, then confirm suitability against the manufacturer's datasheet."
+        ]
+      }
     ],
-    "links": [{ "label": "Compare walk behind scrubbers", "href": "/products/category/walk-behind-scrubber" }, { "label": "Compare ride on scrubber dryers", "href": "/products/category/ride-on-scrubber-dryer" }]
+    "links": [
+      {
+        "label": "Compare walk behind scrubbers",
+        "href": "/products/category/walk-behind-scrubber"
+      },
+      {
+        "label": "Compare ride on scrubber dryers",
+        "href": "/products/category/ride-on-scrubber-dryer"
+      }
+    ]
   },
   {
     "slug": "floor-cleaning-machine-costs-pakistan",
@@ -20,12 +53,49 @@
     "date": "2026-10-09",
     "intro": "A useful price comparison starts with the same machine configuration and service scope. Moral Clean supplies quotations for specific requirements. This guide explains the cost factors; it does not publish unverified prices or imply that all models are in stock.",
     "sections": [
-      { "heading": "Choose the cleaning process first", "paragraphs": ["A single disc floor machine, scrubber dryer, sweeper and vacuum perform different jobs. A low machine price is irrelevant if it cannot perform the required process. Identify whether you need to loosen adhered soil, recover liquid, collect loose dry debris or polish a compatible floor.", "For wet single-disc work, include a suitable recovery method in the budget. For a scrubber dryer, check the solution and recovery system alongside working width. For a sweeper, specify debris type and disposal arrangements."] },
-      { "heading": "Compare what is included", "paragraphs": ["Request the exact model and configuration. Ask whether brushes, pads, pad holder, hose, tools, batteries and charger are supplied where relevant. Catalogue photographs may show optional accessories, so use the written quotation as the purchase specification.", "Confirm currency, taxes, delivery location, installation or instruction, payment terms, validity period and current availability. Imported equipment prices and lead times need confirmation at the time of ordering."] },
-      { "heading": "Allow for operating and maintenance costs", "paragraphs": ["Plan for compatible chemicals, pads, brushes, squeegees, filters and routine inspection. Include staff time, water access, charging and storage. Battery condition and replacement requirements can matter when comparing used or differently configured machines.", "Ask which parts are available for the quoted model and how service is assessed. Avoid assuming that a general service offering guarantees every part, repair or turnaround time."] },
-      { "heading": "Send enough detail for an accurate quote", "paragraphs": ["Provide facility location, floor material, cleaning area, type of soil, frequency, available operating time and access dimensions. Include quantity and power constraints. For replacement equipment, share the existing model and the limitation you need to solve.", "Compare quotations using a checklist of model, accessories, power system, delivery and service terms. Request clarification of missing items before deciding which offer has the lowest total cost."] }
+      {
+        "heading": "Choose the cleaning process first",
+        "paragraphs": [
+          "A single disc floor machine, scrubber dryer, sweeper and vacuum perform different jobs. A low machine price is irrelevant if it cannot perform the required process. Identify whether you need to loosen adhered soil, recover liquid, collect loose dry debris or polish a compatible floor.",
+          "For wet single-disc work, include a suitable recovery method in the budget. For a scrubber dryer, check the solution and recovery system alongside working width. For a sweeper, specify debris type and disposal arrangements."
+        ]
+      },
+      {
+        "heading": "Compare what is included",
+        "paragraphs": [
+          "Request the exact model and configuration. Ask whether brushes, pads, pad holder, hose, tools, batteries and charger are supplied where relevant. Catalogue photographs may show optional accessories, so use the written quotation as the purchase specification.",
+          "Confirm currency, taxes, delivery location, installation or instruction, payment terms, validity period and current availability. Imported equipment prices and lead times need confirmation at the time of ordering."
+        ]
+      },
+      {
+        "heading": "Allow for operating and maintenance costs",
+        "paragraphs": [
+          "Plan for compatible chemicals, pads, brushes, squeegees, filters and routine inspection. Include staff time, water access, charging and storage. Battery condition and replacement requirements can matter when comparing used or differently configured machines.",
+          "Ask which parts are available for the quoted model and how service is assessed. Avoid assuming that a general service offering guarantees every part, repair or turnaround time."
+        ]
+      },
+      {
+        "heading": "Send enough detail for an accurate quote",
+        "paragraphs": [
+          "Provide facility location, floor material, cleaning area, type of soil, frequency, available operating time and access dimensions. Include quantity and power constraints. For replacement equipment, share the existing model and the limitation you need to solve.",
+          "Compare quotations using a checklist of model, accessories, power system, delivery and service terms. Request clarification of missing items before deciding which offer has the lowest total cost."
+        ]
+      }
     ],
-    "links": [{ "label": "Single disc floor machines", "href": "/products/category/single-disk-machine" }, { "label": "Walk behind scrubbers", "href": "/products/category/walk-behind-scrubber" }, { "label": "Ride on scrubber dryers", "href": "/products/category/ride-on-scrubber-dryer" }]
+    "links": [
+      {
+        "label": "Single disc floor machines",
+        "href": "/products/category/single-disk-machine"
+      },
+      {
+        "label": "Walk behind scrubbers",
+        "href": "/products/category/walk-behind-scrubber"
+      },
+      {
+        "label": "Ride on scrubber dryers",
+        "href": "/products/category/ride-on-scrubber-dryer"
+      }
+    ]
   },
   {
     "slug": "cleaning-machine-maintenance-checklist",
@@ -34,11 +104,52 @@
     "date": "2026-10-09",
     "intro": "Follow the maintenance schedule and safety instructions supplied with the exact machine. This checklist helps facility teams collect useful information and request repair or parts support without guessing the cause of a fault.",
     "sections": [
-      { "heading": "Record the machine and symptoms", "paragraphs": ["Record brand, model, product code and serial number where available. Describe when the fault appears, any displayed error, unusual noise, loss of suction, water-recovery problem or reduced cleaning result. Note recent changes in accessories or cleaning procedure.", "Photograph the nameplate and affected component when it is safe to do so. Include the facility location and the period when the machine can be assessed. Do not continue operating equipment with damaged cables, exposed parts or suspected electrical faults."] },
-      { "heading": "Inspect routine wear points safely", "paragraphs": ["Isolate the machine as instructed by its manufacturer before inspection. Check visible wear and blockages in permitted user-serviceable items such as brushes, pads, squeegees, hoses and filters. Use the specified process for cleaning tanks and disposing of recovered material.", "For battery equipment, follow the battery and charger instructions. Electrical work, motor work and internal repairs require a competent technician. A generic checklist cannot replace the model's service manual."] },
-      { "heading": "Request the correct replacement part", "paragraphs": ["Send the exact part number if known, together with machine identification and photographs. Similar-looking parts can have different dimensions, materials or electrical ratings. Confirm compatibility and availability before ordering.", "For brush refilling, provide brush dimensions, mounting details, existing bristle material, floor type and intended application. Refilling suitability depends on the condition of the brush core and the required material."] },
-      { "heading": "Agree the service scope before work", "paragraphs": ["Request an assessment, proposed repair scope, parts list and quotation. Confirm any transport requirement, inspection charge, estimated turnaround and service terms. Diagnosis determines whether repair, replacement or a different solution is appropriate.", "Keep a record of work performed and the next maintenance interval. Repeated faults should be investigated against operating conditions rather than addressed by repeatedly replacing the same component."] }
+      {
+        "heading": "Record the machine and symptoms",
+        "paragraphs": [
+          "Record brand, model, product code and serial number where available. Describe when the fault appears, any displayed error, unusual noise, loss of suction, water-recovery problem or reduced cleaning result. Note recent changes in accessories or cleaning procedure.",
+          "Photograph the nameplate and affected component when it is safe to do so. Include the facility location and the period when the machine can be assessed. Do not continue operating equipment with damaged cables, exposed parts or suspected electrical faults."
+        ]
+      },
+      {
+        "heading": "Inspect routine wear points safely",
+        "paragraphs": [
+          "Isolate the machine as instructed by its manufacturer before inspection. Check visible wear and blockages in permitted user-serviceable items such as brushes, pads, squeegees, hoses and filters. Use the specified process for cleaning tanks and disposing of recovered material.",
+          "For battery equipment, follow the battery and charger instructions. Electrical work, motor work and internal repairs require a competent technician. A generic checklist cannot replace the model's service manual."
+        ]
+      },
+      {
+        "heading": "Request the correct replacement part",
+        "paragraphs": [
+          "Send the exact part number if known, together with machine identification and photographs. Similar-looking parts can have different dimensions, materials or electrical ratings. Confirm compatibility and availability before ordering.",
+          "For brush refilling, provide brush dimensions, mounting details, existing bristle material, floor type and intended application. Refilling suitability depends on the condition of the brush core and the required material."
+        ]
+      },
+      {
+        "heading": "Agree the service scope before work",
+        "paragraphs": [
+          "Request an assessment, proposed repair scope, parts list and quotation. Confirm any transport requirement, inspection charge, estimated turnaround and service terms. Diagnosis determines whether repair, replacement or a different solution is appropriate.",
+          "Keep a record of work performed and the next maintenance interval. Repeated faults should be investigated against operating conditions rather than addressed by repeatedly replacing the same component."
+        ]
+      }
     ],
-    "links": [{ "label": "Motor, parts and brush service enquiries", "href": "/services" }, { "label": "Commercial vacuum cleaners", "href": "/products/category/vacuum-cleaner" }]
+    "links": [
+      {
+        "label": "Motor, parts and brush service enquiries",
+        "href": "/services"
+      },
+      {
+        "label": "Commercial vacuum cleaners",
+        "href": "/products/category/vacuum-cleaner"
+      },
+      {
+        "label": "Investigate poor scrubber water pickup",
+        "href": "/guides/floor-scrubber-not-picking-up-water"
+      },
+      {
+        "label": "Floor-pad and brush selection checklist",
+        "href": "/guides/floor-cleaning-pads-brushes-selection-guide"
+      }
+    ]
   }
 ]

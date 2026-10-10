@@ -1,5 +1,6 @@
 import initialGuides from "./guides.json";
 import additionalGuides from "./additional-guides.json";
+import expertGuides from "./expert-guides.json";
 
 export type Guide = {
   slug: string;
@@ -10,10 +11,11 @@ export type Guide = {
   sections: { heading: string; paragraphs: string[] }[];
   links: { label: string; href: string }[];
   references?: { label: string; href: string }[];
-  comparison?: { columns: string[]; rows: string[][] };
+  faqs?: { question: string; answer: string }[];
+  comparison?: { caption?: string; columns: string[]; rows: string[][] };
 };
 
-export const guides: Guide[] = [...initialGuides, ...additionalGuides];
+export const guides: Guide[] = [...expertGuides, ...initialGuides, ...additionalGuides];
 
 export function getRelatedGuides(categorySlug?: string, currentSlug?: string) {
   const current = guides.find((guide) => guide.slug === currentSlug);
