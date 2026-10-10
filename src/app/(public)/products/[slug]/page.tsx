@@ -423,26 +423,18 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
               <h2 id="product-support" className="mb-4 text-2xl">Service and parts support</h2>
               <div className="grid gap-5 text-sm leading-6 text-muted-foreground md:grid-cols-3">
                 <p>
-                  <span className="font-semibold text-primary">
-                    Motor repair:
-                  </span>{" "}
+                  <Link href="/services/cleaning-machine-repair" className="font-semibold text-primary underline underline-offset-4">Motor repair:</Link>{" "}
                   Moral Clean supports diagnosis, repair coordination, fitting,
                   and testing for compatible motors used in commercial cleaning
                   equipment.
                 </p>
                 <p>
-                  <span className="font-semibold text-primary">
-                    Parts replacement:
-                  </span>{" "}
-                  We source and replace wear parts including squeegees, filters,
-                  hoses, switches, batteries, and other operating consumables.
+                  <Link href="/services/cleaning-machine-parts" className="font-semibold text-primary underline underline-offset-4">Parts replacement:</Link>{" "}
+                  Send the machine model and part details to confirm replacement compatibility, availability and fitting scope.
                 </p>
                 <p>
-                  <span className="font-semibold text-primary">
-                    Brush refilling:
-                  </span>{" "}
-                  Brush refilling and replacement support is available for
-                  scrubbers, sweepers, and single-disc floor machines.
+                  <Link href="/services/brush-refilling" className="font-semibold text-primary underline underline-offset-4">Brush refilling:</Link>{" "}
+                  Request an assessment of the brush body, fitting and floor application before choosing refilling or replacement.
                 </p>
               </div>
               <Link

@@ -10,11 +10,6 @@ export function WebsiteSchema() {
     publisher: { "@id": `${siteUrl}/#organization` },
     name: "Moral Clean",
     url: siteUrl,
-    potentialAction: {
-      "@type": "SearchAction",
-      target: `${siteUrl}/products?q={search_term_string}`,
-      "query-input": "required name=search_term_string",
-    },
   };
 
   return (

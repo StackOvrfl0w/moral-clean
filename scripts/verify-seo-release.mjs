@@ -40,6 +40,7 @@ for (const {slug} of JSON.parse(fs.readFileSync("src/content/planning-guides.jso
   if (!locations.includes("https://moralclean.com/guides/" + slug)) errors.push("Planning guide missing from sitemap: " + slug);
 }
 const results = [];
+const linkGraph = new Map();
 const queue = [...new Set(locations)];
 async function worker() {
   while (queue.length) {
@@ -63,10 +64,20 @@ async function worker() {
     if (article && (!Array.isArray(article.image) || article.image.length < 2 || !article.image.every((image) => image.startsWith("https://moralclean.com/")) || !html.includes(`${path}/social-image`))) errors.push(`Article images or social preview missing: ${path}`);
     if (path.startsWith("/services/") && (!service || service.url !== url || service.provider?.["@id"] !== "https://moralclean.com/#organization" || !html.includes('id="enquiry-checklist"') || (html.match(/<details\b/g) || []).length !== 3)) errors.push(`Service content/schema missing: ${path}`);
     if (path === "/guides/floor-scrubber-cleaning-capacity-calculator" && (!html.includes("data-capacity-minutes") || !html.includes("205") || !html.includes("capacity-utilization-hint"))) errors.push("Calculator initial output or labelled controls missing");
+    const internalLinks = [...html.matchAll(/<a\b[^>]*href="([^"]+)"/g)].map(match => { try { const target = new URL(match[1].replace(/&amp;/g, "&"), "https://moralclean.com" + path); return target.origin === "https://moralclean.com" && !target.search ? target.pathname : null; } catch { return null; } }).filter(Boolean);
+    linkGraph.set(path, [...new Set(internalLinks)]);
+    if (schemas.some(schema => schema["@type"] === "WebSite" && schema.potentialAction)) errors.push("Obsolete site-search action remains: " + path);
+    if (path === "/" || product) for (const {slug} of JSON.parse(fs.readFileSync("src/content/service-pages.json", "utf8"))) if (!internalLinks.includes("/services/" + slug)) errors.push("Contextual service link missing: " + path + " -> " + slug);
     results.push({ path, status: response.status, title, canonical, noindex, h1Count, schemaTypes: schemas.map((schema) => schema["@type"]), fullSpecifications: product ? html.includes("Technical specifications") : undefined });
   }
 }
 await Promise.all(Array.from({ length: 4 }, () => worker()));
+const reachable = new Set(["/"]);
+const crawlQueue = ["/"];
+while (crawlQueue.length) { for (const path of linkGraph.get(crawlQueue.shift()) || []) if (linkGraph.has(path) && !reachable.has(path)) { reachable.add(path); crawlQueue.push(path); } }
+const unreachable = [...linkGraph.keys()].filter(path => !reachable.has(path));
+if (unreachable.length) errors.push("Sitemap URLs unreachable through canonical internal links: " + unreachable.join(", "));
+const internalLinkAudit = { pages: linkGraph.size, reachableFromHome: reachable.size, unreachable, edges: [...linkGraph.values()].reduce((count, links) => count + links.filter(path => linkGraph.has(path)).length, 0) };
 const checks = [];
 for (const [path, expected] of [["/services/unknown-service", 404], ["/products/test-prod", 404], ["/products/test-prod2", 404], ["/blog/blog-test", 404], ["/blog/blog-test1", 404], ["/blog/blogtest2", 404], ["/products/category/cleaning-chemicals", 200], ["/products/category/single-disk-machine?brand=Biemmedue", 200], ["/products/category/single-disk-machine?page=999", 404], ["/products/category/single-disk-machine?page=999&nxtPslug=single-disk-machine", 404], ["/products?page=999", 404], ["/blog?page=999", 404]]) {
   const response = await request(origin + path);
@@ -75,7 +86,7 @@ for (const [path, expected] of [["/services/unknown-service", 404], ["/products/
   if (response.status !== expected || !noindex) errors.push(`Exclusion checks failed: ${path}`);
   checks.push({ path, status: response.status, expected, noindex });
 }
-const result = { testedAt: new Date().toISOString(), origin, sitemapUrls: locations.length, productPages: results.filter((row) => row.schemaTypes.includes("Product")).length, errors, pages: results.sort((a, b) => a.path.localeCompare(b.path)), exclusionChecks: checks };
+const result = { testedAt: new Date().toISOString(), origin, sitemapUrls: locations.length, productPages: results.filter((row) => row.schemaTypes.includes("Product")).length, errors, internalLinkAudit, pages: results.sort((a, b) => a.path.localeCompare(b.path)), exclusionChecks: checks };
 fs.writeFileSync(output, JSON.stringify(result, null, 2));
-console.log(JSON.stringify({ sitemapUrls: result.sitemapUrls, productPages: result.productPages, exclusionChecks: checks.length, errors }, null, 2));
+console.log(JSON.stringify({ sitemapUrls: result.sitemapUrls, productPages: result.productPages, exclusionChecks: checks.length, internalLinkAudit, errors }, null, 2));
 if (errors.length) process.exitCode = 1;

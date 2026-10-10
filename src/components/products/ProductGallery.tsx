@@ -42,7 +42,7 @@ export function ProductGallery({
           alt={activeImage.alt_text || productName}
           fill
           priority
-          sizes="(min-width: 1024px) 55vw, 100vw"
+          sizes="(min-width: 1280px) 640px, (min-width: 1024px) 55vw, 100vw"
           placeholder="blur"
           blurDataURL={blurDataUrl}
 

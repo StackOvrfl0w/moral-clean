@@ -68,6 +68,7 @@ const valueProps = [
 const services = [
   {
     title: "Motor Repairing",
+    href: "/services/cleaning-machine-repair",
     description:
       "Diagnosis, rewinding coordination, fitting, and testing for commercial cleaning machine motors.",
     image: "/assets/services-image/motor-repairing.png",
@@ -76,6 +77,7 @@ const services = [
   },
   {
     title: "Parts Replacement",
+    href: "/services/cleaning-machine-parts",
     description:
       "Brushes, squeegees, hoses, filters, motors, batteries, and consumables sourced to match your machine.",
     image: "/assets/services-image/part-replacement.png",
@@ -84,6 +86,7 @@ const services = [
   },
   {
     title: "Brush Refilling",
+    href: "/services/brush-refilling",
     description:
       "Refilling and replacement support for scrubber, sweeper, and single-disc machine brushes.",
     image: "/assets/services-image/brush.jpeg",
@@ -321,7 +324,7 @@ export default async function Home() {
             </div>
             <div className="grid gap-5 lg:grid-cols-3">
               {services.map(
-                ({ title, description, image, imageAlt, imagePosition }) => (
+                ({ title, description, href, image, imageAlt, imagePosition }) => (
                   <div
                     key={title}
                     className="group overflow-hidden rounded-md border border-brand-navy/15 bg-white/80 p-4 transition duration-300 hover:border-brand-navy/30 hover:shadow-lg hover:shadow-brand-navy/10"
@@ -342,6 +345,7 @@ export default async function Home() {
                     <p className="mt-3 text-sm text-brand-navy/75">
                       {description}
                     </p>
+                    <Link href={href} className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-brand-navy underline underline-offset-4">View service details<ArrowRight size={16} aria-hidden="true" /></Link>
                   </div>
                 ),
               )}

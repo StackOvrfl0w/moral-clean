@@ -4,6 +4,14 @@ import { withSentryConfig } from "@sentry/nextjs/config";
 const nextConfig = {
   compress: true,
   poweredByHeader: false,
+  async redirects() {
+    return [{
+      source: "/:path*",
+      has: [{ type: "host", value: "www.moralclean.com" }],
+      destination: "https://moralclean.com/:path*",
+      permanent: true,
+    }];
+  },
   experimental: {
     serverActions: {
       bodySizeLimit: "1mb",
