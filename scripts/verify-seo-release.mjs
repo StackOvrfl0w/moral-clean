@@ -67,7 +67,15 @@ async function worker() {
     const internalLinks = [...html.matchAll(/<a\b[^>]*href="([^"]+)"/g)].map(match => { try { const target = new URL(match[1].replace(/&amp;/g, "&"), "https://moralclean.com" + path); return target.origin === "https://moralclean.com" && !target.search ? target.pathname : null; } catch { return null; } }).filter(Boolean);
     linkGraph.set(path, [...new Set(internalLinks)]);
     if (schemas.some(schema => schema["@type"] === "WebSite" && schema.potentialAction)) errors.push("Obsolete site-search action remains: " + path);
-    if (path === "/" || product) for (const {slug} of JSON.parse(fs.readFileSync("src/content/service-pages.json", "utf8"))) if (!internalLinks.includes("/services/" + slug)) errors.push("Contextual service link missing: " + path + " -> " + slug);
+    const breadcrumb = schemas.find(schema => schema["@type"] === "BreadcrumbList");
+    const category = breadcrumb?.itemListElement?.find(item => item.item?.includes("/products/category/"))?.item;
+    const janitorial = product && category?.endsWith("/janitorial-equipment");
+    const singleDisc = product && category?.endsWith("/single-disk-machine");
+    const supportBlock = html.match(/<section aria-labelledby="product-support"[^>]*>(.*?)<\/section>/s)?.[1] || "";
+    if (path === "/") for (const {slug} of JSON.parse(fs.readFileSync("src/content/service-pages.json", "utf8"))) if (!internalLinks.includes("/services/" + slug)) errors.push("Homepage service link missing: " + slug);
+    if (product && janitorial && (!supportBlock.includes("/guides/mop-trolley-cleaning-trolley-buying-guide-pakistan") || supportBlock.includes("/services/cleaning-machine-repair"))) errors.push("Manual-equipment support relevance failed: " + path);
+    if (product && !janitorial && !["cleaning-machine-repair", "cleaning-machine-parts"].every(slug => supportBlock.includes("/services/" + slug))) errors.push("Machine support links missing: " + path);
+    if (product && singleDisc && !supportBlock.includes("/services/brush-refilling")) errors.push("Single-disc brush support link missing: " + path);
     results.push({ path, status: response.status, title, canonical, noindex, h1Count, schemaTypes: schemas.map((schema) => schema["@type"]), fullSpecifications: product ? html.includes("Technical specifications") : undefined });
   }
 }

@@ -416,34 +416,14 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
                 </p>
               )}
             </section>
-            <section
-              aria-labelledby="product-support"
-              className="mt-6 rounded-md border border-border bg-white p-6"
-            >
-              <h2 id="product-support" className="mb-4 text-2xl">Service and parts support</h2>
-              <div className="grid gap-5 text-sm leading-6 text-muted-foreground md:grid-cols-3">
-                <p>
-                  <Link href="/services/cleaning-machine-repair" className="font-semibold text-primary underline underline-offset-4">Motor repair:</Link>{" "}
-                  Moral Clean supports diagnosis, repair coordination, fitting,
-                  and testing for compatible motors used in commercial cleaning
-                  equipment.
-                </p>
-                <p>
-                  <Link href="/services/cleaning-machine-parts" className="font-semibold text-primary underline underline-offset-4">Parts replacement:</Link>{" "}
-                  Send the machine model and part details to confirm replacement compatibility, availability and fitting scope.
-                </p>
-                <p>
-                  <Link href="/services/brush-refilling" className="font-semibold text-primary underline underline-offset-4">Brush refilling:</Link>{" "}
-                  Request an assessment of the brush body, fitting and floor application before choosing refilling or replacement.
-                </p>
-              </div>
-              <Link
-                href="/services"
-                className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-accent"
-              >
-                View service options
-                <ArrowRight className="size-4" aria-hidden="true" />
-              </Link>
+            <section aria-labelledby="product-support" className="mt-6 rounded-md border border-border bg-white p-6">
+              <h2 id="product-support" className="mb-4 text-2xl">{product.category?.slug === "janitorial-equipment" ? "Accessory selection and replacement" : "Service and parts enquiries"}</h2>
+              {product.category?.slug === "janitorial-equipment" ? <div className="text-sm leading-7 text-muted-foreground"><p>Confirm the exact item, dimensions and included accessories before ordering a replacement. For buckets and trolleys, check the intended mop system, loaded handling and route access.</p><Link href="/guides/mop-trolley-cleaning-trolley-buying-guide-pakistan" className="mt-4 inline-flex font-semibold text-primary underline underline-offset-4">Mop and cleaning trolley selection guide</Link></div> : <div className="grid gap-5 text-sm leading-7 text-muted-foreground md:grid-cols-2">
+                <p><Link href="/services/cleaning-machine-repair" className="font-semibold text-primary underline underline-offset-4">Machine repair assessment:</Link>{" "}Send the model, serial plate, fault symptoms and location to confirm serviceability and assessment arrangements.</p>
+                <p><Link href="/services/cleaning-machine-parts" className="font-semibold text-primary underline underline-offset-4">Replacement parts enquiry:</Link>{" "}Identify the component and fitting before confirming compatibility, availability and installation scope for this model.</p>
+                {product.category?.slug === "single-disk-machine" ? <p><Link href="/services/brush-refilling" className="font-semibold text-primary underline underline-offset-4">Single-disc brush refilling:</Link>{" "}Confirm the brush body, drive fitting and floor application before choosing refurbishment or replacement.</p> : null}
+              </div>}
+              <Link href="/contact" className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-accent">Ask about this equipment<ArrowRight className="size-4" aria-hidden="true" /></Link>
             </section>
           <GuideLinks categorySlug={product.category?.slug} />
         </div>
