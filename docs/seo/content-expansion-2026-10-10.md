@@ -17,9 +17,13 @@ New article body lengths range from 413 to 510 words, excluding titles, section 
 
 Article templates now include working contents anchors, real publication dates, accessible comparison tables where useful, visible manufacturer references and contextual links to equipment and related articles. Product and category pages recommend relevant guides rather than displaying the whole library on every page. The hub links to all nine articles; sitemap configuration reads the same article records. Article JSON-LD and unique metadata remain server-rendered.
 
+The deployment URL sent a Vercel `noindex` header, but the custom `preview.moralclean.com` alias did not. A preview-only `X-Robots-Tag: noindex` rule was added to the Next.js headers configuration, covering custom aliases too. Production builds do not receive this rule; existing admin noindex/nofollow remains intact.
+
 ## Research and limits
 
 The earlier Pakistan keyword research and the existing catalogue informed topic selection. Four new Semrush `phrase_related` requests failed with `ERROR 122: WRONG FORMAT OR EMPTY KEY`; no new search-volume figures are claimed. The prior successful reports remain useful baseline evidence.
+
+Serpstat subsequently returned 30 autocomplete-style suggestions across three requests in `g_pk`. Vacuum suggestions included filters, accessories and parts; pressure-washer suggestions included pressure/PSI questions; steam suggestions included Pakistan purchasing variants. The articles address the relevant buying questions. Suggestions also contained unrelated countries, consumer retailers and manufacturer-specific terms, which were not used as claims of stocked brands or services. These suggestions are topic evidence, not search-volume or conversion estimates.
 
 Equipment principles were checked against primary manufacturer references linked within the articles: Kärcher professional vacuum information, thermal-disinfection test conditions, floor-equipment guidance and sweeping/scrubbing workflow guidance; Nilfisk's professional FAQ and hot-water washer information. These sources explain principles, not Moral Clean manufacturer authorisation or features of another model. Articles do not invent current stock, prices, model availability, customer experience or hygiene/performance guarantees.
 
