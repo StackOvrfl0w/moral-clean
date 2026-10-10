@@ -1,9 +1,11 @@
 export type QuickQuoteFormState = {
+  recorded?: boolean;
   success: boolean;
   error: string | null;
 };
 
 export type ContactFormState = {
+  recorded?: boolean;
   success: boolean;
   error: string | null;
 };

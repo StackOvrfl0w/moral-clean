@@ -1,3 +1,7 @@
+# Current release
+
+The initial keyword and SEO release is documented in [release-2026-10-09.md](release-2026-10-09.md), with live checks in [live-verification-2026-10-09.json](live-verification-2026-10-09.json). The three-month plan is deferred. The historical notes below predate this release and do not describe its current deployment or Search Console access.
+
 # SEO implementation and release checks
 
 ## Implemented in this workspace

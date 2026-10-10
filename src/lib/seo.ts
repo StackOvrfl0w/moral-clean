@@ -30,6 +30,7 @@ export function pageMetadata({
   noindex?: boolean;
   article?: boolean;
 }): Metadata {
+  title = title.replace(/(?:\s*[|—–-]\s*Moral Clean)+\s*$/i, "").trim();
   description = truncateDescription(description);
   const socialImage = absoluteUrl(image || defaultSocialImage);
   return {
@@ -66,6 +67,7 @@ export function listingMetadata(
   description: string,
   path: string,
   params: SearchParams = {},
+  baseNoindex = false,
 ): Metadata {
   const value = (key: string) =>
     Array.isArray(params[key]) ? params[key]?.[0] : params[key];
@@ -82,6 +84,6 @@ export function listingMetadata(
     title: page > 1 ? `${title} — Page ${page}` : title,
     description,
     path: `${path}${query.size ? `?${query}` : ""}`,
-    noindex: filters.length > 0,
+    noindex: baseNoindex || filters.length > 0,
   });
 }

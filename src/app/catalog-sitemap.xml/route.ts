@@ -2,6 +2,7 @@ import { createClient } from "@supabase/supabase-js";
 import { getServerSideSitemap } from "next-sitemap";
 import { env } from "@/config/env";
 import { absoluteUrl } from "@/lib/seo";
+import { isIndexableCategory } from "@/content/categories";
 
 export const revalidate = 3600;
 
@@ -27,8 +28,10 @@ export async function GET() {
         slug: string;
         updated_at?: string;
         created_at?: string;
+        products?: { count: number }[];
       }[];
       for (const row of rows) {
+        if (table === "categories" && !isIndexableCategory(row.slug, row.products?.[0]?.count ?? 0)) continue;
         const modified = row.updated_at || row.created_at;
         results.push({
           loc: absoluteUrl(`${prefix}/${encodeURIComponent(row.slug)}`),
@@ -43,7 +46,7 @@ export async function GET() {
   // Throw on an upstream failure so ISR keeps the last successful sitemap.
   const groups = await Promise.all([
     entries("products", "/products", "slug,updated_at,created_at"),
-    entries("categories", "/products/category", "slug,created_at"),
+    entries("categories", "/products/category", "slug,created_at,products(count)"),
     entries("blog_posts", "/blog", "slug,updated_at,created_at"),
   ]);
   return getServerSideSitemap(groups.flat());

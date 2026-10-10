@@ -1,0 +1,124 @@
+{
+  "date": "2026-10-09",
+  "projectId": 1324763,
+  "region": {
+    "country": "Pakistan",
+    "engine": "Google",
+    "device": "mobile",
+    "language": "English",
+    "id": 444485
+  },
+  "interpretation": "Initial observation only. Position 0 means not found in the tracked results, not rank zero. These observations do not establish improvement caused by the release.",
+  "keywords": [
+    {
+      "keyword": "commercial pressure washer",
+      "position": 0,
+      "url": ""
+    },
+    {
+      "keyword": "commercial steam cleaner",
+      "position": 33,
+      "url": "https://moralclean.com/products/category/steam-cleaners"
+    },
+    {
+      "keyword": "commercial vacuum cleaner",
+      "position": 39,
+      "url": "https://moralclean.com/products/category/vacuum-cleaner"
+    },
+    {
+      "keyword": "floor polishing machine",
+      "position": 0,
+      "url": ""
+    },
+    {
+      "keyword": "floor scrubber machine",
+      "position": 0,
+      "url": ""
+    },
+    {
+      "keyword": "floor scrubbing machine",
+      "position": 0,
+      "url": ""
+    },
+    {
+      "keyword": "floor sweeper",
+      "position": 0,
+      "url": ""
+    },
+    {
+      "keyword": "industrial floor sweeper",
+      "position": 0,
+      "url": ""
+    },
+    {
+      "keyword": "industrial pressure washer",
+      "position": 0,
+      "url": ""
+    },
+    {
+      "keyword": "industrial steam cleaner",
+      "position": 52,
+      "url": "https://moralclean.com/products/category/steam-cleaners"
+    },
+    {
+      "keyword": "industrial vacuum cleaner",
+      "position": 0,
+      "url": ""
+    },
+    {
+      "keyword": "janitorial equipment",
+      "position": 0,
+      "url": ""
+    },
+    {
+      "keyword": "mop bucket trolley",
+      "position": 56,
+      "url": "https://moralclean.com/products/20-l-side-press-mop-bucket-trolley-mc-mw-200"
+    },
+    {
+      "keyword": "pressure washer pakistan",
+      "position": 0,
+      "url": ""
+    },
+    {
+      "keyword": "ride on floor scrubber",
+      "position": 0,
+      "url": ""
+    },
+    {
+      "keyword": "ride on scrubber dryer",
+      "position": 47,
+      "url": "https://moralclean.com/products/category/ride-on-scrubber-dryer"
+    },
+    {
+      "keyword": "scrubber dryer",
+      "position": 0,
+      "url": ""
+    },
+    {
+      "keyword": "single disc machine",
+      "position": 40,
+      "url": "https://moralclean.com/products/category/single-disk-machine"
+    },
+    {
+      "keyword": "steam cleaner karachi",
+      "position": 9,
+      "url": "https://moralclean.com/products/category/steam-cleaners"
+    },
+    {
+      "keyword": "steam cleaner pakistan",
+      "position": 9,
+      "url": "https://moralclean.com/products/category/steam-cleaners"
+    },
+    {
+      "keyword": "walk behind scrubber dryer",
+      "position": 34,
+      "url": "https://moralclean.com/products/category/ride-on-scrubber-dryer"
+    },
+    {
+      "keyword": "wet and dry vacuum cleaner",
+      "position": 0,
+      "url": ""
+    }
+  ]
+}

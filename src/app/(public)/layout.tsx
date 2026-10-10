@@ -1,3 +1,4 @@
+import { isIndexableCategory } from "@/content/categories";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { WhatsAppButton } from "@/components/layout/WhatsAppButton";
@@ -17,11 +18,13 @@ export default async function PublicLayout({
     getAllCategories(),
   ]);
 
+  const visibleCategories = categories.filter((category) => isIndexableCategory(category.slug, category.product_count));
+
   return (
     <PostHogProvider>
-      <Header settings={settings} categories={categories} />
+      <Header settings={settings} categories={visibleCategories} />
       <main>{children}</main>
-      <Footer settings={settings} categories={categories} />
+      <Footer settings={settings} categories={visibleCategories} />
       <WhatsAppButton whatsapp={settings.contact_form_whatsapp ?? ""} />
     </PostHogProvider>
   );

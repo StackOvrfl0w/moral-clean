@@ -79,12 +79,18 @@ async function queryAllPosts(
   }
 
   const from = (page - 1) * limit;
-  const { data, error, count } = await supabase
+  const query = supabase
     .from("blog_posts")
     .select(BLOG_CARD_COLUMNS, { count: "exact" })
     .eq("published", true)
-    .order("published_at", { ascending: false })
-    .range(from, from + limit - 1);
+    .order("published_at", { ascending: false });
+  let { data, error, count } = await query.range(from, from + limit - 1);
+  if (error?.code === "PGRST103" && page > 1) {
+    const firstPage = await query.range(0, 0);
+    error = firstPage.error;
+    count = firstPage.count;
+    data = [];
+  }
 
   if (error) {
     console.error("Unable to load published articles:", error.message);

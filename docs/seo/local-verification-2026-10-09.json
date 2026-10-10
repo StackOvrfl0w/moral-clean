@@ -1,0 +1,92 @@
+[
+  {
+    "path": "/products/category/steam-cleaners",
+    "status": 200,
+    "title": "Commercial Steam Cleaners in Pakistan | Moral Clean",
+    "h1": 1,
+    "noindex": false,
+    "canonical": "https://moralclean.com/products/category/steam-cleaners"
+  },
+  {
+    "path": "/products/category/single-disk-machine",
+    "status": 200,
+    "title": "Single Disc Floor Cleaning &amp; Polishing Machines in Pakistan | Moral Clean",
+    "h1": 1,
+    "noindex": false,
+    "canonical": "https://moralclean.com/products/category/single-disk-machine"
+  },
+  {
+    "path": "/products/category/cleaning-chemicals",
+    "status": 200,
+    "title": "Cleaning Chemicals in Pakistan | Moral Clean",
+    "h1": 1,
+    "noindex": true,
+    "canonical": "https://moralclean.com/products/category/cleaning-chemicals"
+  },
+  {
+    "path": "/products/category/single-disk-machine?brand=Biemmedue",
+    "status": 200,
+    "title": "Single Disc Floor Cleaning &amp; Polishing Machines in Pakistan | Moral Clean",
+    "h1": 1,
+    "noindex": true,
+    "canonical": "https://moralclean.com/products/category/single-disk-machine?brand=Biemmedue"
+  },
+  {
+    "path": "/products/single-disk-machine",
+    "status": 200,
+    "title": "Biemmedue MS 13 Single-Disc Floor Machine | Moral Clean",
+    "h1": 1,
+    "noindex": false,
+    "canonical": "https://moralclean.com/products/single-disk-machine",
+    "productSchema": true,
+    "fullSpecs": true
+  },
+  {
+    "path": "/guides",
+    "status": 200,
+    "title": "Cleaning Equipment Buying &amp; Maintenance Guides | Moral Clean",
+    "h1": 1,
+    "noindex": false,
+    "canonical": "https://moralclean.com/guides"
+  },
+  {
+    "path": "/guides/floor-cleaning-machine-costs-pakistan",
+    "status": 200,
+    "title": "Floor Cleaning Machine Costs in Pakistan: What a Quote Should Include | Moral Clean",
+    "h1": 1,
+    "noindex": false,
+    "canonical": "https://moralclean.com/guides/floor-cleaning-machine-costs-pakistan"
+  },
+  {
+    "path": "/catalog-sitemap.xml",
+    "status": 200,
+    "h1": 0,
+    "noindex": false,
+    "urls": 44,
+    "steam": true,
+    "chemicals": false
+  },
+  {
+    "path": "/sitemap-0.xml",
+    "status": 200,
+    "h1": 0,
+    "noindex": false,
+    "urls": 10,
+    "steam": false,
+    "chemicals": false
+  },
+  {
+    "path": "/products/test-prod",
+    "status": 404,
+    "title": "Moral Clean — Commercial Cleaning Equipment &amp; Service in Pakistan",
+    "h1": 0,
+    "noindex": true
+  },
+  {
+    "path": "/blog/blog-test",
+    "status": 404,
+    "title": "Moral Clean — Commercial Cleaning Equipment &amp; Service in Pakistan",
+    "h1": 0,
+    "noindex": true
+  }
+]

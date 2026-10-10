@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 
 import { ContactForm } from "@/components/contact/ContactForm";
+import { getCategoryBySlug } from "@/lib/queries/categories";
 import { getProductBySlug } from "@/lib/queries/products";
 import { getServiceBySlug } from "@/lib/queries/services";
 import { getAllSettings } from "@/lib/queries/settings";
@@ -34,13 +35,16 @@ export default async function ContactPage({
 }: {
   searchParams?: Record<string, string | string[] | undefined>;
 }) {
-  const [settings, productResult, serviceResult] = await Promise.all([
+  const [settings, productResult, serviceResult, categoryResult] = await Promise.all([
     getAllSettings(),
     getParam(searchParams, "product")
       ? getProductBySlug(getParam(searchParams, "product")!)
       : Promise.resolve(null),
     getParam(searchParams, "service")
       ? getServiceBySlug(getParam(searchParams, "service")!)
+      : Promise.resolve(null),
+    getParam(searchParams, "category")
+      ? getCategoryBySlug(getParam(searchParams, "category")!)
       : Promise.resolve(null),
   ]);
 
@@ -56,6 +60,11 @@ export default async function ContactPage({
   } else if (serviceSlug) {
     defaultSubject = "Service Request";
     defaultMessage = `Inquiry about: ${serviceResult?.name || serviceSlug}\n`;
+  } else if (categoryResult) {
+    defaultSubject = getParam(searchParams, "subject") === "Quotation" ? "Quotation" : "Product Inquiry";
+    defaultMessage = `Inquiry about: ${categoryResult.name}\nFacility location:\nSurface or floor type:\nCleaning area and daily workload:\nRequired quantity:\n`;
+  } else if (getParam(searchParams, "subject") === "Quotation") {
+    defaultSubject = "Quotation";
   }
 
   const address =
@@ -212,6 +221,7 @@ export default async function ContactPage({
             <ContactForm
               defaultSubject={defaultSubject}
               defaultMessage={defaultMessage}
+              supportPhone={settings.business_phone || settings.contact_phone}
             />
           </div>
         </div>

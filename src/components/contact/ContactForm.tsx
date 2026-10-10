@@ -1,10 +1,11 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { CheckCircle2, Loader2, SendHorizontal } from "lucide-react";
 import { useFormState, useFormStatus } from "react-dom";
 import { toast } from "sonner";
 
+import { trackInquiry } from "@/lib/analytics";
 import { initialContactFormState } from "@/lib/actions/contact-types";
 import { submitContactForm } from "@/lib/actions/contact";
 import { Button } from "@/components/ui/button";
@@ -54,9 +55,11 @@ function SubmitButton() {
 export function ContactForm({
   defaultSubject,
   defaultMessage,
+  supportPhone,
 }: {
   defaultSubject?: string;
   defaultMessage?: string;
+  supportPhone?: string;
 }) {
   const initialSubject = useMemo(
     () =>
@@ -71,7 +74,12 @@ export function ContactForm({
   const [formKey, setFormKey] = useState(0);
   const [showSuccess, setShowSuccess] = useState(false);
 
+  const measuredState = useRef<typeof state>();
   useEffect(() => {
+    if (state.recorded && measuredState.current !== state) {
+      measuredState.current = state;
+      trackInquiry("inquiry_submitted", { form_type: "contact" });
+    }
     if (state.success) {
       setShowSuccess(true);
     }
@@ -79,7 +87,7 @@ export function ContactForm({
     if (state.error) {
       toast.error(state.error);
     }
-  }, [state.error, state.success]);
+  }, [state]);
 
   if (showSuccess) {
     return (
@@ -88,8 +96,8 @@ export function ContactForm({
           <CheckCircle2 className="mx-auto size-12 text-accent" aria-hidden="true" />
           <h2 className="mt-4 text-2xl">Message Received</h2>
           <p className="mt-3 text-sm text-muted-foreground">
-            We&apos;ll respond within 2 business hours. For urgent service
-            requests, please call +92 331 3195138.
+            Your enquiry has been received. Our team will review your requirements.
+            {supportPhone ? <> For urgent requests, <a className="font-semibold underline" href={`tel:${supportPhone.replace(/[^+\d]/g, "")}`}>call {supportPhone}</a>.</> : null}
           </p>
           <Button
             type="button"

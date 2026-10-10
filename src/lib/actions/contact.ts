@@ -108,6 +108,7 @@ async function sendEmail(payload: {
   subject: string;
   html: string;
 }) {
+  try {
   const resend = new Resend(env.resendApiKey);
   const { data, error } = await resend.emails.send(payload);
 
@@ -116,6 +117,7 @@ async function sendEmail(payload: {
   } else {
     console.log("[Resend] Email sent, id:", data?.id);
   }
+  } catch { console.error("[Resend] Notification failed after enquiry was saved"); }
 }
 
 export async function submitQuickQuote(
@@ -131,7 +133,7 @@ export async function submitQuickQuote(
   const honeypot = normalizeValue(formData.get("website"));
 
   if (honeypot) {
-    return { success: true, error: null };
+    return { success: true, error: null, recorded: false };
   }
 
   if (
@@ -184,7 +186,7 @@ export async function submitQuickQuote(
     }),
   });
 
-  return { success: true, error: null };
+  return { success: true, error: null, recorded: true };
 }
 
 export async function submitContactForm(
@@ -199,7 +201,7 @@ export async function submitContactForm(
   const honeypot = normalizeValue(formData.get("website"));
 
   if (honeypot) {
-    return { success: true, error: null };
+    return { success: true, error: null, recorded: false };
   }
 
   if (
@@ -262,5 +264,5 @@ export async function submitContactForm(
     }),
   });
 
-  return { success: true, error: null };
+  return { success: true, error: null, recorded: true };
 }

@@ -20,7 +20,9 @@ import { BreadcrumbSchema } from "@/components/seo/BreadcrumbSchema";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { absoluteUrl } from "@/lib/seo";
+import { GuideLinks } from "@/components/seo/GuideLinks";
 import {
   getProductBySlug,
   getProductSlugs,
@@ -81,6 +83,7 @@ function getSpecEntries(specifications: Json | null): SpecEntry[] {
   }
 
   return Object.entries(specifications)
+    .filter(([key]) => key !== "brochure_url")
     .map(([key, value]) => {
       const formattedValue = formatSpecValue(value);
 
@@ -186,6 +189,17 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
   const brochureUrl = getBrochureUrl(product.specifications);
   return (
     <>
+      <JsonLd data={{
+        "@context": "https://schema.org", "@type": "Product",
+        "@id": `${absoluteUrl(`/products/${product.slug}`)}#product`,
+        name: product.name.trim(), url: absoluteUrl(`/products/${product.slug}`),
+        description: getDescription(product),
+        image: product.images.map((image) => image.url),
+        ...(product.model_code ? { model: product.model_code } : {}),
+        ...(product.brand ? { brand: { "@type": "Brand", name: product.brand } } : {}),
+        ...(product.category ? { category: product.category.name } : {}),
+        additionalProperty: specEntries.map((entry) => ({ "@type": "PropertyValue", name: entry.label, value: entry.value })),
+      }} />
       <BreadcrumbSchema
         items={[
           { name: "Home", url: "/" },
@@ -360,24 +374,20 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
 
       <section className="bg-muted py-14">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <Tabs defaultValue="description">
-            <TabsList className="h-auto w-full justify-start overflow-x-auto rounded-md border border-border bg-white p-1 sm:w-auto">
-              <TabsTrigger value="description">Description</TabsTrigger>
-              <TabsTrigger value="specifications">Specifications</TabsTrigger>
-              <TabsTrigger value="support">Service & Support</TabsTrigger>
-            </TabsList>
-            <TabsContent
-              value="description"
+            <section
+              aria-labelledby="product-description"
               className="mt-6 rounded-md border border-border bg-white p-6"
             >
+              <h2 id="product-description" className="mb-4 text-2xl">Product description</h2>
               <div className="space-y-4 text-base leading-7">
                 {renderDescription(product)}
               </div>
-            </TabsContent>
-            <TabsContent
-              value="specifications"
+            </section>
+            <section
+              aria-labelledby="product-specifications"
               className="mt-6 rounded-md border border-border bg-white p-0"
             >
+              <h2 id="product-specifications" className="px-6 pt-6 text-2xl">Technical specifications</h2>
               {specEntries.length > 0 ? (
                 <div className="overflow-hidden rounded-md">
                   <table className="w-full text-left text-sm">
@@ -389,7 +399,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
                             index % 2 === 0 ? "bg-white" : "bg-muted/60",
                           )}
                         >
-                          <th className="w-1/2 px-5 py-4 font-semibold text-primary">
+                          <th scope="row" className="w-1/2 px-5 py-4 font-semibold text-primary">
                             {entry.label}
                           </th>
                           <td className="px-5 py-4 text-muted-foreground">
@@ -405,11 +415,12 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
                   Detailed specifications available on request.
                 </p>
               )}
-            </TabsContent>
-            <TabsContent
-              value="support"
+            </section>
+            <section
+              aria-labelledby="product-support"
               className="mt-6 rounded-md border border-border bg-white p-6"
             >
+              <h2 id="product-support" className="mb-4 text-2xl">Service and parts support</h2>
               <div className="grid gap-5 text-sm leading-6 text-muted-foreground md:grid-cols-3">
                 <p>
                   <span className="font-semibold text-primary">
@@ -441,8 +452,8 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
                 View service options
                 <ArrowRight className="size-4" aria-hidden="true" />
               </Link>
-            </TabsContent>
-          </Tabs>
+            </section>
+          <GuideLinks />
         </div>
       </section>
 

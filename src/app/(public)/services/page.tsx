@@ -1,3 +1,4 @@
+import { GuideLinks } from "@/components/seo/GuideLinks";
 import { pageMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
 import Image from "next/image";
@@ -294,6 +295,7 @@ export default async function ServicesPage() {
           </div>
         </div>
       </section>
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"><GuideLinks /></div>
     </>
   );
 }

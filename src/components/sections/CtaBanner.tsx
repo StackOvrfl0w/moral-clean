@@ -2,14 +2,15 @@ import Link from "next/link";
 import { Phone } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { getAllSettings } from "@/lib/queries/settings";
 
-export function CtaBanner({
+export async function CtaBanner({
   heading = "Ready to Upgrade Your Cleaning Operations?",
   subtitle = "Tell us your site type, floor area, and cleaning schedule. We will recommend practical machines, service options, and parts support.",
   primaryLabel = "Get a Quote",
   primaryHref = "/contact",
   secondaryLabel = "Call Us",
-  secondaryHref = "tel:+923313195138",
+  secondaryHref,
 }: {
   heading?: string;
   subtitle?: string;
@@ -18,6 +19,11 @@ export function CtaBanner({
   secondaryLabel?: string;
   secondaryHref?: string;
 }) {
+  if (!secondaryHref) {
+    const settings = await getAllSettings();
+    const phone = settings.business_phone || settings.contact_phone || "+92 309 8783242";
+    secondaryHref = `tel:${phone.replace(/[^+\d]/g, "")}`;
+  }
   return (
     <section
       className="bg-brand-gradient py-16 text-accent-foreground"
@@ -31,7 +37,7 @@ export function CtaBanner({
             size="lg"
             className="bg-primary text-primary-foreground hover:bg-primary/90"
           >
-            <Link href={primaryHref}>{primaryLabel}</Link>
+            <Link href={primaryHref} data-quote-request="true">{primaryLabel}</Link>
           </Button>
           <Button
             asChild

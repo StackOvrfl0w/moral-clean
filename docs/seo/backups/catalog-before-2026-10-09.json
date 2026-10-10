@@ -1,0 +1,116 @@
+{
+  "categories": [
+    {
+      "id": "6c81f602-6350-4e08-b46a-2db6fac2cc81",
+      "slug": "janitorial-equipment",
+      "name": "Janitorial Equipment",
+      "description": "Description",
+      "image_url": "https://sjlmjakninsenljyastk.supabase.co/storage/v1/object/public/product%20images/categories/1786398373668-b097d872-72d1-4cae-96fe-9c37e34b40f7.png",
+      "parent_id": null,
+      "sort_order": 4,
+      "created_at": "2026-05-12T20:45:59.23888+00:00"
+    },
+    {
+      "id": "3adfb732-3ead-4615-b5e4-45ecc7bb48fa",
+      "slug": "cleaning-chemicals",
+      "name": "Cleaning Chemicals",
+      "description": null,
+      "image_url": "https://sjlmjakninsenljyastk.supabase.co/storage/v1/object/public/product%20images/categories/1786397947166-ae32a48f-5341-476d-a823-c612175ed930.png",
+      "parent_id": null,
+      "sort_order": 5,
+      "created_at": "2026-05-15T10:25:04.928828+00:00"
+    },
+    {
+      "id": "325f4738-b85b-4768-a4c3-a8e646e6b82b",
+      "slug": "pressure-washer",
+      "name": "Pressure Washer",
+      "description": null,
+      "image_url": "https://sjlmjakninsenljyastk.supabase.co/storage/v1/object/public/product%20images/categories/1786704478957-84eac255-8ec9-4aff-9fe1-b33df0a9ab5e.png",
+      "parent_id": null,
+      "sort_order": 6,
+      "created_at": "2026-08-14T10:48:09.712723+00:00"
+    },
+    {
+      "id": "2b7cbeff-be5f-4c4e-b0e8-845a8ee0df80",
+      "slug": "sweepers",
+      "name": "Sweepers",
+      "description": null,
+      "image_url": "https://sjlmjakninsenljyastk.supabase.co/storage/v1/object/public/product%20images/categories/1791395879929-24557e12-ac0f-4616-b6cd-4f480c262c1d.png",
+      "parent_id": null,
+      "sort_order": 7,
+      "created_at": "2026-05-12T21:32:16.146246+00:00"
+    },
+    {
+      "id": "85dfb8e2-cd8c-4c79-b2c9-70f79d36dfc9",
+      "slug": "ride-on-scrubber-dryer",
+      "name": "Ride On Scrubber Dryer",
+      "description": "Description",
+      "image_url": "https://sjlmjakninsenljyastk.supabase.co/storage/v1/object/public/product%20images/categories/1786395948997-0269926e-ed3a-4b5d-9877-00ddff9d4c02.png",
+      "parent_id": null,
+      "sort_order": 0,
+      "created_at": "2026-05-12T20:47:56.610218+00:00"
+    },
+    {
+      "id": "73d1dc59-1039-4fb4-80c1-c4342286e352",
+      "slug": "single-disk-machine",
+      "name": "Single Disk Machine",
+      "description": null,
+      "image_url": "https://sjlmjakninsenljyastk.supabase.co/storage/v1/object/public/product%20images/categories/1786397921025-0b134ca0-473c-4add-aa02-069e13bfc5f6.png",
+      "parent_id": null,
+      "sort_order": 1,
+      "created_at": "2026-05-17T22:08:15.708477+00:00"
+    },
+    {
+      "id": "04444870-ab06-49a4-a267-7cdaea179dca",
+      "slug": "vacuum-cleaner",
+      "name": "Vacuum Cleaner",
+      "description": null,
+      "image_url": "https://sjlmjakninsenljyastk.supabase.co/storage/v1/object/public/product%20images/categories/1786704447884-8ff9c293-d31b-42a9-8c01-3e8c271baa03.png",
+      "parent_id": null,
+      "sort_order": 2,
+      "created_at": "2026-08-14T10:47:48.973648+00:00"
+    },
+    {
+      "id": "abb67982-c388-4d95-8c82-1f3aa9f5348e",
+      "slug": "walk-behind-scrubber",
+      "name": "Walk Behind Scrubber",
+      "description": "Description",
+      "image_url": "https://sjlmjakninsenljyastk.supabase.co/storage/v1/object/public/product%20images/categories/1786704292151-e88636b6-2228-484b-ab83-745b0cee3f25.png",
+      "parent_id": null,
+      "sort_order": 3,
+      "created_at": "2026-05-12T20:48:14.399901+00:00"
+    }
+  ],
+  "services": [
+    {
+      "id": "a36dabd0-1cb4-41f7-902f-7727ae7f5a5c",
+      "slug": "motor-repairing",
+      "name": "Motor Repairing",
+      "short_description": "Why choose our motor repairing service?",
+      "long_description": "• Comprehensive Diagnostics: Fast, detailed inspections to resolve issues.\r\n• All Machines Covered: Servicing everything from handheld to industrial.\r\n• High-Quality Repairs: Premium parts for long-lasting results.\r\n• Preventative Maintenance: Regular servicing to extend equipment life.\r\n• Quick Turnaround: Efficient service to minimize downtime.",
+      "icon_name": "Single disk machine repairing",
+      "image_url": "https://sjlmjakninsenljyastk.supabase.co/storage/v1/object/public/product%20images/services/1786708642688-9304082d-ff45-4969-8f47-196ddb07d698.png",
+      "sort_order": 0
+    },
+    {
+      "id": "30f41d03-277b-4522-b72e-dce459890fd6",
+      "slug": "single-disk-machine-vacuum-parts-repairing",
+      "name": "Replacement Service",
+      "short_description": "Why choose our parts replacement service?",
+      "long_description": "• Genuine Parts: Top-grade, manufacturer-approved components.\r\n• Wide Selection: Everything from motors to belts.\r\n• Expert Installation: Precise fitting by skilled technicians.\r\n• Peak Efficiency: Restores your machine to optimal performance.\r\n• Guaranteed Longevity: Extends equipment life and prevents breakdowns.",
+      "icon_name": "vacuum-motor-repairing",
+      "image_url": "https://sjlmjakninsenljyastk.supabase.co/storage/v1/object/public/product%20images/services/1786708893506-f683a21c-692b-4e9f-8061-21ba92e05d5e.png",
+      "sort_order": 0
+    },
+    {
+      "id": "8d7ec262-2a16-479b-8cfd-2659276f93e6",
+      "slug": "single-disk-brush-refiling",
+      "name": "Brush Refiling",
+      "short_description": "Why choose our brush refiling service?",
+      "long_description": "• Cost-Effective: A budget-friendly alternative to buying new.\r\n• High-Quality Bristles: Durable materials tailored to your machine.\r\n• Enhanced Performance: Restored brushes deliver optimal cleaning.\r\n• Quick Turnaround: Get your equipment back in action fast.\r\n• Eco-Friendly: Reduces waste by extending brush lifespan.",
+      "icon_name": "single disk machine brush",
+      "image_url": "https://sjlmjakninsenljyastk.supabase.co/storage/v1/object/public/product%20images/services/1785870490011-19c1b3e7-7066-44e2-9d96-ec038e6a51a5.jpg",
+      "sort_order": 0
+    }
+  ]
+}

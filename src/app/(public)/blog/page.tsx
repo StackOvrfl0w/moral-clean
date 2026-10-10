@@ -1,3 +1,4 @@
+import { GuideLinks } from "@/components/seo/GuideLinks";
 import { notFound } from "next/navigation";
 import { listingMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
@@ -12,7 +13,12 @@ import { getPaginationItems } from "@/lib/pagination";
 import { getAllPosts } from "@/lib/queries/blog";
 
 
-export function generateMetadata({ searchParams }: { searchParams?: Record<string, string | string[] | undefined> }): Metadata {
+export async function generateMetadata({ searchParams }: { searchParams?: Record<string, string | string[] | undefined> }): Promise<Metadata> {
+  const page = normalizePage(getParam(searchParams, "page"));
+  if (page > 1) {
+    const result = await getAllPosts({ page, limit: POSTS_PER_PAGE });
+    if (page > result.pageCount) notFound();
+  }
   return listingMetadata('Cleaning Equipment Guides & Maintenance Tips', 'Read Moral Clean guides on choosing commercial cleaning machines, maintaining equipment and planning cleaning operations for facilities in Pakistan.', '/blog', searchParams);
 }
 
@@ -186,6 +192,7 @@ export default async function BlogPage({
           ) : null}
         </div>
       </section>
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"><GuideLinks /></div>
     </>
   );
 }

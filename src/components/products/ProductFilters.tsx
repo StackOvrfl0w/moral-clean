@@ -124,14 +124,14 @@ export function ProductFilters({
             >
               <span>{category.name}</span>
               <span className="rounded-full bg-muted px-2 py-0.5 text-xs text-muted-foreground">
-                {categoryCounts[category.slug] ?? 0}
+                {category.slug === "steam-cleaners" && !(categoryCounts[category.slug] ?? 0) ? "Enquire" : categoryCounts[category.slug] ?? 0}
               </span>
             </Link>
           );
         })}
       </div>
 
-      <div>
+      {brands.length > 0 ? <div>
         <h2 className="text-base">Brands</h2>
         <div className="mt-3 space-y-1">
           {brands.map((brand) => (
@@ -144,9 +144,9 @@ export function ProductFilters({
             </CheckboxFilter>
           ))}
         </div>
-      </div>
+      </div> : null}
 
-      <div>
+      {tags.length > 0 ? <div>
         <h2 className="text-base">Tags</h2>
         <div className="mt-3 space-y-1">
           {tags.map((tag) => (
@@ -159,7 +159,7 @@ export function ProductFilters({
             </CheckboxFilter>
           ))}
         </div>
-      </div>
+      </div> : null}
 
       <Button asChild variant="outline" className="w-full">
         <Link href="/products">Clear Filters</Link>

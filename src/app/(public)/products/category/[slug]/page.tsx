@@ -1,3 +1,5 @@
+import { categoryAdvice, isIndexableCategory } from "@/content/categories";
+import { CategoryBuyingAdvice } from "@/components/products/CategoryBuyingAdvice";
 import { listingMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -149,13 +151,23 @@ function CategoryPagination({
 export async function generateMetadata({ params, searchParams }: CategoryPageProps): Promise<Metadata> {
   const category = await getCategoryBySlug(params.slug);
   if (!category) notFound();
+  const requestedPage = Number(getParam(searchParams, "page") || 1);
+  if (requestedPage > 1) {
+    const result = await getProductsByCategory(category.id, {
+      page: requestedPage,
+      sort: getParam(searchParams, "sort"),
+      brand: getParam(searchParams, "brand"),
+      tag: getParam(searchParams, "tag"),
+    });
+    if (requestedPage > result.pageCount) notFound();
+  }
   const suppliedDescription = category.description?.replace(/\s+/g, " ").trim();
   return listingMetadata(
-    `${category.name} in Pakistan`,
-    suppliedDescription && suppliedDescription.length >= 60
+    categoryAdvice[category.slug]?.title || `${category.name} in Pakistan`,
+    categoryAdvice[category.slug]?.intro || (suppliedDescription && suppliedDescription.length >= 60
       ? suppliedDescription
-      : `Browse ${category.name.toLowerCase()} for commercial facilities in Pakistan. Compare specifications and request equipment, parts and service from Moral Clean.`,
-    `/products/category/${category.slug}`, searchParams,
+      : `Browse ${category.name.toLowerCase()} for commercial facilities in Pakistan. Compare specifications and request equipment, parts and service from Moral Clean.`),
+    `/products/category/${category.slug}`, searchParams, !isIndexableCategory(category.slug, category.product_count),
   );
 }
 
@@ -252,12 +264,12 @@ export default async function CategoryPage({
               <div className="mt-2 flex flex-wrap items-center justify-between gap-4">
                 <h2 className="text-3xl">{category.name}</h2>
                 <Badge variant="secondary" className="bg-muted text-primary">
-                  {productsResult.totalCount} Products
+                  {category.slug === "steam-cleaners" && category.product_count === 0 ? "Models by enquiry" : `${productsResult.totalCount} Products`}
                 </Badge>
               </div>
               <p className="mt-4 text-muted-foreground">
-                {category.description ||
-                  `Browse ${category.name} from leading international brands. Professional commercial cleaning equipment available across Pakistan.`}
+                {categoryAdvice[category.slug]?.intro || (category.description === "Description" ? null : category.description) ||
+                  (category.product_count > 0 ? `Browse ${category.name} and request a quotation for your facility requirements.` : "No products are currently listed in this category. Contact Moral Clean to confirm the current range before ordering.")}
               </p>
             </div>
 
@@ -278,13 +290,13 @@ export default async function CategoryPage({
             ) : (
               <div className="flex min-h-[320px] flex-col items-center justify-center rounded-md border border-dashed border-border bg-muted/50 px-6 text-center">
                 <h3 className="text-xl">
-                  Products coming soon for this category
+                  {category.slug === "steam-cleaners" ? "Request a steam cleaner recommendation" : brand || tag ? "No products match these filters" : "Catalogue details are being updated"}
                 </h3>
                 <Link
-                  href="/products"
+                  href={category.slug === "steam-cleaners" ? "/contact?subject=Product+Inquiry&category=steam-cleaners" : "/products"}
                   className="mt-4 text-sm font-semibold text-primary hover:text-accent"
                 >
-                  Browse all products
+                  {category.slug === "steam-cleaners" ? "Discuss your surface and cleaning requirements" : "Browse all products"}
                 </Link>
               </div>
             )}
@@ -299,6 +311,7 @@ export default async function CategoryPage({
         </div>
       </section>
 
+      <CategoryBuyingAdvice slug={category.slug} categoryId={category.id} />
       {relatedProducts.length > 0 ? (
         <section className="bg-muted py-12">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

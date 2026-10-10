@@ -274,7 +274,7 @@ async function queryCatalogFacets(): Promise<CatalogFacets | null> {
         .select("*, products:products(count)")
         .order("sort_order", { ascending: true })
         .order("name", { ascending: true }),
-      supabase.from("tags").select("*").order("name", { ascending: true }),
+      supabase.from("tags").select("*, product_tags(count)").order("name", { ascending: true }),
       supabase.from("products").select("brand").not("brand", "is", null),
       supabase.from("products").select("id", { count: "exact", head: true }),
     ]);
@@ -306,7 +306,10 @@ async function queryCatalogFacets(): Promise<CatalogFacets | null> {
 
   return {
     categories,
-    tags: tagsResponse.data ?? [],
+    tags: ((tagsResponse.data ?? []) as unknown as (Tag & { product_tags: { count: number }[] })[]).filter((tag) => (tag.product_tags?.[0]?.count ?? 0) > 0).map(({ product_tags: _counts, ...tag }) => {
+      void _counts;
+      return tag;
+    }),
     brands: uniqueSorted(
       (brandsResponse.data ?? []).map((row) => row.brand),
     ),
@@ -319,6 +322,22 @@ const getCatalogFacets = unstable_cache(
   ["catalog-facets-v2"],
   { revalidate: PUBLIC_CACHE_SECONDS, tags: ["catalog"] },
 );
+
+const getCategoryFilterFacets = unstable_cache(async (categoryId: string) => {
+  const supabase = createPublicCatalogClient();
+  if (!supabase) return { brands: [] as string[], tags: [] as Tag[] };
+  const { data, error } = await supabase.from("products")
+    .select("brand, product_tags(tags(*))").eq("category_id", categoryId);
+  if (error) throw new Error("Unable to load category filters");
+  const tags = new Map<string, Tag>();
+  const rows = (data ?? []) as unknown as { brand: string | null; product_tags: { tags: Tag | null }[] }[];
+  for (const product of rows) {
+    for (const relation of product.product_tags ?? []) {
+      if (relation.tags) tags.set(relation.tags.id, relation.tags);
+    }
+  }
+  return { brands: uniqueSorted(rows.map((product) => product.brand)), tags: Array.from(tags.values()).sort((a, b) => a.name.localeCompare(b.name)) };
+}, ["category-filter-facets-v1"], { revalidate: PUBLIC_CACHE_SECONDS, tags: ["catalog"] });
 
 function quotePostgrestValue(value: string) {
   return `"${value.replace(/\\/g, "\\\\").replace(/"/g, '\\"')}"`;
@@ -466,10 +485,19 @@ async function queryProducts(
   }
 
   const from = (page - 1) * PRODUCTS_PER_PAGE;
-  const { data, error, count } = await query.range(
+  let { data, error, count } = await query.range(
     from,
     from + PRODUCTS_PER_PAGE - 1,
   );
+
+  if (error?.code === "PGRST103" && page > 1) {
+    // An invalid offset returns 416 without a count. Recover the filtered count
+    // from the first row so the route can return not-found rather than 500.
+    const firstPage = await query.range(0, 0);
+    error = firstPage.error;
+    count = firstPage.count;
+    data = [];
+  }
 
   if (error) {
     console.error("Products query failed:", error);
@@ -478,6 +506,7 @@ async function queryProducts(
 
   const totalCount = count ?? 0;
   const pageCount = Math.max(1, Math.ceil(totalCount / PRODUCTS_PER_PAGE));
+  const filterFacets = category ? await getCategoryFilterFacets(category.id) : facets;
 
   return {
     products: normalizeCardProducts(
@@ -492,8 +521,8 @@ async function queryProducts(
     categoryCounts: Object.fromEntries(
       facets.categories.map((item) => [item.slug, item.product_count]),
     ),
-    brands: facets.brands,
-    tags: facets.tags,
+    brands: filterFacets.brands,
+    tags: filterFacets.tags,
     usingSeedData: false,
   };
 }

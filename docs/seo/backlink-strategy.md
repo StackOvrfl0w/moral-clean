@@ -24,7 +24,7 @@ These are prospect categories and two verified starting points, not confirmed pl
 
 ## Publish assets worth citing: weeks 2–4
 
-1. **Scrubber dryer selection worksheet for Pakistan facilities.** Include floor area, obstacles, aisle width, tank capacity, battery runtime and an honest worked example using verified model specifications. Explain theoretical versus practical cleaning capacity. Link to `/products/category/scrubber-dryers` and `/products/category/ride-on-scrubber-dryer`.
+1. **Scrubber dryer selection worksheet for Pakistan facilities.** Include floor area, obstacles, aisle width, tank capacity, battery runtime and an honest worked example using verified model specifications. Explain theoretical versus practical cleaning capacity. Link to `/products/category/walk-behind-scrubber` and `/products/category/ride-on-scrubber-dryer`.
 2. **Cleaning machine repair-versus-replacement worksheet.** Document downtime, labor, parts availability and repair history. Use supplier quotes or label all figures as examples; do not invent savings. Link to `/services` and `/contact`.
 3. **One documented customer case study.** Record the starting problem, machine/model, intervention and measured result. Obtain permission to use the customer name, images and figures. Include the measurement period and limitations.
 

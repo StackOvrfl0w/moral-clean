@@ -40,6 +40,7 @@ import { cn } from "@/lib/utils";
 const navItems = [
   { label: "Home", href: "/" },
   { label: "Services", href: "/services" },
+  { label: "Guides", href: "/guides" },
   { label: "Blog", href: "/blog" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
@@ -240,7 +241,7 @@ export function Header({ settings, categories }: HeaderProps) {
               asChild
               className="border-0 bg-brand-gradient text-white hover:opacity-90"
             >
-              <Link href="/contact">Get a Quote</Link>
+              <Link href="/contact?subject=Quotation" data-quote-request="true">Get a Quote</Link>
             </Button>
           </div>
 
@@ -328,7 +329,7 @@ export function Header({ settings, categories }: HeaderProps) {
                       size="lg"
                       className="mt-2 h-12 rounded-md bg-accent text-accent-foreground hover:bg-accent/90"
                     >
-                      <Link href="/contact">Get a Quote</Link>
+                      <Link href="/contact?subject=Quotation" data-quote-request="true">Get a Quote</Link>
                     </Button>
                   </SheetClose>
                 </nav>

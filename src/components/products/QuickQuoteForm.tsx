@@ -5,6 +5,7 @@ import { useFormState, useFormStatus } from "react-dom";
 import { Headset, SendHorizontal } from "lucide-react";
 import { toast } from "sonner";
 
+import { trackInquiry } from "@/lib/analytics";
 import { initialQuickQuoteFormState } from "@/lib/actions/contact-types";
 import { submitQuickQuote } from "@/lib/actions/contact";
 import { Button } from "@/components/ui/button";
@@ -39,9 +40,14 @@ export function QuickQuoteForm({
     initialQuickQuoteFormState,
   );
 
+  const measuredState = useRef<typeof state>();
   useEffect(() => {
+    if (state.recorded && measuredState.current !== state) {
+      measuredState.current = state;
+      trackInquiry("inquiry_submitted", { form_type: "quick_quote", category_slug: categorySlug });
+    }
     if (state.success) {
-      toast.success("Request sent. We'll respond within 2 business hours.");
+      toast.success("Request received. Our team will review your requirements.");
       formRef.current?.reset();
       return;
     }
@@ -49,7 +55,7 @@ export function QuickQuoteForm({
     if (state.error) {
       toast.error(state.error);
     }
-  }, [state]);
+  }, [state, categorySlug]);
 
   return (
     <section className="rounded-md bg-primary p-6 text-primary-foreground shadow-lg">
@@ -60,7 +66,7 @@ export function QuickQuoteForm({
         <div>
           <h3 className="text-lg font-bold text-white">Quick Quote</h3>
           <p className="mt-1 text-sm text-white/75">
-            We respond within 2 business hours.
+            Share the equipment and cleaning task you need help with.
           </p>
         </div>
       </div>
@@ -78,24 +84,28 @@ export function QuickQuoteForm({
         />
 
         <Input
+          aria-label="Name"
           name="name"
           required
           placeholder="Name"
           className="border-white/30 bg-white/5 text-white placeholder:text-white/60"
         />
         <Input
+          aria-label="Phone number"
           name="phone"
           required
           placeholder="Phone Number"
           className="border-white/30 bg-white/5 text-white placeholder:text-white/60"
         />
         <Input
+          aria-label="Email address"
           name="email"
           type="email"
           placeholder="Email Address"
           className="border-white/30 bg-white/5 text-white placeholder:text-white/60"
         />
         <Textarea
+          aria-label="Product or requirement"
           name="requirement"
           required
           placeholder="Product / Requirement"

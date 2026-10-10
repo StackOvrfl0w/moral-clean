@@ -99,6 +99,16 @@ const getCachedAllCategories = unstable_cache(
 
 export const getAllCategories = cache(getCachedAllCategories);
 
+export const getCategoryModels = unstable_cache(async (categoryId: string) => {
+  const supabase = createPublicCatalogClient();
+  if (!supabase) return mockProducts.filter((product) => product.category_id === categoryId);
+  const { data, error } = await supabase.from("products")
+    .select("slug,name,model_code,specifications").eq("category_id", categoryId)
+    .order("name").limit(50);
+  if (error) throw new Error("Unable to load model comparison");
+  return data ?? [];
+}, ["category-model-comparison-v1"], { revalidate: 900, tags: ["catalog"] });
+
 export async function getCategoryBySlug(
   slug: string,
 ): Promise<CategoryWithCount | null> {

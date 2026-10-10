@@ -22,6 +22,8 @@ import {
   Wrench,
 } from "lucide-react";
 
+import { GuideLinks } from "@/components/seo/GuideLinks";
+import { isIndexableCategory } from "@/content/categories";
 import { ContactForm } from "@/components/contact/ContactForm";
 import { CtaBanner } from "@/components/sections/CtaBanner";
 import { IndustriesStrip } from "@/components/sections/IndustriesStrip";
@@ -138,7 +140,7 @@ export default async function Home() {
     date: post.published_at ? new Date(post.published_at).toLocaleDateString("en-US", { dateStyle: "long" }) : "",
   }));
   const HOME_CATEGORY_LIMIT = 8;
-  const visibleCategories = categories.slice(0, HOME_CATEGORY_LIMIT);
+  const visibleCategories = categories.filter((category) => isIndexableCategory(category.slug, category.product_count)).slice(0, HOME_CATEGORY_LIMIT);
   const hasMoreCategories = categories.length > HOME_CATEGORY_LIMIT;
   const address =
     settings.business_address ||
@@ -396,6 +398,7 @@ export default async function Home() {
         </div>
       </SectionReveal>}
 
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"><GuideLinks /></div>
       <SectionReveal className="border-t border-border bg-white py-16 lg:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mb-10 max-w-3xl">
@@ -410,9 +413,9 @@ export default async function Home() {
           </div>
 
           <div className="grid gap-8 lg:grid-cols-5">
-            <aside className="rounded-lg bg-brand-navy p-8 text-white lg:col-span-2">
-              <h3 className="text-2xl text-white">Contact Moral Clean</h3>
-              <p className="mt-3 text-sm leading-6 text-white/70">
+            <aside className="rounded-lg bg-brand-gradient p-8 text-brand-navy lg:col-span-2">
+              <h3 className="text-2xl text-brand-navy">Contact Moral Clean</h3>
+              <p className="mt-3 text-sm leading-6 text-brand-navy/80">
                 Call for urgent support or send the details through the form
                 for equipment, parts, quotations, and service requests.
               </p>
@@ -420,24 +423,24 @@ export default async function Home() {
               <div className="mt-8 space-y-5 text-sm">
                 <div className="flex gap-3">
                   <MapPin
-                    className="mt-0.5 size-5 shrink-0 text-cyan-300"
+                    className="mt-0.5 size-5 shrink-0 text-brand-navy"
                     aria-hidden="true"
                   />
                   <div>
-                    <p className="font-semibold text-white">Office</p>
-                    <p className="mt-1 leading-6 text-white/70">{address}</p>
+                    <p className="font-semibold text-brand-navy">Office</p>
+                    <p className="mt-1 leading-6 text-brand-navy/80">{address}</p>
                   </div>
                 </div>
                 <div className="flex gap-3">
                   <Phone
-                    className="mt-0.5 size-5 shrink-0 text-cyan-300"
+                    className="mt-0.5 size-5 shrink-0 text-brand-navy"
                     aria-hidden="true"
                   />
                   <div>
-                    <p className="font-semibold text-white">Phone</p>
+                    <p className="font-semibold text-brand-navy">Phone</p>
                     <a
                       href={`tel:+${phoneDigits}`}
-                      className="mt-1 block text-white/70 transition-colors hover:text-cyan-300"
+                      className="mt-1 block text-brand-navy/80 transition-opacity hover:opacity-75"
                     >
                       {phone}
                     </a>
@@ -445,14 +448,14 @@ export default async function Home() {
                 </div>
                 <div className="flex gap-3">
                   <Mail
-                    className="mt-0.5 size-5 shrink-0 text-cyan-300"
+                    className="mt-0.5 size-5 shrink-0 text-brand-navy"
                     aria-hidden="true"
                   />
                   <div>
-                    <p className="font-semibold text-white">Email</p>
+                    <p className="font-semibold text-brand-navy">Email</p>
                     <a
                       href={`mailto:${email}`}
-                      className="mt-1 block break-all text-white/70 transition-colors hover:text-cyan-300"
+                      className="mt-1 block break-all text-brand-navy/80 transition-opacity hover:opacity-75"
                     >
                       {email}
                     </a>
@@ -460,12 +463,12 @@ export default async function Home() {
                 </div>
                 <div className="flex gap-3">
                   <Clock3
-                    className="mt-0.5 size-5 shrink-0 text-cyan-300"
+                    className="mt-0.5 size-5 shrink-0 text-brand-navy"
                     aria-hidden="true"
                   />
                   <div>
-                    <p className="font-semibold text-white">Business Hours</p>
-                    <p className="mt-1 text-white/70">{hours}</p>
+                    <p className="font-semibold text-brand-navy">Business Hours</p>
+                    <p className="mt-1 text-brand-navy/80">{hours}</p>
                   </div>
                 </div>
               </div>
@@ -475,7 +478,7 @@ export default async function Home() {
                   href={`https://wa.me/${whatsappDigits}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-8 inline-flex items-center gap-2 rounded-md bg-brand-gradient px-4 py-2.5 text-sm font-semibold text-brand-navy transition hover:brightness-110"
+                  className="mt-8 inline-flex items-center gap-2 rounded-full bg-brand-navy px-4 py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-85"
                 >
                   <MessageCircle className="size-4" aria-hidden="true" />
                   Chat on WhatsApp
@@ -484,7 +487,7 @@ export default async function Home() {
             </aside>
 
             <div className="lg:col-span-3">
-              <ContactForm />
+              <ContactForm supportPhone={settings.business_phone || settings.contact_phone} />
             </div>
           </div>
         </div>

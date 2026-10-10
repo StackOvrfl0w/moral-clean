@@ -4,22 +4,7 @@ import { Suspense, useEffect } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import { env } from "@/config/env";
 
-let analytics: Promise<typeof import("posthog-js")["default"]> | undefined;
-function loadAnalytics() {
-  analytics ??= import("posthog-js").then(({ default: posthog }) => {
-    posthog.init(env.posthogKey, {
-      api_host: env.posthogHost,
-      capture_pageview: false,
-      capture_pageleave: true,
-      autocapture: true,
-      persistence: "localStorage",
-      disable_session_recording: false,
-      session_recording: { maskAllInputs: true },
-    });
-    return posthog;
-  }).catch((error) => { analytics = undefined; throw error; });
-  return analytics;
-}
+import { loadAnalytics, trackInquiry } from "@/lib/analytics";
 
 function PostHogTracker() {
   const pathname = usePathname();
@@ -31,7 +16,7 @@ function PostHogTracker() {
     const capture = () => {
       void loadAnalytics().then((posthog) => {
         if (!cancelled) posthog.capture("$pageview", {
-          $current_url: `${window.location.origin}${pathname}${query ? `?${query}` : ""}`,
+          $current_url: `${window.location.origin}${pathname}`,
         });
       }).catch(() => { /* Analytics must not interrupt the page. */ });
     };
@@ -42,6 +27,18 @@ function PostHogTracker() {
     const id = setTimeout(capture, 1000);
     return () => { cancelled = true; clearTimeout(id); };
   }, [pathname, query]);
+  useEffect(() => {
+    const handleClick = (event: MouseEvent) => {
+      const anchor = event.target instanceof Element ? event.target.closest("a[href]") : null;
+      if (!(anchor instanceof HTMLAnchorElement)) return;
+      const url = new URL(anchor.href, window.location.origin);
+      if (url.protocol === "tel:") trackInquiry("contact_channel_click", { channel: "phone" });
+      else if (url.hostname === "wa.me" || url.hostname === "api.whatsapp.com") trackInquiry("contact_channel_click", { channel: "whatsapp" });
+      else if (url.origin === window.location.origin && url.pathname === "/contact" && (anchor.dataset.quoteRequest === "true" || url.searchParams.get("subject") === "Quotation" || url.searchParams.has("product"))) trackInquiry("quote_request_click", {});
+    };
+    document.addEventListener("click", handleClick);
+    return () => document.removeEventListener("click", handleClick);
+  }, []);
   return null;
 }
 
