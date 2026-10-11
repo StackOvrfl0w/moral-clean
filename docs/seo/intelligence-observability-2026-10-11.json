@@ -1,0 +1,47 @@
+{
+  "window": "2026-10-04T00:00:00Z/2026-10-11T00:00:00Z",
+  "schemaAvailable": true,
+  "queries": [
+    {
+      "metric": "vercel.function_invocation.count",
+      "scope": {
+        "type": "project",
+        "projectId": "prj_nhiqWIb6xw2GAqAzMCssOZILU7Wd"
+      },
+      "aggregation": "sum",
+      "error": {
+        "message": "Vercel API request failed (400: bad_request).",
+        "recovery": "Check the API message, arguments, target team and resource state. Correct the request before retrying.",
+        "remediation": {
+          "actor": "agent",
+          "action": "correct_request"
+        },
+        "status": 400,
+        "code": "bad_request",
+        "operation": "POST /v2/observability/query",
+        "requestId": "bom1:sfo1::fmwb9-1791714789573-af8455b7c7b1"
+      }
+    },
+    {
+      "metric": "vercel.speed_insights.lcp_ms",
+      "scope": {
+        "type": "project",
+        "projectId": "prj_nhiqWIb6xw2GAqAzMCssOZILU7Wd"
+      },
+      "aggregation": "p75",
+      "error": {
+        "message": "Vercel API request failed (400: bad_request).",
+        "recovery": "Check the API message, arguments, target team and resource state. Correct the request before retrying.",
+        "remediation": {
+          "actor": "agent",
+          "action": "correct_request"
+        },
+        "status": 400,
+        "code": "bad_request",
+        "operation": "POST /v2/observability/query",
+        "requestId": "bom1:sfo1::b45f6-1791714789694-976d2fc92055"
+      }
+    }
+  ],
+  "note": "HTTP 400 bad_request: no measurement returned; scope/aggregation compatibility unverified, not evidence of entitlement denial."
+}

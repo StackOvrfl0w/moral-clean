@@ -1,5 +1,7 @@
 # Current release
 
+Latest read-only production/preview research: [SEO intelligence and implementation backlog, 11 October 2026](intelligence-2026-10-11.md). Its dated baseline and deployment distinction supersede historical access/status statements below; it does not authorize or perform a production release.
+
 Production was restored to the pre-SEO master deployment on 10 October. The keyword release is preserved on preview; see [preview-review-2026-10-10.md](preview-review-2026-10-10.md). The three-month plan is deferred. The historical notes below predate this release and do not describe its current deployment or Search Console access.
 
 The next preview batch adds six articles and contextual internal links; see [content-expansion-2026-10-10.md](content-expansion-2026-10-10.md).

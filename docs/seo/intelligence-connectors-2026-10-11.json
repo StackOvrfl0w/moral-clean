@@ -1,0 +1,4365 @@
+{
+  "researchedAt": "2026-10-11",
+  "timezone": "Asia/Karachi",
+  "property": "sc-domain:moralclean.com",
+  "note": "Research only; connector results are estimates except GSC. Production error probes generated synthetic log records. No credentials or protection bypass state retained.",
+  "total28": {
+    "rows": [
+      {
+        "clicks": 21,
+        "impressions": 157,
+        "ctr": 0.1337579617834395,
+        "position": 10.949044585987261
+      }
+    ],
+    "row_count": 1,
+    "truncated": false,
+    "query": {
+      "start_date": "2026-09-11",
+      "end_date": "2026-10-08",
+      "search_type": "web",
+      "data_state": "final",
+      "dimensions": [],
+      "row_limit": 250,
+      "start_row": 0,
+      "estimated_data_finalized_through": "2026-10-08"
+    }
+  },
+  "prev28": {
+    "rows": [
+      {
+        "clicks": 3,
+        "impressions": 21,
+        "ctr": 0.14285714285714285,
+        "position": 9.523809523809524
+      }
+    ],
+    "row_count": 1,
+    "truncated": false,
+    "query": {
+      "start_date": "2026-08-14",
+      "end_date": "2026-09-10",
+      "search_type": "web",
+      "data_state": "final",
+      "dimensions": [],
+      "row_limit": 250,
+      "start_row": 0,
+      "estimated_data_finalized_through": "2026-10-08"
+    }
+  },
+  "total90": {
+    "rows": [
+      {
+        "clicks": 28,
+        "impressions": 224,
+        "ctr": 0.125,
+        "position": 11.629464285714286
+      }
+    ],
+    "row_count": 1,
+    "truncated": false,
+    "query": {
+      "start_date": "2026-07-11",
+      "end_date": "2026-10-08",
+      "search_type": "web",
+      "data_state": "final",
+      "dimensions": [],
+      "row_limit": 250,
+      "start_row": 0,
+      "estimated_data_finalized_through": "2026-10-08"
+    }
+  },
+  "prev90": {
+    "rows": [
+      {
+        "clicks": 9,
+        "impressions": 67,
+        "ctr": 0.13432835820895522,
+        "position": 20.35820895522388
+      }
+    ],
+    "row_count": 1,
+    "truncated": false,
+    "query": {
+      "start_date": "2026-04-12",
+      "end_date": "2026-07-10",
+      "search_type": "web",
+      "data_state": "final",
+      "dimensions": [],
+      "row_limit": 250,
+      "start_row": 0,
+      "estimated_data_finalized_through": "2026-10-08"
+    }
+  },
+  "28-page": {
+    "rows": [
+      {
+        "keys": [
+          "https://moralclean.com/"
+        ],
+        "current": {
+          "clicks": 12,
+          "impressions": 88,
+          "ctr": 0.13636363636363635,
+          "position": 8.53409090909091
+        },
+        "previous": {
+          "clicks": 3,
+          "impressions": 21,
+          "ctr": 0.14285714285714285,
+          "position": 9.523809523809524
+        },
+        "delta": {
+          "clicks": 9,
+          "impressions": 67,
+          "ctr": -0.006493506493506496,
+          "position": -0.9897186147186137
+        }
+      },
+      {
+        "keys": [
+          "https://moralclean.com/products/category/single-disk-machine"
+        ],
+        "current": {
+          "clicks": 6,
+          "impressions": 31,
+          "ctr": 0.1935483870967742,
+          "position": 8.29032258064516
+        },
+        "previous": null,
+        "delta": null
+      },
+      {
+        "keys": [
+          "https://moralclean.com/products/category/ride-on-scrubber-dryer"
+        ],
+        "current": {
+          "clicks": 2,
+          "impressions": 10,
+          "ctr": 0.2,
+          "position": 5.4
+        },
+        "previous": null,
+        "delta": null
+      },
+      {
+        "keys": [
+          "https://moralclean.com/products/category/walk-behind-scrubber"
+        ],
+        "current": {
+          "clicks": 1,
+          "impressions": 5,
+          "ctr": 0.2,
+          "position": 11.4
+        },
+        "previous": null,
+        "delta": null
+      },
+      {
+        "keys": [
+          "https://moralclean.com/products/20-l-side-press-mop-bucket-trolley-mc-mw-200"
+        ],
+        "current": {
+          "clicks": 0,
+          "impressions": 2,
+          "ctr": 0,
+          "position": 35.5
+        },
+        "previous": null,
+        "delta": null
+      },
+      {
+        "keys": [
+          "https://moralclean.com/products/biemmedue-ms-17-fast-single-disc-floor-machine"
+        ],
+        "current": {
+          "clicks": 0,
+          "impressions": 3,
+          "ctr": 0,
+          "position": 5
+        },
+        "previous": null,
+        "delta": null
+      },
+      {
+        "keys": [
+          "https://moralclean.com/products/blue-spin-mop-system-mc-sm-150"
+        ],
+        "current": {
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 10
+        },
+        "previous": null,
+        "delta": null
+      },
+      {
+        "keys": [
+          "https://moralclean.com/products/category/pressure-washer"
+        ],
+        "current": {
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 3
+        },
+        "previous": null,
+        "delta": null
+      },
+      {
+        "keys": [
+          "https://moralclean.com/products/category/steam-cleaners"
+        ],
+        "current": {
+          "clicks": 0,
+          "impressions": 20,
+          "ctr": 0,
+          "position": 24.3
+        },
+        "previous": null,
+        "delta": null
+      },
+      {
+        "keys": [
+          "https://moralclean.com/products/category/vacuum-cleaner"
+        ],
+        "current": {
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 70
+        },
+        "previous": null,
+        "delta": null
+      },
+      {
+        "keys": [
+          "https://moralclean.com/products/compact-flat-mop-squeeze-bucket-set-mc-fm-120"
+        ],
+        "current": {
+          "clicks": 0,
+          "impressions": 2,
+          "ctr": 0,
+          "position": 9.5
+        },
+        "previous": null,
+        "delta": null
+      },
+      {
+        "keys": [
+          "https://moralclean.com/products/test-prod"
+        ],
+        "current": {
+          "clicks": 0,
+          "impressions": 2,
+          "ctr": 0,
+          "position": 1.5
+        },
+        "previous": null,
+        "delta": null
+      },
+      {
+        "keys": [
+          "https://moralclean.com/about"
+        ],
+        "current": null,
+        "previous": {
+          "clicks": 0,
+          "impressions": 3,
+          "ctr": 0,
+          "position": 6.666666666666667
+        },
+        "delta": null
+      },
+      {
+        "keys": [
+          "https://moralclean.com/blog"
+        ],
+        "current": null,
+        "previous": {
+          "clicks": 0,
+          "impressions": 3,
+          "ctr": 0,
+          "position": 6.666666666666667
+        },
+        "delta": null
+      },
+      {
+        "keys": [
+          "https://moralclean.com/contact"
+        ],
+        "current": null,
+        "previous": {
+          "clicks": 0,
+          "impressions": 3,
+          "ctr": 0,
+          "position": 6.666666666666667
+        },
+        "delta": null
+      },
+      {
+        "keys": [
+          "https://moralclean.com/services"
+        ],
+        "current": null,
+        "previous": {
+          "clicks": 0,
+          "impressions": 3,
+          "ctr": 0,
+          "position": 6.666666666666667
+        },
+        "delta": null
+      }
+    ],
+    "current_period": {
+      "start_date": "2026-09-11",
+      "end_date": "2026-10-08",
+      "search_type": "web",
+      "data_state": "final",
+      "dimensions": [
+        "page"
+      ],
+      "row_limit": 1000,
+      "estimated_data_finalized_through": "2026-10-08"
+    },
+    "previous_period": {
+      "start_date": "2026-08-14",
+      "end_date": "2026-09-10",
+      "search_type": "web",
+      "data_state": "final",
+      "dimensions": [
+        "page"
+      ],
+      "row_limit": 1000,
+      "estimated_data_finalized_through": "2026-10-08"
+    },
+    "current_truncated": false,
+    "previous_truncated": false
+  },
+  "90-total": {
+    "rows": [
+      {
+        "keys": [
+          "https://moralclean.com/"
+        ],
+        "current": {
+          "clicks": 19,
+          "impressions": 155,
+          "ctr": 0.12258064516129032,
+          "position": 10.561290322580644
+        },
+        "previous": {
+          "clicks": 9,
+          "impressions": 67,
+          "ctr": 0.13432835820895522,
+          "position": 20.35820895522388
+        },
+        "delta": {
+          "clicks": 10,
+          "impressions": 88,
+          "ctr": -0.011747713047664907,
+          "position": -9.796918632643235
+        }
+      },
+      {
+        "keys": [
+          "https://moralclean.com/products/category/single-disk-machine"
+        ],
+        "current": {
+          "clicks": 6,
+          "impressions": 31,
+          "ctr": 0.1935483870967742,
+          "position": 8.29032258064516
+        },
+        "previous": null,
+        "delta": null
+      },
+      {
+        "keys": [
+          "https://moralclean.com/products/category/ride-on-scrubber-dryer"
+        ],
+        "current": {
+          "clicks": 2,
+          "impressions": 10,
+          "ctr": 0.2,
+          "position": 5.4
+        },
+        "previous": null,
+        "delta": null
+      },
+      {
+        "keys": [
+          "https://moralclean.com/products/category/walk-behind-scrubber"
+        ],
+        "current": {
+          "clicks": 1,
+          "impressions": 5,
+          "ctr": 0.2,
+          "position": 11.4
+        },
+        "previous": null,
+        "delta": null
+      },
+      {
+        "keys": [
+          "https://moralclean.com/about"
+        ],
+        "current": {
+          "clicks": 0,
+          "impressions": 4,
+          "ctr": 0,
+          "position": 7.5
+        },
+        "previous": null,
+        "delta": null
+      },
+      {
+        "keys": [
+          "https://moralclean.com/blog"
+        ],
+        "current": {
+          "clicks": 0,
+          "impressions": 4,
+          "ctr": 0,
+          "position": 7.5
+        },
+        "previous": null,
+        "delta": null
+      },
+      {
+        "keys": [
+          "https://moralclean.com/contact"
+        ],
+        "current": {
+          "clicks": 0,
+          "impressions": 4,
+          "ctr": 0,
+          "position": 7.5
+        },
+        "previous": null,
+        "delta": null
+      },
+      {
+        "keys": [
+          "https://moralclean.com/products/20-l-side-press-mop-bucket-trolley-mc-mw-200"
+        ],
+        "current": {
+          "clicks": 0,
+          "impressions": 2,
+          "ctr": 0,
+          "position": 35.5
+        },
+        "previous": null,
+        "delta": null
+      },
+      {
+        "keys": [
+          "https://moralclean.com/products/biemmedue-ms-17-fast-single-disc-floor-machine"
+        ],
+        "current": {
+          "clicks": 0,
+          "impressions": 3,
+          "ctr": 0,
+          "position": 5
+        },
+        "previous": null,
+        "delta": null
+      },
+      {
+        "keys": [
+          "https://moralclean.com/products/blue-spin-mop-system-mc-sm-150"
+        ],
+        "current": {
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 10
+        },
+        "previous": null,
+        "delta": null
+      },
+      {
+        "keys": [
+          "https://moralclean.com/products/category/pressure-washer"
+        ],
+        "current": {
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 3
+        },
+        "previous": null,
+        "delta": null
+      },
+      {
+        "keys": [
+          "https://moralclean.com/products/category/steam-cleaners"
+        ],
+        "current": {
+          "clicks": 0,
+          "impressions": 20,
+          "ctr": 0,
+          "position": 24.3
+        },
+        "previous": null,
+        "delta": null
+      },
+      {
+        "keys": [
+          "https://moralclean.com/products/category/vacuum-cleaner"
+        ],
+        "current": {
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 70
+        },
+        "previous": null,
+        "delta": null
+      },
+      {
+        "keys": [
+          "https://moralclean.com/products/compact-flat-mop-squeeze-bucket-set-mc-fm-120"
+        ],
+        "current": {
+          "clicks": 0,
+          "impressions": 2,
+          "ctr": 0,
+          "position": 9.5
+        },
+        "previous": null,
+        "delta": null
+      },
+      {
+        "keys": [
+          "https://moralclean.com/products/test-prod"
+        ],
+        "current": {
+          "clicks": 0,
+          "impressions": 2,
+          "ctr": 0,
+          "position": 1.5
+        },
+        "previous": null,
+        "delta": null
+      },
+      {
+        "keys": [
+          "https://moralclean.com/services"
+        ],
+        "current": {
+          "clicks": 0,
+          "impressions": 4,
+          "ctr": 0,
+          "position": 7.5
+        },
+        "previous": null,
+        "delta": null
+      }
+    ],
+    "current_period": {
+      "start_date": "2026-07-11",
+      "end_date": "2026-10-08",
+      "search_type": "web",
+      "data_state": "final",
+      "dimensions": [
+        "page"
+      ],
+      "row_limit": 1000,
+      "estimated_data_finalized_through": "2026-10-08"
+    },
+    "previous_period": {
+      "start_date": "2026-04-12",
+      "end_date": "2026-07-10",
+      "search_type": "web",
+      "data_state": "final",
+      "dimensions": [
+        "page"
+      ],
+      "row_limit": 1000,
+      "estimated_data_finalized_through": "2026-10-08"
+    },
+    "current_truncated": false,
+    "previous_truncated": false
+  },
+  "90-query": {
+    "rows": [
+      {
+        "keys": [
+          "clean"
+        ],
+        "current": {
+          "clicks": 0,
+          "impressions": 3,
+          "ctr": 0,
+          "position": 4.666666666666666
+        },
+        "previous": null,
+        "delta": null
+      },
+      {
+        "keys": [
+          "cleaning machines"
+        ],
+        "current": {
+          "clicks": 0,
+          "impressions": 2,
+          "ctr": 0,
+          "position": 39
+        },
+        "previous": null,
+        "delta": null
+      },
+      {
+        "keys": [
+          "commercial cleaning repairs"
+        ],
+        "current": {
+          "clicks": 0,
+          "impressions": 2,
+          "ctr": 0,
+          "position": 4.5
+        },
+        "previous": null,
+        "delta": null
+      },
+      {
+        "keys": [
+          "disk machine"
+        ],
+        "current": {
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 6
+        },
+        "previous": null,
+        "delta": null
+      },
+      {
+        "keys": [
+          "floor & steam cleaners"
+        ],
+        "current": {
+          "clicks": 0,
+          "impressions": 2,
+          "ctr": 0,
+          "position": 43
+        },
+        "previous": null,
+        "delta": null
+      },
+      {
+        "keys": [
+          "industrial vacuum"
+        ],
+        "current": {
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 70
+        },
+        "previous": null,
+        "delta": null
+      },
+      {
+        "keys": [
+          "maestro cleaning services"
+        ],
+        "current": {
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 47
+        },
+        "previous": null,
+        "delta": null
+      },
+      {
+        "keys": [
+          "mcl laundry"
+        ],
+        "current": {
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 49
+        },
+        "previous": null,
+        "delta": null
+      },
+      {
+        "keys": [
+          "mdclean"
+        ],
+        "current": {
+          "clicks": 0,
+          "impressions": 2,
+          "ctr": 0,
+          "position": 20.5
+        },
+        "previous": null,
+        "delta": null
+      },
+      {
+        "keys": [
+          "mop trolley"
+        ],
+        "current": {
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 63
+        },
+        "previous": null,
+        "delta": null
+      },
+      {
+        "keys": [
+          "ride on machine"
+        ],
+        "current": {
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 6
+        },
+        "previous": null,
+        "delta": null
+      },
+      {
+        "keys": [
+          "single disc machine"
+        ],
+        "current": {
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 9
+        },
+        "previous": null,
+        "delta": null
+      },
+      {
+        "keys": [
+          "steam cleaner"
+        ],
+        "current": {
+          "clicks": 0,
+          "impressions": 6,
+          "ctr": 0,
+          "position": 38.833333333333336
+        },
+        "previous": null,
+        "delta": null
+      },
+      {
+        "keys": [
+          "steam cleaner karachi"
+        ],
+        "current": {
+          "clicks": 0,
+          "impressions": 2,
+          "ctr": 0,
+          "position": 11
+        },
+        "previous": null,
+        "delta": null
+      },
+      {
+        "keys": [
+          "steam cleaner pakistan"
+        ],
+        "current": {
+          "clicks": 0,
+          "impressions": 3,
+          "ctr": 0,
+          "position": 31.333333333333332
+        },
+        "previous": null,
+        "delta": null
+      },
+      {
+        "keys": [
+          "cleaner company"
+        ],
+        "current": null,
+        "previous": {
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 93
+        },
+        "delta": null
+      },
+      {
+        "keys": [
+          "industrial cleaning"
+        ],
+        "current": null,
+        "previous": {
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 93
+        },
+        "delta": null
+      },
+      {
+        "keys": [
+          "industrial steam cleaners"
+        ],
+        "current": null,
+        "previous": {
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 8
+        },
+        "delta": null
+      },
+      {
+        "keys": [
+          "interclean commercial products"
+        ],
+        "current": null,
+        "previous": {
+          "clicks": 0,
+          "impressions": 3,
+          "ctr": 0,
+          "position": 34
+        },
+        "delta": null
+      },
+      {
+        "keys": [
+          "moral cleanliness"
+        ],
+        "current": null,
+        "previous": {
+          "clicks": 0,
+          "impressions": 6,
+          "ctr": 0,
+          "position": 66.5
+        },
+        "delta": null
+      },
+      {
+        "keys": [
+          "moral service"
+        ],
+        "current": null,
+        "previous": {
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 1
+        },
+        "delta": null
+      },
+      {
+        "keys": [
+          "morally clean"
+        ],
+        "current": null,
+        "previous": {
+          "clicks": 0,
+          "impressions": 2,
+          "ctr": 0,
+          "position": 45.5
+        },
+        "delta": null
+      },
+      {
+        "keys": [
+          "what is moral cleanliness"
+        ],
+        "current": null,
+        "previous": {
+          "clicks": 0,
+          "impressions": 3,
+          "ctr": 0,
+          "position": 68.33333333333333
+        },
+        "delta": null
+      }
+    ],
+    "current_period": {
+      "start_date": "2026-07-11",
+      "end_date": "2026-10-08",
+      "search_type": "web",
+      "data_state": "final",
+      "dimensions": [
+        "query"
+      ],
+      "row_limit": 1000,
+      "estimated_data_finalized_through": "2026-10-08"
+    },
+    "previous_period": {
+      "start_date": "2026-04-12",
+      "end_date": "2026-07-10",
+      "search_type": "web",
+      "data_state": "final",
+      "dimensions": [
+        "query"
+      ],
+      "row_limit": 1000,
+      "estimated_data_finalized_through": "2026-10-08"
+    },
+    "current_truncated": false,
+    "previous_truncated": false
+  },
+  "gsc28-query": {
+    "rows": [
+      {
+        "keys": [
+          "clean"
+        ],
+        "clicks": 0,
+        "impressions": 3,
+        "ctr": 0,
+        "position": 4.666666666666666
+      },
+      {
+        "keys": [
+          "cleaning machines"
+        ],
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0,
+        "position": 39
+      },
+      {
+        "keys": [
+          "commercial cleaning repairs"
+        ],
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0,
+        "position": 4.5
+      },
+      {
+        "keys": [
+          "disk machine"
+        ],
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 6
+      },
+      {
+        "keys": [
+          "floor & steam cleaners"
+        ],
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0,
+        "position": 43
+      },
+      {
+        "keys": [
+          "industrial vacuum"
+        ],
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 70
+      },
+      {
+        "keys": [
+          "mop trolley"
+        ],
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 63
+      },
+      {
+        "keys": [
+          "ride on machine"
+        ],
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 6
+      },
+      {
+        "keys": [
+          "single disc machine"
+        ],
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 9
+      },
+      {
+        "keys": [
+          "steam cleaner"
+        ],
+        "clicks": 0,
+        "impressions": 6,
+        "ctr": 0,
+        "position": 38.833333333333336
+      },
+      {
+        "keys": [
+          "steam cleaner karachi"
+        ],
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0,
+        "position": 11
+      },
+      {
+        "keys": [
+          "steam cleaner pakistan"
+        ],
+        "clicks": 0,
+        "impressions": 3,
+        "ctr": 0,
+        "position": 31.333333333333332
+      }
+    ],
+    "row_count": 12,
+    "truncated": false,
+    "query": {
+      "start_date": "2026-09-11",
+      "end_date": "2026-10-08",
+      "search_type": "web",
+      "data_state": "final",
+      "dimensions": [
+        "query"
+      ],
+      "row_limit": 1000,
+      "start_row": 0,
+      "estimated_data_finalized_through": "2026-10-08"
+    },
+    "anonymized_queries_note": "Rare queries are anonymised and withheld by Google, so query-level rows never sum to site totals."
+  },
+  "gsc28-device": {
+    "rows": [
+      {
+        "keys": [
+          "pak",
+          "DESKTOP"
+        ],
+        "clicks": 16,
+        "impressions": 82,
+        "ctr": 0.1951219512195122,
+        "position": 9.24390243902439
+      },
+      {
+        "keys": [
+          "pak",
+          "MOBILE"
+        ],
+        "clicks": 4,
+        "impressions": 45,
+        "ctr": 0.08888888888888889,
+        "position": 15.644444444444444
+      },
+      {
+        "keys": [
+          "ita",
+          "MOBILE"
+        ],
+        "clicks": 1,
+        "impressions": 2,
+        "ctr": 0.5,
+        "position": 7
+      },
+      {
+        "keys": [
+          "bra",
+          "DESKTOP"
+        ],
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 6
+      },
+      {
+        "keys": [
+          "bra",
+          "MOBILE"
+        ],
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 3
+      },
+      {
+        "keys": [
+          "can",
+          "DESKTOP"
+        ],
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0,
+        "position": 8
+      },
+      {
+        "keys": [
+          "can",
+          "MOBILE"
+        ],
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 9
+      },
+      {
+        "keys": [
+          "chn",
+          "DESKTOP"
+        ],
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 2
+      },
+      {
+        "keys": [
+          "col",
+          "DESKTOP"
+        ],
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 2
+      },
+      {
+        "keys": [
+          "deu",
+          "DESKTOP"
+        ],
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 6
+      },
+      {
+        "keys": [
+          "deu",
+          "MOBILE"
+        ],
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 8
+      },
+      {
+        "keys": [
+          "dnk",
+          "DESKTOP"
+        ],
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 2
+      },
+      {
+        "keys": [
+          "gbr",
+          "DESKTOP"
+        ],
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 70
+      },
+      {
+        "keys": [
+          "grc",
+          "MOBILE"
+        ],
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 3
+      },
+      {
+        "keys": [
+          "ind",
+          "MOBILE"
+        ],
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0,
+        "position": 7
+      },
+      {
+        "keys": [
+          "irq",
+          "MOBILE"
+        ],
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 9
+      },
+      {
+        "keys": [
+          "jpn",
+          "DESKTOP"
+        ],
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 2
+      },
+      {
+        "keys": [
+          "mex",
+          "DESKTOP"
+        ],
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 16
+      },
+      {
+        "keys": [
+          "mlt",
+          "DESKTOP"
+        ],
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 8
+      },
+      {
+        "keys": [
+          "per",
+          "DESKTOP"
+        ],
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 9
+      },
+      {
+        "keys": [
+          "phl",
+          "DESKTOP"
+        ],
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 10
+      },
+      {
+        "keys": [
+          "sau",
+          "DESKTOP"
+        ],
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 1
+      },
+      {
+        "keys": [
+          "sgp",
+          "DESKTOP"
+        ],
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 1
+      },
+      {
+        "keys": [
+          "usa",
+          "DESKTOP"
+        ],
+        "clicks": 0,
+        "impressions": 5,
+        "ctr": 0,
+        "position": 7.4
+      },
+      {
+        "keys": [
+          "usa",
+          "MOBILE"
+        ],
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 9
+      }
+    ],
+    "row_count": 25,
+    "truncated": false,
+    "query": {
+      "start_date": "2026-09-11",
+      "end_date": "2026-10-08",
+      "search_type": "web",
+      "data_state": "final",
+      "dimensions": [
+        "country",
+        "device"
+      ],
+      "row_limit": 1000,
+      "start_row": 0,
+      "estimated_data_finalized_through": "2026-10-08"
+    }
+  },
+  "devices": {
+    "rows": [
+      {
+        "keys": [
+          "pak",
+          "DESKTOP"
+        ],
+        "clicks": 19,
+        "impressions": 98,
+        "ctr": 0.19387755102040816,
+        "position": 11.285714285714286
+      },
+      {
+        "keys": [
+          "pak",
+          "MOBILE"
+        ],
+        "clicks": 7,
+        "impressions": 50,
+        "ctr": 0.14,
+        "position": 14.36
+      },
+      {
+        "keys": [
+          "grc",
+          "MOBILE"
+        ],
+        "clicks": 1,
+        "impressions": 3,
+        "ctr": 0.3333333333333333,
+        "position": 2
+      },
+      {
+        "keys": [
+          "ita",
+          "MOBILE"
+        ],
+        "clicks": 1,
+        "impressions": 3,
+        "ctr": 0.3333333333333333,
+        "position": 5.333333333333333
+      },
+      {
+        "keys": [
+          "aus",
+          "MOBILE"
+        ],
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 6
+      },
+      {
+        "keys": [
+          "bgd",
+          "DESKTOP"
+        ],
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0,
+        "position": 46.5
+      },
+      {
+        "keys": [
+          "bra",
+          "DESKTOP"
+        ],
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 6
+      },
+      {
+        "keys": [
+          "bra",
+          "MOBILE"
+        ],
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 3
+      },
+      {
+        "keys": [
+          "can",
+          "DESKTOP"
+        ],
+        "clicks": 0,
+        "impressions": 4,
+        "ctr": 0,
+        "position": 6
+      },
+      {
+        "keys": [
+          "can",
+          "MOBILE"
+        ],
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 9
+      },
+      {
+        "keys": [
+          "chn",
+          "DESKTOP"
+        ],
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 2
+      },
+      {
+        "keys": [
+          "col",
+          "DESKTOP"
+        ],
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 2
+      },
+      {
+        "keys": [
+          "deu",
+          "DESKTOP"
+        ],
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 6
+      },
+      {
+        "keys": [
+          "deu",
+          "MOBILE"
+        ],
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 8
+      },
+      {
+        "keys": [
+          "dnk",
+          "DESKTOP"
+        ],
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 2
+      },
+      {
+        "keys": [
+          "egy",
+          "MOBILE"
+        ],
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 9
+      },
+      {
+        "keys": [
+          "fra",
+          "MOBILE"
+        ],
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 3
+      },
+      {
+        "keys": [
+          "gbr",
+          "DESKTOP"
+        ],
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0,
+        "position": 40
+      },
+      {
+        "keys": [
+          "ind",
+          "DESKTOP"
+        ],
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 46
+      },
+      {
+        "keys": [
+          "ind",
+          "MOBILE"
+        ],
+        "clicks": 0,
+        "impressions": 7,
+        "ctr": 0,
+        "position": 7.142857142857143
+      },
+      {
+        "keys": [
+          "irq",
+          "MOBILE"
+        ],
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 9
+      },
+      {
+        "keys": [
+          "jor",
+          "DESKTOP"
+        ],
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 20
+      },
+      {
+        "keys": [
+          "jpn",
+          "DESKTOP"
+        ],
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0,
+        "position": 3
+      },
+      {
+        "keys": [
+          "mex",
+          "DESKTOP"
+        ],
+        "clicks": 0,
+        "impressions": 3,
+        "ctr": 0,
+        "position": 15
+      },
+      {
+        "keys": [
+          "mlt",
+          "DESKTOP"
+        ],
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 8
+      },
+      {
+        "keys": [
+          "nzl",
+          "MOBILE"
+        ],
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 6
+      },
+      {
+        "keys": [
+          "per",
+          "DESKTOP"
+        ],
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 9
+      },
+      {
+        "keys": [
+          "phl",
+          "DESKTOP"
+        ],
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 10
+      },
+      {
+        "keys": [
+          "sau",
+          "DESKTOP"
+        ],
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0,
+        "position": 17
+      },
+      {
+        "keys": [
+          "sgp",
+          "DESKTOP"
+        ],
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0,
+        "position": 6
+      },
+      {
+        "keys": [
+          "tur",
+          "DESKTOP"
+        ],
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 9
+      },
+      {
+        "keys": [
+          "usa",
+          "DESKTOP"
+        ],
+        "clicks": 0,
+        "impressions": 15,
+        "ctr": 0,
+        "position": 7.733333333333333
+      },
+      {
+        "keys": [
+          "usa",
+          "MOBILE"
+        ],
+        "clicks": 0,
+        "impressions": 9,
+        "ctr": 0,
+        "position": 6.555555555555555
+      },
+      {
+        "keys": [
+          "vnm",
+          "DESKTOP"
+        ],
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0,
+        "position": 30
+      },
+      {
+        "keys": [
+          "zmb",
+          "MOBILE"
+        ],
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 7
+      }
+    ],
+    "row_count": 35,
+    "truncated": false,
+    "query": {
+      "start_date": "2026-07-11",
+      "end_date": "2026-10-08",
+      "search_type": "web",
+      "data_state": "final",
+      "dimensions": [
+        "country",
+        "device"
+      ],
+      "row_limit": 1000,
+      "start_row": 0,
+      "estimated_data_finalized_through": "2026-10-08"
+    }
+  },
+  "steam-queries": {
+    "rows": [
+      {
+        "keys": [
+          "floor & steam cleaners"
+        ],
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0,
+        "position": 43
+      },
+      {
+        "keys": [
+          "steam cleaner"
+        ],
+        "clicks": 0,
+        "impressions": 6,
+        "ctr": 0,
+        "position": 38.833333333333336
+      },
+      {
+        "keys": [
+          "steam cleaner karachi"
+        ],
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0,
+        "position": 11
+      },
+      {
+        "keys": [
+          "steam cleaner pakistan"
+        ],
+        "clicks": 0,
+        "impressions": 3,
+        "ctr": 0,
+        "position": 31.333333333333332
+      }
+    ],
+    "row_count": 4,
+    "truncated": false,
+    "query": {
+      "start_date": "2026-07-11",
+      "end_date": "2026-10-08",
+      "search_type": "web",
+      "data_state": "final",
+      "dimensions": [
+        "query"
+      ],
+      "row_limit": 250,
+      "filters": [
+        {
+          "dimension": "page",
+          "expression": "https://moralclean.com/products/category/steam-cleaners",
+          "operator": "equals"
+        }
+      ],
+      "estimated_data_finalized_through": "2026-10-08"
+    },
+    "anonymized_queries_note": "Rare queries are anonymised and withheld by Google, so query-level rows never sum to this page's totals."
+  },
+  "repair-pages": {
+    "rows": [
+      {
+        "keys": [
+          "https://moralclean.com/"
+        ],
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0,
+        "position": 4.5
+      }
+    ],
+    "row_count": 1,
+    "truncated": false,
+    "query": {
+      "start_date": "2026-07-11",
+      "end_date": "2026-10-08",
+      "search_type": "web",
+      "data_state": "final",
+      "dimensions": [
+        "page"
+      ],
+      "row_limit": 250,
+      "filters": [
+        {
+          "dimension": "query",
+          "expression": "commercial cleaning repairs",
+          "operator": "equals"
+        }
+      ],
+      "estimated_data_finalized_through": "2026-10-08"
+    }
+  },
+  "single-query-pages": {
+    "rows": [
+      {
+        "keys": [
+          "https://moralclean.com/products/category/single-disk-machine"
+        ],
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 9
+      }
+    ],
+    "row_count": 1,
+    "truncated": false,
+    "query": {
+      "start_date": "2026-07-11",
+      "end_date": "2026-10-08",
+      "search_type": "web",
+      "data_state": "final",
+      "dimensions": [
+        "page"
+      ],
+      "row_limit": 250,
+      "filters": [
+        {
+          "dimension": "query",
+          "expression": "single disc machine",
+          "operator": "equals"
+        }
+      ],
+      "estimated_data_finalized_through": "2026-10-08"
+    }
+  },
+  "sitemaps": {
+    "sitemaps": [
+      {
+        "path": "https://moralclean.com/sitemap.xml",
+        "lastSubmitted": "2026-09-24T10:15:58.178Z",
+        "isPending": false,
+        "isSitemapsIndex": true,
+        "lastDownloaded": "2026-10-09T02:42:32.447Z",
+        "warnings": "0",
+        "errors": "0",
+        "contents": [
+          {
+            "type": "web",
+            "submitted": "51",
+            "indexed": "0"
+          }
+        ]
+      }
+    ]
+  },
+  "inspect-test": {
+    "inspection_result": {
+      "inspectionResultLink": "https://search.google.com/search-console/inspect?resource_id=sc-domain:moralclean.com&id=BWx4iQx4a7imwMVGMkdguQ&utm_medium=link&utm_source=api",
+      "indexStatusResult": {
+        "verdict": "PASS",
+        "coverageState": "Submitted and indexed",
+        "robotsTxtState": "ALLOWED",
+        "indexingState": "INDEXING_ALLOWED",
+        "lastCrawlTime": "2026-09-26T16:38:12Z",
+        "pageFetchState": "SUCCESSFUL",
+        "googleCanonical": "https://moralclean.com/products/test-prod",
+        "userCanonical": "https://moralclean.com/products/test-prod",
+        "referringUrls": [
+          "https://moralclean.com/catalog-sitemap.xml"
+        ],
+        "crawledAs": "MOBILE"
+      },
+      "mobileUsabilityResult": {
+        "verdict": "VERDICT_UNSPECIFIED"
+      },
+      "richResultsResult": {
+        "verdict": "PASS",
+        "detectedItems": [
+          {
+            "richResultType": "Breadcrumbs",
+            "items": [
+              {
+                "name": "Unnamed item"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "inspect-steam": {
+    "inspection_result": {
+      "inspectionResultLink": "https://search.google.com/search-console/inspect?resource_id=sc-domain:moralclean.com&id=D9N8ryZX1eKbTyCqhLc2pg&utm_medium=link&utm_source=api",
+      "indexStatusResult": {
+        "verdict": "PASS",
+        "coverageState": "Submitted and indexed",
+        "robotsTxtState": "ALLOWED",
+        "indexingState": "INDEXING_ALLOWED",
+        "lastCrawlTime": "2026-09-24T21:00:27Z",
+        "pageFetchState": "SUCCESSFUL",
+        "googleCanonical": "https://moralclean.com/products/category/steam-cleaners",
+        "userCanonical": "https://moralclean.com/products/category/steam-cleaners",
+        "referringUrls": [
+          "https://moralclean.com/products?q=%7Bsearch_term_string%7D&tag=ride-on-scrubber"
+        ],
+        "crawledAs": "MOBILE"
+      },
+      "mobileUsabilityResult": {
+        "verdict": "VERDICT_UNSPECIFIED"
+      },
+      "richResultsResult": {
+        "verdict": "PASS",
+        "detectedItems": [
+          {
+            "richResultType": "Breadcrumbs",
+            "items": [
+              {
+                "name": "Unnamed item"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "inspect-single": {
+    "inspection_result": {
+      "inspectionResultLink": "https://search.google.com/search-console/inspect?resource_id=sc-domain:moralclean.com&id=7eZDP4I7sZYWmb59hx3xBw&utm_medium=link&utm_source=api",
+      "indexStatusResult": {
+        "verdict": "PASS",
+        "coverageState": "Submitted and indexed",
+        "robotsTxtState": "ALLOWED",
+        "indexingState": "INDEXING_ALLOWED",
+        "lastCrawlTime": "2026-09-24T23:21:39Z",
+        "pageFetchState": "SUCCESSFUL",
+        "googleCanonical": "https://moralclean.com/products/category/single-disk-machine",
+        "userCanonical": "https://moralclean.com/products/category/single-disk-machine",
+        "referringUrls": [
+          "https://moralclean.com/products?category=vacuum-cleaner&tag=platform-trolley",
+          "https://moralclean.com/products?category=vacuum-cleaner&tag=janitorial-service-trolley"
+        ],
+        "crawledAs": "MOBILE"
+      },
+      "mobileUsabilityResult": {
+        "verdict": "VERDICT_UNSPECIFIED"
+      },
+      "richResultsResult": {
+        "verdict": "PASS",
+        "detectedItems": [
+          {
+            "richResultType": "Breadcrumbs",
+            "items": [
+              {
+                "name": "Unnamed item"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "sem-projects": {
+    "data": [
+      {
+        "project_id": 31545213,
+        "project_name": "moralclean.com",
+        "url": "moralclean.com",
+        "domain_unicode": "moralclean.com",
+        "tools": [
+          {
+            "tool": "tracking"
+          },
+          {
+            "tool": "siteaudit"
+          }
+        ],
+        "owner_id": 31154425,
+        "permission": [
+          "OWNER"
+        ]
+      }
+    ],
+    "metadata": {
+      "format": "json",
+      "pagination": {
+        "count": 1
+      },
+      "url": "https://www.semrush.com/projects/",
+      "usage": {
+        "api_units": 100
+      }
+    }
+  },
+  "sem-campaigns": {
+    "data": {
+      "project_id": "31545213",
+      "campaigns": [
+        {
+          "id": "31545213_5621252",
+          "url": "moralclean.com",
+          "type": "rootdomain",
+          "engine": "google",
+          "location": {
+            "id": 2586,
+            "name": "Pakistan",
+            "type": "country",
+            "code": "pk",
+            "hl": "en"
+          },
+          "isGathering": false,
+          "language": "English",
+          "device": "desktop",
+          "keywords_count": 1
+        }
+      ],
+      "limits": {
+        "targets": 1
+      }
+    },
+    "metadata": {
+      "format": "json",
+      "url": "https://www.semrush.com/position-tracking/?project_id=31545213",
+      "usage": {
+        "api_units": 100
+      }
+    }
+  },
+  "sem-position": {
+    "data": {
+      "total": 1,
+      "limit": 50,
+      "offset": 0,
+      "data": {
+        "0": {
+          "Pi": "2140271052462252493",
+          "Ph": "mop trolley",
+          "Kb": "20261009",
+          "Tg": {},
+          "In": {
+            "0": "i",
+            "1": "t"
+          },
+          "Cp": "0.03",
+          "Nq": "50",
+          "Gs": "0",
+          "Dt": {
+            "20261009": {
+              "*.moralclean.com/*": 52
+            },
+            "20261010": {
+              "*.moralclean.com/*": 52
+            },
+            "20261011": {
+              "*.moralclean.com/*": 52
+            }
+          },
+          "Be": {
+            "*.moralclean.com/*": 52
+          },
+          "Fi": {
+            "*.moralclean.com/*": 52
+          },
+          "Diff": {
+            "*.moralclean.com/*": 0
+          },
+          "Diff1": {
+            "*.moralclean.com/*": 0
+          },
+          "Diff7": {
+            "*.moralclean.com/*": 0
+          },
+          "Diff30": {
+            "*.moralclean.com/*": 0
+          },
+          "Vi": {
+            "20261009": {
+              "*.moralclean.com/*": 1.34615
+            },
+            "20261010": {
+              "*.moralclean.com/*": 1.34615
+            },
+            "20261011": {
+              "*.moralclean.com/*": 1.34615
+            },
+            "Diff": {
+              "*.moralclean.com/*": 0
+            }
+          },
+          "Sov": {
+            "20261009": {
+              "*.moralclean.com/*": 0.49
+            },
+            "20261010": {
+              "*.moralclean.com/*": 0.49
+            },
+            "20261011": {
+              "*.moralclean.com/*": 0.49
+            },
+            "Diff": {
+              "*.moralclean.com/*": 0
+            }
+          },
+          "Sf": {
+            "20261009": [
+              "org",
+              "img",
+              "rev",
+              "vid",
+              "res",
+              "aio"
+            ],
+            "20261010": [
+              "org",
+              "img",
+              "rev",
+              "vid",
+              "res",
+              "aio"
+            ],
+            "20261011": [
+              "org",
+              "img",
+              "rev",
+              "vid",
+              "res",
+              "aio"
+            ]
+          },
+          "Sfc": null,
+          "Tr": {
+            "20261009": {
+              "*.moralclean.com/*": 0.00817
+            },
+            "20261010": {
+              "*.moralclean.com/*": 0.00817
+            },
+            "20261011": {
+              "*.moralclean.com/*": 0.00817
+            }
+          },
+          "Tc": {
+            "20261009": {
+              "*.moralclean.com/*": 0.00025
+            },
+            "20261010": {
+              "*.moralclean.com/*": 0.00025
+            },
+            "20261011": {
+              "*.moralclean.com/*": 0.00025
+            }
+          },
+          "Lu": {
+            "20261009": {
+              "*.moralclean.com/*": "https://moralclean.com/products/20-l-side-press-mop-bucket-trolley-mc-mw-200"
+            },
+            "20261010": {
+              "*.moralclean.com/*": "https://moralclean.com/products/20-l-side-press-mop-bucket-trolley-mc-mw-200"
+            },
+            "20261011": {
+              "*.moralclean.com/*": "https://moralclean.com/products/20-l-side-press-mop-bucket-trolley-mc-mw-200"
+            }
+          },
+          "Lt": {
+            "20261009": {
+              "*.moralclean.com/*": [
+                "org"
+              ]
+            },
+            "20261010": {
+              "*.moralclean.com/*": [
+                "org"
+              ]
+            },
+            "20261011": {
+              "*.moralclean.com/*": [
+                "org"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "metadata": {
+      "format": "json",
+      "pagination": {
+        "limit": 50
+      },
+      "url": "https://www.semrush.com/position-tracking/?campaign_id=31545213_5621252&display_limit=50&url=%2A.moralclean.com%2F%2A",
+      "usage": {
+        "api_units": 100
+      }
+    }
+  },
+  "sem-organic": {
+    "error": "McpServerError: {\"code\":\"internal\",\"message\":\"get domain_organic: 403 ERROR 120 :: WRONG KEY - ID PAIR\\n\",\"retryable\":false,\"trace_id\":\"4ecae2a5d169a58c673d4c7034286048\"}",
+    "error_code": "UNAVAILABLE",
+    "error_data": {
+      "type": "json_rpc_error",
+      "code": -32603,
+      "message": "{\"code\":\"internal\",\"message\":\"get domain_organic: 403 ERROR 120 :: WRONG KEY - ID PAIR\\n\",\"retryable\":false,\"trace_id\":\"4ecae2a5d169a58c673d4c7034286048\"}"
+    }
+  },
+  "sem-keywords": {
+    "error": "McpServerError: {\"code\":\"internal\",\"message\":\"get phrase_these: 400 ERROR 122 :: WRONG FORMAT OR EMPTY KEY\\n\",\"retryable\":false,\"trace_id\":\"787ea0eeadb61d231b01d538696a6280\"}",
+    "error_code": "UNAVAILABLE",
+    "error_data": {
+      "type": "json_rpc_error",
+      "code": -32603,
+      "message": "{\"code\":\"internal\",\"message\":\"get phrase_these: 400 ERROR 122 :: WRONG FORMAT OR EMPTY KEY\\n\",\"retryable\":false,\"trace_id\":\"787ea0eeadb61d231b01d538696a6280\"}"
+    }
+  },
+  "sem-single": {
+    "error": "McpServerError: {\"code\":\"internal\",\"message\":\"get phrase_this: 400 ERROR 122 :: WRONG FORMAT OR EMPTY KEY\\n\",\"retryable\":false,\"trace_id\":\"81cccc9cb3b027f273b900276fd9fe38\"}",
+    "error_code": "UNAVAILABLE",
+    "error_data": {
+      "type": "json_rpc_error",
+      "code": -32603,
+      "message": "{\"code\":\"internal\",\"message\":\"get phrase_this: 400 ERROR 122 :: WRONG FORMAT OR EMPTY KEY\\n\",\"retryable\":false,\"trace_id\":\"81cccc9cb3b027f273b900276fd9fe38\"}"
+    }
+  },
+  "sem-competitors": {
+    "error": "McpServerError: {\"code\":\"internal\",\"message\":\"get domain_organic_organic: 403 ERROR 120 :: WRONG KEY - ID PAIR\\n\",\"retryable\":false,\"trace_id\":\"48c516611070722149687b6c35fa0af4\"}",
+    "error_code": "UNAVAILABLE",
+    "error_data": {
+      "type": "json_rpc_error",
+      "code": -32603,
+      "message": "{\"code\":\"internal\",\"message\":\"get domain_organic_organic: 403 ERROR 120 :: WRONG KEY - ID PAIR\\n\",\"retryable\":false,\"trace_id\":\"48c516611070722149687b6c35fa0af4\"}"
+    }
+  },
+  "ser-regions": [
+    {
+      "data": [],
+      "hint": "No data found for this query in the Serpstat database. This is NOT an error — the domain, keyword, or URL simply has no metrics yet. Common reasons: new/parked domain, misspelled keyword, very low-traffic query, or unsupported region. What to do: 1) Verify spelling. 2) Try a broader keyword or a parent domain instead of a subdomain. 3) Try a different search engine database (se) — use get_se_list to see available regions. 4) If the query is correct, inform the user that Serpstat has no data for it and suggest alternatives."
+    }
+  ],
+  "ser-keywords": [
+    "keyword,region_queries_count,cost,concurrency,difficulty\nsteam cleaner pakistan,390,0.010108,11,10\nmop trolley,90,0.010022,4,"
+  ],
+  "ser-broad": [
+    {
+      "data": [
+        {
+          "region_queries_count": 40,
+          "region_queries_count_wide": 0,
+          "cost": 2.156142,
+          "concurrency": 9,
+          "keyword": "cleaning trolley",
+          "found_results": 90,
+          "types": [
+            "pic",
+            "related_search"
+          ],
+          "geo_names": [],
+          "social_domains": [
+            "amazon"
+          ],
+          "right_spelling": null,
+          "difficulty": null,
+          "lang": null,
+          "suggestions_count": 0,
+          "keywords_count": 1
+        },
+        {
+          "region_queries_count": 40,
+          "region_queries_count_wide": 0,
+          "cost": 0.333853,
+          "concurrency": 30,
+          "keyword": "floor scrubber machine",
+          "found_results": 90,
+          "types": [
+            "video",
+            "related_search"
+          ],
+          "geo_names": [],
+          "social_domains": [
+            "wikipedia",
+            "amazon"
+          ],
+          "right_spelling": null,
+          "difficulty": null,
+          "lang": null,
+          "suggestions_count": 11,
+          "keywords_count": 1
+        },
+        {
+          "region_queries_count": 590,
+          "region_queries_count_wide": 0,
+          "cost": 0.04004067603434466,
+          "concurrency": 18,
+          "keyword": "floor cleaning machine",
+          "found_results": 45,
+          "types": [
+            "pic",
+            "related_search"
+          ],
+          "geo_names": [],
+          "social_domains": [
+            "youtube"
+          ],
+          "right_spelling": null,
+          "difficulty": null,
+          "lang": null,
+          "suggestions_count": 24,
+          "keywords_count": 9
+        },
+        {
+          "region_queries_count": 90,
+          "region_queries_count_wide": 0,
+          "cost": 0.2,
+          "concurrency": 9,
+          "keyword": "floor scrubber",
+          "found_results": 70,
+          "types": [
+            "related_search",
+            "pic",
+            "kn_graph_local",
+            "video"
+          ],
+          "geo_names": [],
+          "social_domains": [
+            "youtube",
+            "amazon",
+            "wikipedia",
+            "facebook"
+          ],
+          "right_spelling": null,
+          "difficulty": null,
+          "lang": null,
+          "suggestions_count": 27,
+          "keywords_count": 3
+        },
+        {
+          "region_queries_count": 50,
+          "region_queries_count_wide": 0,
+          "cost": 0.045735000000000005,
+          "concurrency": 28,
+          "keyword": "cleaning equipment",
+          "found_results": 80,
+          "types": [
+            "pic",
+            "local_pack",
+            "related_search",
+            "video",
+            "also_asks"
+          ],
+          "geo_names": [],
+          "social_domains": [
+            "wikipedia"
+          ],
+          "right_spelling": null,
+          "difficulty": null,
+          "lang": null,
+          "suggestions_count": 51,
+          "keywords_count": 9
+        },
+        {
+          "region_queries_count": 2900,
+          "region_queries_count_wide": 0,
+          "cost": 0.010451,
+          "concurrency": 23,
+          "keyword": "pressure washer",
+          "found_results": 197,
+          "types": [
+            "related_search",
+            "ai_overview"
+          ],
+          "geo_names": [],
+          "social_domains": [
+            "youtube",
+            "facebook"
+          ],
+          "right_spelling": null,
+          "difficulty": 22,
+          "lang": null,
+          "suggestions_count": 102,
+          "keywords_count": 88
+        },
+        {
+          "region_queries_count": 70,
+          "region_queries_count_wide": 0,
+          "cost": 11.130262,
+          "concurrency": 17,
+          "keyword": "industrial vacuum cleaner",
+          "found_results": 80,
+          "types": [
+            "video",
+            "related_search",
+            "pic"
+          ],
+          "geo_names": [],
+          "social_domains": [],
+          "right_spelling": null,
+          "difficulty": null,
+          "lang": null,
+          "suggestions_count": 9,
+          "keywords_count": 3
+        },
+        {
+          "region_queries_count": 720,
+          "region_queries_count_wide": 0,
+          "cost": 0.010174,
+          "concurrency": 12,
+          "keyword": "steam cleaner",
+          "found_results": 117000000,
+          "types": [
+            "related_search",
+            "pic",
+            "ai_overview",
+            "also_asks",
+            "video"
+          ],
+          "geo_names": [],
+          "social_domains": [
+            "reddit",
+            "amazon",
+            "facebook",
+            "wikipedia",
+            "youtube"
+          ],
+          "right_spelling": null,
+          "difficulty": 10,
+          "lang": null,
+          "suggestions_count": 111,
+          "keywords_count": 285
+        },
+        {
+          "region_queries_count": 10,
+          "region_queries_count_wide": 0,
+          "cost": 0,
+          "concurrency": 0,
+          "keyword": "commercial steam cleaner",
+          "found_results": 0,
+          "types": [
+            "pic",
+            "also_asks",
+            "video"
+          ],
+          "geo_names": [],
+          "social_domains": [
+            "pinterest",
+            "facebook",
+            "amazon"
+          ],
+          "right_spelling": null,
+          "difficulty": null,
+          "lang": "en",
+          "suggestions_count": 3,
+          "keywords_count": 3
+        },
+        {
+          "region_queries_count": 590,
+          "region_queries_count_wide": 0,
+          "cost": 0.020057,
+          "concurrency": 17,
+          "keyword": "mop bucket",
+          "found_results": 90,
+          "types": [
+            "pic",
+            "also_asks",
+            "related_search"
+          ],
+          "geo_names": [],
+          "social_domains": [],
+          "right_spelling": null,
+          "difficulty": null,
+          "lang": null,
+          "suggestions_count": 21,
+          "keywords_count": 5
+        }
+      ],
+      "summary_info": {
+        "page": 1,
+        "left_lines": 903
+      },
+      "not_found": [
+        "single disc machine",
+        "single disk machine",
+        "industrial vacuum",
+        "ride on scrubber",
+        "walk behind scrubber",
+        "cleaning machine repair"
+      ]
+    }
+  ],
+  "ser-top-steam cleaner pakistan": [
+    {
+      "top": [
+        {
+          "position": 1,
+          "url": "https://www.daraz.pk/tag/steam-cleaner/",
+          "url_keywords_count": 4,
+          "domain": "daraz.pk",
+          "domain_visibility": 5888.81,
+          "domain_keywords_organic": 834263,
+          "domain_keywords_ppc": 0,
+          "domain_top_10_keywords_count": 372649,
+          "domain_sdr": 53,
+          "domain_in_urls_count": 364272,
+          "domain_in_domains_count": 4049,
+          "domain_out_urls_count": 293674,
+          "domain_out_domains_count": 92
+        },
+        {
+          "position": 2,
+          "url": "https://interclean.pk/product_category/steam-cleaners/",
+          "url_keywords_count": 111,
+          "domain": "interclean.pk",
+          "domain_visibility": 1.29,
+          "domain_keywords_organic": 315,
+          "domain_keywords_ppc": 0,
+          "domain_top_10_keywords_count": 151,
+          "domain_sdr": 13,
+          "domain_in_urls_count": 18,
+          "domain_in_domains_count": 7,
+          "domain_out_urls_count": 1510,
+          "domain_out_domains_count": 8
+        },
+        {
+          "position": 3,
+          "url": "https://www.youtube.com/watch?v=KkA__n5OONg",
+          "url_keywords_count": 2,
+          "domain": "youtube.com",
+          "domain_visibility": 40452.77,
+          "domain_keywords_organic": 13066588,
+          "domain_keywords_ppc": 0,
+          "domain_top_10_keywords_count": 5115458,
+          "domain_sdr": 98,
+          "domain_in_urls_count": 6510523641,
+          "domain_in_domains_count": 19009893,
+          "domain_out_urls_count": 11702,
+          "domain_out_domains_count": 131
+        },
+        {
+          "position": 4,
+          "url": "https://www.temu.com/pk-en/steam-cleaners-5020072015455-s.html",
+          "url_keywords_count": 6,
+          "domain": "temu.com",
+          "domain_visibility": 34.27,
+          "domain_keywords_organic": 11597,
+          "domain_keywords_ppc": 0,
+          "domain_top_10_keywords_count": 2485,
+          "domain_sdr": 61,
+          "domain_in_urls_count": 238374,
+          "domain_in_domains_count": 9822,
+          "domain_out_urls_count": 117,
+          "domain_out_domains_count": 83
+        },
+        {
+          "position": 5,
+          "url": "https://dhabione.pk/product/karcher-sc2-easyfix-steam-cleaner-high-power-1500-watt-yellow-black-color-model-sc2-easyfix-1-year-warranty/",
+          "url_keywords_count": 1,
+          "domain": "dhabione.pk",
+          "domain_visibility": 20.85,
+          "domain_keywords_organic": 929,
+          "domain_keywords_ppc": 0,
+          "domain_top_10_keywords_count": 539,
+          "domain_sdr": 10,
+          "domain_in_urls_count": 5,
+          "domain_in_domains_count": 4,
+          "domain_out_urls_count": 0,
+          "domain_out_domains_count": 0
+        },
+        {
+          "position": 6,
+          "url": "https://sehgalmotors.pk/collections/steam-cleaners",
+          "url_keywords_count": 14,
+          "domain": "sehgalmotors.pk",
+          "domain_visibility": 32.32,
+          "domain_keywords_organic": 16002,
+          "domain_keywords_ppc": 0,
+          "domain_top_10_keywords_count": 4283,
+          "domain_sdr": 31,
+          "domain_in_urls_count": 5869,
+          "domain_in_domains_count": 123,
+          "domain_out_urls_count": 113876,
+          "domain_out_domains_count": 22
+        },
+        {
+          "position": 7,
+          "url": "https://www.olx.com.pk/items/q-steam-cleaners",
+          "url_keywords_count": 82,
+          "domain": "olx.com.pk",
+          "domain_visibility": 3088.22,
+          "domain_keywords_organic": 1078287,
+          "domain_keywords_ppc": 0,
+          "domain_top_10_keywords_count": 410673,
+          "domain_sdr": 46,
+          "domain_in_urls_count": 61991,
+          "domain_in_domains_count": 1539,
+          "domain_out_urls_count": 1307,
+          "domain_out_domains_count": 26
+        },
+        {
+          "position": 8,
+          "url": "https://www.instagram.com/popular/steam-cleaner-in-pakistan/",
+          "url_keywords_count": 2,
+          "domain": "instagram.com",
+          "domain_visibility": 17418.83,
+          "domain_keywords_organic": 1954137,
+          "domain_keywords_ppc": 0,
+          "domain_top_10_keywords_count": 577311,
+          "domain_sdr": 97,
+          "domain_in_urls_count": 6517746219,
+          "domain_in_domains_count": 20747495,
+          "domain_out_urls_count": 571,
+          "domain_out_domains_count": 17
+        },
+        {
+          "position": 9,
+          "url": "https://www.naheed.pk/karcher-steam-cleaner-sc2",
+          "url_keywords_count": 21,
+          "domain": "naheed.pk",
+          "domain_visibility": 1039.49,
+          "domain_keywords_organic": 68815,
+          "domain_keywords_ppc": 0,
+          "domain_top_10_keywords_count": 25036,
+          "domain_sdr": 40,
+          "domain_in_urls_count": 1341,
+          "domain_in_domains_count": 462,
+          "domain_out_urls_count": 0,
+          "domain_out_domains_count": 0
+        },
+        {
+          "position": 10,
+          "url": "https://wellshop.pk/product/mosche-handheld-pressurized-steam-cleaner-steam-cl-832416/",
+          "url_keywords_count": 1,
+          "domain": "wellshop.pk",
+          "domain_visibility": 41.88,
+          "domain_keywords_organic": 15781,
+          "domain_keywords_ppc": 0,
+          "domain_top_10_keywords_count": 2846,
+          "domain_sdr": 36,
+          "domain_in_urls_count": 15834,
+          "domain_in_domains_count": 269,
+          "domain_out_urls_count": 176659,
+          "domain_out_domains_count": 22
+        }
+      ],
+      "summary_info": {
+        "keywords": 5,
+        "frequency": 390,
+        "cost": 0.010108,
+        "difficulty": 10,
+        "concurrency": 11,
+        "types": [
+          "pic",
+          "related_search"
+        ],
+        "sorting": {
+          "position": "asc"
+        },
+        "left_limits": 874,
+        "count_top_results": 19,
+        "keyword": "steam cleaner pakistan",
+        "se": "g_pk"
+      }
+    }
+  ],
+  "ser-top-floor scrubber machine": [
+    {
+      "top": [
+        {
+          "position": 1,
+          "url": "https://interclean.pk/product_category/floor-cleaning-machines/",
+          "url_keywords_count": 14,
+          "domain": "interclean.pk",
+          "domain_visibility": 1.29,
+          "domain_keywords_organic": 315,
+          "domain_keywords_ppc": 0,
+          "domain_top_10_keywords_count": 151,
+          "domain_sdr": 13,
+          "domain_in_urls_count": 18,
+          "domain_in_domains_count": 7,
+          "domain_out_urls_count": 1510,
+          "domain_out_domains_count": 8
+        },
+        {
+          "position": 2,
+          "url": "https://www.daraz.pk/tag/floor-scrubber-machine/",
+          "url_keywords_count": 4,
+          "domain": "daraz.pk",
+          "domain_visibility": 5888.81,
+          "domain_keywords_organic": 834263,
+          "domain_keywords_ppc": 0,
+          "domain_top_10_keywords_count": 372649,
+          "domain_sdr": 53,
+          "domain_in_urls_count": 364272,
+          "domain_in_domains_count": 4049,
+          "domain_out_urls_count": 293674,
+          "domain_out_domains_count": 92
+        },
+        {
+          "position": 3,
+          "url": "https://www.olx.com.pk/items/q-floor-scrubber",
+          "url_keywords_count": 3,
+          "domain": "olx.com.pk",
+          "domain_visibility": 3088.22,
+          "domain_keywords_organic": 1078287,
+          "domain_keywords_ppc": 0,
+          "domain_top_10_keywords_count": 410673,
+          "domain_sdr": 46,
+          "domain_in_urls_count": 61991,
+          "domain_in_domains_count": 1539,
+          "domain_out_urls_count": 1307,
+          "domain_out_domains_count": 26
+        },
+        {
+          "position": 4,
+          "url": "https://valemaster.com.pk/product-category/commercial-domestic-cleaning-equipment-accessories/floor-scrubber-dryer/",
+          "url_keywords_count": 5,
+          "domain": "valemaster.com.pk",
+          "domain_visibility": 0.11,
+          "domain_keywords_organic": 99,
+          "domain_keywords_ppc": 0,
+          "domain_top_10_keywords_count": 32,
+          "domain_sdr": 15,
+          "domain_in_urls_count": 11,
+          "domain_in_domains_count": 7,
+          "domain_out_urls_count": 1635,
+          "domain_out_domains_count": 10
+        },
+        {
+          "position": 5,
+          "url": "https://cleantech.com.pk/wet-floor-scrubber-dryers-and-polishers/",
+          "url_keywords_count": 10,
+          "domain": "cleantech.com.pk",
+          "domain_visibility": 0.4,
+          "domain_keywords_organic": 177,
+          "domain_keywords_ppc": 0,
+          "domain_top_10_keywords_count": 56,
+          "domain_sdr": 16,
+          "domain_in_urls_count": 564,
+          "domain_in_domains_count": 7,
+          "domain_out_urls_count": 281,
+          "domain_out_domains_count": 25
+        },
+        {
+          "position": 6,
+          "url": "https://kkdealers.pk/product/walk-behind-floor-scrubber",
+          "url_keywords_count": 1,
+          "domain": "kkdealers.pk",
+          "domain_visibility": 0.01,
+          "domain_keywords_organic": 4,
+          "domain_keywords_ppc": 0,
+          "domain_top_10_keywords_count": 2,
+          "domain_sdr": null,
+          "domain_in_urls_count": null,
+          "domain_in_domains_count": null,
+          "domain_out_urls_count": null,
+          "domain_out_domains_count": null
+        },
+        {
+          "position": 7,
+          "url": "https://www.kaercher.com/int/professional/floor-scrubbers-scrubber-driers.html",
+          "url_keywords_count": 6,
+          "domain": "kaercher.com",
+          "domain_visibility": 2.23,
+          "domain_keywords_organic": 1543,
+          "domain_keywords_ppc": 0,
+          "domain_top_10_keywords_count": 406,
+          "domain_sdr": 62,
+          "domain_in_urls_count": 563924,
+          "domain_in_domains_count": 8861,
+          "domain_out_urls_count": 74508,
+          "domain_out_domains_count": 491
+        },
+        {
+          "position": 8,
+          "url": "https://www.tennantco.com/en_us/1/machines/scrubbers.html",
+          "url_keywords_count": 4,
+          "domain": "tennantco.com",
+          "domain_visibility": 0.06,
+          "domain_keywords_organic": 156,
+          "domain_keywords_ppc": 0,
+          "domain_top_10_keywords_count": 20,
+          "domain_sdr": 48,
+          "domain_in_urls_count": 125773,
+          "domain_in_domains_count": 944,
+          "domain_out_urls_count": 89147,
+          "domain_out_domains_count": 317
+        },
+        {
+          "position": 9,
+          "url": "https://www.amazon.com/floor-scrubber/s?k=floor+scrubber",
+          "url_keywords_count": 2,
+          "domain": "amazon.com",
+          "domain_visibility": 2277.39,
+          "domain_keywords_organic": 2070140,
+          "domain_keywords_ppc": 9,
+          "domain_top_10_keywords_count": 807227,
+          "domain_sdr": 89,
+          "domain_in_urls_count": 772308116,
+          "domain_in_domains_count": 2680158,
+          "domain_out_urls_count": 1400244,
+          "domain_out_domains_count": 9493
+        },
+        {
+          "position": 10,
+          "url": "https://www.averncleaningsupplies.com/collections/floor-scrubber-machines",
+          "url_keywords_count": 1,
+          "domain": "averncleaningsupplies.com",
+          "domain_visibility": 0.02,
+          "domain_keywords_organic": 58,
+          "domain_keywords_ppc": 0,
+          "domain_top_10_keywords_count": 9,
+          "domain_sdr": 24,
+          "domain_in_urls_count": 42,
+          "domain_in_domains_count": 27,
+          "domain_out_urls_count": 15082,
+          "domain_out_domains_count": 22
+        }
+      ],
+      "summary_info": {
+        "keywords": 1,
+        "frequency": 40,
+        "cost": 0.333853,
+        "difficulty": 0,
+        "concurrency": 30,
+        "types": [
+          "video",
+          "related_search"
+        ],
+        "sorting": {
+          "position": "asc"
+        },
+        "left_limits": 885,
+        "count_top_results": 18,
+        "keyword": "floor scrubber machine",
+        "se": "g_pk"
+      }
+    }
+  ],
+  "ser-top-industrial vacuum cleaner": [
+    {
+      "top": [
+        {
+          "position": 1,
+          "url": "https://interclean.pk/product_category/industrial-wet-dry-vacuum-cleaners/",
+          "url_keywords_count": 18,
+          "domain": "interclean.pk",
+          "domain_visibility": 1.29,
+          "domain_keywords_organic": 315,
+          "domain_keywords_ppc": 0,
+          "domain_top_10_keywords_count": 151,
+          "domain_sdr": 13,
+          "domain_in_urls_count": 18,
+          "domain_in_domains_count": 7,
+          "domain_out_urls_count": 1510,
+          "domain_out_domains_count": 8
+        },
+        {
+          "position": 2,
+          "url": "https://alclean.pk/products/bf585",
+          "url_keywords_count": 2,
+          "domain": "alclean.pk",
+          "domain_visibility": 10.45,
+          "domain_keywords_organic": 515,
+          "domain_keywords_ppc": 0,
+          "domain_top_10_keywords_count": 346,
+          "domain_sdr": 16,
+          "domain_in_urls_count": 12,
+          "domain_in_domains_count": 8,
+          "domain_out_urls_count": 28583,
+          "domain_out_domains_count": 17
+        },
+        {
+          "position": 3,
+          "url": "https://yasirelectronics.com/product-category/vacuum-cleaner/",
+          "url_keywords_count": 8,
+          "domain": "yasirelectronics.com",
+          "domain_visibility": 45.72,
+          "domain_keywords_organic": 3467,
+          "domain_keywords_ppc": 0,
+          "domain_top_10_keywords_count": 1522,
+          "domain_sdr": 40,
+          "domain_in_urls_count": 50774,
+          "domain_in_domains_count": 299,
+          "domain_out_urls_count": 13636,
+          "domain_out_domains_count": 14
+        },
+        {
+          "position": 4,
+          "url": "https://www.kaercher.com/int/professional/industrial-vacuum-cleaners.html",
+          "url_keywords_count": 3,
+          "domain": "kaercher.com",
+          "domain_visibility": 2.23,
+          "domain_keywords_organic": 1543,
+          "domain_keywords_ppc": 0,
+          "domain_top_10_keywords_count": 406,
+          "domain_sdr": 62,
+          "domain_in_urls_count": 563924,
+          "domain_in_domains_count": 8861,
+          "domain_out_urls_count": 74508,
+          "domain_out_domains_count": 491
+        },
+        {
+          "position": 5,
+          "url": "https://valemaster.com.pk/product/s-72/",
+          "url_keywords_count": 3,
+          "domain": "valemaster.com.pk",
+          "domain_visibility": 0.11,
+          "domain_keywords_organic": 99,
+          "domain_keywords_ppc": 0,
+          "domain_top_10_keywords_count": 32,
+          "domain_sdr": 15,
+          "domain_in_urls_count": 11,
+          "domain_in_domains_count": 7,
+          "domain_out_urls_count": 1635,
+          "domain_out_domains_count": 10
+        },
+        {
+          "position": 6,
+          "url": "https://mktrader.pk/product-category/main-categories/industrial-vacuum-cleaner-machine/",
+          "url_keywords_count": 2,
+          "domain": "mktrader.pk",
+          "domain_visibility": null,
+          "domain_keywords_organic": 11,
+          "domain_keywords_ppc": 0,
+          "domain_top_10_keywords_count": 6,
+          "domain_sdr": 5,
+          "domain_in_urls_count": 1,
+          "domain_in_domains_count": 1,
+          "domain_out_urls_count": 0,
+          "domain_out_domains_count": 0
+        },
+        {
+          "position": 7,
+          "url": "https://www.delfinvacuums.com/en/",
+          "url_keywords_count": 7,
+          "domain": "delfinvacuums.com",
+          "domain_visibility": 0.02,
+          "domain_keywords_organic": 55,
+          "domain_keywords_ppc": 0,
+          "domain_top_10_keywords_count": 9,
+          "domain_sdr": 30,
+          "domain_in_urls_count": 2466,
+          "domain_in_domains_count": 63,
+          "domain_out_urls_count": 9460,
+          "domain_out_domains_count": 39
+        },
+        {
+          "position": 8,
+          "url": "https://cleantech.com.pk/vacuum-cleaners-2/",
+          "url_keywords_count": 7,
+          "domain": "cleantech.com.pk",
+          "domain_visibility": 0.4,
+          "domain_keywords_organic": 177,
+          "domain_keywords_ppc": 0,
+          "domain_top_10_keywords_count": 56,
+          "domain_sdr": 16,
+          "domain_in_urls_count": 564,
+          "domain_in_domains_count": 7,
+          "domain_out_urls_count": 281,
+          "domain_out_domains_count": 25
+        },
+        {
+          "position": 9,
+          "url": "https://www.olx.com.pk/items/q-heavy-vacuum-cleaner",
+          "url_keywords_count": 3,
+          "domain": "olx.com.pk",
+          "domain_visibility": 3088.22,
+          "domain_keywords_organic": 1078287,
+          "domain_keywords_ppc": 0,
+          "domain_top_10_keywords_count": 410673,
+          "domain_sdr": 46,
+          "domain_in_urls_count": 61991,
+          "domain_in_domains_count": 1539,
+          "domain_out_urls_count": 1307,
+          "domain_out_domains_count": 26
+        },
+        {
+          "position": 10,
+          "url": "https://www.goodway.com/products/industrial-vacuum-cleaners",
+          "url_keywords_count": 4,
+          "domain": "goodway.com",
+          "domain_visibility": 0.04,
+          "domain_keywords_organic": 107,
+          "domain_keywords_ppc": 0,
+          "domain_top_10_keywords_count": 14,
+          "domain_sdr": 42,
+          "domain_in_urls_count": 2078,
+          "domain_in_domains_count": 407,
+          "domain_out_urls_count": 0,
+          "domain_out_domains_count": 0
+        }
+      ],
+      "summary_info": {
+        "keywords": 3,
+        "frequency": 70,
+        "cost": 11.130262,
+        "difficulty": 0,
+        "concurrency": 17,
+        "types": [
+          "video",
+          "related_search",
+          "pic"
+        ],
+        "sorting": {
+          "position": "asc"
+        },
+        "left_limits": 865,
+        "count_top_results": 18,
+        "keyword": "industrial vacuum cleaner",
+        "se": "g_pk"
+      }
+    }
+  ],
+  "backlinks": [
+    {
+      "summary_info": {
+        "sort": null,
+        "order": null,
+        "left_lines": 868
+      },
+      "data": {
+        "sersptat_domain_rank": 0,
+        "referring_domains": 0,
+        "referring_domains_change": 0,
+        "redirected_domains": 0,
+        "referring_malicious_domains": 0,
+        "referring_malicious_domains_change": 0,
+        "referring_ip_addresses": 0,
+        "referring_ip_addresses_change": 0,
+        "referring_subnets": 0,
+        "referring_subnets_change": 0,
+        "backlinks": 0,
+        "backlinks_change": 0,
+        "backlinks_from_mainpages": 0,
+        "backlinks_from_mainpages_change": 0,
+        "nofollow_backlinks": 0,
+        "nofollow_backlinks_change": 0,
+        "dofollow_backlinks": 0,
+        "dofollow_backlinks_change": 0,
+        "text_backlinks": 0,
+        "text_backlinks_change": 0,
+        "image_backlinks": 0,
+        "image_backlinks_change": 0,
+        "redirect_backlinks": 0,
+        "redirect_backlinks_change": 0,
+        "canonical_backlinks": 0,
+        "canonical_backlinks_change": 0,
+        "alternate_backlinks": 0,
+        "alternate_backlinks_change": 0,
+        "rss_backlinks": 0,
+        "rss_backlinks_change": 0,
+        "frame_backlinks": 0,
+        "frame_backlinks_change": 0,
+        "form_backlinks": 0,
+        "form_backlinks_change": 0,
+        "external_domains": 6,
+        "external_domains_change": 0,
+        "external_malicious_domains": 0,
+        "external_malicious_domains_change": 0,
+        "external_links": 227,
+        "external_links_change": 0
+      }
+    }
+  ],
+  "audit-prod": [
+    "reportId,date,sdo,progress,criticalCount,nonCriticalCount\n11351106,2026-10-09 20:06:17,92,100,141,22"
+  ],
+  "audit-preview": [
+    "reportId,date,sdo,progress,criticalCount,nonCriticalCount\n11351319,2026-10-10 19:57:40,70,100,748,555"
+  ],
+  "audit-detail-prod": [
+    {
+      "categories": [
+        {
+          "key": "pages_status",
+          "errors": [
+            {
+              "key": "errors_400",
+              "priority": "high",
+              "countAll": 79,
+              "countNew": 79,
+              "countFixed": 0
+            },
+            {
+              "key": "errors_500",
+              "priority": "high",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            }
+          ]
+        },
+        {
+          "key": "meta_tags",
+          "errors": [
+            {
+              "key": "pages_title_dup",
+              "priority": "high",
+              "countAll": 1,
+              "countNew": 1,
+              "countFixed": 0
+            },
+            {
+              "key": "no_desc",
+              "priority": "high",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            },
+            {
+              "key": "no_title",
+              "priority": "high",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            },
+            {
+              "key": "pages_desc_dup",
+              "priority": "medium",
+              "countAll": 1,
+              "countNew": 1,
+              "countFixed": 0
+            },
+            {
+              "key": "pages_h1_dup",
+              "priority": "medium",
+              "countAll": 1,
+              "countNew": 1,
+              "countFixed": 0
+            },
+            {
+              "key": "tiny_desc",
+              "priority": "medium",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            },
+            {
+              "key": "long_title",
+              "priority": "medium",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            },
+            {
+              "key": "tiny_title",
+              "priority": "medium",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            },
+            {
+              "key": "many_title",
+              "priority": "medium",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            },
+            {
+              "key": "meta_refresh",
+              "priority": "medium",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            },
+            {
+              "key": "title_dup_h1",
+              "priority": "low",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            },
+            {
+              "key": "charset_missing",
+              "priority": "low",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            },
+            {
+              "key": "long_desc",
+              "priority": "information",
+              "countAll": 1,
+              "countNew": 1,
+              "countFixed": 0
+            }
+          ]
+        },
+        {
+          "key": "headings",
+          "errors": [
+            {
+              "key": "h1_missing",
+              "priority": "high",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            },
+            {
+              "key": "many_h1",
+              "priority": "low",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            }
+          ]
+        },
+        {
+          "key": "content",
+          "errors": [
+            {
+              "key": "large_page_size",
+              "priority": "high",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            },
+            {
+              "key": "body_text_missing",
+              "priority": "high",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            },
+            {
+              "key": "dummy_text",
+              "priority": "high",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            }
+          ]
+        },
+        {
+          "key": "multimedia",
+          "errors": [
+            {
+              "key": "broken_image_url",
+              "priority": "high",
+              "countAll": 60,
+              "countNew": 60,
+              "countFixed": 0
+            },
+            {
+              "key": "large_image_size",
+              "priority": "medium",
+              "countAll": 1,
+              "countNew": 1,
+              "countFixed": 0
+            },
+            {
+              "key": "image_no_alt",
+              "priority": "medium",
+              "countAll": 8,
+              "countNew": 8,
+              "countFixed": 0
+            }
+          ]
+        },
+        {
+          "key": "indexation",
+          "errors": [
+            {
+              "key": "many_canonical",
+              "priority": "high",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            },
+            {
+              "key": "use_flash",
+              "priority": "medium",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            },
+            {
+              "key": "use_iframe",
+              "priority": "low",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            },
+            {
+              "key": "less_words",
+              "priority": "low",
+              "countAll": 11,
+              "countNew": 11,
+              "countFixed": 0
+            },
+            {
+              "key": "wrong_canonical",
+              "priority": "information",
+              "countAll": 3,
+              "countNew": 3,
+              "countFixed": 0
+            },
+            {
+              "key": "hidden_no_index",
+              "priority": "information",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            },
+            {
+              "key": "hidden_robots_txt",
+              "priority": "information",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            },
+            {
+              "key": "offsite_canonical",
+              "priority": "information",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            },
+            {
+              "key": "relative_canonical",
+              "priority": "information",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            }
+          ]
+        },
+        {
+          "key": "redirects",
+          "errors": [
+            {
+              "key": "redirect_chain",
+              "priority": "high",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            },
+            {
+              "key": "redirect_loop",
+              "priority": "high",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            },
+            {
+              "key": "redirect_meta_refresh",
+              "priority": "medium",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            },
+            {
+              "key": "redirect_http_refresh",
+              "priority": "medium",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            },
+            {
+              "key": "redirect_javascript",
+              "priority": "medium",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            },
+            {
+              "key": "redirects",
+              "priority": "information",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            }
+          ]
+        },
+        {
+          "key": "links",
+          "errors": [
+            {
+              "key": "many_get_params",
+              "priority": "high",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            },
+            {
+              "key": "long_url",
+              "priority": "high",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            },
+            {
+              "key": "many_external_links",
+              "priority": "medium",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            },
+            {
+              "key": "miss_favicon",
+              "priority": "medium",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            },
+            {
+              "key": "external_link_without_no_follow_exist",
+              "priority": "information",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            },
+            {
+              "key": "internal_links_no_follow_exist",
+              "priority": "information",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            }
+          ]
+        },
+        {
+          "key": "server_params",
+          "errors": [
+            {
+              "key": "www_status:no_redirect",
+              "priority": "high",
+              "countAll": 1,
+              "countNew": 0,
+              "countFixed": 0
+            }
+          ]
+        },
+        {
+          "key": "https",
+          "errors": [
+            {
+              "key": "https_check_domain_in_cert",
+              "priority": "high",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            },
+            {
+              "key": "https_hsts",
+              "priority": "high",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            },
+            {
+              "key": "https_cert_chain",
+              "priority": "high",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            },
+            {
+              "key": "https_expired",
+              "priority": "high",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            },
+            {
+              "key": "https_tls",
+              "priority": "medium",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            },
+            {
+              "key": "https_sslv3",
+              "priority": "medium",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            },
+            {
+              "key": "https_self_signed",
+              "priority": "medium",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            },
+            {
+              "key": "https_sitemap_with_http",
+              "priority": "medium",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            },
+            {
+              "key": "https_mixed_content",
+              "priority": "medium",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            },
+            {
+              "key": "https_link_to_http",
+              "priority": "medium",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            },
+            {
+              "key": "https_non_secure_page",
+              "priority": "medium",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            }
+          ]
+        },
+        {
+          "key": "hreflang",
+          "errors": [
+            {
+              "key": "hreflang_usage",
+              "priority": "information",
+              "countAll": 1,
+              "countNew": 1,
+              "countFixed": 0
+            }
+          ]
+        },
+        {
+          "key": "amp",
+          "errors": [
+            {
+              "key": "amp_usage",
+              "priority": "information",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            }
+          ]
+        },
+        {
+          "key": "markup",
+          "errors": [
+            {
+              "key": "markup_schema_missing",
+              "priority": "low",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            },
+            {
+              "key": "markup_open_graph_missing",
+              "priority": "information",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            },
+            {
+              "key": "markup_twitter_card_missing",
+              "priority": "information",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            },
+            {
+              "key": "markup_json_ld_missing",
+              "priority": "information",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            }
+          ]
+        },
+        {
+          "key": "url",
+          "errors": [
+            {
+              "key": "url_uppercase",
+              "priority": "low",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            },
+            {
+              "key": "url_double_slash",
+              "priority": "low",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            },
+            {
+              "key": "url_space",
+              "priority": "low",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            },
+            {
+              "key": "url_non_ascii",
+              "priority": "low",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            },
+            {
+              "key": "url_underscore",
+              "priority": "low",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            },
+            {
+              "key": "url_repetitive_path",
+              "priority": "low",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            },
+            {
+              "key": "url_internal_search",
+              "priority": "low",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            },
+            {
+              "key": "url_tracking_params",
+              "priority": "low",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "audit-detail-preview": [
+    {
+      "categories": [
+        {
+          "key": "pages_status",
+          "errors": [
+            {
+              "key": "errors_400",
+              "priority": "high",
+              "countAll": 3,
+              "countNew": 3,
+              "countFixed": 0
+            },
+            {
+              "key": "errors_500",
+              "priority": "high",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            }
+          ]
+        },
+        {
+          "key": "meta_tags",
+          "errors": [
+            {
+              "key": "pages_title_dup",
+              "priority": "high",
+              "countAll": 1,
+              "countNew": 1,
+              "countFixed": 0
+            },
+            {
+              "key": "no_desc",
+              "priority": "high",
+              "countAll": 5,
+              "countNew": 5,
+              "countFixed": 0
+            },
+            {
+              "key": "no_title",
+              "priority": "high",
+              "countAll": 1,
+              "countNew": 1,
+              "countFixed": 0
+            },
+            {
+              "key": "pages_desc_dup",
+              "priority": "medium",
+              "countAll": 1,
+              "countNew": 1,
+              "countFixed": 0
+            },
+            {
+              "key": "pages_h1_dup",
+              "priority": "medium",
+              "countAll": 1,
+              "countNew": 1,
+              "countFixed": 0
+            },
+            {
+              "key": "tiny_desc",
+              "priority": "medium",
+              "countAll": 48,
+              "countNew": 48,
+              "countFixed": 0
+            },
+            {
+              "key": "long_title",
+              "priority": "medium",
+              "countAll": 1,
+              "countNew": 1,
+              "countFixed": 0
+            },
+            {
+              "key": "tiny_title",
+              "priority": "medium",
+              "countAll": 6,
+              "countNew": 6,
+              "countFixed": 0
+            },
+            {
+              "key": "many_title",
+              "priority": "medium",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            },
+            {
+              "key": "meta_refresh",
+              "priority": "medium",
+              "countAll": 1,
+              "countNew": 1,
+              "countFixed": 0
+            },
+            {
+              "key": "title_dup_h1",
+              "priority": "low",
+              "countAll": 27,
+              "countNew": 27,
+              "countFixed": 0
+            },
+            {
+              "key": "charset_missing",
+              "priority": "low",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            },
+            {
+              "key": "long_desc",
+              "priority": "information",
+              "countAll": 4,
+              "countNew": 4,
+              "countFixed": 0
+            }
+          ]
+        },
+        {
+          "key": "headings",
+          "errors": [
+            {
+              "key": "h1_missing",
+              "priority": "high",
+              "countAll": 2,
+              "countNew": 2,
+              "countFixed": 0
+            },
+            {
+              "key": "many_h1",
+              "priority": "low",
+              "countAll": 3,
+              "countNew": 3,
+              "countFixed": 0
+            }
+          ]
+        },
+        {
+          "key": "content",
+          "errors": [
+            {
+              "key": "large_page_size",
+              "priority": "high",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            },
+            {
+              "key": "body_text_missing",
+              "priority": "high",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            },
+            {
+              "key": "dummy_text",
+              "priority": "high",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            }
+          ]
+        },
+        {
+          "key": "multimedia",
+          "errors": [
+            {
+              "key": "broken_image_url",
+              "priority": "high",
+              "countAll": 735,
+              "countNew": 735,
+              "countFixed": 0
+            },
+            {
+              "key": "large_image_size",
+              "priority": "medium",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            },
+            {
+              "key": "image_no_alt",
+              "priority": "medium",
+              "countAll": 447,
+              "countNew": 447,
+              "countFixed": 0
+            }
+          ]
+        },
+        {
+          "key": "indexation",
+          "errors": [
+            {
+              "key": "many_canonical",
+              "priority": "high",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            },
+            {
+              "key": "use_flash",
+              "priority": "medium",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            },
+            {
+              "key": "use_iframe",
+              "priority": "low",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            },
+            {
+              "key": "less_words",
+              "priority": "low",
+              "countAll": 17,
+              "countNew": 17,
+              "countFixed": 0
+            },
+            {
+              "key": "wrong_canonical",
+              "priority": "information",
+              "countAll": 2,
+              "countNew": 2,
+              "countFixed": 0
+            },
+            {
+              "key": "hidden_no_index",
+              "priority": "information",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            },
+            {
+              "key": "hidden_robots_txt",
+              "priority": "information",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            },
+            {
+              "key": "offsite_canonical",
+              "priority": "information",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            },
+            {
+              "key": "relative_canonical",
+              "priority": "information",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            }
+          ]
+        },
+        {
+          "key": "redirects",
+          "errors": [
+            {
+              "key": "redirect_chain",
+              "priority": "high",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            },
+            {
+              "key": "redirect_loop",
+              "priority": "high",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            },
+            {
+              "key": "redirect_meta_refresh",
+              "priority": "medium",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            },
+            {
+              "key": "redirect_http_refresh",
+              "priority": "medium",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            },
+            {
+              "key": "redirect_javascript",
+              "priority": "medium",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            },
+            {
+              "key": "redirects",
+              "priority": "information",
+              "countAll": 7,
+              "countNew": 7,
+              "countFixed": 0
+            }
+          ]
+        },
+        {
+          "key": "links",
+          "errors": [
+            {
+              "key": "many_get_params",
+              "priority": "high",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            },
+            {
+              "key": "long_url",
+              "priority": "high",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            },
+            {
+              "key": "many_external_links",
+              "priority": "medium",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            },
+            {
+              "key": "miss_favicon",
+              "priority": "medium",
+              "countAll": 1,
+              "countNew": 1,
+              "countFixed": 0
+            },
+            {
+              "key": "external_link_without_no_follow_exist",
+              "priority": "information",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            },
+            {
+              "key": "internal_links_no_follow_exist",
+              "priority": "information",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            }
+          ]
+        },
+        {
+          "key": "server_params",
+          "errors": [
+            {
+              "key": "www_status:www_status",
+              "priority": "high",
+              "countAll": 1,
+              "countNew": 0,
+              "countFixed": 0
+            }
+          ]
+        },
+        {
+          "key": "https",
+          "errors": [
+            {
+              "key": "https_check_domain_in_cert",
+              "priority": "high",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            },
+            {
+              "key": "https_hsts",
+              "priority": "high",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            },
+            {
+              "key": "https_cert_chain",
+              "priority": "high",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            },
+            {
+              "key": "https_expired",
+              "priority": "high",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            },
+            {
+              "key": "https_tls",
+              "priority": "medium",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            },
+            {
+              "key": "https_sslv3",
+              "priority": "medium",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            },
+            {
+              "key": "https_self_signed",
+              "priority": "medium",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            },
+            {
+              "key": "https_sitemap_with_http",
+              "priority": "medium",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            },
+            {
+              "key": "https_mixed_content",
+              "priority": "medium",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            },
+            {
+              "key": "https_link_to_http",
+              "priority": "medium",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            },
+            {
+              "key": "https_non_secure_page",
+              "priority": "medium",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            }
+          ]
+        },
+        {
+          "key": "hreflang",
+          "errors": [
+            {
+              "key": "hreflang_usage",
+              "priority": "information",
+              "countAll": 1,
+              "countNew": 1,
+              "countFixed": 0
+            }
+          ]
+        },
+        {
+          "key": "amp",
+          "errors": [
+            {
+              "key": "amp_usage",
+              "priority": "information",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            }
+          ]
+        },
+        {
+          "key": "markup",
+          "errors": [
+            {
+              "key": "markup_schema_missing",
+              "priority": "low",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            },
+            {
+              "key": "markup_open_graph_missing",
+              "priority": "information",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            },
+            {
+              "key": "markup_twitter_card_missing",
+              "priority": "information",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            },
+            {
+              "key": "markup_json_ld_missing",
+              "priority": "information",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            }
+          ]
+        },
+        {
+          "key": "url",
+          "errors": [
+            {
+              "key": "url_uppercase",
+              "priority": "low",
+              "countAll": 1,
+              "countNew": 1,
+              "countFixed": 0
+            },
+            {
+              "key": "url_double_slash",
+              "priority": "low",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            },
+            {
+              "key": "url_space",
+              "priority": "low",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            },
+            {
+              "key": "url_non_ascii",
+              "priority": "low",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            },
+            {
+              "key": "url_underscore",
+              "priority": "low",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            },
+            {
+              "key": "url_repetitive_path",
+              "priority": "low",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            },
+            {
+              "key": "url_internal_search",
+              "priority": "low",
+              "countAll": 0,
+              "countNew": 0,
+              "countFixed": 0
+            },
+            {
+              "key": "url_tracking_params",
+              "priority": "low",
+              "countAll": 1,
+              "countNew": 1,
+              "countFixed": 0
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "audit403": [
+    {
+      "data": [
+        {
+          "url": "https://moralclean.com/products?category=ride-on-scrubber-dryer&tag=dusty-650-m",
+          "code": 403,
+          "count": 1,
+          "urlCrc": 28237103824339
+        },
+        {
+          "url": "https://moralclean.com/products?tag=testing",
+          "code": 403,
+          "count": 1,
+          "urlCrc": 168791590631703
+        },
+        {
+          "url": "https://moralclean.com/products?category=ride-on-scrubber-dryer&tag=facility-equipment",
+          "code": 403,
+          "count": 1,
+          "urlCrc": 205276104338934
+        },
+        {
+          "url": "https://moralclean.com/products?category=ride-on-scrubber-dryer&tag=34-litre-mop-trolley",
+          "code": 403,
+          "count": 1,
+          "urlCrc": 219678615929756
+        },
+        {
+          "url": "https://moralclean.com/products?category=ride-on-scrubber-dryer&tag=biemmedue",
+          "code": 403,
+          "count": 1,
+          "urlCrc": 316678257474400
+        }
+      ],
+      "totalCount": 79,
+      "mode": "all"
+    }
+  ],
+  "audit-images": [
+    {
+      "data": [
+        {
+          "url": "https://moralclean.com/_next/image?url=https%3A%2F%2Fsjlmjakninsenljyastk.supabase.co%2Fstorage%2Fv1%2Fobject%2Fpublic%2Fproduct%2520images%2Fproducts%2F1786723159548-6135cda7-d3c6-4511-bfef-493b7d5bc094.png&w=3840&q=75",
+          "count": 1,
+          "imageCrc": 65274081098341
+        },
+        {
+          "url": "https://moralclean.com/_next/image?url=https%3A%2F%2Fsjlmjakninsenljyastk.supabase.co%2Fstorage%2Fv1%2Fobject%2Fpublic%2Fproduct%2520images%2Fproducts%2F1785342422387-b2b290a5-3f48-4d28-aeea-c01762614dd1.jpg&w=3840&q=75",
+          "count": 1,
+          "imageCrc": 108419243188125
+        },
+        {
+          "url": "https://moralclean.com/_next/image?url=https%3A%2F%2Fsjlmjakninsenljyastk.supabase.co%2Fstorage%2Fv1%2Fobject%2Fpublic%2Fproduct%2520images%2Fproducts%2F1786722242583-ad8bec36-094e-4bb0-8798-85fc8486de85.png&w=3840&q=75",
+          "count": 1,
+          "imageCrc": 126842106892734
+        },
+        {
+          "url": "https://moralclean.com/_next/image?url=https%3A%2F%2Fsjlmjakninsenljyastk.supabase.co%2Fstorage%2Fv1%2Fobject%2Fpublic%2Fproduct%2520images%2Fproducts%2F1786721062633-ceb31ec0-ad10-4fd4-a93f-235d11c8ac00.jpg&w=3840&q=75",
+          "count": 1,
+          "imageCrc": 166780809154018
+        },
+        {
+          "url": "https://moralclean.com/_next/image?url=https%3A%2F%2Fsjlmjakninsenljyastk.supabase.co%2Fstorage%2Fv1%2Fobject%2Fpublic%2Fproduct%2520images%2Fproducts%2F1786720768434-81ab2204-d91d-4d4e-9627-2727187fb612.jpg&w=3840&q=75",
+          "count": 1,
+          "imageCrc": 439521626263469
+        }
+      ],
+      "totalCount": 60,
+      "mode": "all"
+    }
+  ],
+  "audit-preview-no-title": [
+    {
+      "data": [
+        {
+          "url": "https://vercel.com/login",
+          "isUnreliableResult": false,
+          "urlCrc": 6932125343291154
+        }
+      ],
+      "totalCount": 1,
+      "mode": "all"
+    }
+  ],
+  "audit-preview-images": [
+    {
+      "data": [
+        {
+          "url": "https://vercel.com/vc-ap-vercel-marketing/_next/static/immutable/media/nextjs-logotype-dark.3h4a2z2v_dkod.svg",
+          "count": 1,
+          "imageCrc": 2449616138307
+        },
+        {
+          "url": "https://vercel.com/vc-ap-vercel-docs/_next/static/immutable/media/logo-next-dark.0jqrwuxq05oly.svg",
+          "count": 1,
+          "imageCrc": 10458041039138
+        },
+        {
+          "url": "https://vercel.com/vc-ap-vercel-marketing/_next/image?url=%2Fvc-ap-vercel-marketing%2F_next%2Fstatic%2Fimmutable%2Fmedia%2Fmug.34rs06cimf3lp.png&w=640&q=75",
+          "count": 1,
+          "imageCrc": 14376488494300
+        },
+        {
+          "url": "https://vercel.com/vc-ap-vercel-marketing/_next/image?url=https%3A%2F%2F7nyt0uhk7sse4zvn.public.blob.vercel-storage.com%2Fdocs-assets%2Fstatic%2Fdocs%2Fai-gateway%2Flogos%2Fstealth.png&w=48&q=75",
+          "count": 1,
+          "imageCrc": 33894468948948
+        },
+        {
+          "url": "https://vercel.com/vc-ap-vercel-marketing/_next/image?url=https%3A%2F%2Flishhsx6kmthaacj.public.blob.vercel-storage.com%2FExa-Desktop%2520Thumbnail.png&w=3840&q=75",
+          "count": 1,
+          "imageCrc": 52470675550447
+        }
+      ],
+      "totalCount": 735,
+      "mode": "all"
+    }
+  ],
+  "audit-canonical": [
+    {
+      "data": [
+        {
+          "url": "https://moralclean.com/contact",
+          "startPage": "https://moralclean.com/contact?service=motor-repairing",
+          "urlCrc": false
+        },
+        {
+          "url": "https://moralclean.com/contact",
+          "startPage": "https://moralclean.com/contact?service=single-disk-machine-vacuum-parts-repairing",
+          "urlCrc": false
+        },
+        {
+          "url": "https://moralclean.com/contact",
+          "startPage": "https://moralclean.com/contact?service=single-disk-brush-refiling",
+          "urlCrc": false
+        }
+      ],
+      "totalCount": 3,
+      "mode": "all"
+    }
+  ],
+  "logs": {
+    "rows": [],
+    "projectId": "prj_nhiqWIb6xw2GAqAzMCssOZILU7Wd",
+    "timeRange": {
+      "since": "2026-10-10T10:20:31.050Z",
+      "until": "2026-10-11T10:20:31.050Z"
+    },
+    "state": "error",
+    "error": {
+      "message": "Vercel API request failed (400: bad_request). The hobby plan does not retain runtime logs for the requested time range.",
+      "recovery": "Check the API message, arguments, target team and resource state. Correct the request before retrying.",
+      "remediation": {
+        "actor": "agent",
+        "action": "correct_request"
+      },
+      "status": 400,
+      "code": "bad_request",
+      "operation": "get_runtime_logs",
+      "requestId": "iad1:iad1:sfo1:sfo1:bom1:iad1:sfo1:sfo1::sfo1::tnvtk-1791714031097-990b68d70053"
+    },
+    "notice": "Notes:\n- Runtime log query failed at page 0: Vercel API request failed (400: bad_request). The hobby plan does not retain runtime logs for the requested time range.\n- 400  The window may exceed your plan’s runtime-log retention or require Observability Plus. Try a recent window such as since: \"30m\"; Hobby retains 1 hour, Pro 1 day, and Enterprise 3 days without Plus.",
+    "failure": {
+      "message": "Vercel API request failed (400: bad_request). The hobby plan does not retain runtime logs for the requested time range.",
+      "recovery": "Check the API message, arguments, target team and resource state. Correct the request before retrying.",
+      "remediation": {
+        "actor": "agent",
+        "action": "correct_request"
+      },
+      "status": 400,
+      "code": "bad_request",
+      "operation": "get_runtime_logs",
+      "requestId": "iad1:iad1:sfo1:sfo1:bom1:iad1:sfo1:sfo1::sfo1::tnvtk-1791714031097-990b68d70053"
+    },
+    "error_code": "INVALID_ARGUMENT"
+  },
+  "logs30": [
+    "## Runtime Logs\n\n**Project:** prj_nhiqWIb6xw2GAqAzMCssOZILU7Wd\n**Time range:** 2026-10-11T09:50:54.739Z → 2026-10-11T10:20:54.739Z\n\nNo logs found for the specified criteria."
+  ],
+  "logs-confirmed": [
+    "## Runtime Logs\n\n**Project:** prj_nhiqWIb6xw2GAqAzMCssOZILU7Wd\n**Time range:** 2026-10-11T09:58:00.098Z → 2026-10-11T10:28:00.098Z\n\n### 2026-10-11T10:27:17.096Z GET /products/category/single-disk-machine [error/function]\ndep=dpl_Eet82YisYPevDFQQDFHyFJttNndE branch=master request=9m455-1791714435673-8c2726eec38b domain=moralclean.com environment=production region=sin1 runtime=nodejs24.x stream=stderr\n    Products query failed: {\n      code: 'PGRST103',\n      details: 'An offset of 11976 was requested, but there are only 6 rows.',\n      hint: null,\n      message: 'Requested range not satisfiable'\n    }\n\n### 2026-10-11T10:27:15.287Z GET /products [error/function]\ndep=dpl_Eet82YisYPevDFQQDFHyFJttNndE branch=master request=lzckg-1791714433485-a2388644fd62 domain=moralclean.com environment=production region=sin1 runtime=nodejs24.x stream=stderr\n    Products query failed: {\n      code: 'PGRST103',\n      details: 'An offset of 11976 was requested, but there are only 36 rows.',\n      hint: null,\n      message: 'Requested range not satisfiable'\n    }\n\n### 2026-10-11T10:24:19.442Z GET /products/category/single-disk-machine [error/function]\ndep=dpl_Eet82YisYPevDFQQDFHyFJttNndE branch=master request=kz8nh-1791714258364-3322df7889da domain=moralclean.com environment=production region=sin1 runtime=nodejs24.x stream=stderr\n    Products query failed: {\n      code: 'PGRST103',\n      details: 'An offset of 11976 was requested, but there are only 6 rows.',\n      hint: null,\n      message: 'Requested range not satisfiable'\n    }\n\n### 2026-10-11T10:24:19.180Z GET /products [error/function]\ndep=dpl_Eet82YisYPevDFQQDFHyFJttNndE branch=master request=wgklk-1791714258295-747e16e115c7 domain=moralclean.com environment=production region=sin1 runtime=nodejs24.x stream=stderr\n    Products query failed: {\n      code: 'PGRST103',\n      details: 'An offset of 11976 was requested, but there are only 36 rows.',\n      hint: null,\n      message: 'Requested range not satisfiable'\n    }\n\n### 2026-10-11T10:22:50.238Z GET /products [error/function]\ndep=dpl_Eet82YisYPevDFQQDFHyFJttNndE branch=master request=g4tss-1791714168775-6bd3c1bc20e7 domain=moralclean.com environment=production region=sin1 runtime=nodejs24.x stream=stderr\n    Products query failed: {\n      code: 'PGRST103',\n      details: 'An offset of 11976 was requested, but there are only 36 rows.',\n      hint: null,\n      message: 'Requested range not satisfiable'\n    }\n"
+  ],
+  "deployments": [
+    {
+      "id": "dpl_Eet82YisYPevDFQQDFHyFJttNndE",
+      "url": "moral-clean-m1yuwsbij-burhan-uddins-projects-91e8a924.vercel.app",
+      "target": "production",
+      "readyState": "READY",
+      "branch": "master",
+      "sha": "253902d05d522a747c589130875360117c40e815"
+    },
+    {
+      "id": "dpl_A1trRHfY9tkXfLXP8CeZbjPckC4U",
+      "url": "moral-clean-mxfmwtecz-burhan-uddins-projects-91e8a924.vercel.app",
+      "target": null,
+      "readyState": "READY",
+      "branch": "preview",
+      "sha": "4640859c2c12f0102cb067f46ab21127b3287905"
+    }
+  ]
+}
