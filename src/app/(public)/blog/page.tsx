@@ -9,12 +9,13 @@ import { ArrowRight } from "lucide-react";
 import { BlogCard } from "@/components/blog/BlogCard";
 import { Button } from "@/components/ui/button";
 import { blogFallbackImage } from "@/lib/fallback-images";
-import { getPaginationItems } from "@/lib/pagination";
+import { getPaginationItems, parsePage } from "@/lib/pagination";
 import { getAllPosts } from "@/lib/queries/blog";
 
 
 export async function generateMetadata({ searchParams }: { searchParams?: Record<string, string | string[] | undefined> }): Promise<Metadata> {
-  const page = normalizePage(getParam(searchParams, "page"));
+  const page = parsePage(getParam(searchParams, "page"));
+  if (page === null) notFound();
   if (page > 1) {
     const result = await getAllPosts({ page, limit: POSTS_PER_PAGE });
     if (page > result.pageCount) notFound();
@@ -33,14 +34,6 @@ function getParam(
     return value[0];
   }
   return value;
-}
-
-function normalizePage(page?: string) {
-  const value = Number(page ?? 1);
-  if (!Number.isFinite(value) || value < 1) {
-    return 1;
-  }
-  return Math.floor(value);
 }
 
 function formatDate(value: string | null) {
@@ -64,7 +57,8 @@ export default async function BlogPage({
 }: {
   searchParams?: Record<string, string | string[] | undefined>;
 }) {
-  const page = normalizePage(getParam(searchParams, "page"));
+  const page = parsePage(getParam(searchParams, "page"));
+  if (page === null) notFound();
   const result = await getAllPosts({ page, limit: POSTS_PER_PAGE });
   if (page > result.pageCount) notFound();
 

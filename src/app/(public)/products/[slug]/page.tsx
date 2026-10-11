@@ -31,6 +31,7 @@ import {
 import type { Json, ProductWithRelations } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { sanitizeRichText } from "@/lib/sanitize-html";
+import { brochureUrl as getBrochureUrl, productEnquiryHref } from "@/lib/product-enquiry";
 
 export const revalidate = 3600;
 
@@ -98,16 +99,6 @@ function getSpecEntries(specifications: Json | null): SpecEntry[] {
       };
     })
     .filter((entry): entry is SpecEntry => Boolean(entry));
-}
-
-function getBrochureUrl(specifications: Json | null) {
-  if (!isRecord(specifications)) {
-    return null;
-  }
-
-  const value = specifications.brochure_url;
-
-  return typeof value === "string" && value.trim() ? value : null;
 }
 
 function getDescription(product: ProductWithRelations) {
@@ -332,7 +323,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
                 size="lg"
                 className="w-full bg-accent text-accent-foreground hover:bg-accent/90 sm:w-auto"
               >
-                <Link href={`/contact?product=${product.slug}`}>
+                <Link href={productEnquiryHref(product.slug)}>
                   Request a Quote
                 </Link>
               </Button>
@@ -340,27 +331,21 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
                 asChild
                 size="lg"
                 variant="outline"
-                className={cn(
-                  "w-full sm:w-auto",
-                  !brochureUrl && "pointer-events-none opacity-50",
-                )}
+                className="w-full sm:w-auto"
               >
-                <Link
-                  href={brochureUrl ?? "#"}
-                  aria-disabled={!brochureUrl}
-                  tabIndex={brochureUrl ? undefined : -1}
-                >
-                  <Download className="size-4" aria-hidden="true" />
-                  Download Brochure
-                </Link>
+                {brochureUrl ? <a href={brochureUrl} target="_blank" rel="noopener noreferrer">
+                  <Download className="size-4" aria-hidden="true" />Download Brochure
+                </a> : <Link href={productEnquiryHref(product.slug, "documentation")}>
+                  Request model documentation
+                </Link>}
               </Button>
             </div>
 
             <div className="mt-6 grid gap-3 text-sm font-semibold text-primary sm:grid-cols-3">
               {[
-                { label: "Authorized Distributor", icon: BadgeCheck },
-                { label: "Pakistan-wide Service", icon: Truck },
-                { label: "Original Parts Available", icon: PackageCheck },
+                { label: "Model-specific quotation", icon: BadgeCheck },
+                { label: "Confirm delivery terms", icon: Truck },
+                { label: "Parts compatibility enquiry", icon: PackageCheck },
               ].map(({ label, icon: Icon }) => (
                 <div key={label} className="flex items-center gap-2">
                   <Icon className="size-4 text-accent" aria-hidden="true" />
@@ -423,7 +408,11 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
                 <p><Link href="/services/cleaning-machine-parts" className="font-semibold text-primary underline underline-offset-4">Replacement parts enquiry:</Link>{" "}Identify the component and fitting before confirming compatibility, availability and installation scope for this model.</p>
                 {product.category?.slug === "single-disk-machine" ? <p><Link href="/services/brush-refilling" className="font-semibold text-primary underline underline-offset-4">Single-disc brush refilling:</Link>{" "}Confirm the brush body, drive fitting and floor application before choosing refurbishment or replacement.</p> : null}
               </div>}
-              <Link href="/contact" className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-accent">Ask about this equipment<ArrowRight className="size-4" aria-hidden="true" /></Link>
+              <div className="mt-6 border-t pt-5 text-sm leading-7 text-muted-foreground">
+                <h3 className="text-lg text-primary">Confirm before ordering</h3>
+                <p className="mt-2">Request a written specification and quotation for the exact configuration. Confirm included accessories, power requirements where applicable, current availability, delivery arrangements and any warranty or service terms. Compatibility and serviceability need confirmation for the individual model.</p>
+              </div>
+              <Link href={productEnquiryHref(product.slug, "parts")} className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-accent">Ask about parts for this model<ArrowRight className="size-4" aria-hidden="true" /></Link>
             </section>
           <GuideLinks categorySlug={product.category?.slug} />
         </div>
@@ -464,7 +453,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
             size="lg"
             className="w-fit bg-black text-white hover:bg-brand-black/90"
           >
-            <Link href="/contact">Talk to Our Team</Link>
+            <Link href={productEnquiryHref(product.slug)}>Discuss this equipment</Link>
           </Button>
         </div>
       </section>

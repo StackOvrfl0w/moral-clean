@@ -22,12 +22,13 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { getProducts, type ProductSort } from "@/lib/queries/products";
-import { getPaginationItems } from "@/lib/pagination";
+import { getPaginationItems, parsePage } from "@/lib/pagination";
 import { cn } from "@/lib/utils";
 
 
 export async function generateMetadata({ searchParams }: { searchParams?: Record<string, string | string[] | undefined> }): Promise<Metadata> {
-  const page = Number(getParam(searchParams, "page") || 1);
+  const page = parsePage(getParam(searchParams, "page"));
+  if (page === null) notFound();
   if (page > 1) {
     const result = await getProducts({ page, category: getParam(searchParams, "category"), brand: getParam(searchParams, "brand"), tag: getParam(searchParams, "tag"), q: getParam(searchParams, "q"), sort: getParam(searchParams, "sort") });
     if (page > result.pageCount) notFound();
@@ -190,7 +191,8 @@ export default async function ProductsPage({
   const tag = getParam(searchParams, "tag");
   const q = getParam(searchParams, "q");
   const sort = getParam(searchParams, "sort") ?? "featured";
-  const page = getParam(searchParams, "page") ?? "1";
+  const page = parsePage(getParam(searchParams, "page"));
+  if (page === null) notFound();
 
   const result = await getProducts({
     category,
@@ -201,7 +203,7 @@ export default async function ProductsPage({
     page,
   });
 
-  if (Number(page) > result.pageCount) notFound();
+  if (page > result.pageCount) notFound();
 
   const activeFilters = {
     category,

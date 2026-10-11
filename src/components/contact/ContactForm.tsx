@@ -56,10 +56,12 @@ export function ContactForm({
   defaultSubject,
   defaultMessage,
   supportPhone,
+  productSlug,
 }: {
   defaultSubject?: string;
   defaultMessage?: string;
   supportPhone?: string;
+  productSlug?: string;
 }) {
   const initialSubject = useMemo(
     () =>
@@ -78,7 +80,7 @@ export function ContactForm({
   useEffect(() => {
     if (state.recorded && measuredState.current !== state) {
       measuredState.current = state;
-      trackInquiry("inquiry_submitted", { form_type: "contact" });
+      trackInquiry("inquiry_submitted", { form_type: "contact", product_slug: productSlug });
     }
     if (state.success) {
       setShowSuccess(true);
@@ -87,7 +89,7 @@ export function ContactForm({
     if (state.error) {
       toast.error(state.error);
     }
-  }, [state]);
+  }, [state, productSlug]);
 
   if (showSuccess) {
     return (

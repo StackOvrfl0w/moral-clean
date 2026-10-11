@@ -1,4 +1,6 @@
 import "server-only";
+import { parsePage } from "@/lib/pagination";
+import { readPage } from "./read-page";
 
 import { unstable_cache } from "next/cache";
 import { cache } from "react";
@@ -39,8 +41,9 @@ function createPublicClient() {
 }
 
 function normalizePage(page?: string | number) {
-  const value = Number(page ?? 1);
-  return Number.isFinite(value) && value >= 1 ? Math.floor(value) : 1;
+  const value = parsePage(page);
+  if (value === null) throw new RangeError("Invalid article page");
+  return value;
 }
 
 function normalizeLimit(limit?: number) {
@@ -78,19 +81,15 @@ async function queryAllPosts(
     };
   }
 
-  const from = (page - 1) * limit;
   const query = supabase
     .from("blog_posts")
     .select(BLOG_CARD_COLUMNS, { count: "exact" })
     .eq("published", true)
-    .order("published_at", { ascending: false });
-  let { data, error, count } = await query.range(from, from + limit - 1);
-  if (error?.code === "PGRST103" && page > 1) {
-    const firstPage = await query.range(0, 0);
-    error = firstPage.error;
-    count = firstPage.count;
-    data = [];
-  }
+    .order("published_at", { ascending: false })
+    .order("id");
+  const { data, error, count } = await readPage(
+    (from, to) => query.range(from, to), page, limit,
+  );
 
   if (error) {
     console.error("Unable to load published articles:", error.message);

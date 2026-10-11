@@ -1,14 +1,24 @@
 export type CategoryAdvice = {
   title: string;
+  heading?: string;
+  description?: string;
   intro: string;
+  applications?: { heading: string; body: string }[];
   selection: string[];
   questions: { question: string; answer: string }[];
 };
 
 export const categoryAdvice: Record<string, CategoryAdvice> = {
   "single-disk-machine": {
-    title: "Single Disc Floor Cleaning & Polishing Machines in Pakistan",
+    title: "Single Disc Floor Machines in Pakistan",
+    heading: "Single Disc Floor Cleaning Machines",
+    description: "Compare commercial single disc floor machines in Pakistan. Check speed, working width and recovery needs; request a model-specific equipment quotation.",
     intro: "Compare single disc machines for floor scrubbing, stripping and polishing in commercial facilities. Choose the machine, pad or brush as a system: floor material, required finish and operator experience matter as much as motor power. Moral Clean supplies equipment and handles enquiries for compatible parts and service.",
+    applications: [
+      { heading: "Routine hard-floor scrubbing", body: "For compatible floors in hotels, offices and commercial facilities, select the brush or pad for the surface and soil. Plan dirty-water recovery and a safe drying procedure before reopening the area." },
+      { heading: "Finish maintenance and stripping", body: "A floor finish, chemical and accessory must be approved for use together. Confirm the exact machine speed and floor-care method; a scrubbing machine is not automatically a high-speed burnisher." },
+      { heading: "Choosing the complete cleaning system", body: "Single disc machines separate agitation from water recovery. If your route needs washing and recovery in one pass, compare a walk-behind scrubber dryer before selecting the equipment." },
+    ],
     selection: ["Check the floor manufacturer's guidance before using an abrasive pad or polishing chemical.", "Choose speed for the task. Low-speed scrubbing and higher-speed polishing require different accessories and operating methods.", "A single disc machine loosens soil but does not recover dirty water. Plan wet-vacuum recovery when the process leaves liquid on the floor.", "Compare working width, cable access, machine weight and pad availability before choosing a model."],
     questions: [{ question: "Is a single disc machine the same as a scrubber dryer?", answer: "No. A scrubber dryer combines washing and water recovery. A single disc machine needs a separate recovery method for wet work." }, { question: "What determines the price?", answer: "Model, motor, working width, supplied accessories and service requirements affect the quotation. Send your floor type and intended task for a model-specific quote." }],
   },
@@ -19,8 +29,15 @@ export const categoryAdvice: Record<string, CategoryAdvice> = {
     questions: [{ question: "When should I choose a ride-on instead?", answer: "Consider a ride-on for long, open routes when access, storage and operator training allow it. A walk behind is often easier to move through smaller rooms and tight aisles." }, { question: "How much area can a scrubber dryer clean?", answer: "Published theoretical productivity does not include obstacles, refilling, turns or operator breaks. Estimate practical output from your route and required cleaning time." }],
   },
   "ride-on-scrubber-dryer": {
-    title: "Ride On Scrubber Dryers for Commercial Floors in Pakistan",
+    title: "Ride On Scrubber Dryers in Pakistan",
+    heading: "Ride On Scrubber Dryers for Commercial Floors",
+    description: "Compare ride on scrubber dryers for commercial floors in Pakistan. Check working width, tanks, access and power configuration before requesting a quotation.",
     intro: "Compare ride on scrubber dryers for large commercial and industrial hard-floor cleaning routes. An operator rides the machine while it scrubs and recovers water. Wide open areas can benefit from larger tanks and working widths, but doorway clearance, turning space and safe traffic management must be checked first.",
+    applications: [
+      { heading: "Warehouses and open commercial routes", body: "Consider a ride-on where the floor, aisle clearance and traffic plan permit seated operation. Remove loose debris as required by the model's instructions; do not assume a scrubber also sweeps." },
+      { heading: "Access determines usable capacity", body: "A wide cleaning path cannot compensate for inaccessible doorways, tight turns or unsuitable lifts. Check the machine's overall dimensions and operating limits, not just its brush width." },
+      { heading: "Plan a complete cleaning shift", body: "Estimate cleaning time with turns, refills and emptying included. Confirm the exact power configuration, charger requirements and operating time; theoretical productivity is not a site performance guarantee." },
+    ],
     selection: ["Measure doorways, lifts, ramps and turning space before selecting working width or chassis size.", "Compare solution and recovery tanks with the distance to refill and discharge points.", "Confirm battery and charger inclusion, charging location and expected duty cycle with the supplier.", "Arrange operator instruction and a route that separates cleaning equipment from pedestrians and vehicle traffic."],
     questions: [{ question: "Is a larger ride-on always a better choice?", answer: "No. Lost time manoeuvring around obstacles can outweigh a wider cleaning path. Select against the usable route, storage space and workload." }, { question: "Are batteries included with every model?", answer: "Do not assume they are. Check the individual product specification and written quotation for batteries, charger and accessories." }],
   },

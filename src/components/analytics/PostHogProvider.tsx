@@ -32,13 +32,15 @@ function PostHogTracker() {
       const anchor = event.target instanceof Element ? event.target.closest("a[href]") : null;
       if (!(anchor instanceof HTMLAnchorElement)) return;
       const url = new URL(anchor.href, window.location.origin);
+      const productSlug = pathname?.match(/^\/products\/(?!category\/)([^/]+)$/)?.[1];
+      const categorySlug = pathname?.match(/^\/products\/category\/([^/]+)$/)?.[1];
       if (url.protocol === "tel:") trackInquiry("contact_channel_click", { channel: "phone" });
       else if (url.hostname === "wa.me" || url.hostname === "api.whatsapp.com") trackInquiry("contact_channel_click", { channel: "whatsapp" });
-      else if (url.origin === window.location.origin && url.pathname === "/contact" && (anchor.dataset.quoteRequest === "true" || url.searchParams.get("subject") === "Quotation" || url.searchParams.has("product"))) trackInquiry("quote_request_click", {});
+      else if (url.origin === window.location.origin && url.pathname === "/contact" && (anchor.dataset.quoteRequest === "true" || url.searchParams.get("subject") === "Quotation" || url.searchParams.has("product"))) trackInquiry("quote_request_click", { product_slug: productSlug, category_slug: categorySlug });
     };
     document.addEventListener("click", handleClick);
     return () => document.removeEventListener("click", handleClick);
-  }, []);
+  }, [pathname]);
   return null;
 }
 

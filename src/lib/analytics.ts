@@ -19,7 +19,7 @@ export function loadAnalytics() {
 }
 
 type InquiryEvent = "inquiry_submitted" | "contact_channel_click" | "quote_request_click";
-export function trackInquiry(event: InquiryEvent, properties: { form_type?: "contact" | "quick_quote"; channel?: "phone" | "whatsapp"; category_slug?: string }) {
+export function trackInquiry(event: InquiryEvent, properties: { form_type?: "contact" | "quick_quote"; channel?: "phone" | "whatsapp"; category_slug?: string; product_slug?: string }) {
   if (!env.posthogKey) return;
   void loadAnalytics().then((posthog) => posthog.capture(event, {
     ...properties, page_path: window.location.pathname,

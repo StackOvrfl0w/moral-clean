@@ -15,6 +15,7 @@ import { getCategoryBySlug } from "@/lib/queries/categories";
 import { getProductBySlug } from "@/lib/queries/products";
 import { getServiceBySlug } from "@/lib/queries/services";
 import { getAllSettings } from "@/lib/queries/settings";
+import { productEnquiryMessage } from "@/lib/product-enquiry";
 
 
 export const metadata: Metadata = pageMetadata({
@@ -55,8 +56,9 @@ export default async function ContactPage({
   let defaultMessage = "";
 
   if (productSlug) {
-    defaultSubject = "Product Inquiry";
-    defaultMessage = `Inquiry about: ${productResult?.name || productSlug}\n`;
+    const purpose = getParam(searchParams, "purpose");
+    defaultSubject = purpose === "parts" ? "Parts & Replacement" : "Product Inquiry";
+    defaultMessage = productEnquiryMessage(productResult?.name || productSlug, purpose);
   } else if (serviceSlug) {
     defaultSubject = "Service Request";
     defaultMessage = `Inquiry about: ${serviceResult?.name || serviceSlug}\n`;
@@ -219,6 +221,7 @@ export default async function ContactPage({
 
           <div className="order-1 lg:order-2 lg:col-span-3">
             <ContactForm
+              productSlug={productResult?.slug}
               defaultSubject={defaultSubject}
               defaultMessage={defaultMessage}
               supportPhone={settings.business_phone || settings.contact_phone}

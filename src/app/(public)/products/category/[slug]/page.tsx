@@ -12,7 +12,7 @@ import { ProductFilters } from "@/components/products/ProductFilters";
 import { BreadcrumbSchema } from "@/components/seo/BreadcrumbSchema";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { getPaginationItems } from "@/lib/pagination";
+import { getPaginationItems, parsePage } from "@/lib/pagination";
 import {
   getAllCategories,
   getCategoryBySlug,
@@ -149,9 +149,10 @@ function CategoryPagination({
 }
 
 export async function generateMetadata({ params, searchParams }: CategoryPageProps): Promise<Metadata> {
+  const requestedPage = parsePage(getParam(searchParams, "page"));
+  if (requestedPage === null) notFound();
   const category = await getCategoryBySlug(params.slug);
   if (!category) notFound();
-  const requestedPage = Number(getParam(searchParams, "page") || 1);
   if (requestedPage > 1) {
     const result = await getProductsByCategory(category.id, {
       page: requestedPage,
@@ -164,7 +165,7 @@ export async function generateMetadata({ params, searchParams }: CategoryPagePro
   const suppliedDescription = category.description?.replace(/\s+/g, " ").trim();
   return listingMetadata(
     categoryAdvice[category.slug]?.title || `${category.name} in Pakistan`,
-    categoryAdvice[category.slug]?.intro || (suppliedDescription && suppliedDescription.length >= 60
+    categoryAdvice[category.slug]?.description || categoryAdvice[category.slug]?.intro || (suppliedDescription && suppliedDescription.length >= 60
       ? suppliedDescription
       : `Browse ${category.name.toLowerCase()} for commercial facilities in Pakistan. Compare specifications and request equipment, parts and service from Moral Clean.`),
     `/products/category/${category.slug}`, searchParams, !isIndexableCategory(category.slug, category.product_count),
@@ -180,13 +181,14 @@ export default async function CategoryPage({
   params,
   searchParams,
 }: CategoryPageProps) {
+  const page = parsePage(getParam(searchParams, "page"));
+  if (page === null) notFound();
   const category = await getCategoryBySlug(params.slug);
 
   if (!category) {
     notFound();
   }
 
-  const page = getParam(searchParams, "page") ?? "1";
   const sort = getParam(searchParams, "sort") ?? "featured";
   const brand = getParam(searchParams, "brand");
   const tag = getParam(searchParams, "tag");
@@ -196,7 +198,7 @@ export default async function CategoryPage({
     brand,
     tag,
   });
-  if (Number(page) > productsResult.pageCount) notFound();
+  if (page > productsResult.pageCount) notFound();
 
   const allCategories = await getAllCategories();
   const relatedProducts = productsResult.products.slice(0, 6);
@@ -216,7 +218,7 @@ export default async function CategoryPage({
         {/* Replace this gradient with a real category hero image when assets are available. */}
         <div className="absolute inset-0 bg-brand-gradient opacity-90" />
         <div className="relative mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
-          <h1 className="text-white">{category.name}</h1>
+          <h1 className="text-white">{categoryAdvice[category.slug]?.heading || category.name}</h1>
           <nav
             className="mt-5 flex flex-wrap items-center justify-center gap-2 text-sm text-white/70"
             aria-label="Breadcrumb"

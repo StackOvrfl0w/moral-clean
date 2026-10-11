@@ -1,4 +1,6 @@
 import "server-only";
+import { parsePage } from "@/lib/pagination";
+import { readPage } from "./read-page";
 
 import { unstable_cache } from "next/cache";
 import { cache } from "react";
@@ -110,13 +112,9 @@ function normalizeSort(sort?: string): ProductSort {
 }
 
 function normalizePage(page?: string | number) {
-  const value = Number(page ?? 1);
-
-  if (!Number.isFinite(value) || value < 1) {
-    return 1;
-  }
-
-  return Math.floor(value);
+  const value = parsePage(page, PRODUCTS_PER_PAGE);
+  if (value === null) throw new RangeError("Invalid catalog page");
+  return value;
 }
 
 function uniqueSorted(values: Array<string | null>) {
@@ -484,20 +482,11 @@ async function queryProducts(
       .order("name", { ascending: true });
   }
 
-  const from = (page - 1) * PRODUCTS_PER_PAGE;
-  let { data, error, count } = await query.range(
-    from,
-    from + PRODUCTS_PER_PAGE - 1,
+  query = query.order("id");
+  const { data, error, count } = await readPage(
+    (from, to) => query.range(from, to),
+    page, PRODUCTS_PER_PAGE,
   );
-
-  if (error?.code === "PGRST103" && page > 1) {
-    // An invalid offset returns 416 without a count. Recover the filtered count
-    // from the first row so the route can return not-found rather than 500.
-    const firstPage = await query.range(0, 0);
-    error = firstPage.error;
-    count = firstPage.count;
-    data = [];
-  }
 
   if (error) {
     console.error("Products query failed:", error);
