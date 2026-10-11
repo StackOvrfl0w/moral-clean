@@ -119,4 +119,3 @@ Production traffic, rankings, confirmed new-page indexing, qualified enquiries a
 ![Mobile product on the tested local build](screenshots/qa-mobile-product-2026-10-11.png)
 
 ![Quotation success with isolated local sinks](screenshots/qa-isolated-contact-success-2026-10-11.png)
-
