@@ -1,0 +1,1058 @@
+{
+  "testedAt": "2026-10-11T12:02:19.820Z",
+  "origin": "https://moral-clean-igyb1ngc1-burhan-uddins-projects-91e8a924.vercel.app",
+  "sitemapUrls": 68,
+  "productPages": 36,
+  "errors": [],
+  "internalLinkAudit": {
+    "pages": 68,
+    "reachableFromHome": 68,
+    "unreachable": [],
+    "edges": 1376
+  },
+  "pages": [
+    {
+      "path": "/",
+      "status": 200,
+      "title": "Commercial Cleaning Equipment in Pakistan | Moral Clean",
+      "canonical": "https://moralclean.com",
+      "noindex": false,
+      "h1Count": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite"
+      ]
+    },
+    {
+      "path": "/about",
+      "status": 200,
+      "title": "About Our Cleaning Equipment Company | Moral Clean",
+      "canonical": "https://moralclean.com/about",
+      "noindex": false,
+      "h1Count": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite"
+      ]
+    },
+    {
+      "path": "/blog",
+      "status": 200,
+      "title": "Cleaning Equipment Guides &amp; Maintenance Tips | Moral Clean",
+      "canonical": "https://moralclean.com/blog",
+      "noindex": false,
+      "h1Count": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite"
+      ]
+    },
+    {
+      "path": "/contact",
+      "status": 200,
+      "title": "Contact Moral Clean for Equipment &amp; Repairs | Moral Clean",
+      "canonical": "https://moralclean.com/contact",
+      "noindex": false,
+      "h1Count": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite"
+      ]
+    },
+    {
+      "path": "/guides",
+      "status": 200,
+      "title": "Commercial Cleaning Equipment Guides for Pakistan | Moral Clean",
+      "canonical": "https://moralclean.com/guides",
+      "noindex": false,
+      "h1Count": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "BreadcrumbList",
+        "CollectionPage"
+      ]
+    },
+    {
+      "path": "/guides/cleaning-machine-maintenance-checklist",
+      "status": 200,
+      "title": "Commercial Cleaning Machine Maintenance and Repair Enquiry Checklist | Moral Clean",
+      "canonical": "https://moralclean.com/guides/cleaning-machine-maintenance-checklist",
+      "noindex": false,
+      "h1Count": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "BreadcrumbList",
+        "Article"
+      ]
+    },
+    {
+      "path": "/guides/commercial-pressure-washer-pressure-flow-guide",
+      "status": 200,
+      "title": "Commercial Pressure Washers: Pressure, Flow and Duty Cycle Explained | Moral Clean",
+      "canonical": "https://moralclean.com/guides/commercial-pressure-washer-pressure-flow-guide",
+      "noindex": false,
+      "h1Count": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "BreadcrumbList",
+        "Article"
+      ]
+    },
+    {
+      "path": "/guides/commercial-steam-cleaner-buying-guide-pakistan",
+      "status": 200,
+      "title": "Commercial Steam Cleaners in Pakistan: What to Check Before Buying | Moral Clean",
+      "canonical": "https://moralclean.com/guides/commercial-steam-cleaner-buying-guide-pakistan",
+      "noindex": false,
+      "h1Count": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "BreadcrumbList",
+        "Article"
+      ]
+    },
+    {
+      "path": "/guides/floor-cleaning-machine-costs-pakistan",
+      "status": 200,
+      "title": "Floor Cleaning Machine Costs in Pakistan: What a Quote Should Include | Moral Clean",
+      "canonical": "https://moralclean.com/guides/floor-cleaning-machine-costs-pakistan",
+      "noindex": false,
+      "h1Count": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "BreadcrumbList",
+        "Article"
+      ]
+    },
+    {
+      "path": "/guides/floor-cleaning-pads-brushes-selection-guide",
+      "status": 200,
+      "title": "Floor Cleaning Pads and Brushes: Choose the Right Accessory for the Job | Moral Clean",
+      "canonical": "https://moralclean.com/guides/floor-cleaning-pads-brushes-selection-guide",
+      "noindex": false,
+      "h1Count": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "BreadcrumbList",
+        "Article"
+      ]
+    },
+    {
+      "path": "/guides/floor-scrubber-cleaning-capacity-calculator",
+      "status": 200,
+      "title": "Floor Scrubber Cleaning Capacity Calculator: Plan Your Cleaning Time | Moral Clean",
+      "canonical": "https://moralclean.com/guides/floor-scrubber-cleaning-capacity-calculator",
+      "noindex": false,
+      "h1Count": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "BreadcrumbList",
+        "Article"
+      ]
+    },
+    {
+      "path": "/guides/floor-scrubber-not-picking-up-water",
+      "status": 200,
+      "title": "Floor Scrubber Not Picking Up Water: Checks Before Booking a Repair | Moral Clean",
+      "canonical": "https://moralclean.com/guides/floor-scrubber-not-picking-up-water",
+      "noindex": false,
+      "h1Count": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "BreadcrumbList",
+        "Article"
+      ]
+    },
+    {
+      "path": "/guides/floor-sweeper-vs-scrubber-dryer",
+      "status": 200,
+      "title": "Floor Sweeper vs Scrubber Dryer: Choosing for Dust, Debris and Adhered Soil | Moral Clean",
+      "canonical": "https://moralclean.com/guides/floor-sweeper-vs-scrubber-dryer",
+      "noindex": false,
+      "h1Count": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "BreadcrumbList",
+        "Article"
+      ]
+    },
+    {
+      "path": "/guides/mop-trolley-cleaning-trolley-buying-guide-pakistan",
+      "status": 200,
+      "title": "Mop Trolley or Cleaning Trolley? A Buying Guide for Pakistan | Moral Clean",
+      "canonical": "https://moralclean.com/guides/mop-trolley-cleaning-trolley-buying-guide-pakistan",
+      "noindex": false,
+      "h1Count": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "BreadcrumbList",
+        "Article"
+      ]
+    },
+    {
+      "path": "/guides/single-disc-machine-vs-scrubber-dryer",
+      "status": 200,
+      "title": "Single Disc Machine vs Scrubber Dryer: Which Cleaning Process Do You Need? | Moral Clean",
+      "canonical": "https://moralclean.com/guides/single-disc-machine-vs-scrubber-dryer",
+      "noindex": false,
+      "h1Count": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "BreadcrumbList",
+        "Article"
+      ]
+    },
+    {
+      "path": "/guides/steam-cleaner-vs-wet-dry-vacuum",
+      "status": 200,
+      "title": "Steam Cleaner vs Wet and Dry Vacuum: Which Does Your Facility Need? | Moral Clean",
+      "canonical": "https://moralclean.com/guides/steam-cleaner-vs-wet-dry-vacuum",
+      "noindex": false,
+      "h1Count": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "BreadcrumbList",
+        "Article"
+      ]
+    },
+    {
+      "path": "/guides/walk-behind-vs-ride-on-scrubber-dryer",
+      "status": 200,
+      "title": "Walk Behind vs Ride On Scrubber Dryer: Choosing for Your Facility | Moral Clean",
+      "canonical": "https://moralclean.com/guides/walk-behind-vs-ride-on-scrubber-dryer",
+      "noindex": false,
+      "h1Count": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "BreadcrumbList",
+        "Article"
+      ]
+    },
+    {
+      "path": "/guides/warehouse-floor-cleaning-equipment-checklist-pakistan",
+      "status": 200,
+      "title": "Warehouse Floor Cleaning Equipment: A Procurement Checklist for Pakistan | Moral Clean",
+      "canonical": "https://moralclean.com/guides/warehouse-floor-cleaning-equipment-checklist-pakistan",
+      "noindex": false,
+      "h1Count": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "BreadcrumbList",
+        "Article"
+      ]
+    },
+    {
+      "path": "/guides/wet-dry-vacuum-cleaner-buying-guide-pakistan",
+      "status": 200,
+      "title": "Wet and Dry Vacuum Cleaners in Pakistan: A Commercial Buying Guide | Moral Clean",
+      "canonical": "https://moralclean.com/guides/wet-dry-vacuum-cleaner-buying-guide-pakistan",
+      "noindex": false,
+      "h1Count": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "BreadcrumbList",
+        "Article"
+      ]
+    },
+    {
+      "path": "/products",
+      "status": 200,
+      "title": "Commercial Cleaning Machines &amp; Equipment | Moral Clean",
+      "canonical": "https://moralclean.com/products",
+      "noindex": false,
+      "h1Count": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite"
+      ]
+    },
+    {
+      "path": "/products/18-l-window-cleaning-bucket-mc-gb-180",
+      "status": 200,
+      "title": "18 L Window Cleaning Bucket MC-GB-180 | Moral Clean",
+      "canonical": "https://moralclean.com/products/18-l-window-cleaning-bucket-mc-gb-180",
+      "noindex": false,
+      "h1Count": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ],
+      "fullSpecifications": true
+    },
+    {
+      "path": "/products/20-l-side-press-mop-bucket-trolley-mc-mw-200",
+      "status": 200,
+      "title": "20 L Side-Press Mop Bucket Trolley | Moral Clean",
+      "canonical": "https://moralclean.com/products/20-l-side-press-mop-bucket-trolley-mc-mw-200",
+      "noindex": false,
+      "h1Count": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ],
+      "fullSpecifications": true
+    },
+    {
+      "path": "/products/34-l-double-bucket-wringer-trolley-mc-dw-340",
+      "status": 200,
+      "title": "34 L Double-Bucket Wringer Trolley | Moral Clean",
+      "canonical": "https://moralclean.com/products/34-l-double-bucket-wringer-trolley-mc-dw-340",
+      "noindex": false,
+      "h1Count": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ],
+      "fullSpecifications": true
+    },
+    {
+      "path": "/products/35-l-double-bucket-wringer-mc-dw-350",
+      "status": 200,
+      "title": "35 L Double-Bucket Wringer MC-DW-350 | Moral Clean",
+      "canonical": "https://moralclean.com/products/35-l-double-bucket-wringer-mc-dw-350",
+      "noindex": false,
+      "h1Count": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ],
+      "fullSpecifications": true
+    },
+    {
+      "path": "/products/60-l-double-mop-wringer-trolley-mc-dw-600",
+      "status": 200,
+      "title": "60 L Double Mop Wringer Trolley | Moral Clean",
+      "canonical": "https://moralclean.com/products/60-l-double-mop-wringer-trolley-mc-dw-600",
+      "noindex": false,
+      "h1Count": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ],
+      "fullSpecifications": true
+    },
+    {
+      "path": "/products/biemmedue-ms-17-fast-single-disc-floor-machine",
+      "status": 200,
+      "title": "Biemmedue MS 17 FAST Single Disc Floor Machine | Moral Clean",
+      "canonical": "https://moralclean.com/products/biemmedue-ms-17-fast-single-disc-floor-machine",
+      "noindex": false,
+      "h1Count": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ],
+      "fullSpecifications": true
+    },
+    {
+      "path": "/products/biemmedue-ms-17-single-disc-floor-machine",
+      "status": 200,
+      "title": "MS 17 Single Disc Floor Machine | Moral Clean",
+      "canonical": "https://moralclean.com/products/biemmedue-ms-17-single-disc-floor-machine",
+      "noindex": false,
+      "h1Count": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ],
+      "fullSpecifications": true
+    },
+    {
+      "path": "/products/biemmedue-ms-20-fast-single-disc-floor-machine",
+      "status": 200,
+      "title": "Biemmedue MS 20 FAST Single-Disc Floor Machine | Moral Clean",
+      "canonical": "https://moralclean.com/products/biemmedue-ms-20-fast-single-disc-floor-machine",
+      "noindex": false,
+      "h1Count": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ],
+      "fullSpecifications": true
+    },
+    {
+      "path": "/products/biemmedue-ms-20-single-disc-floor-machine",
+      "status": 200,
+      "title": "Biemmedue MS 20 Single-Disc Floor Machine | Moral Clean",
+      "canonical": "https://moralclean.com/products/biemmedue-ms-20-single-disc-floor-machine",
+      "noindex": false,
+      "h1Count": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ],
+      "fullSpecifications": true
+    },
+    {
+      "path": "/products/biemmedue-wet-560-ba-ride-on-scrubber-dryer",
+      "status": 200,
+      "title": "Biemmedue WET 560 BA Ride-On Scrubber Dryer | Moral Clean",
+      "canonical": "https://moralclean.com/products/biemmedue-wet-560-ba-ride-on-scrubber-dryer",
+      "noindex": false,
+      "h1Count": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ],
+      "fullSpecifications": true
+    },
+    {
+      "path": "/products/blue-spin-mop-system-mc-sm-150",
+      "status": 200,
+      "title": "Blue Spin Mop System MC-SM-150 | Moral Clean",
+      "canonical": "https://moralclean.com/products/blue-spin-mop-system-mc-sm-150",
+      "noindex": false,
+      "h1Count": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ],
+      "fullSpecifications": true
+    },
+    {
+      "path": "/products/category/janitorial-equipment",
+      "status": 200,
+      "title": "Janitorial Equipment, Mop Buckets &amp; Trolleys in Pakistan | Moral Clean",
+      "canonical": "https://moralclean.com/products/category/janitorial-equipment",
+      "noindex": false,
+      "h1Count": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "path": "/products/category/pressure-washer",
+      "status": 200,
+      "title": "Commercial Pressure Washers in Pakistan | Moral Clean",
+      "canonical": "https://moralclean.com/products/category/pressure-washer",
+      "noindex": false,
+      "h1Count": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "path": "/products/category/ride-on-scrubber-dryer",
+      "status": 200,
+      "title": "Ride On Scrubber Dryers in Pakistan | Moral Clean",
+      "canonical": "https://moralclean.com/products/category/ride-on-scrubber-dryer",
+      "noindex": false,
+      "h1Count": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "path": "/products/category/single-disk-machine",
+      "status": 200,
+      "title": "Single Disc Floor Machines in Pakistan | Moral Clean",
+      "canonical": "https://moralclean.com/products/category/single-disk-machine",
+      "noindex": false,
+      "h1Count": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "path": "/products/category/steam-cleaners",
+      "status": 200,
+      "title": "Commercial Steam Cleaners in Pakistan | Moral Clean",
+      "canonical": "https://moralclean.com/products/category/steam-cleaners",
+      "noindex": false,
+      "h1Count": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "path": "/products/category/sweepers",
+      "status": 200,
+      "title": "Commercial &amp; Industrial Floor Sweepers in Pakistan | Moral Clean",
+      "canonical": "https://moralclean.com/products/category/sweepers",
+      "noindex": false,
+      "h1Count": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "path": "/products/category/vacuum-cleaner",
+      "status": 200,
+      "title": "Industrial, Wet &amp; Dry Vacuum Cleaners in Pakistan | Moral Clean",
+      "canonical": "https://moralclean.com/products/category/vacuum-cleaner",
+      "noindex": false,
+      "h1Count": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "path": "/products/category/walk-behind-scrubber",
+      "status": 200,
+      "title": "Walk Behind Scrubber Dryers in Pakistan | Moral Clean",
+      "canonical": "https://moralclean.com/products/category/walk-behind-scrubber",
+      "noindex": false,
+      "h1Count": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "path": "/products/dusty-1100",
+      "status": 200,
+      "title": "DUSTY 1100 Sweeper | Moral Clean",
+      "canonical": "https://moralclean.com/products/dusty-1100",
+      "noindex": false,
+      "h1Count": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ],
+      "fullSpecifications": true
+    },
+    {
+      "path": "/products/dusty-650-m",
+      "status": 200,
+      "title": "DUSTY 650 M Manual Sweeper | Moral Clean",
+      "canonical": "https://moralclean.com/products/dusty-650-m",
+      "noindex": false,
+      "h1Count": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ],
+      "fullSpecifications": true
+    },
+    {
+      "path": "/products/enclosed-housekeeping-cart-mc-hc-820",
+      "status": 200,
+      "title": "Enclosed Housekeeping Cart MC-HC-820 | Moral Clean",
+      "canonical": "https://moralclean.com/products/enclosed-housekeeping-cart-mc-hc-820",
+      "noindex": false,
+      "h1Count": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ],
+      "fullSpecifications": true
+    },
+    {
+      "path": "/products/ex-40",
+      "status": 200,
+      "title": "EX 40 Vacuum Cleaner | Moral Clean",
+      "canonical": "https://moralclean.com/products/ex-40",
+      "noindex": false,
+      "h1Count": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ],
+      "fullSpecifications": true
+    },
+    {
+      "path": "/products/ex-80",
+      "status": 200,
+      "title": "EX 80 Vacuum Cleaner | Moral Clean",
+      "canonical": "https://moralclean.com/products/ex-80",
+      "noindex": false,
+      "h1Count": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ],
+      "fullSpecifications": true
+    },
+    {
+      "path": "/products/folding-platform-trolley-mc-pt-500",
+      "status": 200,
+      "title": "Folding Platform Trolley MC-PT-500 | Moral Clean",
+      "canonical": "https://moralclean.com/products/folding-platform-trolley-mc-pt-500",
+      "noindex": false,
+      "h1Count": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ],
+      "fullSpecifications": true
+    },
+    {
+      "path": "/products/heavy-duty-janitorial-cleaning-trolley-mc-ct-173",
+      "status": 200,
+      "title": "Heavy-Duty Janitorial Cleaning Trolley | Moral Clean",
+      "canonical": "https://moralclean.com/products/heavy-duty-janitorial-cleaning-trolley-mc-ct-173",
+      "noindex": false,
+      "h1Count": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ],
+      "fullSpecifications": true
+    },
+    {
+      "path": "/products/m-130",
+      "status": 200,
+      "title": "M 130 Pressure Washer | Moral Clean",
+      "canonical": "https://moralclean.com/products/m-130",
+      "noindex": false,
+      "h1Count": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ],
+      "fullSpecifications": true
+    },
+    {
+      "path": "/products/m-140",
+      "status": 200,
+      "title": "M 140 Pressure Washer | Moral Clean",
+      "canonical": "https://moralclean.com/products/m-140",
+      "noindex": false,
+      "h1Count": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ],
+      "fullSpecifications": true
+    },
+    {
+      "path": "/products/m-160",
+      "status": 200,
+      "title": "M 160 Pressure Washer | Moral Clean",
+      "canonical": "https://moralclean.com/products/m-160",
+      "noindex": false,
+      "h1Count": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ],
+      "fullSpecifications": true
+    },
+    {
+      "path": "/products/maxim-15",
+      "status": 200,
+      "title": "MAXIM 15 Vacuum Cleaner | Moral Clean",
+      "canonical": "https://moralclean.com/products/maxim-15",
+      "noindex": false,
+      "h1Count": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ],
+      "fullSpecifications": true
+    },
+    {
+      "path": "/products/maxim-25",
+      "status": 200,
+      "title": "MAXIM 25 Vacuum Cleaner | Moral Clean",
+      "canonical": "https://moralclean.com/products/maxim-25",
+      "noindex": false,
+      "h1Count": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ],
+      "fullSpecifications": true
+    },
+    {
+      "path": "/products/one-650",
+      "status": 200,
+      "title": "ONE 650 Sweeper | Moral Clean",
+      "canonical": "https://moralclean.com/products/one-650",
+      "noindex": false,
+      "h1Count": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ],
+      "fullSpecifications": true
+    },
+    {
+      "path": "/products/one-850",
+      "status": 200,
+      "title": "ONE 850 Sweeper | Moral Clean",
+      "canonical": "https://moralclean.com/products/one-850",
+      "noindex": false,
+      "h1Count": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ],
+      "fullSpecifications": true
+    },
+    {
+      "path": "/products/othello",
+      "status": 200,
+      "title": "OTHELLO Vacuum Cleaner | Moral Clean",
+      "canonical": "https://moralclean.com/products/othello",
+      "noindex": false,
+      "h1Count": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ],
+      "fullSpecifications": true
+    },
+    {
+      "path": "/products/single-disk-floor-scrubbing-machine",
+      "status": 200,
+      "title": "Single disk floor scrubbing machine | Moral Clean",
+      "canonical": "https://moralclean.com/products/single-disk-floor-scrubbing-machine",
+      "noindex": false,
+      "h1Count": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ],
+      "fullSpecifications": true
+    },
+    {
+      "path": "/products/single-disk-machine",
+      "status": 200,
+      "title": "Biemmedue MS 13 Single-Disc Floor Machine | Moral Clean",
+      "canonical": "https://moralclean.com/products/single-disk-machine",
+      "noindex": false,
+      "h1Count": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ],
+      "fullSpecifications": true
+    },
+    {
+      "path": "/products/sp-sm-80",
+      "status": 200,
+      "title": "SP / SM 80 Vacuum Cleaners | Moral Clean",
+      "canonical": "https://moralclean.com/products/sp-sm-80",
+      "noindex": false,
+      "h1Count": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ],
+      "fullSpecifications": true
+    },
+    {
+      "path": "/products/two-shelf-janitorial-service-trolley-mc-st-170",
+      "status": 200,
+      "title": "Two-Shelf Janitorial Service Trolley | Moral Clean",
+      "canonical": "https://moralclean.com/products/two-shelf-janitorial-service-trolley-mc-st-170",
+      "noindex": false,
+      "h1Count": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ],
+      "fullSpecifications": true
+    },
+    {
+      "path": "/products/wet-1000",
+      "status": 200,
+      "title": "WET 1000 Ride On Scrubber Dryer | Moral Clean",
+      "canonical": "https://moralclean.com/products/wet-1000",
+      "noindex": false,
+      "h1Count": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ],
+      "fullSpecifications": true
+    },
+    {
+      "path": "/products/wet-350",
+      "status": 200,
+      "title": "WET 350 Walk Behind Scrubber | Moral Clean",
+      "canonical": "https://moralclean.com/products/wet-350",
+      "noindex": false,
+      "h1Count": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ],
+      "fullSpecifications": true
+    },
+    {
+      "path": "/products/wet-450",
+      "status": 200,
+      "title": "WET 450 Walk Behind Scrubber | Moral Clean",
+      "canonical": "https://moralclean.com/products/wet-450",
+      "noindex": false,
+      "h1Count": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ],
+      "fullSpecifications": true
+    },
+    {
+      "path": "/products/wet-550",
+      "status": 200,
+      "title": "WET 550 Walk Behind Scrubber | Moral Clean",
+      "canonical": "https://moralclean.com/products/wet-550",
+      "noindex": false,
+      "h1Count": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ],
+      "fullSpecifications": true
+    },
+    {
+      "path": "/products/wet-560",
+      "status": 200,
+      "title": "WET 560 Ride On Scrubber Dryer | Moral Clean",
+      "canonical": "https://moralclean.com/products/wet-560",
+      "noindex": false,
+      "h1Count": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ],
+      "fullSpecifications": true
+    },
+    {
+      "path": "/products/wet-850",
+      "status": 200,
+      "title": "WET 850 Ride On Scrubber Dryer | Moral Clean",
+      "canonical": "https://moralclean.com/products/wet-850",
+      "noindex": false,
+      "h1Count": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ],
+      "fullSpecifications": true
+    },
+    {
+      "path": "/services",
+      "status": 200,
+      "title": "Cleaning Machine Repair &amp; Maintenance in Pakistan | Moral Clean",
+      "canonical": "https://moralclean.com/services",
+      "noindex": false,
+      "h1Count": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        null
+      ]
+    },
+    {
+      "path": "/services/brush-refilling",
+      "status": 200,
+      "title": "Single-Disc Cleaning Machine Brush Refilling in Pakistan | Moral Clean",
+      "canonical": "https://moralclean.com/services/brush-refilling",
+      "noindex": false,
+      "h1Count": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "BreadcrumbList",
+        "Service"
+      ]
+    },
+    {
+      "path": "/services/cleaning-machine-parts",
+      "status": 200,
+      "title": "Cleaning Machine Parts &amp; Replacement Support in Pakistan | Moral Clean",
+      "canonical": "https://moralclean.com/services/cleaning-machine-parts",
+      "noindex": false,
+      "h1Count": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "BreadcrumbList",
+        "Service"
+      ]
+    },
+    {
+      "path": "/services/cleaning-machine-repair",
+      "status": 200,
+      "title": "Commercial Cleaning Machine Repair in Pakistan | Moral Clean",
+      "canonical": "https://moralclean.com/services/cleaning-machine-repair",
+      "noindex": false,
+      "h1Count": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "BreadcrumbList",
+        "Service"
+      ]
+    }
+  ],
+  "exclusionChecks": [
+    {
+      "path": "/services/unknown-service",
+      "status": 404,
+      "expected": 404,
+      "noindex": true
+    },
+    {
+      "path": "/products/test-prod",
+      "status": 404,
+      "expected": 404,
+      "noindex": true
+    },
+    {
+      "path": "/products/test-prod2",
+      "status": 404,
+      "expected": 404,
+      "noindex": true
+    },
+    {
+      "path": "/blog/blog-test",
+      "status": 404,
+      "expected": 404,
+      "noindex": true
+    },
+    {
+      "path": "/blog/blog-test1",
+      "status": 404,
+      "expected": 404,
+      "noindex": true
+    },
+    {
+      "path": "/blog/blogtest2",
+      "status": 404,
+      "expected": 404,
+      "noindex": true
+    },
+    {
+      "path": "/products/category/cleaning-chemicals",
+      "status": 200,
+      "expected": 200,
+      "noindex": true
+    },
+    {
+      "path": "/products/category/single-disk-machine?brand=Biemmedue",
+      "status": 200,
+      "expected": 200,
+      "noindex": true
+    },
+    {
+      "path": "/products/category/single-disk-machine?page=999",
+      "status": 404,
+      "expected": 404,
+      "noindex": true
+    },
+    {
+      "path": "/products/category/single-disk-machine?page=999&nxtPslug=single-disk-machine",
+      "status": 404,
+      "expected": 404,
+      "noindex": true
+    },
+    {
+      "path": "/products?page=999",
+      "status": 404,
+      "expected": 404,
+      "noindex": true
+    },
+    {
+      "path": "/blog?page=999",
+      "status": 404,
+      "expected": 404,
+      "noindex": true
+    }
+  ]
+}

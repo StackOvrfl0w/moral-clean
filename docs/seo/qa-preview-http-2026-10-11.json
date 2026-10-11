@@ -1,0 +1,2946 @@
+{
+  "testedAt": "2026-10-11T12:03:29.455Z",
+  "origin": "https://preview.moralclean.com",
+  "errors": [],
+  "pages": [
+    {
+      "path": "/",
+      "title": "Commercial Cleaning Equipment in Pakistan | Moral Clean",
+      "description": "Compare commercial cleaning machines, industrial vacuums and scrubber dryers. Get equipment, spare parts and repair support from Moral Clean in Pakistan.",
+      "canonical": "https://moralclean.com",
+      "h1": "Industrial GradeCleaning Equipment",
+      "schemaTypes": [
+        "Organization",
+        "WebSite"
+      ],
+      "imageCount": 18,
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER"
+    },
+    {
+      "path": "/about",
+      "title": "About Our Cleaning Equipment Company | Moral Clean",
+      "description": "Meet Moral Clean, a Pakistan supplier of commercial cleaning equipment since 2007, with machine repair, spare parts and after-sales support.",
+      "canonical": "https://moralclean.com/about",
+      "h1": "About Moral Clean",
+      "schemaTypes": [
+        "Organization",
+        "WebSite"
+      ],
+      "imageCount": 1,
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER"
+    },
+    {
+      "path": "/blog",
+      "title": "Cleaning Equipment Guides &amp; Maintenance Tips | Moral Clean",
+      "description": "Read Moral Clean guides on choosing commercial cleaning machines, maintaining equipment and planning cleaning operations for facilities in Pakistan.",
+      "canonical": "https://moralclean.com/blog",
+      "h1": "The Moral Clean Blog",
+      "schemaTypes": [
+        "Organization",
+        "WebSite"
+      ],
+      "imageCount": 3,
+      "status": 200,
+      "robots": "noindex",
+      "cache": "MISS"
+    },
+    {
+      "path": "/contact",
+      "title": "Contact Moral Clean for Equipment &amp; Repairs | Moral Clean",
+      "description": "Contact Moral Clean in Karachi for cleaning equipment quotes, spare parts and repair support. Share your machine model and facility requirements.",
+      "canonical": "https://moralclean.com/contact",
+      "h1": "Let&#x27;s Talk About Your Equipment Needs",
+      "schemaTypes": [
+        "Organization",
+        "WebSite"
+      ],
+      "imageCount": 0,
+      "status": 200,
+      "robots": "noindex",
+      "cache": "MISS"
+    },
+    {
+      "path": "/guides",
+      "title": "Commercial Cleaning Equipment Guides for Pakistan | Moral Clean",
+      "description": "Compare steam cleaners, vacuums, pressure washers, sweepers and scrubber dryers. Practical equipment selection and maintenance guides for Pakistan.",
+      "canonical": "https://moralclean.com/guides",
+      "h1": "Commercial cleaning equipment guides.",
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "BreadcrumbList",
+        "CollectionPage"
+      ],
+      "imageCount": 15,
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER"
+    },
+    {
+      "path": "/guides/cleaning-machine-maintenance-checklist",
+      "title": "Commercial Cleaning Machine Maintenance and Repair Enquiry Checklist | Moral Clean",
+      "description": "Prepare model details, symptoms and maintenance records for cleaning-machine repairs, parts replacement and brush-refilling enquiries in Pakistan.",
+      "canonical": "https://moralclean.com/guides/cleaning-machine-maintenance-checklist",
+      "h1": "Commercial Cleaning Machine Maintenance and Repair Enquiry Checklist",
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "BreadcrumbList",
+        "Article"
+      ],
+      "imageCount": 4,
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER"
+    },
+    {
+      "path": "/guides/commercial-pressure-washer-pressure-flow-guide",
+      "title": "Commercial Pressure Washers: Pressure, Flow and Duty Cycle Explained | Moral Clean",
+      "description": "Compare pressure-washer operating pressure, flow, power supply and duty cycle before requesting commercial cleaning equipment in Pakistan.",
+      "canonical": "https://moralclean.com/guides/commercial-pressure-washer-pressure-flow-guide",
+      "h1": "Commercial Pressure Washers: Pressure, Flow and Duty Cycle Explained",
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "BreadcrumbList",
+        "Article"
+      ],
+      "imageCount": 4,
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER"
+    },
+    {
+      "path": "/guides/commercial-steam-cleaner-buying-guide-pakistan",
+      "title": "Commercial Steam Cleaners in Pakistan: What to Check Before Buying | Moral Clean",
+      "description": "Compare commercial steam cleaners by surface compatibility, output, refill method, attachments and recovery. Request model-specific specifications in Pakistan.",
+      "canonical": "https://moralclean.com/guides/commercial-steam-cleaner-buying-guide-pakistan",
+      "h1": "Commercial Steam Cleaners in Pakistan: What to Check Before Buying",
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "BreadcrumbList",
+        "Article"
+      ],
+      "imageCount": 4,
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER"
+    },
+    {
+      "path": "/guides/floor-cleaning-machine-costs-pakistan",
+      "title": "Floor Cleaning Machine Costs in Pakistan: What a Quote Should Include | Moral Clean",
+      "description": "Understand equipment price factors, accessories, batteries, delivery and operating costs when requesting a floor cleaning machine quote in Pakistan.",
+      "canonical": "https://moralclean.com/guides/floor-cleaning-machine-costs-pakistan",
+      "h1": "Floor Cleaning Machine Costs in Pakistan: What a Quote Should Include",
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "BreadcrumbList",
+        "Article"
+      ],
+      "imageCount": 4,
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER"
+    },
+    {
+      "path": "/guides/floor-cleaning-pads-brushes-selection-guide",
+      "title": "Floor Cleaning Pads and Brushes: Choose the Right Accessory for the Job | Moral Clean",
+      "description": "Choose floor cleaning pads and brushes by surface, finish, task, machine speed and fitting. Build a clear accessory or brush-refilling enquiry in Pakistan.",
+      "canonical": "https://moralclean.com/guides/floor-cleaning-pads-brushes-selection-guide",
+      "h1": "Floor Cleaning Pads and Brushes: Choose the Right Accessory for the Job",
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "BreadcrumbList",
+        "Article"
+      ],
+      "imageCount": 4,
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER"
+    },
+    {
+      "path": "/guides/floor-scrubber-cleaning-capacity-calculator",
+      "title": "Floor Scrubber Cleaning Capacity Calculator: Plan Your Cleaning Time | Moral Clean",
+      "description": "Estimate a scrubber&#x27;s cleaning window using floor area, brush width, speed and route assumptions. Understand theoretical capacity, stop time and a real site…",
+      "canonical": "https://moralclean.com/guides/floor-scrubber-cleaning-capacity-calculator",
+      "h1": "Floor Scrubber Cleaning Capacity Calculator: Plan Your Cleaning Time",
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "BreadcrumbList",
+        "Article"
+      ],
+      "imageCount": 4,
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER"
+    },
+    {
+      "path": "/guides/floor-scrubber-not-picking-up-water",
+      "title": "Floor Scrubber Not Picking Up Water: Checks Before Booking a Repair | Moral Clean",
+      "description": "Understand poor scrubber-dryer water pickup. Record the trail, check permitted recovery-system items and prepare a specific repair enquiry in Pakistan.",
+      "canonical": "https://moralclean.com/guides/floor-scrubber-not-picking-up-water",
+      "h1": "Floor Scrubber Not Picking Up Water: Checks Before Booking a Repair",
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "BreadcrumbList",
+        "Article"
+      ],
+      "imageCount": 4,
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER"
+    },
+    {
+      "path": "/guides/floor-sweeper-vs-scrubber-dryer",
+      "title": "Floor Sweeper vs Scrubber Dryer: Choosing for Dust, Debris and Adhered Soil | Moral Clean",
+      "description": "Choose between sweeping and wet scrubbing using debris, surface, route access and disposal requirements. Compare commercial cleaning workflows in Pakistan.",
+      "canonical": "https://moralclean.com/guides/floor-sweeper-vs-scrubber-dryer",
+      "h1": "Floor Sweeper vs Scrubber Dryer: Choosing for Dust, Debris and Adhered Soil",
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "BreadcrumbList",
+        "Article"
+      ],
+      "imageCount": 4,
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER"
+    },
+    {
+      "path": "/guides/mop-trolley-cleaning-trolley-buying-guide-pakistan",
+      "title": "Mop Trolley or Cleaning Trolley? A Buying Guide for Pakistan | Moral Clean",
+      "description": "Compare mop bucket trolleys and janitorial cleaning carts by route, wringer compatibility, storage and handling. Prepare a specific facility quotation in…",
+      "canonical": "https://moralclean.com/guides/mop-trolley-cleaning-trolley-buying-guide-pakistan",
+      "h1": "Mop Trolley or Cleaning Trolley? A Buying Guide for Pakistan",
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "BreadcrumbList",
+        "Article"
+      ],
+      "imageCount": 4,
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER"
+    },
+    {
+      "path": "/guides/single-disc-machine-vs-scrubber-dryer",
+      "title": "Single Disc Machine vs Scrubber Dryer: Which Cleaning Process Do You Need? | Moral Clean",
+      "description": "Compare single disc floor machines and scrubber dryers by scrubbing, water recovery, accessories and workflow before buying in Pakistan.",
+      "canonical": "https://moralclean.com/guides/single-disc-machine-vs-scrubber-dryer",
+      "h1": "Single Disc Machine vs Scrubber Dryer: Which Cleaning Process Do You Need?",
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "BreadcrumbList",
+        "Article"
+      ],
+      "imageCount": 4,
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER"
+    },
+    {
+      "path": "/guides/steam-cleaner-vs-wet-dry-vacuum",
+      "title": "Steam Cleaner vs Wet and Dry Vacuum: Which Does Your Facility Need? | Moral Clean",
+      "description": "Compare steam cleaning, dry dust collection and wet recovery. Choose a complete cleaning workflow for your facility in Pakistan before buying equipment.",
+      "canonical": "https://moralclean.com/guides/steam-cleaner-vs-wet-dry-vacuum",
+      "h1": "Steam Cleaner vs Wet and Dry Vacuum: Which Does Your Facility Need?",
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "BreadcrumbList",
+        "Article"
+      ],
+      "imageCount": 4,
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER"
+    },
+    {
+      "path": "/guides/walk-behind-vs-ride-on-scrubber-dryer",
+      "title": "Walk Behind vs Ride On Scrubber Dryer: Choosing for Your Facility | Moral Clean",
+      "description": "Compare access, cleaning routes, tanks, power and operating costs before choosing a walk behind or ride on scrubber dryer for a facility in Pakistan.",
+      "canonical": "https://moralclean.com/guides/walk-behind-vs-ride-on-scrubber-dryer",
+      "h1": "Walk Behind vs Ride On Scrubber Dryer: Choosing for Your Facility",
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "BreadcrumbList",
+        "Article"
+      ],
+      "imageCount": 4,
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER"
+    },
+    {
+      "path": "/guides/warehouse-floor-cleaning-equipment-checklist-pakistan",
+      "title": "Warehouse Floor Cleaning Equipment: A Procurement Checklist for Pakistan | Moral Clean",
+      "description": "Build a warehouse cleaning-equipment brief using floor condition, aisles, traffic, dust, water access and practical route testing before requesting quotations.",
+      "canonical": "https://moralclean.com/guides/warehouse-floor-cleaning-equipment-checklist-pakistan",
+      "h1": "Warehouse Floor Cleaning Equipment: A Procurement Checklist for Pakistan",
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "BreadcrumbList",
+        "Article"
+      ],
+      "imageCount": 4,
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER"
+    },
+    {
+      "path": "/guides/wet-dry-vacuum-cleaner-buying-guide-pakistan",
+      "title": "Wet and Dry Vacuum Cleaners in Pakistan: A Commercial Buying Guide | Moral Clean",
+      "description": "Choose a commercial wet and dry vacuum by pickup material, filtration, capacity, tools and service needs. Prepare a comparable quotation in Pakistan.",
+      "canonical": "https://moralclean.com/guides/wet-dry-vacuum-cleaner-buying-guide-pakistan",
+      "h1": "Wet and Dry Vacuum Cleaners in Pakistan: A Commercial Buying Guide",
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "BreadcrumbList",
+        "Article"
+      ],
+      "imageCount": 4,
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER"
+    },
+    {
+      "path": "/products",
+      "title": "Commercial Cleaning Machines &amp; Equipment | Moral Clean",
+      "description": "Browse scrubber dryers, industrial vacuums, pressure washers and janitorial equipment. Compare specifications and request a quote from Moral Clean.",
+      "canonical": "https://moralclean.com/products",
+      "h1": "Our Products",
+      "schemaTypes": [
+        "Organization",
+        "WebSite"
+      ],
+      "imageCount": 12,
+      "status": 200,
+      "robots": "noindex",
+      "cache": "MISS"
+    },
+    {
+      "path": "/products/18-l-window-cleaning-bucket-mc-gb-180",
+      "title": "18 L Window Cleaning Bucket MC-GB-180 | Moral Clean",
+      "description": "Equip glass-cleaning teams with the Moral Clean 18 L window bucket, sized for washers and squeegees used on large windows and commercial glazing.",
+      "canonical": "https://moralclean.com/products/18-l-window-cleaning-bucket-mc-gb-180",
+      "h1": "18 L Window Cleaning Bucket",
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ],
+      "imageCount": 12,
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER"
+    },
+    {
+      "path": "/products/20-l-side-press-mop-bucket-trolley-mc-mw-200",
+      "title": "20 L Side-Press Mop Bucket Trolley | Moral Clean",
+      "description": "Move efficiently between cleaning zones with the Moral Clean 20 L side-press mop bucket trolley, featuring manual wringing and four caster wheels.",
+      "canonical": "https://moralclean.com/products/20-l-side-press-mop-bucket-trolley-mc-mw-200",
+      "h1": "20 L Side-Press Mop Bucket Trolley",
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ],
+      "imageCount": 12,
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER"
+    },
+    {
+      "path": "/products/34-l-double-bucket-wringer-trolley-mc-dw-340",
+      "title": "34 L Double-Bucket Wringer Trolley | Moral Clean",
+      "description": "Separate clean and recovered water with the Moral Clean 34 L double-bucket wringer trolley, designed for mobile cleaning in busy commercial facilities.",
+      "canonical": "https://moralclean.com/products/34-l-double-bucket-wringer-trolley-mc-dw-340",
+      "h1": "34 L Double-Bucket Wringer Trolley",
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ],
+      "imageCount": 12,
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER"
+    },
+    {
+      "path": "/products/35-l-double-bucket-wringer-mc-dw-350",
+      "title": "35 L Double-Bucket Wringer MC-DW-350 | Moral Clean",
+      "description": "Improve floor-cleaning control with the Moral Clean 35 L double-bucket wringer, featuring separate compartments and a durable manual press system.",
+      "canonical": "https://moralclean.com/products/35-l-double-bucket-wringer-mc-dw-350",
+      "h1": "35 L Double-Bucket Wringer",
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ],
+      "imageCount": 12,
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER"
+    },
+    {
+      "path": "/products/60-l-double-mop-wringer-trolley-mc-dw-600",
+      "title": "60 L Double Mop Wringer Trolley | Moral Clean",
+      "description": "Handle larger cleaning rounds with the Moral Clean 60 L double mop wringer trolley, offering separated bucket space, manual pressing and smooth mobility.",
+      "canonical": "https://moralclean.com/products/60-l-double-mop-wringer-trolley-mc-dw-600",
+      "h1": "60 L Double Mop Wringer Trolley",
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ],
+      "imageCount": 12,
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER"
+    },
+    {
+      "path": "/products/biemmedue-ms-17-fast-single-disc-floor-machine",
+      "title": "Biemmedue MS 17 FAST Single Disc Floor Machine | Moral Clean",
+      "description": "High-speed 440mm single-disc floor machine for professional commercial cleaning. Compatible with high-speed pad drivers and detergent tanks.",
+      "canonical": "https://moralclean.com/products/biemmedue-ms-17-fast-single-disc-floor-machine",
+      "h1": "MS 17 FAST Single Disc Floor Machine",
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ],
+      "imageCount": 11,
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER"
+    },
+    {
+      "path": "/products/biemmedue-ms-17-single-disc-floor-machine",
+      "title": "MS 17 Single Disc Floor Machine | Moral Clean",
+      "description": "Professional single-disc floor machine tested under the most demanding work conditions, offering extreme stability and precision of movement for your commercial…",
+      "canonical": "https://moralclean.com/products/biemmedue-ms-17-single-disc-floor-machine",
+      "h1": "MS 17 Single Disc Floor Machine",
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ],
+      "imageCount": 11,
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER"
+    },
+    {
+      "path": "/products/biemmedue-ms-20-fast-single-disc-floor-machine",
+      "title": "Biemmedue MS 20 FAST Single-Disc Floor Machine | Moral Clean",
+      "description": "High-speed 510mm single-disc floor machine for professional commercial cleaning. Compatible with high-speed pad drivers and detergent tanks.",
+      "canonical": "https://moralclean.com/products/biemmedue-ms-20-fast-single-disc-floor-machine",
+      "h1": "MS 20 FAST Single-Disc Floor Machine",
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ],
+      "imageCount": 11,
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER"
+    },
+    {
+      "path": "/products/biemmedue-ms-20-single-disc-floor-machine",
+      "title": "Biemmedue MS 20 Single-Disc Floor Machine | Moral Clean",
+      "description": "Professional 20-inch single-disc floor machine for washing, scrubbing, and polishing. Built for extreme stability and demanding commercial work conditions.",
+      "canonical": "https://moralclean.com/products/biemmedue-ms-20-single-disc-floor-machine",
+      "h1": "MS 20 Single Disc Floor Machine",
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ],
+      "imageCount": 11,
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER"
+    },
+    {
+      "path": "/products/biemmedue-wet-560-ba-ride-on-scrubber-dryer",
+      "title": "Biemmedue WET 560 BA Ride-On Scrubber Dryer | Moral Clean",
+      "description": "rofessional ride-on scrubber dryer with dual disc brushes and front-wheel drive. Extremely stable with a 550mm scrubbing path for commercial cleaning.",
+      "canonical": "https://moralclean.com/products/biemmedue-wet-560-ba-ride-on-scrubber-dryer",
+      "h1": "WET 560 BA Ride On Scrubber Dryer",
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ],
+      "imageCount": 11,
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER"
+    },
+    {
+      "path": "/products/blue-spin-mop-system-mc-sm-150",
+      "title": "Blue Spin Mop System MC-SM-150 | Moral Clean",
+      "description": "Make routine floor care easier with the Moral Clean blue spin mop system, complete with steel drainer, 360-degree swivel head and spare refill.",
+      "canonical": "https://moralclean.com/products/blue-spin-mop-system-mc-sm-150",
+      "h1": "Blue Spin Mop System",
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ],
+      "imageCount": 12,
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER"
+    },
+    {
+      "path": "/products/category/janitorial-equipment",
+      "title": "Janitorial Equipment, Mop Buckets &amp; Trolleys in Pakistan | Moral Clean",
+      "description": "Browse mop buckets, trolleys and janitorial tools for routine commercial housekeeping. Build a system around floor type, chemical compatibility, handling weight…",
+      "canonical": "https://moralclean.com/products/category/janitorial-equipment",
+      "h1": "Janitorial Equipment",
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "BreadcrumbList"
+      ],
+      "imageCount": 19,
+      "status": 200,
+      "robots": "noindex",
+      "cache": "MISS"
+    },
+    {
+      "path": "/products/category/pressure-washer",
+      "title": "Commercial Pressure Washers in Pakistan | Moral Clean",
+      "description": "Compare pressure washers for compatible outdoor surfaces, equipment and facility maintenance. Select using water flow, operating pressure, duty cycle and…",
+      "canonical": "https://moralclean.com/products/category/pressure-washer",
+      "h1": "Pressure Washer",
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "BreadcrumbList"
+      ],
+      "imageCount": 9,
+      "status": 200,
+      "robots": "noindex",
+      "cache": "MISS"
+    },
+    {
+      "path": "/products/category/ride-on-scrubber-dryer",
+      "title": "Ride On Scrubber Dryers in Pakistan | Moral Clean",
+      "description": "Compare ride on scrubber dryers for commercial floors in Pakistan. Check working width, tanks, access and power configuration before requesting a quotation.",
+      "canonical": "https://moralclean.com/products/category/ride-on-scrubber-dryer",
+      "h1": "Ride On Scrubber Dryers for Commercial Floors",
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "BreadcrumbList"
+      ],
+      "imageCount": 11,
+      "status": 200,
+      "robots": "noindex",
+      "cache": "MISS"
+    },
+    {
+      "path": "/products/category/single-disk-machine",
+      "title": "Single Disc Floor Machines in Pakistan | Moral Clean",
+      "description": "Compare commercial single disc floor machines in Pakistan. Check speed, working width and recovery needs; request a model-specific equipment quotation.",
+      "canonical": "https://moralclean.com/products/category/single-disk-machine",
+      "h1": "Single Disc Floor Cleaning Machines",
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "BreadcrumbList"
+      ],
+      "imageCount": 15,
+      "status": 200,
+      "robots": "noindex",
+      "cache": "MISS"
+    },
+    {
+      "path": "/products/category/steam-cleaners",
+      "title": "Commercial Steam Cleaners in Pakistan | Moral Clean",
+      "description": "Moral Clean supplies steam cleaners for compatible cleaning tasks in Pakistan. Share your surface, type of soil and expected daily workload to request a…",
+      "canonical": "https://moralclean.com/products/category/steam-cleaners",
+      "h1": "Steam Cleaners",
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "BreadcrumbList"
+      ],
+      "imageCount": 3,
+      "status": 200,
+      "robots": "noindex",
+      "cache": "MISS"
+    },
+    {
+      "path": "/products/category/sweepers",
+      "title": "Commercial &amp; Industrial Floor Sweepers in Pakistan | Moral Clean",
+      "description": "Floor sweepers collect loose dry debris from suitable indoor or outdoor routes. Compare manual and powered machines by surface, debris volume, working width and…",
+      "canonical": "https://moralclean.com/products/category/sweepers",
+      "h1": "Sweepers",
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "BreadcrumbList"
+      ],
+      "imageCount": 11,
+      "status": 200,
+      "robots": "noindex",
+      "cache": "MISS"
+    },
+    {
+      "path": "/products/category/vacuum-cleaner",
+      "title": "Industrial, Wet &amp; Dry Vacuum Cleaners in Pakistan | Moral Clean",
+      "description": "Browse vacuum cleaners for commercial housekeeping and facility cleaning. Match the machine to the material being collected: dry dust, wet spills and specialist…",
+      "canonical": "https://moralclean.com/products/category/vacuum-cleaner",
+      "h1": "Vacuum Cleaner",
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "BreadcrumbList"
+      ],
+      "imageCount": 15,
+      "status": 200,
+      "robots": "noindex",
+      "cache": "MISS"
+    },
+    {
+      "path": "/products/category/walk-behind-scrubber",
+      "title": "Walk Behind Scrubber Dryers in Pakistan | Moral Clean",
+      "description": "Walk behind scrubber dryers wash compatible hard floors and recover dirty water in one pass. They suit facilities where an operator can walk the cleaning route…",
+      "canonical": "https://moralclean.com/products/category/walk-behind-scrubber",
+      "h1": "Walk Behind Scrubber",
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "BreadcrumbList"
+      ],
+      "imageCount": 9,
+      "status": 200,
+      "robots": "noindex",
+      "cache": "MISS"
+    },
+    {
+      "path": "/products/dusty-1100",
+      "title": "DUSTY 1100 Sweeper | Moral Clean",
+      "description": "Biemmedue DUSTY 1100 Sweeper. 1100 model with battery-powered ET or petrol-engine STH options. Standard and assisted-discharge PLUS configurations.",
+      "canonical": "https://moralclean.com/products/dusty-1100",
+      "h1": "DUSTY 1100 Sweeper",
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ],
+      "imageCount": 10,
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER"
+    },
+    {
+      "path": "/products/dusty-650-m",
+      "title": "DUSTY 650 M Manual Sweeper | Moral Clean",
+      "description": "Biemmedue DUSTY 650 M Manual Sweeper. Manual push-driven sweeper; separate from the powered ET/STH models.",
+      "canonical": "https://moralclean.com/products/dusty-650-m",
+      "h1": "DUSTY 650 M Manual Sweeper",
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ],
+      "imageCount": 7,
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER"
+    },
+    {
+      "path": "/products/enclosed-housekeeping-cart-mc-hc-820",
+      "title": "Enclosed Housekeeping Cart MC-HC-820 | Moral Clean",
+      "description": "Organise linen, waste and supplies with the Moral Clean enclosed housekeeping cart, featuring dual side bags, cabinet storage and smooth mobility.",
+      "canonical": "https://moralclean.com/products/enclosed-housekeeping-cart-mc-hc-820",
+      "h1": "Enclosed Housekeeping Cart",
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ],
+      "imageCount": 12,
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER"
+    },
+    {
+      "path": "/products/ex-40",
+      "title": "EX 40 Vacuum Cleaner | Moral Clean",
+      "description": "Biemmedue EX 40 Vacuum Cleaner. 40 L model. Verified catalog configuration: EX 40 M stainless-steel tank. Plastic version requires confirmation.",
+      "canonical": "https://moralclean.com/products/ex-40",
+      "h1": "EX 40 Vacuum Cleaner",
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ],
+      "imageCount": 8,
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER"
+    },
+    {
+      "path": "/products/ex-80",
+      "title": "EX 80 Vacuum Cleaner | Moral Clean",
+      "description": "Biemmedue EX 80 Vacuum Cleaner. 80 L model with plastic P or stainless-steel M tanks, in ECO and PRO configurations.",
+      "canonical": "https://moralclean.com/products/ex-80",
+      "h1": "EX 80 Vacuum Cleaner",
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ],
+      "imageCount": 10,
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER"
+    },
+    {
+      "path": "/products/folding-platform-trolley-mc-pt-500",
+      "title": "Folding Platform Trolley MC-PT-500 | Moral Clean",
+      "description": "Move cartons and facility supplies with the Moral Clean folding platform trolley, built with a flat deck, four wheels and a space-saving handle.",
+      "canonical": "https://moralclean.com/products/folding-platform-trolley-mc-pt-500",
+      "h1": "Folding Platform Trolley",
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ],
+      "imageCount": 12,
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER"
+    },
+    {
+      "path": "/products/heavy-duty-janitorial-cleaning-trolley-mc-ct-173",
+      "title": "Heavy-Duty Janitorial Cleaning Trolley | Moral Clean",
+      "description": "Organise intensive cleaning rounds with this Moral Clean heavy-duty janitorial trolley, combining supply storage, mop wringing and waste collection.",
+      "canonical": "https://moralclean.com/products/heavy-duty-janitorial-cleaning-trolley-mc-ct-173",
+      "h1": "Heavy-Duty Janitorial Cleaning Trolley",
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ],
+      "imageCount": 12,
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER"
+    },
+    {
+      "path": "/products/m-130",
+      "title": "M 130 Pressure Washer | Moral Clean",
+      "description": "Biemmedue M 130 Pressure Washer. M 130 pressure-washer model. Use the model-specific specifications below.",
+      "canonical": "https://moralclean.com/products/m-130",
+      "h1": "M 130 Pressure Washer",
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ],
+      "imageCount": 6,
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER"
+    },
+    {
+      "path": "/products/m-140",
+      "title": "M 140 Pressure Washer | Moral Clean",
+      "description": "Biemmedue M 140 Pressure Washer. M 140 pressure-washer model. Use the model-specific specifications below.",
+      "canonical": "https://moralclean.com/products/m-140",
+      "h1": "M 140 Pressure Washer",
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ],
+      "imageCount": 6,
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER"
+    },
+    {
+      "path": "/products/m-160",
+      "title": "M 160 Pressure Washer | Moral Clean",
+      "description": "Biemmedue M 160 Pressure Washer. M 160 pressure-washer model. Use the model-specific specifications below.",
+      "canonical": "https://moralclean.com/products/m-160",
+      "h1": "M 160 Pressure Washer",
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ],
+      "imageCount": 6,
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER"
+    },
+    {
+      "path": "/products/maxim-15",
+      "title": "MAXIM 15 Vacuum Cleaner | Moral Clean",
+      "description": "Biemmedue MAXIM 15 Vacuum Cleaner. 15 L model with DRY (dry pickup only) or wet/dry configurations.",
+      "canonical": "https://moralclean.com/products/maxim-15",
+      "h1": "MAXIM 15 Vacuum Cleaner",
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ],
+      "imageCount": 8,
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER"
+    },
+    {
+      "path": "/products/maxim-25",
+      "title": "MAXIM 25 Vacuum Cleaner | Moral Clean",
+      "description": "Biemmedue MAXIM 25 Vacuum Cleaner. 25 L single-motor wet/dry model.",
+      "canonical": "https://moralclean.com/products/maxim-25",
+      "h1": "MAXIM 25 Vacuum Cleaner",
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ],
+      "imageCount": 8,
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER"
+    },
+    {
+      "path": "/products/one-650",
+      "title": "ONE 650 Sweeper | Moral Clean",
+      "description": "Biemmedue ONE 650 Sweeper. ONE 650 model with battery-powered ET or petrol-engine STH options. Representative family photo; exact width/equipment follows select",
+      "canonical": "https://moralclean.com/products/one-650",
+      "h1": "ONE 650 Sweeper",
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ],
+      "imageCount": 7,
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER"
+    },
+    {
+      "path": "/products/one-850",
+      "title": "ONE 850 Sweeper | Moral Clean",
+      "description": "Biemmedue ONE 850 Sweeper. ONE 850 model with battery-powered ET or petrol-engine STH options. Representative family photo; exact width/equipment follows select",
+      "canonical": "https://moralclean.com/products/one-850",
+      "h1": "ONE 850 Sweeper",
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ],
+      "imageCount": 7,
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER"
+    },
+    {
+      "path": "/products/othello",
+      "title": "OTHELLO Vacuum Cleaner | Moral Clean",
+      "description": "Biemmedue OTHELLO Vacuum Cleaner. Compact professional dry vacuum cleaner.",
+      "canonical": "https://moralclean.com/products/othello",
+      "h1": "OTHELLO Vacuum Cleaner",
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ],
+      "imageCount": 8,
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER"
+    },
+    {
+      "path": "/products/single-disk-floor-scrubbing-machine",
+      "title": "Single disk floor scrubbing machine | Moral Clean",
+      "description": "The MC-522 Pro is a heavy-duty, multi-functional single-disk cleaning machine engineered for versatile industries",
+      "canonical": "https://moralclean.com/products/single-disk-floor-scrubbing-machine",
+      "h1": "Single disk floor scrubbing machine",
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ],
+      "imageCount": 12,
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER"
+    },
+    {
+      "path": "/products/single-disk-machine",
+      "title": "Biemmedue MS 13 Single-Disc Floor Machine | Moral Clean",
+      "description": "Professional 13-inch single-disc floor machine for washing, scrubbing, and polishing. Built for extreme stability and demanding commercial work conditions.",
+      "canonical": "https://moralclean.com/products/single-disk-machine",
+      "h1": "MS-13 Single Disc Floor Machine  ",
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ],
+      "imageCount": 11,
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER"
+    },
+    {
+      "path": "/products/sp-sm-80",
+      "title": "SP / SM 80 Vacuum Cleaners | Moral Clean",
+      "description": "Biemmedue SP / SM 80 Vacuum Cleaners. 80 L range with polypropylene plastic tanks (SP) or AISI 430 stainless-steel tanks (SM). Choose 3HP/4HP and fixed F, plast",
+      "canonical": "https://moralclean.com/products/sp-sm-80",
+      "h1": "SP / SM 80 Vacuum Cleaners",
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ],
+      "imageCount": 11,
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER"
+    },
+    {
+      "path": "/products/two-shelf-janitorial-service-trolley-mc-st-170",
+      "title": "Two-Shelf Janitorial Service Trolley | Moral Clean",
+      "description": "Carry tools, supplies and waste efficiently with the Moral Clean two-shelf janitorial trolley, built for hospitals, schools and commercial buildings.",
+      "canonical": "https://moralclean.com/products/two-shelf-janitorial-service-trolley-mc-st-170",
+      "h1": "Two-Shelf Janitorial Service Trolley",
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ],
+      "imageCount": 12,
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER"
+    },
+    {
+      "path": "/products/wet-1000",
+      "title": "WET 1000 Ride On Scrubber Dryer | Moral Clean",
+      "description": "Biemmedue WET 1000 Ride On Scrubber Dryer. WET 1000 battery-powered BA model. Brush assembly, dimensions and batteries follow the selected model specifications.",
+      "canonical": "https://moralclean.com/products/wet-1000",
+      "h1": "WET 1000 Ride On Scrubber Dryer",
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ],
+      "imageCount": 7,
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER"
+    },
+    {
+      "path": "/products/wet-350",
+      "title": "WET 350 Walk Behind Scrubber | Moral Clean",
+      "description": "Biemmedue WET 350 Walk Behind Scrubber. Available in mains-electric EL and battery-powered BA versions.",
+      "canonical": "https://moralclean.com/products/wet-350",
+      "h1": "WET 350 Walk Behind Scrubber",
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ],
+      "imageCount": 6,
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER"
+    },
+    {
+      "path": "/products/wet-450",
+      "title": "WET 450 Walk Behind Scrubber | Moral Clean",
+      "description": "Biemmedue WET 450 Walk Behind Scrubber. 450 model with mains-electric EL or battery-powered BA options.",
+      "canonical": "https://moralclean.com/products/wet-450",
+      "h1": "WET 450 Walk Behind Scrubber",
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ],
+      "imageCount": 6,
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER"
+    },
+    {
+      "path": "/products/wet-550",
+      "title": "WET 550 Walk Behind Scrubber | Moral Clean",
+      "description": "Biemmedue WET 550 Walk Behind Scrubber. 550 model with twin disc brushes. Verified catalog configuration: battery-powered BA. EL version requires confirmation.",
+      "canonical": "https://moralclean.com/products/wet-550",
+      "h1": "WET 550 Walk Behind Scrubber",
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ],
+      "imageCount": 6,
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER"
+    },
+    {
+      "path": "/products/wet-560",
+      "title": "WET 560 Ride On Scrubber Dryer | Moral Clean",
+      "description": "Biemmedue WET 560 Ride On Scrubber Dryer. WET 560 battery-powered BA model. Brush assembly, dimensions and batteries follow the selected model specifications.",
+      "canonical": "https://moralclean.com/products/wet-560",
+      "h1": "WET 560 Ride On Scrubber Dryer",
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ],
+      "imageCount": 7,
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER"
+    },
+    {
+      "path": "/products/wet-850",
+      "title": "WET 850 Ride On Scrubber Dryer | Moral Clean",
+      "description": "Biemmedue WET 850 Ride On Scrubber Dryer. WET 850 battery-powered BA model. Brush assembly, dimensions and batteries follow the selected model specifications.",
+      "canonical": "https://moralclean.com/products/wet-850",
+      "h1": "WET 850 Ride On Scrubber Dryer",
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ],
+      "imageCount": 7,
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER"
+    },
+    {
+      "path": "/services",
+      "title": "Cleaning Machine Repair &amp; Maintenance in Pakistan | Moral Clean",
+      "description": "Get motor repair, parts replacement, brush refilling and maintenance for commercial cleaning equipment. Send your equipment details and location to confirm…",
+      "canonical": "https://moralclean.com/services",
+      "h1": "Cleaning Machine Repair, Parts &amp; Brush Refilling",
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        null
+      ],
+      "imageCount": 7,
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER"
+    },
+    {
+      "path": "/services/brush-refilling",
+      "title": "Single-Disc Cleaning Machine Brush Refilling in Pakistan | Moral Clean",
+      "description": "Request brush refilling for a single-disc cleaning machine. Confirm the backing, drive fitting, bristle condition and floor application before selecting…",
+      "canonical": "https://moralclean.com/services/brush-refilling",
+      "h1": "Single-Disc Cleaning Machine Brush Refilling",
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "BreadcrumbList",
+        "Service"
+      ],
+      "imageCount": 1,
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER"
+    },
+    {
+      "path": "/services/cleaning-machine-parts",
+      "title": "Cleaning Machine Parts &amp; Replacement Support in Pakistan | Moral Clean",
+      "description": "Enquire about replacement parts for single-disc machines and vacuums. Identify the exact model, part number and fitting before confirming compatibility and…",
+      "canonical": "https://moralclean.com/services/cleaning-machine-parts",
+      "h1": "Cleaning Machine Parts &amp; Replacement Support",
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "BreadcrumbList",
+        "Service"
+      ],
+      "imageCount": 1,
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER"
+    },
+    {
+      "path": "/services/cleaning-machine-repair",
+      "title": "Commercial Cleaning Machine Repair in Pakistan | Moral Clean",
+      "description": "Request a cleaning-machine or motor repair assessment from Moral Clean. Send the model, fault symptoms and location so repair scope and parts can be confirmed.",
+      "canonical": "https://moralclean.com/services/cleaning-machine-repair",
+      "h1": "Commercial Cleaning Machine Repair",
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "BreadcrumbList",
+        "Service"
+      ],
+      "imageCount": 1,
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER"
+    }
+  ],
+  "images": [
+    {
+      "path": "/_next/image?url=%2Fassets%2Fcategories%2FPressure-washer.png&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=%2Fassets%2Fcategories%2Fwalk-behind-scrubber-dryer.png&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=%2Fassets%2Fcategories%2Fmop-bucket.png&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=%2Fassets%2Fcategories%2Fsteam-cleaner.png&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=%2Fassets%2Fservices-image%2Fpart-replacement.png&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=%2Fassets%2Fservices-image%2Fbrush.jpeg&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=%2Fassets%2Fabout%2Fmuhammad-moiz-khan.webp&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=%2Fassets%2Fcategories%2FSingle-disk-machine.png&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=%2Fassets%2Fcategories%2FVaccumcleaners.png&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fsjlmjakninsenljyastk.supabase.co%2Fstorage%2Fv1%2Fobject%2Fpublic%2Fproduct%2520images%2Fcategories%2F1786395948997-0269926e-ed3a-4b5d-9877-00ddff9d4c02.png&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=%2Fassets%2Fcategories%2FRide-on-scrubber-dryer.png&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=%2Fhero-placeholder.png&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fsjlmjakninsenljyastk.supabase.co%2Fstorage%2Fv1%2Fobject%2Fpublic%2Fproduct%2520images%2Fcategories%2F1786397921025-0b134ca0-473c-4add-aa02-069e13bfc5f6.png&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fsjlmjakninsenljyastk.supabase.co%2Fstorage%2Fv1%2Fobject%2Fpublic%2Fproduct%2520images%2Fcategories%2F1786704447884-8ff9c293-d31b-42a9-8c01-3e8c271baa03.png&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fsjlmjakninsenljyastk.supabase.co%2Fstorage%2Fv1%2Fobject%2Fpublic%2Fproduct%2520images%2Fcategories%2F1786704292151-e88636b6-2228-484b-ab83-745b0cee3f25.png&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fsjlmjakninsenljyastk.supabase.co%2Fstorage%2Fv1%2Fobject%2Fpublic%2Fproduct%2520images%2Fcategories%2F1786398373668-b097d872-72d1-4cae-96fe-9c37e34b40f7.png&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fsjlmjakninsenljyastk.supabase.co%2Fstorage%2Fv1%2Fobject%2Fpublic%2Fproduct%2520images%2Fcategories%2F1786704478957-84eac255-8ec9-4aff-9fe1-b33df0a9ab5e.png&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fsjlmjakninsenljyastk.supabase.co%2Fstorage%2Fv1%2Fobject%2Fpublic%2Fproduct%2520images%2Fcategories%2F1791395879929-24557e12-ac0f-4616-b6cd-4f480c262c1d.png&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=%2Fassets%2Fservices-image%2Fmotor-repairing.png&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fsjlmjakninsenljyastk.supabase.co%2Fstorage%2Fv1%2Fobject%2Fpublic%2Fproduct%2520images%2Fproducts%2F1786721655800-4a62da49-1642-4484-85ea-590c5254fb85.png&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fsjlmjakninsenljyastk.supabase.co%2Fstorage%2Fv1%2Fobject%2Fpublic%2Fproduct%2520images%2Fproducts%2F1786720829530-6ed8c886-2d75-4727-a2b1-1c585e5d79fc.jpg&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fsjlmjakninsenljyastk.supabase.co%2Fstorage%2Fv1%2Fobject%2Fpublic%2Fproduct%2520images%2Fproducts%2F1786721062633-ceb31ec0-ad10-4fd4-a93f-235d11c8ac00.jpg&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fsjlmjakninsenljyastk.supabase.co%2Fstorage%2Fv1%2Fobject%2Fpublic%2Fproduct%2520images%2Fservices%2F1785870490011-19c1b3e7-7066-44e2-9d96-ec038e6a51a5.jpg&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fsjlmjakninsenljyastk.supabase.co%2Fstorage%2Fv1%2Fobject%2Fpublic%2Fproduct%2520images%2Fproducts%2F1786722229137-9dc5c7e0-b87e-45ad-88ef-483ef393fbd7.png&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fsjlmjakninsenljyastk.supabase.co%2Fstorage%2Fv1%2Fobject%2Fpublic%2Fproduct%2520images%2Fservices%2F1786708642688-9304082d-ff45-4969-8f47-196ddb07d698.png&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fsjlmjakninsenljyastk.supabase.co%2Fstorage%2Fv1%2Fobject%2Fpublic%2Fproduct%2520images%2Fservices%2F1786708893506-f683a21c-692b-4e9f-8061-21ba92e05d5e.png&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=%2Fassets%2Fmap.jpg&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fewshqneh2%2Fproducts%2Fcsv%2F18-l-window-cleaning-bucket-mc-gb-180-front_Na0mOMldQ.webp&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fewshqneh2%2Fproducts%2Fcsv%2F18-l-window-cleaning-bucket-mc-gb-180-alternate_Wk3JZgkMr.webp&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fewshqneh2%2Fproducts%2Fcsv%2F18-l-window-cleaning-bucket-mc-gb-180-detail_nDavmUrkN.webp&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fewshqneh2%2Fproducts%2Fcsv%2Fenclosed-housekeeping-cart-mc-hc-820-front_axojhniO8.webp&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fewshqneh2%2Fproducts%2Fcsv%2F18-l-window-cleaning-bucket-mc-gb-180-application_FMkZR51o9.webp&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fewshqneh2%2Fproducts%2Fcsv%2F20-l-side-press-mop-bucket-trolley-mc-mw-200-front_aBbdx0PvO.webp&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fewshqneh2%2Fproducts%2Fcsv%2Fblue-spin-mop-system-mc-sm-150-front_VdGLEEe8a.webp&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fsjlmjakninsenljyastk.supabase.co%2Fstorage%2Fv1%2Fobject%2Fpublic%2Fproduct%2520images%2Fproducts%2F1785342422387-b2b290a5-3f48-4d28-aeea-c01762614dd1.jpg&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fewshqneh2%2Fproducts%2Fcsv%2Ffolding-platform-trolley-mc-pt-500-front_lYjGuYMgF.webp&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fsjlmjakninsenljyastk.supabase.co%2Fstorage%2Fv1%2Fobject%2Fpublic%2Fproduct%2520images%2Fproducts%2F1779056323138-08ab05ac-6ada-45bf-a76f-882ab4031285.jpg&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fsjlmjakninsenljyastk.supabase.co%2Fstorage%2Fv1%2Fobject%2Fpublic%2Fproduct%2520images%2Fproducts%2F1786723159548-6135cda7-d3c6-4511-bfef-493b7d5bc094.png&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fxm8amguex%2Fproducts%2Fcsv%2Fex-40-01_PwhwfXkfY.webp&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fxm8amguex%2Fproducts%2Fcsv%2Fex-80-01_ijXsTcq1_.webp&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fxm8amguex%2Fproducts%2Fcsv%2Fwet-450-01_4kltvB0Dr.webp&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fxm8amguex%2Fproducts%2Fcsv%2Fwet-550-01_Pfji2LsjS.webp&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fewshqneh2%2Fproducts%2Fcsv%2F20-l-side-press-mop-bucket-trolley-mc-mw-200-alternate_zmidpis1n.webp&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fewshqneh2%2Fproducts%2Fcsv%2F20-l-side-press-mop-bucket-trolley-mc-mw-200-detail_HDrnoioqk.webp&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fewshqneh2%2Fproducts%2Fcsv%2F20-l-side-press-mop-bucket-trolley-mc-mw-200-application_HNZnxV1fA.webp&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fewshqneh2%2Fproducts%2Fcsv%2F34-l-double-bucket-wringer-trolley-mc-dw-340-front_h5-4SboGA.webp&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fewshqneh2%2Fproducts%2Fcsv%2F34-l-double-bucket-wringer-trolley-mc-dw-340-alternate_qUR0rjEaP.webp&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fewshqneh2%2Fproducts%2Fcsv%2F34-l-double-bucket-wringer-trolley-mc-dw-340-detail_WUSRSoxUh.webp&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fewshqneh2%2Fproducts%2Fcsv%2F34-l-double-bucket-wringer-trolley-mc-dw-340-application_0vItqs3sy.webp&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fewshqneh2%2Fproducts%2Fcsv%2F35-l-double-bucket-wringer-mc-dw-350-front_Uaopdz5Xh.webp&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fewshqneh2%2Fproducts%2Fcsv%2F35-l-double-bucket-wringer-mc-dw-350-alternate_ODM07lC1L.webp&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fewshqneh2%2Fproducts%2Fcsv%2F35-l-double-bucket-wringer-mc-dw-350-detail_A7aIe_pS7.webp&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fewshqneh2%2Fproducts%2Fcsv%2F35-l-double-bucket-wringer-mc-dw-350-application_bROiQO1_a.webp&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fewshqneh2%2Fproducts%2Fcsv%2F60-l-double-mop-wringer-trolley-mc-dw-600-front_TosCVdRxC.webp&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fewshqneh2%2Fproducts%2Fcsv%2F60-l-double-mop-wringer-trolley-mc-dw-600-alternate_TMWdCNroh.webp&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fewshqneh2%2Fproducts%2Fcsv%2F60-l-double-mop-wringer-trolley-mc-dw-600-detail_0ZFen8LKc.webp&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fewshqneh2%2Fproducts%2Fcsv%2F60-l-double-mop-wringer-trolley-mc-dw-600-application_DUnIzo1Eh.webp&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fsjlmjakninsenljyastk.supabase.co%2Fstorage%2Fv1%2Fobject%2Fpublic%2Fproduct%2520images%2Fproducts%2F1786722015142-018a0742-96bc-4b9a-a2f4-3141e13592b5.png&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fsjlmjakninsenljyastk.supabase.co%2Fstorage%2Fv1%2Fobject%2Fpublic%2Fproduct%2520images%2Fproducts%2F1786720768434-81ab2204-d91d-4d4e-9627-2727187fb612.jpg&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fsjlmjakninsenljyastk.supabase.co%2Fstorage%2Fv1%2Fobject%2Fpublic%2Fproduct%2520images%2Fproducts%2F1786722018522-3b151ef7-c908-4d6b-98af-1e79b9ad539a.png&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fsjlmjakninsenljyastk.supabase.co%2Fstorage%2Fv1%2Fobject%2Fpublic%2Fproduct%2520images%2Fproducts%2F1786720770772-bfdce1d5-ec5e-42cc-b174-67e66e6dfb8e.jpg&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fsjlmjakninsenljyastk.supabase.co%2Fstorage%2Fv1%2Fobject%2Fpublic%2Fproduct%2520images%2Fproducts%2F1786722239109-431a9c8a-77a4-472d-b06c-4d0f05df132e.png&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fsjlmjakninsenljyastk.supabase.co%2Fstorage%2Fv1%2Fobject%2Fpublic%2Fproduct%2520images%2Fproducts%2F1786722242583-ad8bec36-094e-4bb0-8798-85fc8486de85.png&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fsjlmjakninsenljyastk.supabase.co%2Fstorage%2Fv1%2Fobject%2Fpublic%2Fproduct%2520images%2Fproducts%2F1786721089488-0d6bb263-f01e-46b2-822e-c0511d50e545.jpg&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fsjlmjakninsenljyastk.supabase.co%2Fstorage%2Fv1%2Fobject%2Fpublic%2Fproduct%2520images%2Fproducts%2F1786721092215-a2fc995f-91dc-4690-9d48-03a237856fb3.jpg&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fsjlmjakninsenljyastk.supabase.co%2Fstorage%2Fv1%2Fobject%2Fpublic%2Fproduct%2520images%2Fproducts%2F1786723142168-ce9bb011-cf2d-45a7-b508-063a3d2b0fcf.png&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fsjlmjakninsenljyastk.supabase.co%2Fstorage%2Fv1%2Fobject%2Fpublic%2Fproduct%2520images%2Fproducts%2F1786723146915-41614c62-6935-495c-9976-c7a3723b3738.png&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fsjlmjakninsenljyastk.supabase.co%2Fstorage%2Fv1%2Fobject%2Fpublic%2Fproduct%2520images%2Fproducts%2F1786723151260-245d31ef-0393-4f41-8dc4-e8176a4feb77.png&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fxm8amguex%2Fproducts%2Fcsv%2Fwet-560-01_qsG9ptN21.webp&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fxm8amguex%2Fproducts%2Fcsv%2Fwet-850-01_cKbdMBWwu.webp&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fxm8amguex%2Fproducts%2Fcsv%2Fwet-1000-01_stZLMz5X1.webp&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fewshqneh2%2Fproducts%2Fcsv%2Fblue-spin-mop-system-mc-sm-150-alternate_6QLzMSh86.webp&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fewshqneh2%2Fproducts%2Fcsv%2Fblue-spin-mop-system-mc-sm-150-detail_cS71uR6lK.webp&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fewshqneh2%2Fproducts%2Fcsv%2Fblue-spin-mop-system-mc-sm-150-application_ZhkokI5QF.webp&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fxm8amguex%2Fproducts%2Fcsv%2Fdusty-1100-03_-lFEqc6IE.webp&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fxm8amguex%2Fproducts%2Fcsv%2Fdusty-1100-02_bPFeEb3jc.webp&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fxm8amguex%2Fproducts%2Fcsv%2Fdusty-1100-01_llhGEGtvo.webp&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fxm8amguex%2Fproducts%2Fcsv%2Fone-650-01_rm4mW8cIL.webp&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fewshqneh2%2Fproducts%2Fcsv%2Fenclosed-housekeeping-cart-mc-hc-820-alternate_UeNKsQfCx.webp&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fxm8amguex%2Fproducts%2Fcsv%2Fone-850-01_upH9noicm.webp&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fxm8amguex%2Fproducts%2Fcsv%2Fdusty-650-m-01_gpSaam9R-.webp&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fewshqneh2%2Fproducts%2Fcsv%2Fenclosed-housekeeping-cart-mc-hc-820-detail_-d7KTuRi_.webp&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fxm8amguex%2Fproducts%2Fcsv%2Fsp-sm-80-01_PUN_t34-N.webp&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fxm8amguex%2Fproducts%2Fcsv%2Fmaxim-15-01_ZU9pONNqX.webp&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fewshqneh2%2Fproducts%2Fcsv%2Fenclosed-housekeeping-cart-mc-hc-820-application_jGO8Yy6Gy.webp&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fxm8amguex%2Fproducts%2Fcsv%2Fmaxim-25-01_EPmHu3BT5.webp&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fxm8amguex%2Fproducts%2Fcsv%2Fex-80-02_N4wB5KF-M.webp&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fewshqneh2%2Fproducts%2Fcsv%2Ffolding-platform-trolley-mc-pt-500-alternate_k3UOdj_kq.webp&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fewshqneh2%2Fproducts%2Fcsv%2Ffolding-platform-trolley-mc-pt-500-detail_Q1x4KqmCM.webp&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fewshqneh2%2Fproducts%2Fcsv%2Ffolding-platform-trolley-mc-pt-500-application_Zssq7FoTD.webp&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fewshqneh2%2Fproducts%2Fcsv%2Fheavy-duty-janitorial-cleaning-trolley-mc-ct-173-alternate_k_-WWGHAZ.webp&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fewshqneh2%2Fproducts%2Fcsv%2Fheavy-duty-janitorial-cleaning-trolley-mc-ct-173-front_K0gmJSRF1.webp&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fewshqneh2%2Fproducts%2Fcsv%2Fheavy-duty-janitorial-cleaning-trolley-mc-ct-173-detail_K9PS9Gy0C.webp&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fewshqneh2%2Fproducts%2Fcsv%2Fheavy-duty-janitorial-cleaning-trolley-mc-ct-173-application_S9DSCxRZx.webp&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fxm8amguex%2Fproducts%2Fcsv%2Fm-140-01_GGCz1AvM2.webp&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fxm8amguex%2Fproducts%2Fcsv%2Fm-130-01_Ea2ztN0wI.webp&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fxm8amguex%2Fproducts%2Fcsv%2Fothello-01__lxQ5EnZG.webp&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fxm8amguex%2Fproducts%2Fcsv%2Fm-160-01_UqmxJ1REb.webp&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fsjlmjakninsenljyastk.supabase.co%2Fstorage%2Fv1%2Fobject%2Fpublic%2Fproduct%2520images%2Fproducts%2F1785342425347-bd8660cb-50e0-4af7-b195-1d6c57199bd1.jpg&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fsjlmjakninsenljyastk.supabase.co%2Fstorage%2Fv1%2Fobject%2Fpublic%2Fproduct%2520images%2Fproducts%2F1779056324934-4a43b0b5-c264-4322-bc3b-16baa57fe28d.jpg&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fsjlmjakninsenljyastk.supabase.co%2Fstorage%2Fv1%2Fobject%2Fpublic%2Fproduct%2520images%2Fproducts%2F1779056326965-04710a2a-7474-46a9-a010-cba4e3afa5eb.jpg&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fsjlmjakninsenljyastk.supabase.co%2Fstorage%2Fv1%2Fobject%2Fpublic%2Fproduct%2520images%2Fproducts%2F1779056328725-dd90fa8a-15bb-477f-9a83-3e55c87e53d2.jpg&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fsjlmjakninsenljyastk.supabase.co%2Fstorage%2Fv1%2Fobject%2Fpublic%2Fproduct%2520images%2Fproducts%2F1785342427237-8af3d1e5-a0c8-45f1-9919-bc8ffb0b4466.jpg&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fxm8amguex%2Fproducts%2Fcsv%2Fsp-sm-80-02_XJ5cdTsBM.webp&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fewshqneh2%2Fproducts%2Fcsv%2Ftwo-shelf-janitorial-service-trolley-mc-st-170-front_0EBpV6lAM.webp&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fxm8amguex%2Fproducts%2Fcsv%2Fsp-sm-80-03_Ijg-T74ss.webp&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fewshqneh2%2Fproducts%2Fcsv%2Ftwo-shelf-janitorial-service-trolley-mc-st-170-alternate__wBMYBE8n.webp&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fewshqneh2%2Fproducts%2Fcsv%2Ftwo-shelf-janitorial-service-trolley-mc-st-170-detail_kKZmEZlMV.webp&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fewshqneh2%2Fproducts%2Fcsv%2Ftwo-shelf-janitorial-service-trolley-mc-st-170-application_vdjJiTACJ.webp&w=3840&q=75",
+      "status": 200
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fxm8amguex%2Fproducts%2Fcsv%2Fwet-350-01_EbZTw0NbW.webp&w=3840&q=75",
+      "status": 200
+    }
+  ],
+  "responses": [
+    {
+      "path": "/sitemap.xml",
+      "status": 200,
+      "robots": "noindex",
+      "cache": "MISS",
+      "seconds": 1.353567
+    },
+    {
+      "path": "/sitemap-0.xml",
+      "status": 200,
+      "robots": "noindex",
+      "cache": "MISS",
+      "seconds": 0.84369
+    },
+    {
+      "path": "/catalog-sitemap.xml",
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER",
+      "seconds": 1.0746
+    },
+    {
+      "path": "/guides/commercial-pressure-washer-pressure-flow-guide",
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER",
+      "seconds": 0.874852
+    },
+    {
+      "path": "/about",
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER",
+      "seconds": 1.006533
+    },
+    {
+      "path": "/guides/cleaning-machine-maintenance-checklist",
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER",
+      "seconds": 1.275889
+    },
+    {
+      "path": "/guides/commercial-steam-cleaner-buying-guide-pakistan",
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER",
+      "seconds": 1.20877
+    },
+    {
+      "path": "/guides/floor-cleaning-pads-brushes-selection-guide",
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER",
+      "seconds": 1.020081
+    },
+    {
+      "path": "/guides/floor-scrubber-cleaning-capacity-calculator",
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER",
+      "seconds": 0.990255
+    },
+    {
+      "path": "/guides/floor-scrubber-not-picking-up-water",
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER",
+      "seconds": 0.973135
+    },
+    {
+      "path": "/guides/floor-cleaning-machine-costs-pakistan",
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER",
+      "seconds": 0.888439
+    },
+    {
+      "path": "/guides/floor-sweeper-vs-scrubber-dryer",
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER",
+      "seconds": 1.019517
+    },
+    {
+      "path": "/guides/single-disc-machine-vs-scrubber-dryer",
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER",
+      "seconds": 0.978521
+    },
+    {
+      "path": "/guides/mop-trolley-cleaning-trolley-buying-guide-pakistan",
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER",
+      "seconds": 0.977112
+    },
+    {
+      "path": "/guides/steam-cleaner-vs-wet-dry-vacuum",
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER",
+      "seconds": 1.107795
+    },
+    {
+      "path": "/guides/walk-behind-vs-ride-on-scrubber-dryer",
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER",
+      "seconds": 0.894208
+    },
+    {
+      "path": "/guides/wet-dry-vacuum-cleaner-buying-guide-pakistan",
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER",
+      "seconds": 0.87874
+    },
+    {
+      "path": "/guides/warehouse-floor-cleaning-equipment-checklist-pakistan",
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER",
+      "seconds": 0.986746
+    },
+    {
+      "path": "/guides",
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER",
+      "seconds": 0.997762
+    },
+    {
+      "path": "/",
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER",
+      "seconds": 0.987538
+    },
+    {
+      "path": "/services/brush-refilling",
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER",
+      "seconds": 0.917084
+    },
+    {
+      "path": "/services/cleaning-machine-parts",
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER",
+      "seconds": 0.919514
+    },
+    {
+      "path": "/services/cleaning-machine-repair",
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER",
+      "seconds": 0.8635
+    },
+    {
+      "path": "/services",
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER",
+      "seconds": 1.044637
+    },
+    {
+      "path": "/contact",
+      "status": 200,
+      "robots": "noindex",
+      "cache": "MISS",
+      "seconds": 1.879387
+    },
+    {
+      "path": "/blog",
+      "status": 200,
+      "robots": "noindex",
+      "cache": "MISS",
+      "seconds": 0.935996
+    },
+    {
+      "path": "/products/18-l-window-cleaning-bucket-mc-gb-180",
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER",
+      "seconds": 1.047618
+    },
+    {
+      "path": "/products",
+      "status": 200,
+      "robots": "noindex",
+      "cache": "MISS",
+      "seconds": 3.814456
+    },
+    {
+      "path": "/products/20-l-side-press-mop-bucket-trolley-mc-mw-200",
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER",
+      "seconds": 1.050153
+    },
+    {
+      "path": "/products/34-l-double-bucket-wringer-trolley-mc-dw-340",
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER",
+      "seconds": 0.986287
+    },
+    {
+      "path": "/products/35-l-double-bucket-wringer-mc-dw-350",
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER",
+      "seconds": 0.982196
+    },
+    {
+      "path": "/products/60-l-double-mop-wringer-trolley-mc-dw-600",
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER",
+      "seconds": 1.010611
+    },
+    {
+      "path": "/products/biemmedue-ms-17-fast-single-disc-floor-machine",
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER",
+      "seconds": 0.981501
+    },
+    {
+      "path": "/products/biemmedue-ms-17-single-disc-floor-machine",
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER",
+      "seconds": 0.983604
+    },
+    {
+      "path": "/products/biemmedue-ms-20-fast-single-disc-floor-machine",
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER",
+      "seconds": 0.990979
+    },
+    {
+      "path": "/products/biemmedue-ms-20-single-disc-floor-machine",
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER",
+      "seconds": 0.976066
+    },
+    {
+      "path": "/products/biemmedue-wet-560-ba-ride-on-scrubber-dryer",
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER",
+      "seconds": 0.997769
+    },
+    {
+      "path": "/products/blue-spin-mop-system-mc-sm-150",
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER",
+      "seconds": 1.109114
+    },
+    {
+      "path": "/products/dusty-1100",
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER",
+      "seconds": 1.034218
+    },
+    {
+      "path": "/products/dusty-650-m",
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER",
+      "seconds": 0.992126
+    },
+    {
+      "path": "/products/enclosed-housekeeping-cart-mc-hc-820",
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER",
+      "seconds": 0.983068
+    },
+    {
+      "path": "/products/ex-40",
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER",
+      "seconds": 0.989058
+    },
+    {
+      "path": "/products/ex-80",
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER",
+      "seconds": 1.11694
+    },
+    {
+      "path": "/products/folding-platform-trolley-mc-pt-500",
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER",
+      "seconds": 1.013201
+    },
+    {
+      "path": "/products/heavy-duty-janitorial-cleaning-trolley-mc-ct-173",
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER",
+      "seconds": 0.993904
+    },
+    {
+      "path": "/products/m-130",
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER",
+      "seconds": 0.962632
+    },
+    {
+      "path": "/products/m-140",
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER",
+      "seconds": 1.083096
+    },
+    {
+      "path": "/products/m-160",
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER",
+      "seconds": 0.957954
+    },
+    {
+      "path": "/products/maxim-15",
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER",
+      "seconds": 0.977985
+    },
+    {
+      "path": "/products/maxim-25",
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER",
+      "seconds": 1.002733
+    },
+    {
+      "path": "/products/one-650",
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER",
+      "seconds": 0.994367
+    },
+    {
+      "path": "/products/one-850",
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER",
+      "seconds": 0.987023
+    },
+    {
+      "path": "/products/othello",
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER",
+      "seconds": 0.968578
+    },
+    {
+      "path": "/products/single-disk-floor-scrubbing-machine",
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER",
+      "seconds": 1.010755
+    },
+    {
+      "path": "/products/single-disk-machine",
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER",
+      "seconds": 0.983308
+    },
+    {
+      "path": "/products/sp-sm-80",
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER",
+      "seconds": 1.007657
+    },
+    {
+      "path": "/products/two-shelf-janitorial-service-trolley-mc-st-170",
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER",
+      "seconds": 0.966808
+    },
+    {
+      "path": "/products/wet-1000",
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER",
+      "seconds": 1.010052
+    },
+    {
+      "path": "/products/wet-350",
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER",
+      "seconds": 1.016576
+    },
+    {
+      "path": "/products/wet-450",
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER",
+      "seconds": 1.002786
+    },
+    {
+      "path": "/products/wet-550",
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER",
+      "seconds": 1.108571
+    },
+    {
+      "path": "/products/wet-560",
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER",
+      "seconds": 1.015906
+    },
+    {
+      "path": "/products/wet-850",
+      "status": 200,
+      "robots": "noindex",
+      "cache": "PRERENDER",
+      "seconds": 0.958138
+    },
+    {
+      "path": "/products/category/janitorial-equipment",
+      "status": 200,
+      "robots": "noindex",
+      "cache": "MISS",
+      "seconds": 3.357762
+    },
+    {
+      "path": "/products/category/pressure-washer",
+      "status": 200,
+      "robots": "noindex",
+      "cache": "MISS",
+      "seconds": 3.064116
+    },
+    {
+      "path": "/products/category/ride-on-scrubber-dryer",
+      "status": 200,
+      "robots": "noindex",
+      "cache": "MISS",
+      "seconds": 2.887165
+    },
+    {
+      "path": "/products/category/single-disk-machine",
+      "status": 200,
+      "robots": "noindex",
+      "cache": "MISS",
+      "seconds": 2.366789
+    },
+    {
+      "path": "/products/category/steam-cleaners",
+      "status": 200,
+      "robots": "noindex",
+      "cache": "MISS",
+      "seconds": 2.547265
+    },
+    {
+      "path": "/products/category/sweepers",
+      "status": 200,
+      "robots": "noindex",
+      "cache": "MISS",
+      "seconds": 2.761434
+    },
+    {
+      "path": "/products/category/vacuum-cleaner",
+      "status": 200,
+      "robots": "noindex",
+      "cache": "MISS",
+      "seconds": 2.380751
+    },
+    {
+      "path": "/products/category/walk-behind-scrubber",
+      "status": 200,
+      "robots": "noindex",
+      "cache": "MISS",
+      "seconds": 2.611156
+    },
+    {
+      "path": "/_next/image?url=%2Fassets%2Fcategories%2FPressure-washer.png&w=3840&q=75",
+      "status": 200,
+      "robots": "noindex",
+      "cache": "MISS",
+      "seconds": 0.974927
+    },
+    {
+      "path": "/_next/image?url=%2Fassets%2Fcategories%2Fwalk-behind-scrubber-dryer.png&w=3840&q=75",
+      "status": 200,
+      "robots": "noindex",
+      "cache": "MISS",
+      "seconds": 1.244742
+    },
+    {
+      "path": "/_next/image?url=%2Fassets%2Fcategories%2Fmop-bucket.png&w=3840&q=75",
+      "status": 200,
+      "robots": "noindex",
+      "cache": "MISS",
+      "seconds": 1.350597
+    },
+    {
+      "path": "/_next/image?url=%2Fassets%2Fcategories%2Fsteam-cleaner.png&w=3840&q=75",
+      "status": 200,
+      "robots": "noindex",
+      "cache": "MISS",
+      "seconds": 1.559264
+    },
+    {
+      "path": "/_next/image?url=%2Fassets%2Fservices-image%2Fpart-replacement.png&w=3840&q=75",
+      "status": 200,
+      "robots": "noindex",
+      "cache": "HIT",
+      "seconds": 0.804743
+    },
+    {
+      "path": "/_next/image?url=%2Fassets%2Fservices-image%2Fbrush.jpeg&w=3840&q=75",
+      "status": 200,
+      "robots": "noindex",
+      "cache": "HIT",
+      "seconds": 0.643484
+    },
+    {
+      "path": "/_next/image?url=%2Fassets%2Fabout%2Fmuhammad-moiz-khan.webp&w=3840&q=75",
+      "status": 200,
+      "robots": "noindex",
+      "cache": "HIT",
+      "seconds": 0.630751
+    },
+    {
+      "path": "/_next/image?url=%2Fassets%2Fcategories%2FSingle-disk-machine.png&w=3840&q=75",
+      "status": 200,
+      "robots": "noindex",
+      "cache": "MISS",
+      "seconds": 1.005486
+    },
+    {
+      "path": "/_next/image?url=%2Fassets%2Fcategories%2FVaccumcleaners.png&w=3840&q=75",
+      "status": 200,
+      "robots": "noindex",
+      "cache": "MISS",
+      "seconds": 1.098729
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fsjlmjakninsenljyastk.supabase.co%2Fstorage%2Fv1%2Fobject%2Fpublic%2Fproduct%2520images%2Fcategories%2F1786395948997-0269926e-ed3a-4b5d-9877-00ddff9d4c02.png&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "STALE",
+      "seconds": 0.685146
+    },
+    {
+      "path": "/_next/image?url=%2Fassets%2Fcategories%2FRide-on-scrubber-dryer.png&w=3840&q=75",
+      "status": 200,
+      "robots": "noindex",
+      "cache": "MISS",
+      "seconds": 2.118194
+    },
+    {
+      "path": "/_next/image?url=%2Fhero-placeholder.png&w=3840&q=75",
+      "status": 200,
+      "robots": "noindex",
+      "cache": "HIT",
+      "seconds": 0.804824
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fsjlmjakninsenljyastk.supabase.co%2Fstorage%2Fv1%2Fobject%2Fpublic%2Fproduct%2520images%2Fcategories%2F1786397921025-0b134ca0-473c-4add-aa02-069e13bfc5f6.png&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "STALE",
+      "seconds": 0.586487
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fsjlmjakninsenljyastk.supabase.co%2Fstorage%2Fv1%2Fobject%2Fpublic%2Fproduct%2520images%2Fcategories%2F1786704447884-8ff9c293-d31b-42a9-8c01-3e8c271baa03.png&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "STALE",
+      "seconds": 0.653538
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fsjlmjakninsenljyastk.supabase.co%2Fstorage%2Fv1%2Fobject%2Fpublic%2Fproduct%2520images%2Fcategories%2F1786704292151-e88636b6-2228-484b-ab83-745b0cee3f25.png&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "STALE",
+      "seconds": 0.65617
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fsjlmjakninsenljyastk.supabase.co%2Fstorage%2Fv1%2Fobject%2Fpublic%2Fproduct%2520images%2Fcategories%2F1786398373668-b097d872-72d1-4cae-96fe-9c37e34b40f7.png&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "STALE",
+      "seconds": 0.685487
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fsjlmjakninsenljyastk.supabase.co%2Fstorage%2Fv1%2Fobject%2Fpublic%2Fproduct%2520images%2Fcategories%2F1786704478957-84eac255-8ec9-4aff-9fe1-b33df0a9ab5e.png&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "STALE",
+      "seconds": 0.582046
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fsjlmjakninsenljyastk.supabase.co%2Fstorage%2Fv1%2Fobject%2Fpublic%2Fproduct%2520images%2Fcategories%2F1791395879929-24557e12-ac0f-4616-b6cd-4f480c262c1d.png&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "STALE",
+      "seconds": 0.819643
+    },
+    {
+      "path": "/_next/image?url=%2Fassets%2Fservices-image%2Fmotor-repairing.png&w=3840&q=75",
+      "status": 200,
+      "robots": "noindex",
+      "cache": "HIT",
+      "seconds": 0.896744
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fsjlmjakninsenljyastk.supabase.co%2Fstorage%2Fv1%2Fobject%2Fpublic%2Fproduct%2520images%2Fproducts%2F1786721655800-4a62da49-1642-4484-85ea-590c5254fb85.png&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "STALE",
+      "seconds": 0.303118
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fsjlmjakninsenljyastk.supabase.co%2Fstorage%2Fv1%2Fobject%2Fpublic%2Fproduct%2520images%2Fproducts%2F1786720829530-6ed8c886-2d75-4727-a2b1-1c585e5d79fc.jpg&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "STALE",
+      "seconds": 0.579131
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fsjlmjakninsenljyastk.supabase.co%2Fstorage%2Fv1%2Fobject%2Fpublic%2Fproduct%2520images%2Fproducts%2F1786721062633-ceb31ec0-ad10-4fd4-a93f-235d11c8ac00.jpg&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "STALE",
+      "seconds": 0.289258
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fsjlmjakninsenljyastk.supabase.co%2Fstorage%2Fv1%2Fobject%2Fpublic%2Fproduct%2520images%2Fservices%2F1785870490011-19c1b3e7-7066-44e2-9d96-ec038e6a51a5.jpg&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "STALE",
+      "seconds": 0.721617
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fsjlmjakninsenljyastk.supabase.co%2Fstorage%2Fv1%2Fobject%2Fpublic%2Fproduct%2520images%2Fproducts%2F1786722229137-9dc5c7e0-b87e-45ad-88ef-483ef393fbd7.png&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "STALE",
+      "seconds": 0.569871
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fsjlmjakninsenljyastk.supabase.co%2Fstorage%2Fv1%2Fobject%2Fpublic%2Fproduct%2520images%2Fservices%2F1786708642688-9304082d-ff45-4969-8f47-196ddb07d698.png&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "STALE",
+      "seconds": 0.980074
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fsjlmjakninsenljyastk.supabase.co%2Fstorage%2Fv1%2Fobject%2Fpublic%2Fproduct%2520images%2Fservices%2F1786708893506-f683a21c-692b-4e9f-8061-21ba92e05d5e.png&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "STALE",
+      "seconds": 0.800437
+    },
+    {
+      "path": "/_next/image?url=%2Fassets%2Fmap.jpg&w=3840&q=75",
+      "status": 200,
+      "robots": "noindex",
+      "cache": "STALE",
+      "seconds": 0.569136
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fewshqneh2%2Fproducts%2Fcsv%2F18-l-window-cleaning-bucket-mc-gb-180-front_Na0mOMldQ.webp&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "HIT",
+      "seconds": 0.578248
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fewshqneh2%2Fproducts%2Fcsv%2F18-l-window-cleaning-bucket-mc-gb-180-alternate_Wk3JZgkMr.webp&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "HIT",
+      "seconds": 0.606831
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fewshqneh2%2Fproducts%2Fcsv%2F18-l-window-cleaning-bucket-mc-gb-180-detail_nDavmUrkN.webp&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "HIT",
+      "seconds": 0.624585
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fewshqneh2%2Fproducts%2Fcsv%2Fenclosed-housekeeping-cart-mc-hc-820-front_axojhniO8.webp&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "HIT",
+      "seconds": 0.567793
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fewshqneh2%2Fproducts%2Fcsv%2F18-l-window-cleaning-bucket-mc-gb-180-application_FMkZR51o9.webp&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "HIT",
+      "seconds": 0.704318
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fewshqneh2%2Fproducts%2Fcsv%2F20-l-side-press-mop-bucket-trolley-mc-mw-200-front_aBbdx0PvO.webp&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "HIT",
+      "seconds": 0.566757
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fewshqneh2%2Fproducts%2Fcsv%2Fblue-spin-mop-system-mc-sm-150-front_VdGLEEe8a.webp&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "HIT",
+      "seconds": 0.5979
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fsjlmjakninsenljyastk.supabase.co%2Fstorage%2Fv1%2Fobject%2Fpublic%2Fproduct%2520images%2Fproducts%2F1785342422387-b2b290a5-3f48-4d28-aeea-c01762614dd1.jpg&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "HIT",
+      "seconds": 0.281454
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fewshqneh2%2Fproducts%2Fcsv%2Ffolding-platform-trolley-mc-pt-500-front_lYjGuYMgF.webp&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "HIT",
+      "seconds": 0.600997
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fsjlmjakninsenljyastk.supabase.co%2Fstorage%2Fv1%2Fobject%2Fpublic%2Fproduct%2520images%2Fproducts%2F1779056323138-08ab05ac-6ada-45bf-a76f-882ab4031285.jpg&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "STALE",
+      "seconds": 0.574871
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fsjlmjakninsenljyastk.supabase.co%2Fstorage%2Fv1%2Fobject%2Fpublic%2Fproduct%2520images%2Fproducts%2F1786723159548-6135cda7-d3c6-4511-bfef-493b7d5bc094.png&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "HIT",
+      "seconds": 0.374843
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fxm8amguex%2Fproducts%2Fcsv%2Fex-40-01_PwhwfXkfY.webp&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "HIT",
+      "seconds": 0.602578
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fxm8amguex%2Fproducts%2Fcsv%2Fex-80-01_ijXsTcq1_.webp&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "HIT",
+      "seconds": 0.650471
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fxm8amguex%2Fproducts%2Fcsv%2Fwet-450-01_4kltvB0Dr.webp&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "HIT",
+      "seconds": 0.698174
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fxm8amguex%2Fproducts%2Fcsv%2Fwet-550-01_Pfji2LsjS.webp&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "HIT",
+      "seconds": 0.740573
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fewshqneh2%2Fproducts%2Fcsv%2F20-l-side-press-mop-bucket-trolley-mc-mw-200-alternate_zmidpis1n.webp&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "HIT",
+      "seconds": 0.698016
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fewshqneh2%2Fproducts%2Fcsv%2F20-l-side-press-mop-bucket-trolley-mc-mw-200-detail_HDrnoioqk.webp&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "HIT",
+      "seconds": 0.562223
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fewshqneh2%2Fproducts%2Fcsv%2F20-l-side-press-mop-bucket-trolley-mc-mw-200-application_HNZnxV1fA.webp&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "HIT",
+      "seconds": 0.670537
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fewshqneh2%2Fproducts%2Fcsv%2F34-l-double-bucket-wringer-trolley-mc-dw-340-front_h5-4SboGA.webp&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "HIT",
+      "seconds": 0.632317
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fewshqneh2%2Fproducts%2Fcsv%2F34-l-double-bucket-wringer-trolley-mc-dw-340-alternate_qUR0rjEaP.webp&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "HIT",
+      "seconds": 0.648955
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fewshqneh2%2Fproducts%2Fcsv%2F34-l-double-bucket-wringer-trolley-mc-dw-340-detail_WUSRSoxUh.webp&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "HIT",
+      "seconds": 1.128978
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fewshqneh2%2Fproducts%2Fcsv%2F34-l-double-bucket-wringer-trolley-mc-dw-340-application_0vItqs3sy.webp&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "HIT",
+      "seconds": 0.679264
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fewshqneh2%2Fproducts%2Fcsv%2F35-l-double-bucket-wringer-mc-dw-350-front_Uaopdz5Xh.webp&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "HIT",
+      "seconds": 0.579736
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fewshqneh2%2Fproducts%2Fcsv%2F35-l-double-bucket-wringer-mc-dw-350-alternate_ODM07lC1L.webp&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "HIT",
+      "seconds": 0.570898
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fewshqneh2%2Fproducts%2Fcsv%2F35-l-double-bucket-wringer-mc-dw-350-detail_A7aIe_pS7.webp&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "HIT",
+      "seconds": 0.685289
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fewshqneh2%2Fproducts%2Fcsv%2F35-l-double-bucket-wringer-mc-dw-350-application_bROiQO1_a.webp&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "HIT",
+      "seconds": 0.730787
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fewshqneh2%2Fproducts%2Fcsv%2F60-l-double-mop-wringer-trolley-mc-dw-600-front_TosCVdRxC.webp&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "HIT",
+      "seconds": 0.599185
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fewshqneh2%2Fproducts%2Fcsv%2F60-l-double-mop-wringer-trolley-mc-dw-600-alternate_TMWdCNroh.webp&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "HIT",
+      "seconds": 0.58565
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fewshqneh2%2Fproducts%2Fcsv%2F60-l-double-mop-wringer-trolley-mc-dw-600-detail_0ZFen8LKc.webp&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "HIT",
+      "seconds": 0.698646
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fewshqneh2%2Fproducts%2Fcsv%2F60-l-double-mop-wringer-trolley-mc-dw-600-application_DUnIzo1Eh.webp&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "HIT",
+      "seconds": 0.739927
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fsjlmjakninsenljyastk.supabase.co%2Fstorage%2Fv1%2Fobject%2Fpublic%2Fproduct%2520images%2Fproducts%2F1786722015142-018a0742-96bc-4b9a-a2f4-3141e13592b5.png&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "STALE",
+      "seconds": 0.828025
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fsjlmjakninsenljyastk.supabase.co%2Fstorage%2Fv1%2Fobject%2Fpublic%2Fproduct%2520images%2Fproducts%2F1786720768434-81ab2204-d91d-4d4e-9627-2727187fb612.jpg&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "HIT",
+      "seconds": 0.36908
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fsjlmjakninsenljyastk.supabase.co%2Fstorage%2Fv1%2Fobject%2Fpublic%2Fproduct%2520images%2Fproducts%2F1786722018522-3b151ef7-c908-4d6b-98af-1e79b9ad539a.png&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "STALE",
+      "seconds": 1.52647
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fsjlmjakninsenljyastk.supabase.co%2Fstorage%2Fv1%2Fobject%2Fpublic%2Fproduct%2520images%2Fproducts%2F1786720770772-bfdce1d5-ec5e-42cc-b174-67e66e6dfb8e.jpg&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "STALE",
+      "seconds": 0.753648
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fsjlmjakninsenljyastk.supabase.co%2Fstorage%2Fv1%2Fobject%2Fpublic%2Fproduct%2520images%2Fproducts%2F1786722239109-431a9c8a-77a4-472d-b06c-4d0f05df132e.png&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "STALE",
+      "seconds": 0.859418
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fsjlmjakninsenljyastk.supabase.co%2Fstorage%2Fv1%2Fobject%2Fpublic%2Fproduct%2520images%2Fproducts%2F1786722242583-ad8bec36-094e-4bb0-8798-85fc8486de85.png&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "HIT",
+      "seconds": 0.506928
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fsjlmjakninsenljyastk.supabase.co%2Fstorage%2Fv1%2Fobject%2Fpublic%2Fproduct%2520images%2Fproducts%2F1786721089488-0d6bb263-f01e-46b2-822e-c0511d50e545.jpg&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "STALE",
+      "seconds": 0.63101
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fsjlmjakninsenljyastk.supabase.co%2Fstorage%2Fv1%2Fobject%2Fpublic%2Fproduct%2520images%2Fproducts%2F1786721092215-a2fc995f-91dc-4690-9d48-03a237856fb3.jpg&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "STALE",
+      "seconds": 0.702978
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fsjlmjakninsenljyastk.supabase.co%2Fstorage%2Fv1%2Fobject%2Fpublic%2Fproduct%2520images%2Fproducts%2F1786723142168-ce9bb011-cf2d-45a7-b508-063a3d2b0fcf.png&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "STALE",
+      "seconds": 0.90255
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fsjlmjakninsenljyastk.supabase.co%2Fstorage%2Fv1%2Fobject%2Fpublic%2Fproduct%2520images%2Fproducts%2F1786723146915-41614c62-6935-495c-9976-c7a3723b3738.png&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "STALE",
+      "seconds": 1.096231
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fsjlmjakninsenljyastk.supabase.co%2Fstorage%2Fv1%2Fobject%2Fpublic%2Fproduct%2520images%2Fproducts%2F1786723151260-245d31ef-0393-4f41-8dc4-e8176a4feb77.png&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "STALE",
+      "seconds": 0.817633
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fxm8amguex%2Fproducts%2Fcsv%2Fwet-560-01_qsG9ptN21.webp&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "HIT",
+      "seconds": 0.694747
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fxm8amguex%2Fproducts%2Fcsv%2Fwet-850-01_cKbdMBWwu.webp&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "HIT",
+      "seconds": 0.737118
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fxm8amguex%2Fproducts%2Fcsv%2Fwet-1000-01_stZLMz5X1.webp&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "HIT",
+      "seconds": 0.829415
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fewshqneh2%2Fproducts%2Fcsv%2Fblue-spin-mop-system-mc-sm-150-alternate_6QLzMSh86.webp&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "HIT",
+      "seconds": 0.56641
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fewshqneh2%2Fproducts%2Fcsv%2Fblue-spin-mop-system-mc-sm-150-detail_cS71uR6lK.webp&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "HIT",
+      "seconds": 0.732637
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fewshqneh2%2Fproducts%2Fcsv%2Fblue-spin-mop-system-mc-sm-150-application_ZhkokI5QF.webp&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "HIT",
+      "seconds": 0.734428
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fxm8amguex%2Fproducts%2Fcsv%2Fdusty-1100-03_-lFEqc6IE.webp&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "HIT",
+      "seconds": 0.658028
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fxm8amguex%2Fproducts%2Fcsv%2Fdusty-1100-02_bPFeEb3jc.webp&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "HIT",
+      "seconds": 0.706212
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fxm8amguex%2Fproducts%2Fcsv%2Fdusty-1100-01_llhGEGtvo.webp&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "HIT",
+      "seconds": 0.724519
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fxm8amguex%2Fproducts%2Fcsv%2Fone-650-01_rm4mW8cIL.webp&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "HIT",
+      "seconds": 0.74363
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fewshqneh2%2Fproducts%2Fcsv%2Fenclosed-housekeeping-cart-mc-hc-820-alternate_UeNKsQfCx.webp&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "HIT",
+      "seconds": 0.60199
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fxm8amguex%2Fproducts%2Fcsv%2Fone-850-01_upH9noicm.webp&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "HIT",
+      "seconds": 0.730471
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fxm8amguex%2Fproducts%2Fcsv%2Fdusty-650-m-01_gpSaam9R-.webp&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "HIT",
+      "seconds": 0.690642
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fewshqneh2%2Fproducts%2Fcsv%2Fenclosed-housekeeping-cart-mc-hc-820-detail_-d7KTuRi_.webp&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "HIT",
+      "seconds": 0.591777
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fxm8amguex%2Fproducts%2Fcsv%2Fsp-sm-80-01_PUN_t34-N.webp&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "HIT",
+      "seconds": 0.665466
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fxm8amguex%2Fproducts%2Fcsv%2Fmaxim-15-01_ZU9pONNqX.webp&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "HIT",
+      "seconds": 0.728394
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fewshqneh2%2Fproducts%2Fcsv%2Fenclosed-housekeeping-cart-mc-hc-820-application_jGO8Yy6Gy.webp&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "HIT",
+      "seconds": 0.806074
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fxm8amguex%2Fproducts%2Fcsv%2Fmaxim-25-01_EPmHu3BT5.webp&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "HIT",
+      "seconds": 0.759362
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fxm8amguex%2Fproducts%2Fcsv%2Fex-80-02_N4wB5KF-M.webp&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "HIT",
+      "seconds": 0.786537
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fewshqneh2%2Fproducts%2Fcsv%2Ffolding-platform-trolley-mc-pt-500-alternate_k3UOdj_kq.webp&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "HIT",
+      "seconds": 0.665509
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fewshqneh2%2Fproducts%2Fcsv%2Ffolding-platform-trolley-mc-pt-500-detail_Q1x4KqmCM.webp&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "HIT",
+      "seconds": 0.718308
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fewshqneh2%2Fproducts%2Fcsv%2Ffolding-platform-trolley-mc-pt-500-application_Zssq7FoTD.webp&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "HIT",
+      "seconds": 0.649105
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fewshqneh2%2Fproducts%2Fcsv%2Fheavy-duty-janitorial-cleaning-trolley-mc-ct-173-alternate_k_-WWGHAZ.webp&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "HIT",
+      "seconds": 0.661877
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fewshqneh2%2Fproducts%2Fcsv%2Fheavy-duty-janitorial-cleaning-trolley-mc-ct-173-front_K0gmJSRF1.webp&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "HIT",
+      "seconds": 0.761166
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fewshqneh2%2Fproducts%2Fcsv%2Fheavy-duty-janitorial-cleaning-trolley-mc-ct-173-detail_K9PS9Gy0C.webp&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "HIT",
+      "seconds": 0.689874
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fewshqneh2%2Fproducts%2Fcsv%2Fheavy-duty-janitorial-cleaning-trolley-mc-ct-173-application_S9DSCxRZx.webp&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "HIT",
+      "seconds": 0.894499
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fxm8amguex%2Fproducts%2Fcsv%2Fm-140-01_GGCz1AvM2.webp&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "HIT",
+      "seconds": 0.616797
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fxm8amguex%2Fproducts%2Fcsv%2Fm-130-01_Ea2ztN0wI.webp&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "HIT",
+      "seconds": 0.56491
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fxm8amguex%2Fproducts%2Fcsv%2Fothello-01__lxQ5EnZG.webp&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "HIT",
+      "seconds": 0.673297
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fxm8amguex%2Fproducts%2Fcsv%2Fm-160-01_UqmxJ1REb.webp&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "HIT",
+      "seconds": 0.583229
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fsjlmjakninsenljyastk.supabase.co%2Fstorage%2Fv1%2Fobject%2Fpublic%2Fproduct%2520images%2Fproducts%2F1785342425347-bd8660cb-50e0-4af7-b195-1d6c57199bd1.jpg&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "STALE",
+      "seconds": 0.642202
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fsjlmjakninsenljyastk.supabase.co%2Fstorage%2Fv1%2Fobject%2Fpublic%2Fproduct%2520images%2Fproducts%2F1779056324934-4a43b0b5-c264-4322-bc3b-16baa57fe28d.jpg&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "MISS",
+      "seconds": 1.268996
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fsjlmjakninsenljyastk.supabase.co%2Fstorage%2Fv1%2Fobject%2Fpublic%2Fproduct%2520images%2Fproducts%2F1779056326965-04710a2a-7474-46a9-a010-cba4e3afa5eb.jpg&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "MISS",
+      "seconds": 1.071109
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fsjlmjakninsenljyastk.supabase.co%2Fstorage%2Fv1%2Fobject%2Fpublic%2Fproduct%2520images%2Fproducts%2F1779056328725-dd90fa8a-15bb-477f-9a83-3e55c87e53d2.jpg&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "MISS",
+      "seconds": 1.173517
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fsjlmjakninsenljyastk.supabase.co%2Fstorage%2Fv1%2Fobject%2Fpublic%2Fproduct%2520images%2Fproducts%2F1785342427237-8af3d1e5-a0c8-45f1-9919-bc8ffb0b4466.jpg&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "STALE",
+      "seconds": 0.68906
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fxm8amguex%2Fproducts%2Fcsv%2Fsp-sm-80-02_XJ5cdTsBM.webp&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "HIT",
+      "seconds": 0.596433
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fewshqneh2%2Fproducts%2Fcsv%2Ftwo-shelf-janitorial-service-trolley-mc-st-170-front_0EBpV6lAM.webp&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "HIT",
+      "seconds": 0.631549
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fxm8amguex%2Fproducts%2Fcsv%2Fsp-sm-80-03_Ijg-T74ss.webp&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "HIT",
+      "seconds": 0.597211
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fewshqneh2%2Fproducts%2Fcsv%2Ftwo-shelf-janitorial-service-trolley-mc-st-170-alternate__wBMYBE8n.webp&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "HIT",
+      "seconds": 0.622023
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fewshqneh2%2Fproducts%2Fcsv%2Ftwo-shelf-janitorial-service-trolley-mc-st-170-detail_kKZmEZlMV.webp&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "HIT",
+      "seconds": 0.593937
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fewshqneh2%2Fproducts%2Fcsv%2Ftwo-shelf-janitorial-service-trolley-mc-st-170-application_vdjJiTACJ.webp&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "HIT",
+      "seconds": 0.671699
+    },
+    {
+      "path": "/_next/image?url=https%3A%2F%2Fik.imagekit.io%2Fxm8amguex%2Fproducts%2Fcsv%2Fwet-350-01_EbZTw0NbW.webp&w=3840&q=75",
+      "status": 200,
+      "robots": "",
+      "cache": "HIT",
+      "seconds": 0.93017
+    },
+    {
+      "path": "/products/test-prod",
+      "status": 404,
+      "robots": "noindex",
+      "cache": "MISS",
+      "seconds": 0.892211
+    },
+    {
+      "path": "/products/category/not-a-category",
+      "status": 404,
+      "robots": "noindex",
+      "cache": "MISS",
+      "seconds": 0.590801
+    },
+    {
+      "path": "/guides/not-a-guide",
+      "status": 404,
+      "robots": "noindex",
+      "cache": "MISS",
+      "seconds": 0.864072
+    },
+    {
+      "path": "/services/not-a-service",
+      "status": 404,
+      "robots": "noindex",
+      "cache": "MISS",
+      "seconds": 1.044889
+    },
+    {
+      "path": "/blog/not-a-post",
+      "status": 404,
+      "robots": "noindex",
+      "cache": "MISS",
+      "seconds": 1.51566
+    },
+    {
+      "path": "/products?page=999999999999999999",
+      "status": 404,
+      "robots": "noindex",
+      "cache": "MISS",
+      "seconds": 0.579447
+    },
+    {
+      "path": "/products?page=1.5",
+      "status": 404,
+      "robots": "noindex",
+      "cache": "MISS",
+      "seconds": 0.573957
+    },
+    {
+      "path": "/products?page=999",
+      "status": 404,
+      "robots": "noindex",
+      "cache": "MISS",
+      "seconds": 0.578679
+    },
+    {
+      "path": "/blog?page=999",
+      "status": 404,
+      "robots": "noindex",
+      "cache": "MISS",
+      "seconds": 0.551135
+    },
+    {
+      "path": "/products/category/single-disk-machine?page=999",
+      "status": 404,
+      "robots": "noindex",
+      "cache": "MISS",
+      "seconds": 0.613183
+    },
+    {
+      "path": "/",
+      "status": 200,
+      "robots": "noindex",
+      "cache": "HIT",
+      "seconds": 0.481639
+    },
+    {
+      "path": "/guides",
+      "status": 200,
+      "robots": "noindex",
+      "cache": "HIT",
+      "seconds": 0.460278
+    },
+    {
+      "path": "/services/cleaning-machine-parts",
+      "status": 200,
+      "robots": "noindex",
+      "cache": "HIT",
+      "seconds": 0.38323
+    }
+  ]
+}

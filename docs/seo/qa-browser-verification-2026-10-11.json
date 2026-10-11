@@ -1,0 +1,171 @@
+{
+  "testedApplicationCommit": "16e5e1811647664fcf8199709b09eb4243685c5a",
+  "origin": "http://localhost:3011",
+  "desktopViewport": {
+    "width": 1280,
+    "height": 900
+  },
+  "mobileViewport": {
+    "width": 390,
+    "height": 844
+  },
+  "desktop": [
+    {
+      "brokenVisibleImages": [],
+      "h1": "Industrial GradeCleaning Equipment",
+      "path": "/",
+      "scrollWidth": 1265,
+      "width": 1265
+    },
+    {
+      "brokenVisibleImages": [],
+      "h1": "Our Products",
+      "path": "/products",
+      "scrollWidth": 1265,
+      "width": 1265
+    },
+    {
+      "brokenVisibleImages": [],
+      "h1": "Single Disc Floor Cleaning Machines",
+      "path": "/products/category/single-disk-machine",
+      "scrollWidth": 1265,
+      "width": 1265
+    },
+    {
+      "brokenVisibleImages": [],
+      "h1": "MS 17 FAST Single Disc Floor Machine",
+      "path": "/products/biemmedue-ms-17-fast-single-disc-floor-machine",
+      "scrollWidth": 1265,
+      "width": 1265
+    },
+    {
+      "brokenVisibleImages": [],
+      "h1": "The Moral Clean Blog",
+      "path": "/blog",
+      "scrollWidth": 1265,
+      "width": 1265
+    },
+    {
+      "brokenVisibleImages": [],
+      "h1": "Commercial cleaning equipment guides.",
+      "path": "/guides",
+      "scrollWidth": 1265,
+      "width": 1265
+    },
+    {
+      "brokenVisibleImages": [],
+      "h1": "Commercial Cleaning Machine Repair",
+      "path": "/services/cleaning-machine-repair",
+      "scrollWidth": 1265,
+      "width": 1265
+    },
+    {
+      "brokenVisibleImages": [],
+      "h1": "Let's Talk About Your Equipment Needs",
+      "path": "/contact",
+      "scrollWidth": 1265,
+      "width": 1265
+    }
+  ],
+  "mobile": [
+    {
+      "brokenVisibleImages": [],
+      "h1": "Our Products",
+      "scrollWidth": 375,
+      "url": "http://localhost:3011/products",
+      "width": 375
+    },
+    {
+      "brokenVisibleImages": [],
+      "h1": "Our Products",
+      "scrollWidth": 375,
+      "url": "http://localhost:3011/products?page=2",
+      "width": 375
+    },
+    {
+      "brokenVisibleImages": [],
+      "h1": "The Moral Clean Blog",
+      "scrollWidth": 375,
+      "url": "http://localhost:3011/blog",
+      "width": 375
+    },
+    {
+      "brokenVisibleImages": [],
+      "h1": "Commercial cleaning equipment guides.",
+      "scrollWidth": 375,
+      "url": "http://localhost:3011/guides",
+      "width": 375
+    },
+    {
+      "brokenVisibleImages": [],
+      "h1": "Floor Scrubber Cleaning Capacity Calculator: Plan Your Cleaning Time",
+      "scrollWidth": 375,
+      "url": "http://localhost:3011/guides/floor-scrubber-cleaning-capacity-calculator",
+      "width": 375
+    },
+    {
+      "brokenVisibleImages": [],
+      "h1": "Cleaning Machine Repair, Parts & Brush Refilling",
+      "scrollWidth": 375,
+      "url": "http://localhost:3011/services",
+      "width": 375
+    },
+    {
+      "brokenVisibleImages": [],
+      "h1": "Cleaning Machine Parts & Replacement Support",
+      "scrollWidth": 375,
+      "url": "http://localhost:3011/services/cleaning-machine-parts",
+      "width": 375
+    },
+    {
+      "brokenVisibleImages": [],
+      "h1": "Steam Cleaners",
+      "scrollWidth": 375,
+      "url": "http://localhost:3011/products/category/steam-cleaners",
+      "width": 375
+    },
+    {
+      "brokenVisibleImages": [],
+      "h1": "Cleaning Chemicals",
+      "scrollWidth": 375,
+      "url": "http://localhost:3011/products/category/cleaning-chemicals",
+      "width": 375
+    }
+  ],
+  "productJourney": [
+    {
+      "h1": "Single Disc Floor Cleaning Machines",
+      "path": "/products/category/single-disk-machine",
+      "scrollWidth": 375,
+      "visibleBrokenImages": [],
+      "width": 375
+    },
+    {
+      "h1": "MS 17 FAST Single Disc Floor Machine",
+      "path": "/products/biemmedue-ms-17-fast-single-disc-floor-machine",
+      "scrollWidth": 375,
+      "visibleBrokenImages": [],
+      "width": 375
+    }
+  ],
+  "checks": {
+    "desktopMenu": true,
+    "desktopBrandFilter": "6 of 6 for BM2 BIEMMEDUE",
+    "mobileMenu": true,
+    "mobileBrandFilter": "12 of 19 for Biemmedue",
+    "searchEmptyState": true,
+    "documentationModelPrefill": true,
+    "categoryQuotationPrefill": true,
+    "invalidContactRejected": true,
+    "calculatorInitialMinutes": 205,
+    "calculatorDoubleAreaMinutes": 389,
+    "calculatorZeroAllowanceRejected": true
+  },
+  "limitations": [
+    "Authenticated remote UI unavailable: browser redirects to Vercel login. HTTP audit uses existing CLI authentication.",
+    "Successful contact DB/email flow covered with mocks; no shared live records or notifications created.",
+    "QuickQuoteForm has no route consumers; its action is covered by unit tests.",
+    "Existing mobile sheet emits missing dialog-description warning.",
+    "All 36 current products have in_stock=true; no live out-of-stock fixture was available."
+  ]
+}

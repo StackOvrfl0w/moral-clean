@@ -1,0 +1,318 @@
+{
+  "baseline": "253902d05d522a747c589130875360117c40e815",
+  "application": "16e5e1811647664fcf8199709b09eb4243685c5a",
+  "files": [
+    {
+      "path": "next-sitemap.config.js",
+      "bytes": 1291,
+      "sha256": "a78530730811d068cc7aa311636bec787f439611c66b21a329837a3496e59a8f",
+      "reviewArea": "Route output, accessibility, navigation and environment scope"
+    },
+    {
+      "path": "next.config.mjs",
+      "bytes": 3687,
+      "sha256": "8b2717eedc06c2ba790c5ef7132be7f97c175ddddf4e53afa2cf4e85e0a28db9",
+      "reviewArea": "Route output, accessibility, navigation and environment scope"
+    },
+    {
+      "path": "src/app/(public)/blog/page.tsx",
+      "bytes": 7443,
+      "sha256": "086f49a36cc3fc3a8694c4be28d276d79d01ccbd7613cc26ef55faaff018ac4a",
+      "reviewArea": "Route output, accessibility, navigation and environment scope"
+    },
+    {
+      "path": "src/app/(public)/contact/page.tsx",
+      "bytes": 12226,
+      "sha256": "ffda2e991be984c39e7817f38f362e22ce6906d86e39b1d50282ef33dd0be4a1",
+      "reviewArea": "Route output, accessibility, navigation and environment scope"
+    },
+    {
+      "path": "src/app/(public)/guides/[slug]/page.tsx",
+      "bytes": 8807,
+      "sha256": "f4cbe3a6262d2c260400d236f5e521bb532d388878502e99800f6cf75f002f36",
+      "reviewArea": "Route output, accessibility, navigation and environment scope"
+    },
+    {
+      "path": "src/app/(public)/guides/[slug]/social-image/route.tsx",
+      "bytes": 1962,
+      "sha256": "effd2c0e093efb70ca2f3597fde7b6e7cbdf3e927088273da42b9de6bba87648",
+      "reviewArea": "Route output, accessibility, navigation and environment scope"
+    },
+    {
+      "path": "src/app/(public)/guides/page.tsx",
+      "bytes": 7088,
+      "sha256": "9b525d88bfd8c9b05c6a92ea3f8a03d15077bffd7c9039163c7df1de4a9f6c9d",
+      "reviewArea": "Route output, accessibility, navigation and environment scope"
+    },
+    {
+      "path": "src/app/(public)/layout.tsx",
+      "bytes": 1128,
+      "sha256": "6b121efd15f9105dd6ec0489c0842c13de38663e2741cb224145dafb35bf1d60",
+      "reviewArea": "Route output, accessibility, navigation and environment scope"
+    },
+    {
+      "path": "src/app/(public)/page.tsx",
+      "bytes": 20762,
+      "sha256": "757c2a1a0b16e5abd0bb2ae32688e2cbba33aab9e15f92370d3e79b3da9e2233",
+      "reviewArea": "Route output, accessibility, navigation and environment scope"
+    },
+    {
+      "path": "src/app/(public)/products/[slug]/page.tsx",
+      "bytes": 18277,
+      "sha256": "a563cad8c7782e50d51670e249111ece11143a8505cb4714552ceda85b9ad2b3",
+      "reviewArea": "Pagination, catalogue data, enquiries, image sizing and schema"
+    },
+    {
+      "path": "src/app/(public)/products/category/[slug]/page.tsx",
+      "bytes": 11969,
+      "sha256": "424daf54296aed7e45c3142f44e053f3ce2d1a5e3d56121b2a12b11df07bf1c8",
+      "reviewArea": "Pagination, catalogue data, enquiries, image sizing and schema"
+    },
+    {
+      "path": "src/app/(public)/products/page.tsx",
+      "bytes": 12553,
+      "sha256": "11eb160baa4f567bad64c8997b6127a9bbf0607e123a461143ed771f9dc5ec6f",
+      "reviewArea": "Pagination, catalogue data, enquiries, image sizing and schema"
+    },
+    {
+      "path": "src/app/(public)/services/[slug]/page.tsx",
+      "bytes": 4803,
+      "sha256": "dcd9a7cdc8fcadea3a9f558503d75614a79b7f2efc683746677977312ca2d382",
+      "reviewArea": "Route output, accessibility, navigation and environment scope"
+    },
+    {
+      "path": "src/app/(public)/services/page.tsx",
+      "bytes": 12549,
+      "sha256": "3a9c07498edef09f249853105cf45f2c81d0932c67949419a1b5b8d07ce5803d",
+      "reviewArea": "Route output, accessibility, navigation and environment scope"
+    },
+    {
+      "path": "src/app/catalog-sitemap.xml/route.ts",
+      "bytes": 2191,
+      "sha256": "1571b399f5cf0163657c9adba0139968d2ae201b5124c7be065261d13686af14",
+      "reviewArea": "Route output, accessibility, navigation and environment scope"
+    },
+    {
+      "path": "src/app/icon.png",
+      "bytes": 21898,
+      "sha256": "97eccee3f1067751922aad857236aaea11413349e01f0cc320b59fb7334bb61d",
+      "reviewArea": "Route output, accessibility, navigation and environment scope"
+    },
+    {
+      "path": "src/app/manifest.ts",
+      "bytes": 615,
+      "sha256": "9dab45fff83654dc2cd8d2b519fddbd7df7c66c7df4b88694c5db1019d2fffc7",
+      "reviewArea": "Route output, accessibility, navigation and environment scope"
+    },
+    {
+      "path": "src/components/analytics/PostHogProvider.tsx",
+      "bytes": 2454,
+      "sha256": "a9131bbd66cf6480f6647f01052803c66ff14d85d4310ca634ac86fb238817e8",
+      "reviewArea": "Recorded lead events and PII exclusion"
+    },
+    {
+      "path": "src/components/contact/ContactForm.tsx",
+      "bytes": 5783,
+      "sha256": "16e3bb7a636b3ac8fdd8f75586f37120e8a8cc6be07658d8b942400c90d573fc",
+      "reviewArea": "Route output, accessibility, navigation and environment scope"
+    },
+    {
+      "path": "src/components/layout/Footer.tsx",
+      "bytes": 5551,
+      "sha256": "de4d777f9f2e16a904d949f9177ffc08752a22425737306be57a7d033a4532a5",
+      "reviewArea": "Route output, accessibility, navigation and environment scope"
+    },
+    {
+      "path": "src/components/layout/Header.tsx",
+      "bytes": 14055,
+      "sha256": "6196dc9e7328defc63b0a924474d1e40dba6f01a8575577860e59c9d6231adc6",
+      "reviewArea": "Route output, accessibility, navigation and environment scope"
+    },
+    {
+      "path": "src/components/products/CategoryBuyingAdvice.tsx",
+      "bytes": 4863,
+      "sha256": "81e9ab59a8934a7781e2d591fcd4b881355ff97798abec5630364c497c6e31cf",
+      "reviewArea": "Pagination, catalogue data, enquiries, image sizing and schema"
+    },
+    {
+      "path": "src/components/products/ProductCard.tsx",
+      "bytes": 2711,
+      "sha256": "d13a5a76af512583894262a411ac3917fb405fedebea27a22a6904464ebcf813",
+      "reviewArea": "Pagination, catalogue data, enquiries, image sizing and schema"
+    },
+    {
+      "path": "src/components/products/ProductFilters.tsx",
+      "bytes": 4704,
+      "sha256": "4c1658462b5e1df77e1de945191ade9d5daada11bd3586f1a8eeca3a8de6b543",
+      "reviewArea": "Pagination, catalogue data, enquiries, image sizing and schema"
+    },
+    {
+      "path": "src/components/products/ProductGallery.tsx",
+      "bytes": 2611,
+      "sha256": "02fed7d10fed1e118d56cba43f2935bb73ee2a997399ff31c0fa9676f0c1dadf",
+      "reviewArea": "Pagination, catalogue data, enquiries, image sizing and schema"
+    },
+    {
+      "path": "src/components/products/QuickQuoteForm.tsx",
+      "bytes": 3785,
+      "sha256": "a13de906a88c00bd61ec6e489d1fddf4798bf1eb36cff1e630f08aa4196376ea",
+      "reviewArea": "Pagination, catalogue data, enquiries, image sizing and schema"
+    },
+    {
+      "path": "src/components/sections/CtaBanner.tsx",
+      "bytes": 2009,
+      "sha256": "559623cb78ac903294d3438a38ff80ddca9fcc413ef301f6bc1209fd24822aea",
+      "reviewArea": "Route output, accessibility, navigation and environment scope"
+    },
+    {
+      "path": "src/components/seo/FloorCapacityCalculator.tsx",
+      "bytes": 4285,
+      "sha256": "81d19cb76d81432963cf7529d54c05f9a960512945489213774db36f783785b3",
+      "reviewArea": "Route output, accessibility, navigation and environment scope"
+    },
+    {
+      "path": "src/components/seo/GuideCard.tsx",
+      "bytes": 1949,
+      "sha256": "16a9914476bf4a450fa1fddd13e73b66528a71beb52cca88fcc16d81019e53bf",
+      "reviewArea": "Route output, accessibility, navigation and environment scope"
+    },
+    {
+      "path": "src/components/seo/GuideLinks.tsx",
+      "bytes": 935,
+      "sha256": "a985bacf49a931b94855ec7a31eed51613f41da12b6f3d480b742b812b0b1fb8",
+      "reviewArea": "Route output, accessibility, navigation and environment scope"
+    },
+    {
+      "path": "src/components/seo/WebsiteSchema.tsx",
+      "bytes": 519,
+      "sha256": "c30fbf22b2356c0ae837063dd21711a803d4efec04b51b75dabb742be3050d23",
+      "reviewArea": "Route output, accessibility, navigation and environment scope"
+    },
+    {
+      "path": "src/content/additional-guides.json",
+      "bytes": 29905,
+      "sha256": "dbffe7f8935e2f0ed67a44ec8bafed3d080814628915d0458af652618fc2dd45",
+      "reviewArea": "Content intent, links and unsupported claims"
+    },
+    {
+      "path": "src/content/categories.ts",
+      "bytes": 12770,
+      "sha256": "a0aa49abba4189a900d7efa8ca0a6672a99fc261247d02001f3cf5060aa9130d",
+      "reviewArea": "Content intent, links and unsupported claims"
+    },
+    {
+      "path": "src/content/expert-guides.json",
+      "bytes": 29578,
+      "sha256": "c16e955f9e1055c94f22f94aae1a3092fe59da27d4eb3a89f8e836126ef96e05",
+      "reviewArea": "Content intent, links and unsupported claims"
+    },
+    {
+      "path": "src/content/guide-presentation.ts",
+      "bytes": 6439,
+      "sha256": "0a96f56f8b51ddddad1e5dae131964ab567018a1501fb2705f042287836af236",
+      "reviewArea": "Content intent, links and unsupported claims"
+    },
+    {
+      "path": "src/content/guides.json",
+      "bytes": 10355,
+      "sha256": "2680a440e90bab8f5288c6a183a9f288d40750785797b7c83ea4f8bd1af9f755",
+      "reviewArea": "Content intent, links and unsupported claims"
+    },
+    {
+      "path": "src/content/guides.ts",
+      "bytes": 1570,
+      "sha256": "c25cdd9c43b7de2967b072b761abaa36da8f5ece994257a4854b35669fd38081",
+      "reviewArea": "Content intent, links and unsupported claims"
+    },
+    {
+      "path": "src/content/planning-guides.json",
+      "bytes": 11562,
+      "sha256": "e679f6183ca173e94737ec3f0ae1c47b73bda15dc36269df0d25a50410cbb897",
+      "reviewArea": "Content intent, links and unsupported claims"
+    },
+    {
+      "path": "src/content/service-pages.json",
+      "bytes": 14034,
+      "sha256": "0914792955e64f5afa590446487d7c5d2fecc7b4c05c5b57f332135786f8f468",
+      "reviewArea": "Content intent, links and unsupported claims"
+    },
+    {
+      "path": "src/content/service-pages.ts",
+      "bytes": 292,
+      "sha256": "4c9d6e51f0220479ed96fdb7b64864c10534b4459d470892264795858519bf5f",
+      "reviewArea": "Content intent, links and unsupported claims"
+    },
+    {
+      "path": "src/lib/actions/contact-types.ts",
+      "bytes": 427,
+      "sha256": "b23d841924b9ff5ea89a60706a690504e3cc489cf2c773508005020ac3b55e04",
+      "reviewArea": "Route output, accessibility, navigation and environment scope"
+    },
+    {
+      "path": "src/lib/actions/contact.ts",
+      "bytes": 8439,
+      "sha256": "51b1283b3520b40919f332ee930904d2207372eea3704e9307e448def06f9855",
+      "reviewArea": "Route output, accessibility, navigation and environment scope"
+    },
+    {
+      "path": "src/lib/analytics.ts",
+      "bytes": 1180,
+      "sha256": "26dd29b5b639ab93c3cc2d964cee796684570bc8bf3bc65644c5bc8686c99ea1",
+      "reviewArea": "Recorded lead events and PII exclusion"
+    },
+    {
+      "path": "src/lib/floor-capacity.ts",
+      "bytes": 757,
+      "sha256": "f6723df79c720742c9fea8b44d38377e5fb7b91175464128653f288922769148",
+      "reviewArea": "Route output, accessibility, navigation and environment scope"
+    },
+    {
+      "path": "src/lib/pagination.ts",
+      "bytes": 1051,
+      "sha256": "5926217a5504d54130650a1d3647f02df2979a5b215d5030c611c44627e5cc4b",
+      "reviewArea": "Route output, accessibility, navigation and environment scope"
+    },
+    {
+      "path": "src/lib/product-enquiry.ts",
+      "bytes": 1209,
+      "sha256": "2df6ae395a7e680bc16cdc016590bdc9cb8cc164f8ac5924a2a2a4ec3e3c797e",
+      "reviewArea": "Route output, accessibility, navigation and environment scope"
+    },
+    {
+      "path": "src/lib/product-specifications.ts",
+      "bytes": 374,
+      "sha256": "d3203ac709ee2bcb7853a9dd07ff007a9e14e80b90af8236959258e47eee1be8",
+      "reviewArea": "Route output, accessibility, navigation and environment scope"
+    },
+    {
+      "path": "src/lib/queries/blog.ts",
+      "bytes": 5490,
+      "sha256": "12ed52cd860d9b4300b3e0b3150b2bf60efc1de8b724e906f0e5069b4d0f95a4",
+      "reviewArea": "Read-only queries, bounds, caching and genuine error propagation"
+    },
+    {
+      "path": "src/lib/queries/categories.ts",
+      "bytes": 4473,
+      "sha256": "31cdf904ae45ad5cc13ebdcd0a835c9daee44cf49f806777050361c838ba3d50",
+      "reviewArea": "Read-only queries, bounds, caching and genuine error propagation"
+    },
+    {
+      "path": "src/lib/queries/products.ts",
+      "bytes": 18547,
+      "sha256": "12a07debf6518c422cfb41fc6607198a8de6071ec5e28fa67fe5d9732492e6df",
+      "reviewArea": "Read-only queries, bounds, caching and genuine error propagation"
+    },
+    {
+      "path": "src/lib/queries/read-page.ts",
+      "bytes": 948,
+      "sha256": "3ba15df4eb35e5ec57cdefbbd985c3561688a7a57550e253c72a01ea5b129c20",
+      "reviewArea": "Read-only queries, bounds, caching and genuine error propagation"
+    },
+    {
+      "path": "src/lib/seo.ts",
+      "bytes": 2725,
+      "sha256": "ac30ac36a27c5fcdaf442eff4089c43296ab5826ba5a0922a1a29949ab291310",
+      "reviewArea": "Route output, accessibility, navigation and environment scope"
+    }
+  ]
+}

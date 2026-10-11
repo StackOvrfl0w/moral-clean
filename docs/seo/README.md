@@ -1,6 +1,8 @@
 # Current release
 
-Latest feature batch: [Commercial SEO implementation, 11 October 2026](commercial-implementation-2026-10-11.md). Five deliverables verified against a local production build; not pushed or deployed.
+Latest independent QA: [Tested preview release, 11 October 2026](qa-preview-release-2026-10-11.md). Preview commit 16e5e1811647664fcf8199709b09eb4243685c5a is READY and independently crawled. Production remains on approved master; the report lists remaining verification gates.
+
+Implementation-phase record: [Commercial SEO implementation, 11 October 2026](commercial-implementation-2026-10-11.md). Its local-only status describes that phase; the subsequent preview deployment and QA are recorded above.
 
 Latest read-only production/preview research: [SEO intelligence and implementation backlog, 11 October 2026](intelligence-2026-10-11.md). Its dated baseline and deployment distinction supersede historical access/status statements below; it does not authorize or perform a production release.
 

@@ -1,0 +1,53 @@
+{
+  "checkedAt": "2026-10-11T12:05:19.791Z",
+  "applicationCommit": "16e5e1811647664fcf8199709b09eb4243685c5a",
+  "previewBranch": "preview",
+  "deployment": {
+    "id": "dpl_9KwkwDiHqAtiTa9Ea628CMQqKdiq",
+    "url": "https://moral-clean-igyb1ngc1-burhan-uddins-projects-91e8a924.vercel.app",
+    "state": "READY",
+    "target": null
+  },
+  "alias": {
+    "host": "preview.moralclean.com",
+    "deployment": {
+      "id": "dpl_9KwkwDiHqAtiTa9Ea628CMQqKdiq",
+      "url": "moral-clean-igyb1ngc1-burhan-uddins-projects-91e8a924.vercel.app"
+    }
+  },
+  "production": {
+    "branch": "master",
+    "commit": "253902d05d522a747c589130875360117c40e815",
+    "deployment": {
+      "id": "dpl_Eet82YisYPevDFQQDFHyFJttNndE",
+      "url": "moral-clean-m1yuwsbij-burhan-uddins-projects-91e8a924.vercel.app"
+    }
+  },
+  "runtimeLogs": [
+    "## Runtime Logs\n\n**Project:** prj_nhiqWIb6xw2GAqAzMCssOZILU7Wd\n**Deployment:** dpl_9KwkwDiHqAtiTa9Ea628CMQqKdiq\n**Time range:** 2026-10-11T11:33:58.753Z → 2026-10-11T12:03:58.753Z\n\nNo logs found for the specified criteria."
+  ],
+  "sentry": {
+    "authenticatedDiagnosticsAvailable": false
+  },
+  "performance": {
+    "categoryWarmRequests": [
+      {
+        "status": 200,
+        "cache": "MISS",
+        "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate",
+        "seconds": 1.128808
+      },
+      {
+        "status": 200,
+        "cache": "MISS",
+        "seconds": 0.74805
+      },
+      {
+        "status": 200,
+        "cache": "MISS",
+        "seconds": 0.813564
+      }
+    ],
+    "categoryDynamicRenderingAlsoPresentInProductionBaseline": true
+  }
+}

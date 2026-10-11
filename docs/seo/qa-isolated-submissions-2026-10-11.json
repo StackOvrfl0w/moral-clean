@@ -1,0 +1,13 @@
+{
+  "applicationCommit": "16e5e1811647664fcf8199709b09eb4243685c5a",
+  "origin": "http://localhost:3012",
+  "databaseSinkCount": 2,
+  "emailSinkCount": 2,
+  "documentationContextPreserved": true,
+  "quotationContextPreserved": true,
+  "successUI": true,
+  "externalWritesBlocked": true,
+  "realDatabaseWrites": 0,
+  "realEmails": 0,
+  "limitation": "Tests real browser and Next server-action transport through deterministic external API sinks; real Supabase persistence, Resend delivery and PostHog ingestion are not certified."
+}

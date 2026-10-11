@@ -1,0 +1,18 @@
+{
+  "error": {
+    "code": "payment_required",
+    "message": "Observability Plus is required for this query.",
+    "hint": "Observability Plus is available on Pro and Enterprise. Upgrade with `vercel buy pro --scope burhan-uddins-projects-91e8a924`. The add-on cannot be purchased on Hobby.",
+    "retryable": false,
+    "userActionRequired": true,
+    "scope": "burhan-uddins-projects-91e8a924",
+    "next": [
+      {
+        "command": "vercel buy pro --scope burhan-uddins-projects-91e8a924",
+        "when": "a person has approved upgrading the plan"
+      }
+    ],
+    "cliVersion": "63.1.2",
+    "invocationId": "5e06eb3f-b4ab-4e3c-b06f-e158295812e2"
+  }
+}
