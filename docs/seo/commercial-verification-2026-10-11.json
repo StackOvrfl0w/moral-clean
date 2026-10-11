@@ -1,0 +1,136 @@
+{
+  "testedAt": "2026-10-11T10:55:41.686Z",
+  "origin": "http://localhost:3011",
+  "scope": "local production build using read-only public catalogue data; no form submissions",
+  "results": [
+    {
+      "path": "/products?page=999",
+      "status": 404
+    },
+    {
+      "path": "/products?page=1.5",
+      "status": 404
+    },
+    {
+      "path": "/products?page=0",
+      "status": 404
+    },
+    {
+      "path": "/products?page=-1",
+      "status": 404
+    },
+    {
+      "path": "/products?page=Infinity",
+      "status": 404
+    },
+    {
+      "path": "/products?page=abc",
+      "status": 404
+    },
+    {
+      "path": "/products?page=999999999999999999999",
+      "status": 404
+    },
+    {
+      "path": "/products/category/single-disk-machine?page=999",
+      "status": 404
+    },
+    {
+      "path": "/products/category/single-disk-machine?page=1.5",
+      "status": 404
+    },
+    {
+      "path": "/products/category/single-disk-machine?page=0",
+      "status": 404
+    },
+    {
+      "path": "/products/category/single-disk-machine?page=-1",
+      "status": 404
+    },
+    {
+      "path": "/products/category/single-disk-machine?page=Infinity",
+      "status": 404
+    },
+    {
+      "path": "/products/category/single-disk-machine?page=abc",
+      "status": 404
+    },
+    {
+      "path": "/products/category/single-disk-machine?page=999999999999999999999",
+      "status": 404
+    },
+    {
+      "path": "/blog?page=999",
+      "status": 404
+    },
+    {
+      "path": "/blog?page=1.5",
+      "status": 404
+    },
+    {
+      "path": "/blog?page=0",
+      "status": 404
+    },
+    {
+      "path": "/blog?page=-1",
+      "status": 404
+    },
+    {
+      "path": "/blog?page=Infinity",
+      "status": 404
+    },
+    {
+      "path": "/blog?page=abc",
+      "status": 404
+    },
+    {
+      "path": "/blog?page=999999999999999999999",
+      "status": 404
+    },
+    {
+      "path": "/products?page=2",
+      "status": 200
+    },
+    {
+      "path": "/products?page=3",
+      "status": 200
+    },
+    {
+      "path": "/products?q=no-such-cleaning-equipment-918327",
+      "status": 200
+    },
+    {
+      "path": "/products?q=no-such-cleaning-equipment-918327&page=999",
+      "status": 404
+    },
+    {
+      "path": "/products/category/single-disk-machine",
+      "status": 200
+    },
+    {
+      "path": "/products/category/ride-on-scrubber-dryer",
+      "status": 200
+    },
+    {
+      "path": "/products/biemmedue-ms-17-fast-single-disc-floor-machine",
+      "status": 200
+    },
+    {
+      "path": "/contact?product=biemmedue-ms-17-fast-single-disc-floor-machine&purpose=documentation",
+      "status": 200
+    },
+    {
+      "path": "/contact?product=biemmedue-ms-17-fast-single-disc-floor-machine&purpose=parts",
+      "status": 200
+    },
+    {
+      "path": "representative product image optimizer",
+      "status": 200
+    },
+    {
+      "path": "www path/query redirect",
+      "status": 308
+    }
+  ],
+  "errors": []
+}
