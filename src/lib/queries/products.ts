@@ -516,11 +516,11 @@ async function queryProducts(
   };
 }
 
-const getCachedProducts = unstable_cache(
+const getCachedProducts = cache(unstable_cache(
   queryProducts,
   ["catalog-products-v2"],
   { revalidate: PUBLIC_CACHE_SECONDS, tags: ["catalog"] },
-);
+));
 
 export async function getProducts(
   params: ProductQueryParams = {},

@@ -32,6 +32,7 @@ import type { Json, ProductWithRelations } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { sanitizeRichText } from "@/lib/sanitize-html";
 import { brochureUrl as getBrochureUrl, productEnquiryHref } from "@/lib/product-enquiry";
+import { isDisplayableSpecification } from "@/lib/product-specifications";
 
 export const revalidate = 3600;
 
@@ -78,13 +79,13 @@ function formatSpecValue(value: Json | undefined): string | null {
   return JSON.stringify(value);
 }
 
-function getSpecEntries(specifications: Json | null): SpecEntry[] {
+function getSpecEntries(specifications: Json | null, slug: string): SpecEntry[] {
   if (!isRecord(specifications)) {
     return [];
   }
 
   return Object.entries(specifications)
-    .filter(([key]) => key !== "brochure_url")
+    .filter(([key]) => key !== "brochure_url" && isDisplayableSpecification(slug, key))
     .map(([key, value]) => {
       const formattedValue = formatSpecValue(value);
 
@@ -175,7 +176,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
   const relatedProducts = product.category_id
     ? await getRelatedProducts(product.id, product.category_id)
     : [];
-  const specEntries = getSpecEntries(product.specifications);
+  const specEntries = getSpecEntries(product.specifications, product.slug);
   const keySpecEntries = specEntries.slice(0, 4);
   const brochureUrl = getBrochureUrl(product.specifications);
   return (

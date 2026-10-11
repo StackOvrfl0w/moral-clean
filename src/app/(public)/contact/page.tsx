@@ -263,12 +263,12 @@ export default async function ContactPage({
               {
                 question: "Response time on quotes?",
                 answer:
-                  "Most quote requests receive an initial response within 2 business hours.",
+                  "Response time depends on the equipment, specification and service information required. Confirm timing when submitting your enquiry.",
               },
               {
                 question: "Do you offer on-site service?",
                 answer:
-                  "Yes. On-site visits are available for diagnostics and many service cases.",
+                  "Share your machine model, fault and site location. Confirm whether an on-site visit or workshop assessment is available for your case.",
               },
               {
                 question: "What payment methods do you accept?",

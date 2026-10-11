@@ -108,11 +108,11 @@ async function queryAllPosts(
   };
 }
 
-const getCachedAllPosts = unstable_cache(
+const getCachedAllPosts = cache(unstable_cache(
   queryAllPosts,
   ["published-blog-list-v2"],
   { revalidate: PUBLIC_CACHE_SECONDS, tags: ["blog"] },
-);
+));
 
 export function getAllPosts(
   options: GetAllPostsOptions = {},

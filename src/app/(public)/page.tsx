@@ -45,21 +45,21 @@ type IconComponent = ComponentType<SVGProps<SVGSVGElement>>;
 
 const valueProps = [
   {
-    title: "Authorized Distribution",
+    title: "Equipment Procurement",
     description:
-      "Partnered with leading international brands for original-equipment supply, warranty support, and dependable procurement.",
+      "Compare listed models and confirm configuration, included accessories, delivery and warranty terms in your quotation.",
     icon: ShieldCheck,
   },
   {
-    title: "Full After-Sales Service",
+    title: "Service Enquiries",
     description:
-      "Motor repair, parts replacement, brush refilling, and on-site maintenance handled by trained technical teams.",
+      "Send your machine details for motor repair, replacement parts or brush refilling. Confirm the assessment and work scope before authorizing service.",
     icon: Wrench,
   },
   {
-    title: "Nationwide Coverage",
+    title: "Location-Based Arrangements",
     description:
-      "Service support across Karachi, Lahore, Islamabad, and major industrial cities where downtime costs money.",
+      "Include your facility location so delivery, assessment location and any attendance arrangements can be confirmed for your requirements.",
     icon: MapPinned,
   },
 ];
@@ -97,9 +97,9 @@ const services = [
 
 
 const trustSignals = [
-  { label: "Authorized Distributor", icon: BadgeCheck },
-  { label: "Nationwide Service", icon: Truck },
-  { label: "20+ Years Combined Expertise", icon: Building2 },
+  { label: "Model-Specific Quotations", icon: BadgeCheck },
+  { label: "Confirm Delivery Terms", icon: Truck },
+  { label: "Equipment and Parts Enquiries", icon: Building2 },
 ];
 
 function SectionReveal({

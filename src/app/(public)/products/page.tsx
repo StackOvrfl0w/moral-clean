@@ -313,6 +313,7 @@ export default async function ProductsPage({
                       name="q"
                       defaultValue={q}
                       placeholder="Search products"
+                      aria-label="Search products"
                       className="pl-9"
                     />
                   </div>

@@ -2,6 +2,7 @@ import Link from "next/link";
 import { categoryAdvice } from "@/content/categories";
 import { GuideLinks } from "@/components/seo/GuideLinks";
 import { getCategoryModels } from "@/lib/queries/categories";
+import { isDisplayableSpecification } from "@/lib/product-specifications";
 
 export async function CategoryBuyingAdvice({ slug, categoryId }: { slug: string; categoryId: string }) {
   const advice = categoryAdvice[slug];
@@ -27,7 +28,7 @@ export async function CategoryBuyingAdvice({ slug, categoryId }: { slug: string;
           <thead className="bg-muted"><tr><th scope="col" className="p-4">Model</th><th scope="col" className="p-4">Selected specifications</th></tr></thead>
           <tbody>{models.map((model) => {
             const specifications = model.specifications && typeof model.specifications === "object" && !Array.isArray(model.specifications) ? model.specifications : {};
-            const entries = Object.entries(specifications).filter(([key, value]) => /scrubbing path|work.*width|machine width|tank|capacity|speed|max power|working width/i.test(key) && (typeof value === "string" || typeof value === "number")).slice(0, 4);
+            const entries = Object.entries(specifications).filter(([key, value]) => isDisplayableSpecification(model.slug, key) && /scrubbing path|work.*width|machine width|tank|capacity|speed|max power|working width/i.test(key) && (typeof value === "string" || typeof value === "number")).slice(0, 4);
             return <tr key={model.slug} className="border-t"><th scope="row" className="p-4 font-semibold"><Link className="text-primary underline underline-offset-4" href={`/products/${model.slug}`}>{model.name}</Link></th><td className="p-4 text-muted-foreground">{entries.length ? <ul className="space-y-1">{entries.map(([key, value]) => <li key={key}>{key}: {String(value)}</li>)}</ul> : "Request the model datasheet"}</td></tr>;
           })}</tbody>
         </table></div>

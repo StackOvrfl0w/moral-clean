@@ -1,0 +1,111 @@
+{
+  "testedAt": "2026-10-11T11:54:13.417Z",
+  "rows": [
+    {
+      "url": "https://moralclean.com/products?category=ride-on-scrubber-dryer&tag=dusty-650-m",
+      "userAgent": "Mozilla/5.0 QA",
+      "status": 200,
+      "robots": null,
+      "metaNoindex": true
+    },
+    {
+      "url": "https://moralclean.com/products?category=ride-on-scrubber-dryer&tag=dusty-650-m",
+      "userAgent": "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)",
+      "status": 200,
+      "robots": null,
+      "metaNoindex": true
+    },
+    {
+      "url": "https://moralclean.com/products?tag=testing",
+      "userAgent": "Mozilla/5.0 QA",
+      "status": 200,
+      "robots": null,
+      "metaNoindex": true
+    },
+    {
+      "url": "https://moralclean.com/products?tag=testing",
+      "userAgent": "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)",
+      "status": 200,
+      "robots": null,
+      "metaNoindex": true
+    },
+    {
+      "url": "https://moralclean.com/products?category=ride-on-scrubber-dryer&tag=facility-equipment",
+      "userAgent": "Mozilla/5.0 QA",
+      "status": 200,
+      "robots": null,
+      "metaNoindex": true
+    },
+    {
+      "url": "https://moralclean.com/products?category=ride-on-scrubber-dryer&tag=facility-equipment",
+      "userAgent": "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)",
+      "status": 200,
+      "robots": null,
+      "metaNoindex": true
+    },
+    {
+      "url": "https://moralclean.com/products?category=ride-on-scrubber-dryer&tag=34-litre-mop-trolley",
+      "userAgent": "Mozilla/5.0 QA",
+      "status": 200,
+      "robots": null,
+      "metaNoindex": true
+    },
+    {
+      "url": "https://moralclean.com/products?category=ride-on-scrubber-dryer&tag=34-litre-mop-trolley",
+      "userAgent": "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)",
+      "status": 200,
+      "robots": null,
+      "metaNoindex": true
+    },
+    {
+      "url": "https://moralclean.com/products?category=ride-on-scrubber-dryer&tag=biemmedue",
+      "userAgent": "Mozilla/5.0 QA",
+      "status": 200,
+      "robots": null,
+      "metaNoindex": true
+    },
+    {
+      "url": "https://moralclean.com/products?category=ride-on-scrubber-dryer&tag=biemmedue",
+      "userAgent": "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)",
+      "status": 200,
+      "robots": null,
+      "metaNoindex": true
+    },
+    {
+      "url": "https://moralclean.com/_next/image?url=https%3A%2F%2Fsjlmjakninsenljyastk.supabase.co%2Fstorage%2Fv1%2Fobject%2Fpublic%2Fproduct%2520images%2Fproducts%2F1786723159548-6135cda7-d3c6-4511-bfef-493b7d5bc094.png&w=3840&q=75",
+      "status": 200,
+      "contentType": "image/png"
+    },
+    {
+      "url": "https://moralclean.com/_next/image?url=https%3A%2F%2Fsjlmjakninsenljyastk.supabase.co%2Fstorage%2Fv1%2Fobject%2Fpublic%2Fproduct%2520images%2Fproducts%2F1785342422387-b2b290a5-3f48-4d28-aeea-c01762614dd1.jpg&w=3840&q=75",
+      "status": 200,
+      "contentType": "image/jpeg"
+    },
+    {
+      "url": "https://moralclean.com/_next/image?url=https%3A%2F%2Fsjlmjakninsenljyastk.supabase.co%2Fstorage%2Fv1%2Fobject%2Fpublic%2Fproduct%2520images%2Fproducts%2F1786722242583-ad8bec36-094e-4bb0-8798-85fc8486de85.png&w=3840&q=75",
+      "status": 200,
+      "contentType": "image/png"
+    },
+    {
+      "url": "https://moralclean.com/_next/image?url=https%3A%2F%2Fsjlmjakninsenljyastk.supabase.co%2Fstorage%2Fv1%2Fobject%2Fpublic%2Fproduct%2520images%2Fproducts%2F1786721062633-ceb31ec0-ad10-4fd4-a93f-235d11c8ac00.jpg&w=3840&q=75",
+      "status": 200,
+      "contentType": "image/jpeg"
+    },
+    {
+      "url": "https://moralclean.com/_next/image?url=https%3A%2F%2Fsjlmjakninsenljyastk.supabase.co%2Fstorage%2Fv1%2Fobject%2Fpublic%2Fproduct%2520images%2Fproducts%2F1786720768434-81ab2204-d91d-4d4e-9627-2727187fb612.jpg&w=3840&q=75",
+      "status": 200,
+      "contentType": "image/jpeg"
+    },
+    {
+      "url": "https://preview.moralclean.com",
+      "status": 302,
+      "robots": null,
+      "location": "https://vercel.com/sso-api"
+    },
+    {
+      "url": "https://moralclean.com",
+      "status": 200,
+      "robots": null
+    }
+  ]
+}
