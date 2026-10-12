@@ -1,26 +1,18 @@
 import type { PostgrestError } from "@supabase/supabase-js";
+import { PageOutOfRangeError } from "@/lib/pagination";
 
-type PageResponse<Row> = {
-  data: Row[] | null;
-  error: PostgrestError | null;
-  count: number | null;
-};
+type PageResponse<Row> = { data: Row[] | null; count: number | null; error: PostgrestError | null };
 
-// Valid pages make one request. Only an unsatisfiable range needs count recovery.
+// Bounds are checked by the caller before this function and before result caching.
+// A concurrent deletion can still invalidate the checked range. Do not cache it
+// or disguise permission/connectivity errors as empty results.
 export async function readPage<Row>(
   range: (from: number, to: number) => PromiseLike<PageResponse<Row>>,
-  page: number,
-  perPage: number,
+  page: number, perPage: number,
 ): Promise<PageResponse<Row>> {
   const from = (page - 1) * perPage;
   const result = await range(from, from + perPage - 1);
   if (result.error?.code !== "PGRST103") return result;
-  if (result.count === 0) return { ...result, error: null, data: [] };
-  if (page === 1) return result;
-  const first = await range(0, 0);
-  if (first.error?.code === "PGRST103" && first.count === 0) {
-    return { ...first, error: null, data: [] };
-  }
-  // Never hide permissions, connectivity or SQL failures in the recovery query.
-  return { ...first, data: [] };
+  if (page === 1 && result.count === 0) return { ...result, data: [], error: null };
+  throw new PageOutOfRangeError("Results changed after pagination validation");
 }

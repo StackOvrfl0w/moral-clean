@@ -1,6 +1,7 @@
 import "server-only";
 import { isRetiredCategory } from "@/content/categories";
-import { parsePage } from "@/lib/pagination";
+import { notFound } from "next/navigation";
+import { PageOutOfRangeError, parsePage, validatePage } from "@/lib/pagination";
 import { readPage } from "./read-page";
 
 import { unstable_cache } from "next/cache";
@@ -91,7 +92,7 @@ function hasSupabaseConfig() {
   return Boolean(env.supabaseUrl?.trim() && env.supabaseAnonKey?.trim());
 }
 
-function createPublicCatalogClient() {
+const createPublicCatalogClient = cache(() => {
   if (!hasSupabaseConfig()) {
     return null;
   }
@@ -102,7 +103,7 @@ function createPublicCatalogClient() {
       persistSession: false,
     },
   });
-}
+});
 
 function normalizeSort(sort?: string): ProductSort {
   if (sort === "name-az" || sort === "newest") {
@@ -114,7 +115,7 @@ function normalizeSort(sort?: string): ProductSort {
 
 function normalizePage(page?: string | number) {
   const value = parsePage(page, PRODUCTS_PER_PAGE);
-  if (value === null) throw new RangeError("Invalid catalog page");
+  if (value === null) notFound();
   return value;
 }
 
@@ -218,7 +219,7 @@ function normalizeCardProducts(
         (a, b) =>
           Number(b.is_primary) - Number(a.is_primary) ||
           (a.sort_order ?? 0) - (b.sort_order ?? 0),
-      ),
+      ).slice(0, 1),
     };
   });
 }
@@ -262,6 +263,14 @@ function getSeedFacets(): CatalogFacets {
   };
 }
 
+const getCatalogCount = cache(unstable_cache(async () => {
+  const supabase = createPublicCatalogClient();
+  if (!supabase) return mockProducts.length;
+  const { count, error } = await supabase.from("products").select("id", { count: "exact", head: true });
+  if (error || count === null) throw new Error("Unable to count the product catalog");
+  return count;
+}, ["catalog-product-count-v1"], { revalidate: PUBLIC_CACHE_SECONDS, tags: ["catalog"] }));
+
 async function queryCatalogFacets(): Promise<CatalogFacets | null> {
   const supabase = createPublicCatalogClient();
   if (!supabase) return null;
@@ -273,16 +282,15 @@ async function queryCatalogFacets(): Promise<CatalogFacets | null> {
         .select("*, products:products(count)")
         .order("sort_order", { ascending: true })
         .order("name", { ascending: true }),
-      supabase.from("tags").select("*, product_tags(count)").order("name", { ascending: true }),
+      supabase.from("tags").select("*").order("name", { ascending: true }),
       supabase.from("products").select("brand").not("brand", "is", null),
-      supabase.from("products").select("id", { count: "exact", head: true }),
+      getCatalogCount(),
     ]);
 
   const error =
     categoriesResponse.error ||
     tagsResponse.error ||
-    brandsResponse.error ||
-    countResponse.error;
+    brandsResponse.error;
   if (error) {
     console.error("Catalog facets query failed:", error);
     throw new Error("Unable to load the product catalog filters");
@@ -305,45 +313,27 @@ async function queryCatalogFacets(): Promise<CatalogFacets | null> {
 
   return {
     categories: categories.filter((category) => !isRetiredCategory(category.slug)),
-    tags: ((tagsResponse.data ?? []) as unknown as (Tag & { product_tags: { count: number }[] })[]).filter((tag) => (tag.product_tags?.[0]?.count ?? 0) > 0).map(({ product_tags: _counts, ...tag }) => {
-      void _counts;
-      return tag;
-    }),
+    tags: tagsResponse.data ?? [],
     brands: uniqueSorted(
       (brandsResponse.data ?? []).map((row) => row.brand),
     ),
-    allProductsCount: countResponse.count ?? 0,
+    allProductsCount: countResponse,
   };
 }
 
-const getCatalogFacets = unstable_cache(
+const getCatalogFacets = cache(unstable_cache(
   queryCatalogFacets,
-  ["catalog-facets-v3"],
+  ["catalog-facets-validated-v1"],
   { revalidate: PUBLIC_CACHE_SECONDS, tags: ["catalog"] },
-);
-
-const getCategoryFilterFacets = unstable_cache(async (categoryId: string) => {
-  const supabase = createPublicCatalogClient();
-  if (!supabase) return { brands: [] as string[], tags: [] as Tag[] };
-  const { data, error } = await supabase.from("products")
-    .select("brand, product_tags(tags(*))").eq("category_id", categoryId);
-  if (error) throw new Error("Unable to load category filters");
-  const tags = new Map<string, Tag>();
-  const rows = (data ?? []) as unknown as { brand: string | null; product_tags: { tags: Tag | null }[] }[];
-  for (const product of rows) {
-    for (const relation of product.product_tags ?? []) {
-      if (relation.tags) tags.set(relation.tags.id, relation.tags);
-    }
-  }
-  return { brands: uniqueSorted(rows.map((product) => product.brand)), tags: Array.from(tags.values()).sort((a, b) => a.name.localeCompare(b.name)) };
-}, ["category-filter-facets-v1"], { revalidate: PUBLIC_CACHE_SECONDS, tags: ["catalog"] });
+));
 
 function quotePostgrestValue(value: string) {
   return `"${value.replace(/\\/g, "\\\\").replace(/"/g, '\\"')}"`;
 }
 
-async function getProductIdsForTags(tagIds: string[]) {
-  if (tagIds.length === 0) return [];
+const getProductIdsForTags = cache(async (tagIdsKey: string) => {
+  if (!tagIdsKey) return [];
+  const tagIds = tagIdsKey.split(",");
   const supabase = createPublicCatalogClient();
   if (!supabase) return [];
 
@@ -354,7 +344,46 @@ async function getProductIdsForTags(tagIds: string[]) {
 
   if (error) throw new Error("Unable to search product tags");
   return Array.from(new Set((data ?? []).map((row) => row.product_id)));
+});
+
+async function filteredProductQuery(
+  facets: CatalogFacets, categorySlug: string, brand: string, tagSlug: string,
+  search: string, countOnly = false,
+) {
+  const category = facets.categories.find((item) => item.slug === categorySlug);
+  const tag = facets.tags.find((item) => item.slug === tagSlug);
+  const lowercaseSearch = search.toLowerCase();
+  const matchingCategoryIds = search ? facets.categories.filter((item) => item.name.toLowerCase().includes(lowercaseSearch)).map((item) => item.id) : [];
+  const matchingTagIds = search ? facets.tags.filter((item) => item.name.toLowerCase().includes(lowercaseSearch)).map((item) => item.id) : [];
+  const matchingTagProductIds = await getProductIdsForTags(matchingTagIds.join(","));
+  const columns = countOnly ? "id" : PRODUCT_CARD_SELECT;
+  const select = tag ? `${columns}, matching_tags:product_tags!inner(tag_id)` : columns;
+  let query = createPublicCatalogClient()!.from("products").select(select, { count: "exact", head: countOnly });
+  if (category) query = query.eq("category_id", category.id);
+  if (brand) query = query.eq("brand", brand);
+  if (tag) query = query.eq("matching_tags.tag_id", tag.id);
+  if (search) {
+    const pattern = quotePostgrestValue(`%${search}%`);
+    const filters = [`name.ilike.${pattern}`, `short_description.ilike.${pattern}`, `brand.ilike.${pattern}`, `model_code.ilike.${pattern}`];
+    if (matchingCategoryIds.length) filters.push(`category_id.in.(${matchingCategoryIds.join(",")})`);
+    if (matchingTagProductIds.length) filters.push(`id.in.(${matchingTagProductIds.join(",")})`);
+    query = query.or(filters.join(","));
+  }
+  // Return a wrapper: returning a thenable builder directly executes it.
+  return { query };
 }
+
+async function queryFilteredCount(category: string, brand: string, tag: string, search: string) {
+  const facets = (await getCatalogFacets()) ?? getSeedFacets();
+  const { query } = await filteredProductQuery(facets, category, brand, tag, search, true);
+  const { count, error } = await query;
+  if (error || count === null) throw new Error("Unable to count filtered products");
+  return count;
+}
+
+const getFilteredCount = unstable_cache(queryFilteredCount, ["catalog-filtered-count-v1"], {
+  revalidate: PUBLIC_CACHE_SECONDS, tags: ["catalog"],
+});
 
 async function queryProducts(
   categorySlug: string,
@@ -405,7 +434,6 @@ async function queryProducts(
     };
   }
 
-  const supabase = createPublicCatalogClient()!;
   const category = categorySlug
     ? facets.categories.find((item) => item.slug === categorySlug)
     : undefined;
@@ -413,7 +441,7 @@ async function queryProducts(
     ? facets.tags.find((item) => item.slug === tagSlug)
     : undefined;
 
-  if ((categorySlug && !category) || (tagSlug && !tag)) {
+  if ((categorySlug && !category) || (tagSlug && !tag) || (brand && !facets.brands.includes(brand))) {
     return {
       products: [],
       totalCount: 0,
@@ -431,46 +459,7 @@ async function queryProducts(
     };
   }
 
-  const normalizedSearch = search.trim();
-  const lowercaseSearch = normalizedSearch.toLowerCase();
-  const matchingCategoryIds = normalizedSearch
-    ? facets.categories
-        .filter((item) => item.name.toLowerCase().includes(lowercaseSearch))
-        .map((item) => item.id)
-    : [];
-  const matchingTagIds = normalizedSearch
-    ? facets.tags
-        .filter((item) => item.name.toLowerCase().includes(lowercaseSearch))
-        .map((item) => item.id)
-    : [];
-  const matchingTagProductIds = await getProductIdsForTags(matchingTagIds);
-
-  const select = tag
-    ? `${PRODUCT_CARD_SELECT}, matching_tags:product_tags!inner(tag_id)`
-    : PRODUCT_CARD_SELECT;
-  let query = supabase.from("products").select(select, { count: "exact" });
-
-  if (category) query = query.eq("category_id", category.id);
-  if (brand) query = query.eq("brand", brand);
-  if (tag) query = query.eq("matching_tags.tag_id", tag.id);
-
-  if (normalizedSearch) {
-    const pattern = quotePostgrestValue(`%${normalizedSearch}%`);
-    const filters = [
-      `name.ilike.${pattern}`,
-      `short_description.ilike.${pattern}`,
-      `brand.ilike.${pattern}`,
-      `model_code.ilike.${pattern}`,
-    ];
-
-    if (matchingCategoryIds.length > 0) {
-      filters.push(`category_id.in.(${matchingCategoryIds.join(",")})`);
-    }
-    if (matchingTagProductIds.length > 0) {
-      filters.push(`id.in.(${matchingTagProductIds.join(",")})`);
-    }
-    query = query.or(filters.join(","));
-  }
+  let { query } = await filteredProductQuery(facets, categorySlug, brand, tagSlug, search);
 
   if (sort === "name-az") {
     query = query.order("name", { ascending: true });
@@ -484,10 +473,7 @@ async function queryProducts(
   }
 
   query = query.order("id");
-  const { data, error, count } = await readPage(
-    (from, to) => query.range(from, to),
-    page, PRODUCTS_PER_PAGE,
-  );
+  const { data, error, count } = await readPage((from, to) => query.range(from, to), page, PRODUCTS_PER_PAGE);
 
   if (error) {
     console.error("Products query failed:", error);
@@ -496,7 +482,6 @@ async function queryProducts(
 
   const totalCount = count ?? 0;
   const pageCount = Math.max(1, Math.ceil(totalCount / PRODUCTS_PER_PAGE));
-  const filterFacets = category ? await getCategoryFilterFacets(category.id) : facets;
 
   return {
     products: normalizeCardProducts(
@@ -511,29 +496,66 @@ async function queryProducts(
     categoryCounts: Object.fromEntries(
       facets.categories.map((item) => [item.slug, item.product_count]),
     ),
-    brands: filterFacets.brands,
-    tags: filterFacets.tags,
+    brands: facets.brands,
+    tags: facets.tags,
     usingSeedData: false,
   };
 }
 
-const getCachedProducts = cache(unstable_cache(
-  queryProducts,
-  ["catalog-products-v3"],
+const getCachedProducts = unstable_cache(
+  async (...args: Parameters<typeof queryProducts>) => {
+    const { products, totalCount, allProductsCount, page, pageCount, perPage, usingSeedData } = await queryProducts(...args);
+    // Facets have their own cache. Do not duplicate their complete arrays in
+    // every category/brand/tag/sort/page entry and decode them twice per request.
+    return { products, totalCount, allProductsCount, page, pageCount, perPage, usingSeedData };
+  },
+  ["catalog-products-validated-v1"],
   { revalidate: PUBLIC_CACHE_SECONDS, tags: ["catalog"] },
-));
+);
 
-export async function getProducts(
-  params: ProductQueryParams = {},
-): Promise<ProductQueryResult> {
-  return getCachedProducts(
-    params.category?.trim() ?? "",
-    params.brand?.trim() ?? "",
-    params.tag?.trim() ?? "",
-    params.q?.trim() ?? "",
-    normalizeSort(params.sort),
-    normalizePage(params.page),
-  );
+// Only validated, bounded catalogue filters/pages reach the persistent result cache.
+const getRequestProducts = cache(async (category: string, brand: string, tag: string, search: string, sort: ProductSort, page: number) => {
+  // Reject an unfiltered hostile offset using just the shared count cache,
+  // before fetching brands, tags, categories or looking up a page cache key.
+  if (page > 1 && !category && !brand && !tag && !search) {
+    validatePage(page, await getCatalogCount(), PRODUCTS_PER_PAGE);
+  }
+  const facets = (await getCatalogFacets()) ?? getSeedFacets();
+  const knownFilters = (!category || facets.categories.some(item => item.slug === category)) &&
+    (!tag || facets.tags.some(item => item.slug === tag)) && (!brand || facets.brands.includes(brand));
+  if (page > 1) {
+    let count = 0;
+    if (!hasSupabaseConfig()) count = filterSeedProducts(mockProducts, { category, brand, tag, q: search }).length;
+    else if (knownFilters) {
+      if (!brand && !tag && !search) count = category ? facets.categories.find(item => item.slug === category)!.product_count : facets.allProductsCount;
+      else count = search ? await queryFilteredCount(category, brand, tag, search) : await getFilteredCount(category, brand, tag, "");
+    }
+    validatePage(page, count, PRODUCTS_PER_PAGE);
+  }
+  // Free-text searches and unknown filters are request-memoized only. Random
+  // searches and unknown filter strings must not generate persistent cache keys.
+  if (search || !knownFilters) return queryProducts(category, brand, tag, search, sort, page);
+  const rows = await getCachedProducts(category, brand, tag, search, sort, page);
+  return {
+    ...rows,
+    categories: facets.categories,
+    categoryCounts: Object.fromEntries(facets.categories.map(item => [item.slug, item.product_count])),
+    brands: facets.brands,
+    tags: facets.tags,
+  };
+});
+
+export async function getProducts(params: ProductQueryParams = {}): Promise<ProductQueryResult> {
+  const page = normalizePage(params.page);
+  const values = [params.category, params.brand, params.tag, params.q].map(value => value?.trim() ?? "");
+  if (values.some(value => value.length > 120 || /[\u0000-\u001f\u007f]/.test(value))) notFound();
+  if (params.sort && (params.sort.length > 120 || /[\u0000-\u001f\u007f]/.test(params.sort))) notFound();
+  try {
+    return await getRequestProducts(values[0], values[1], values[2], values[3], normalizeSort(params.sort), page);
+  } catch (error) {
+    if (error instanceof PageOutOfRangeError) notFound();
+    throw error;
+  }
 }
 
 async function queryGetProductBySlug(slug: string) {

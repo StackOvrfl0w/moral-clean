@@ -1,0 +1,10 @@
+{
+  "sample": "First 12 public catalogue cards",
+  "products": 12,
+  "imagesBefore": 32,
+  "imagesAfter": 12,
+  "serializedBytesBefore": 16121,
+  "serializedBytesAfter": 9128,
+  "selectedImagesIdentical": true,
+  "note": "Measures card-result serialization only; Supabase response bytes and billed CPU reduction are not established."
+}

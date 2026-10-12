@@ -1,5 +1,6 @@
 import "server-only";
-import { parsePage } from "@/lib/pagination";
+import { notFound } from "next/navigation";
+import { PageOutOfRangeError, parsePage, validatePage } from "@/lib/pagination";
 import { readPage } from "./read-page";
 
 import { unstable_cache } from "next/cache";
@@ -27,7 +28,7 @@ type GetAllPostsResult = {
   limit: number;
 };
 
-function createPublicClient() {
+const createPublicClient = cache(() => {
   if (!env.supabaseUrl?.trim() || !env.supabaseAnonKey?.trim()) {
     return null;
   }
@@ -38,11 +39,11 @@ function createPublicClient() {
       persistSession: false,
     },
   });
-}
+});
 
 function normalizePage(page?: string | number) {
   const value = parsePage(page);
-  if (value === null) throw new RangeError("Invalid article page");
+  if (value === null) notFound();
   return value;
 }
 
@@ -85,11 +86,8 @@ async function queryAllPosts(
     .from("blog_posts")
     .select(BLOG_CARD_COLUMNS, { count: "exact" })
     .eq("published", true)
-    .order("published_at", { ascending: false })
-    .order("id");
-  const { data, error, count } = await readPage(
-    (from, to) => query.range(from, to), page, limit,
-  );
+    .order("published_at", { ascending: false }).order("id");
+  const { data, error, count } = await readPage((from, to) => query.range(from, to), page, limit);
 
   if (error) {
     console.error("Unable to load published articles:", error.message);
@@ -108,19 +106,33 @@ async function queryAllPosts(
   };
 }
 
-const getCachedAllPosts = cache(unstable_cache(
+const getCachedAllPosts = unstable_cache(
   queryAllPosts,
-  ["published-blog-list-v2"],
+  ["published-blog-list-validated-v1"],
   { revalidate: PUBLIC_CACHE_SECONDS, tags: ["blog"] },
-));
+);
 
-export function getAllPosts(
-  options: GetAllPostsOptions = {},
-): Promise<GetAllPostsResult> {
-  return getCachedAllPosts(
-    normalizePage(options.page),
-    normalizeLimit(options.limit),
-  );
+const getPublishedCount = unstable_cache(async () => {
+  const supabase = createPublicClient();
+  if (!supabase) return getSeedPublishedPosts().length;
+  const { count, error } = await supabase.from("blog_posts")
+    .select("id", { count: "exact", head: true }).eq("published", true);
+  if (error || count === null) throw new Error("Unable to count published articles");
+  return count;
+}, ["published-blog-count-v1"], { revalidate: PUBLIC_CACHE_SECONDS, tags: ["blog"] });
+
+const getRequestPosts = cache(async (page: number, limit: number) => {
+  if (page > 1) validatePage(page, await getPublishedCount(), limit);
+  return getCachedAllPosts(page, limit);
+});
+
+export async function getAllPosts(options: GetAllPostsOptions = {}): Promise<GetAllPostsResult> {
+  const page = normalizePage(options.page);
+  try { return await getRequestPosts(page, normalizeLimit(options.limit)); }
+  catch (error) {
+    if (error instanceof PageOutOfRangeError) notFound();
+    throw error;
+  }
 }
 
 async function queryPostBySlug(slug: string): Promise<BlogPost | null> {
