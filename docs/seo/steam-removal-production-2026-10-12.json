@@ -1,0 +1,36 @@
+{
+  "origin": "https://moralclean.com",
+  "scope": "Shared category deletion and cache refresh only; production code remains unchanged",
+  "rows": [
+    {
+      "path": "/products/category/steam-cleaners",
+      "status": 404,
+      "retiredCategoryLink": false,
+      "rideOnLink": true
+    },
+    {
+      "path": "/",
+      "status": 200,
+      "retiredCategoryLink": false,
+      "rideOnLink": true
+    },
+    {
+      "path": "/products",
+      "status": 200,
+      "retiredCategoryLink": false,
+      "rideOnLink": true
+    },
+    {
+      "path": "/catalog-sitemap.xml",
+      "status": 200,
+      "retiredCategoryLink": false,
+      "rideOnLink": true
+    },
+    {
+      "path": "/products/category/ride-on-scrubber-dryer",
+      "status": 200,
+      "retiredCategoryLink": false,
+      "rideOnLink": true
+    }
+  ]
+}
