@@ -32,7 +32,7 @@ for (const child of children) {
   locations.push(...extractLocations(await response.text()));
 }
 if (locations.some((url) => url.includes("/cleaning-chemicals"))) errors.push("Empty chemicals category is included in the sitemap");
-if (!locations.some((url) => url.includes("/steam-cleaners"))) errors.push("Steam category is missing from the sitemap");
+if (locations.some((url) => url.includes("/products/category/steam-cleaners"))) errors.push("Retired steam category is included in the sitemap");
 for (const {slug} of JSON.parse(fs.readFileSync("src/content/service-pages.json", "utf8"))) {
   if (!locations.includes("https://moralclean.com/services/" + slug)) errors.push("Service page missing from sitemap: " + slug);
 }

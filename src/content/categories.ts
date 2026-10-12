@@ -74,5 +74,9 @@ export const categoryAdvice: Record<string, CategoryAdvice> = {
 };
 
 export function isIndexableCategory(slug: string, productCount: number) {
-  return productCount > 0 || slug === "steam-cleaners";
+  return !isRetiredCategory(slug) && productCount > 0;
+}
+
+export function isRetiredCategory(slug: string) {
+  return slug === "steam-cleaners";
 }

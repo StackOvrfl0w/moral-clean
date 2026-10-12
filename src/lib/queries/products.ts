@@ -1,4 +1,5 @@
 import "server-only";
+import { isRetiredCategory } from "@/content/categories";
 import { parsePage } from "@/lib/pagination";
 import { readPage } from "./read-page";
 
@@ -251,7 +252,7 @@ function getSeedFacets(): CatalogFacets {
   }, {});
 
   return {
-    categories: mockCategories.map((category) => ({
+    categories: mockCategories.filter((category) => !isRetiredCategory(category.slug)).map((category) => ({
       ...category,
       product_count: counts[category.slug] ?? 0,
     })),
@@ -303,7 +304,7 @@ async function queryCatalogFacets(): Promise<CatalogFacets | null> {
   });
 
   return {
-    categories,
+    categories: categories.filter((category) => !isRetiredCategory(category.slug)),
     tags: ((tagsResponse.data ?? []) as unknown as (Tag & { product_tags: { count: number }[] })[]).filter((tag) => (tag.product_tags?.[0]?.count ?? 0) > 0).map(({ product_tags: _counts, ...tag }) => {
       void _counts;
       return tag;
@@ -317,7 +318,7 @@ async function queryCatalogFacets(): Promise<CatalogFacets | null> {
 
 const getCatalogFacets = unstable_cache(
   queryCatalogFacets,
-  ["catalog-facets-v2"],
+  ["catalog-facets-v3"],
   { revalidate: PUBLIC_CACHE_SECONDS, tags: ["catalog"] },
 );
 
@@ -518,7 +519,7 @@ async function queryProducts(
 
 const getCachedProducts = cache(unstable_cache(
   queryProducts,
-  ["catalog-products-v2"],
+  ["catalog-products-v3"],
   { revalidate: PUBLIC_CACHE_SECONDS, tags: ["catalog"] },
 ));
 

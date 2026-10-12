@@ -1,0 +1,42 @@
+[
+  {
+    "path": "/products/category/steam-cleaners",
+    "status": 404,
+    "retiredCategoryLink": false
+  },
+  {
+    "path": "/products/category/steam-cleaners?page=2",
+    "status": 404,
+    "retiredCategoryLink": false
+  },
+  {
+    "path": "/",
+    "status": 200,
+    "retiredCategoryLink": false
+  },
+  {
+    "path": "/products",
+    "status": 200,
+    "retiredCategoryLink": false
+  },
+  {
+    "path": "/catalog-sitemap.xml",
+    "status": 200,
+    "retiredCategoryLink": false
+  },
+  {
+    "path": "/products/category/ride-on-scrubber-dryer",
+    "status": 200,
+    "retiredCategoryLink": false
+  },
+  {
+    "path": "/guides/commercial-steam-cleaner-buying-guide-pakistan",
+    "status": 200,
+    "retiredCategoryLink": false
+  },
+  {
+    "path": "/guides/steam-cleaner-vs-wet-dry-vacuum",
+    "status": 200,
+    "retiredCategoryLink": false
+  }
+]

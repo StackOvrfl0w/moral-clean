@@ -1,4 +1,5 @@
 import "server-only";
+import { isRetiredCategory } from "@/content/categories";
 
 import { unstable_cache } from "next/cache";
 import { cache } from "react";
@@ -97,7 +98,9 @@ const getCachedAllCategories = unstable_cache(
   { revalidate: 900, tags: ["catalog"] },
 );
 
-export const getAllCategories = cache(getCachedAllCategories);
+export const getAllCategories = cache(async () =>
+  (await getCachedAllCategories()).filter((category) => !isRetiredCategory(category.slug)),
+);
 
 export const getCategoryModels = unstable_cache(async (categoryId: string) => {
   const supabase = createPublicCatalogClient();
