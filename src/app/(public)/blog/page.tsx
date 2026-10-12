@@ -8,11 +8,12 @@ import { ArrowRight } from "lucide-react";
 import { BlogCard } from "@/components/blog/BlogCard";
 import { Button } from "@/components/ui/button";
 import { blogFallbackImage } from "@/lib/fallback-images";
-import { getPaginationItems } from "@/lib/pagination";
+import { getPaginationItems, parsePage } from "@/lib/pagination";
 import { getAllPosts } from "@/lib/queries/blog";
 
 
-export function generateMetadata({ searchParams }: { searchParams?: Record<string, string | string[] | undefined> }): Metadata {
+export async function generateMetadata({ searchParams }: { searchParams?: Record<string, string | string[] | undefined> }): Promise<Metadata> {
+  await getAllPosts({ page: getParam(searchParams, "page"), limit: POSTS_PER_PAGE });
   return listingMetadata('Cleaning Equipment Guides & Maintenance Tips', 'Read Moral Clean guides on choosing commercial cleaning machines, maintaining equipment and planning cleaning operations for facilities in Pakistan.', '/blog', searchParams);
 }
 
@@ -27,14 +28,6 @@ function getParam(
     return value[0];
   }
   return value;
-}
-
-function normalizePage(page?: string) {
-  const value = Number(page ?? 1);
-  if (!Number.isFinite(value) || value < 1) {
-    return 1;
-  }
-  return Math.floor(value);
 }
 
 function formatDate(value: string | null) {
@@ -58,7 +51,8 @@ export default async function BlogPage({
 }: {
   searchParams?: Record<string, string | string[] | undefined>;
 }) {
-  const page = normalizePage(getParam(searchParams, "page"));
+  const page = parsePage(getParam(searchParams, "page"));
+  if (page === null) notFound();
   const result = await getAllPosts({ page, limit: POSTS_PER_PAGE });
   if (page > result.pageCount) notFound();
 

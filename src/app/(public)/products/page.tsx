@@ -26,7 +26,8 @@ import { getPaginationItems } from "@/lib/pagination";
 import { cn } from "@/lib/utils";
 
 
-export function generateMetadata({ searchParams }: { searchParams?: Record<string, string | string[] | undefined> }): Metadata {
+export async function generateMetadata({ searchParams }: { searchParams?: Record<string, string | string[] | undefined> }): Promise<Metadata> {
+  await getProducts({ page: getParam(searchParams, "page"), category: getParam(searchParams, "category"), brand: getParam(searchParams, "brand"), tag: getParam(searchParams, "tag"), q: getParam(searchParams, "q"), sort: getParam(searchParams, "sort") });
   return listingMetadata('Commercial Cleaning Machines & Equipment', 'Browse scrubber dryers, industrial vacuums, pressure washers and janitorial equipment. Compare specifications and request a quote from Moral Clean.', '/products', searchParams);
 }
 

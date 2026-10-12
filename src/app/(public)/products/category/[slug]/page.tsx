@@ -10,7 +10,7 @@ import { ProductFilters } from "@/components/products/ProductFilters";
 import { BreadcrumbSchema } from "@/components/seo/BreadcrumbSchema";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { getPaginationItems } from "@/lib/pagination";
+import { getPaginationItems, parsePage } from "@/lib/pagination";
 import {
   getAllCategories,
   getCategoryBySlug,
@@ -147,8 +147,11 @@ function CategoryPagination({
 }
 
 export async function generateMetadata({ params, searchParams }: CategoryPageProps): Promise<Metadata> {
+  const page = parsePage(getParam(searchParams, "page"));
+  if (page === null) notFound();
   const category = await getCategoryBySlug(params.slug);
   if (!category) notFound();
+  await getProductsByCategory(category.id, { page, sort: getParam(searchParams, "sort"), brand: getParam(searchParams, "brand"), tag: getParam(searchParams, "tag") });
   const suppliedDescription = category.description?.replace(/\s+/g, " ").trim();
   return listingMetadata(
     `${category.name} in Pakistan`,

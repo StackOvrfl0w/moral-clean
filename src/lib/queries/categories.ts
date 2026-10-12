@@ -1,4 +1,6 @@
 import "server-only";
+import { notFound } from "next/navigation";
+import { PageOutOfRangeError, parsePage, validatePage } from "@/lib/pagination";
 
 import { unstable_cache } from "next/cache";
 import { cache } from "react";
@@ -110,6 +112,8 @@ export async function getProductsByCategory(
   categoryId: string,
   options: CategoryProductQueryOptions,
 ) {
+  const page = parsePage(options.page, CATEGORY_PRODUCTS_PER_PAGE);
+  if (page === null) notFound();
   const categories = await getAllCategories();
   const category = categories.find((item) => item.id === categoryId);
 
@@ -125,12 +129,19 @@ export async function getProductsByCategory(
     };
   }
 
+  if (!options.brand && !options.tag) {
+    try { validatePage(page, category.product_count, CATEGORY_PRODUCTS_PER_PAGE); }
+    catch (error) {
+      if (error instanceof PageOutOfRangeError) notFound();
+      throw error;
+    }
+  }
   const result = await getProducts({
     category: category.slug,
     brand: options.brand,
     tag: options.tag,
     sort: options.sort,
-    page: options.page,
+    page,
   });
 
   return {
