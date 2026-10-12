@@ -42,31 +42,28 @@ describe("catalog pagination boundary", () => {
     expect(t.urls).toHaveLength(1);
     expect(t.urls[0].searchParams.get("offset")).toBe("12");
   });
-  test("out-of-range pages recover the filtered count without returning page-one products", async () => {
-    const t = transport([{ status: 416, body: rangeError }, { status: 200, body: [{ id: "first" }], count: "0-0/36" }]);
-    const result = await t.run(999);
-    expect(result.error).toBeNull();
-    expect(result.count).toBe(36);
-    expect(result.data).toEqual([]);
-    expect(t.urls).toHaveLength(2);
-    expect(t.urls[1].searchParams.get("offset")).toBe("0");
-    expect(t.urls[1].searchParams.get("limit")).toBe("1");
-    expect(t.urls.every((url) => url.searchParams.get("category_id") === "eq.single-disc")).toBe(true);
+  test("a range failure after preflight is surfaced without a recovery query", async () => {
+    const t = transport([{ status: 416, body: rangeError }]);
+    await expect(t.run(999)).rejects.toThrow("Results changed after pagination validation");
+    expect(t.urls).toHaveLength(1);
   });
-  test("empty filtered collections recover as empty rather than throwing", async () => {
-    const t = transport([{ status: 416, body: rangeError }, { status: 200, body: [], count: "*/0" }]);
-    const result = await t.run(999);
-    expect(result.count).toBe(0);
+  test("an empty first page is valid without a recovery request", async () => {
+    let calls = 0;
+    const result = await readPage(async () => {
+      calls += 1;
+      return { data: null, count: 0, error: rangeError };
+    }, 1, 12);
     expect(result.data).toEqual([]);
     expect(result.error).toBeNull();
+    expect(calls).toBe(1);
   });
   test("a permission failure is propagated without retry", async () => {
     const t = transport([{ status: 403, body: { ...rangeError, code: "42501", message: "Permission denied" } }]);
     expect((await t.run(2)).error?.code).toBe("42501");
     expect(t.urls).toHaveLength(1);
   });
-  test("a failed count recovery remains a genuine failure", async () => {
-    const t = transport([{ status: 416, body: rangeError }, { status: 500, body: { ...rangeError, code: "XX000" } }]);
+  test("a failed request remains a genuine failure", async () => {
+    const t = transport([{ status: 500, body: { ...rangeError, code: "XX000" } }]);
     expect((await t.run(999)).error?.code).toBe("XX000");
   });
 });
