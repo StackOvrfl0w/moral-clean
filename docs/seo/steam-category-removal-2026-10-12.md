@@ -10,3 +10,9 @@ The owner requested removal of the category while retaining steam-related SEO co
 - Bun tests: 18 pass, 74 assertions. Build/type/lint checks passed. Full local verification: 67 sitemap pages, 36 products, 12 exclusions, 67/67 reachable pages, zero errors. Focused checks confirm retired routes return 404 and both steam guides return 200 without links to the retired category.
 
 Earlier SEO work: researched Search Console and keyword opportunities; improved category/product metadata, structured data, internal links, filters/pagination and enquiry context; prepared 14 guides and three service pages; tested desktop/mobile, images and isolated submissions. These code changes remain on preview. No ranking/traffic gain has been demonstrated from preview.
+
+## Preview deployment limitation
+
+Preview branch commit a847b76f1f420165dfdf4e101a9b72f6afdd29c8 contains the tested application safeguards and corrected guide links. Its CLI deployment dpl_5GftttYjH61hxqStLzRknnq5j3QU (https://moral-clean-8vscy1jr6-burhan-uddins-projects-91e8a924.vercel.app) remains INITIALIZING, with no build logs. It is not claimed READY or remotely verified. The earlier stalled Git-source deployment was cancelled to avoid a later obsolete alias assignment.
+
+[Vercel's official status](https://www.vercel-status.com/) reported an unresolved build/deployment incident on 12 October, including queued builds and delayed starts, and partial outages for builds, CI/CD and Git integrations. This is consistent with the observed deployment stall; no production deployment was attempted as a workaround. The shared-data deletion and scoped cache refresh are already verified on production, independently of this pending code deployment. Article paragraphs were not edited or deleted.
