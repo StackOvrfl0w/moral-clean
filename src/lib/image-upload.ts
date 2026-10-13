@@ -1,4 +1,4 @@
-const MAX_IMAGE_BYTES = 5 * 1024 * 1024;
+export const MAX_IMAGE_BYTES = 5 * 1024 * 1024;
 
 type ImageType = {
   mime: "image/jpeg" | "image/png" | "image/gif" | "image/webp";
@@ -11,6 +11,15 @@ const imageTypes: ImageType[] = [
   { mime: "image/gif", extension: "gif" },
   { mime: "image/webp", extension: "webp" },
 ];
+
+export function validateImageMetadata(size: number, extension: string, contentType: string) {
+  if (!Number.isSafeInteger(size) || size <= 0 || size > MAX_IMAGE_BYTES) {
+    throw new Error("Image must be between 1 byte and 5 MB.");
+  }
+  if (!imageTypes.some((type) => type.extension === extension && type.mime === contentType)) {
+    throw new Error("Only valid JPEG, PNG, GIF, or WebP images are supported.");
+  }
+}
 
 function matchesSignature(bytes: Uint8Array, type: ImageType) {
   if (type.mime === "image/jpeg") {

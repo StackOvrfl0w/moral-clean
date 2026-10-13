@@ -125,12 +125,14 @@ export const metadata: Metadata = {
     images: ["/opengraph-image"],
   },
   robots: {
+    ...(env.migrationTrial ? { index: false, follow: false } : {}),
     googleBot: {
+      ...(env.migrationTrial ? { index: false, follow: false } : {}),
       "max-image-preview": "large",
       "max-snippet": -1,
     },
   },
-  verification: { google: process.env.GOOGLE_SITE_VERIFICATION?.trim() || undefined },
+  verification: { google: env.migrationTrial ? undefined : process.env.GOOGLE_SITE_VERIFICATION?.trim() || undefined },
 };
 
 export default function RootLayout({
@@ -147,7 +149,7 @@ export default function RootLayout({
         <WebsiteSchema />
         {children}
         <Toaster />
-        {process.env.VERCEL ? <SpeedInsights /> : null}
+        {process.env.VERCEL && !env.migrationTrial ? <SpeedInsights /> : null}
       </body>
     </html>
   );

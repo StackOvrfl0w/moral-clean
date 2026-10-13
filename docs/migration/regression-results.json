@@ -1,0 +1,30 @@
+[
+  {
+    "file": "catalog-pagination.test.js",
+    "exitCode": 0
+  },
+  {
+    "file": "contact-recording.test.js",
+    "exitCode": 0
+  },
+  {
+    "file": "netlify-hosting.test.js",
+    "exitCode": 0
+  },
+  {
+    "file": "netlify-storage-upload.test.js",
+    "exitCode": 0
+  },
+  {
+    "file": "product-enquiry.test.js",
+    "exitCode": 0
+  },
+  {
+    "file": "product-specifications.test.js",
+    "exitCode": 0
+  },
+  {
+    "file": "public-pagination.test.js",
+    "exitCode": 0
+  }
+]

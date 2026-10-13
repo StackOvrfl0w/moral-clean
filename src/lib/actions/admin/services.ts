@@ -4,7 +4,6 @@ import { revalidatePath, revalidateTag } from "next/cache";
 import { redirect } from "next/navigation";
 
 import { requireAdmin } from "@/lib/auth";
-import { validateImageUpload } from "@/lib/image-upload";
 import { createClient } from "@/lib/supabase/server";
 import { normalizeSafeUrl, slugify } from "@/lib/utils";
 
@@ -15,27 +14,6 @@ function invalidateServices() {
 function normalize(value: FormDataEntryValue | null) {
   const text = typeof value === "string" ? value.trim() : "";
   return text || null;
-}
-
-export async function uploadServiceImage(formData: FormData): Promise<{ url: string }> {
-  await requireAdmin();
-  const file = formData.get("file");
-  if (!(file instanceof File)) throw new Error("No file selected.");
-
-  const image = await validateImageUpload(file);
-  const path = `services/${Date.now()}-${crypto.randomUUID()}.${image.extension}`;
-  const supabase = createClient();
-  const { error } = await supabase.storage.from("product images").upload(path, image.file, {
-    contentType: image.contentType,
-    upsert: false,
-  });
-  if (error) throw new Error(error.message);
-
-  const {
-    data: { publicUrl },
-  } = supabase.storage.from("product images").getPublicUrl(path);
-
-  return { url: publicUrl };
 }
 
 export async function createService(formData: FormData) {

@@ -1,4 +1,11 @@
 import { withSentryConfig } from "@sentry/nextjs/config";
+import hosting from "./src/config/hosting.cjs";
+
+hosting.assertTrialTarget(process.env);
+const preview = hosting.isPreviewEnvironment(process.env);
+const supabaseHostname = process.env.NEXT_PUBLIC_SUPABASE_URL
+  ? new URL(process.env.NEXT_PUBLIC_SUPABASE_URL).hostname
+  : `${hosting.PRODUCTION_SUPABASE_REF}.supabase.co`;
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -25,7 +32,7 @@ const nextConfig = {
       { protocol: "https", hostname: "images.unsplash.com", pathname: "/**" },
       {
         protocol: "https",
-        hostname: "sjlmjakninsenljyastk.supabase.co",
+        hostname: supabaseHostname,
         pathname: "/storage/v1/object/public/**",
       },
       {
@@ -37,8 +44,8 @@ const nextConfig = {
   },
   async headers() {
     return [
-      ...(process.env.VERCEL_ENV === "preview"
-        ? [{ source: "/:path*", headers: [{ key: "X-Robots-Tag", value: "noindex" }] }]
+      ...(preview
+        ? [{ source: "/:path*", headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }] }]
         : []),
       {
         source: "/assets/:path*",
@@ -77,7 +84,7 @@ const nextConfig = {
           {
             key: "Content-Security-Policy",
             value:
-              "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://va.vercel-scripts.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://sjlmjakninsenljyastk.supabase.co https://ik.imagekit.io https://plus.unsplash.com https://images.unsplash.com; font-src 'self' data:; connect-src 'self' https://*.supabase.co https://upload.imagekit.io https://va.vercel-scripts.com https://us.i.posthog.com https://*.posthog.com https://*.ingest.us.sentry.io https://*.ingest.sentry.io; frame-src 'self' https://www.google.com https://maps.google.com https://us.posthog.com; frame-ancestors 'self'; object-src 'none'; base-uri 'self'; form-action 'self'",
+              `default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://va.vercel-scripts.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://${supabaseHostname} https://ik.imagekit.io https://plus.unsplash.com https://images.unsplash.com; font-src 'self' data:; connect-src 'self' https://*.supabase.co https://upload.imagekit.io https://va.vercel-scripts.com https://us.i.posthog.com https://*.posthog.com https://*.ingest.us.sentry.io https://*.ingest.sentry.io; frame-src 'self' https://www.google.com https://maps.google.com https://us.posthog.com; frame-ancestors 'self'; object-src 'none'; base-uri 'self'; form-action 'self'`,
           },
           { key: "X-Content-Type-Options", value: "nosniff" },
           { key: "X-Frame-Options", value: "SAMEORIGIN" },
@@ -96,7 +103,7 @@ const nextConfig = {
   },
 };
 
-export default withSentryConfig(nextConfig, {
+export default process.env.NEXT_PUBLIC_MIGRATION_TRIAL === "true" ? nextConfig : withSentryConfig(nextConfig, {
   org: "moral-clean",
   project: "moral-clean",
   silent: true,

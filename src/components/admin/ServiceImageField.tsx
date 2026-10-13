@@ -3,7 +3,7 @@
 import { useRef, useState } from "react";
 import { Loader2, Upload, Link as LinkIcon, X } from "lucide-react";
 
-import { uploadServiceImage } from "@/lib/actions/admin/services";
+import { uploadAdminImage } from "@/lib/upload-admin-image";
 
 interface ServiceImageFieldProps {
   defaultValue?: string;
@@ -23,9 +23,7 @@ export function ServiceImageField({ defaultValue = "" }: ServiceImageFieldProps)
     setUploading(true);
     setUploadError("");
     try {
-      const fd = new FormData();
-      fd.append("file", file);
-      const { url } = await uploadServiceImage(fd);
+      const { url } = await uploadAdminImage(file, "services");
       setImageUrl(url);
     } catch {
       setUploadError("Upload failed. Please try again.");

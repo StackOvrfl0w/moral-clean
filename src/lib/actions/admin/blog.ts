@@ -4,7 +4,6 @@ import { revalidatePath, revalidateTag } from "next/cache";
 import { redirect } from "next/navigation";
 
 import { requireAdmin } from "@/lib/auth";
-import { validateImageUpload } from "@/lib/image-upload";
 import { createClient } from "@/lib/supabase/server";
 import { sanitizeRichText } from "@/lib/sanitize-html";
 import { normalizeSafeUrl, slugify } from "@/lib/utils";
@@ -147,28 +146,4 @@ export async function bulkDeleteBlogPosts(formData: FormData) {
   revalidatePath("/catalog-sitemap.xml");
   revalidatePath("/blog");
   return { deletedCount: count ?? 0 };
-}
-
-export async function uploadBlogImage(formData: FormData) {
-  await requireAdmin();
-  const file = formData.get("file");
-  if (!(file instanceof File)) {
-    throw new Error("No file selected.");
-  }
-
-  const image = await validateImageUpload(file);
-  const path = `blog/${Date.now()}-${crypto.randomUUID()}.${image.extension}`;
-  const supabase = createClient();
-  const { error } = await supabase.storage.from("product images").upload(path, image.file, {
-    contentType: image.contentType,
-    upsert: false,
-  });
-
-  if (error) throw new Error(error.message);
-
-  const {
-    data: { publicUrl },
-  } = supabase.storage.from("product images").getPublicUrl(path);
-
-  return { url: publicUrl, path };
 }

@@ -6,7 +6,6 @@ import { revalidatePath, revalidateTag } from "next/cache";
 import { redirect } from "next/navigation";
 
 import { requireAdmin } from "@/lib/auth";
-import { validateImageUpload } from "@/lib/image-upload";
 import { sanitizeRichText } from "@/lib/sanitize-html";
 import { createClient } from "@/lib/supabase/server";
 import { normalizeSafeUrl, slugify } from "@/lib/utils";
@@ -395,35 +394,6 @@ export async function toggleInStock(formData: FormData) {
   revalidatePath("/admin/products");
   revalidatePath("/");
   revalidatePath("/catalog-sitemap.xml");
-}
-
-export async function uploadProductImage(formData: FormData) {
-  await requireAdmin();
-  const file = formData.get("file");
-  if (!(file instanceof File)) {
-    throw new Error("No file selected.");
-  }
-
-  const image = await validateImageUpload(file);
-  const path = `products/${Date.now()}-${crypto.randomUUID()}.${image.extension}`;
-
-  const supabase = createClient();
-  const { error } = await supabase.storage
-    .from("product images")
-    .upload(path, image.file, {
-      contentType: image.contentType,
-      upsert: false,
-    });
-
-  if (error) {
-    throw new Error(error.message);
-  }
-
-  const {
-    data: { publicUrl },
-  } = supabase.storage.from("product images").getPublicUrl(path);
-
-  return { url: publicUrl, path };
 }
 
 export async function deleteProductImage(formData: FormData) {

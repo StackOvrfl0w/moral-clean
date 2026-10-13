@@ -1,0 +1,20 @@
+# Dedicated trial site only. Never attach moralclean.com to this site.
+[build]
+  command = "bun run build:netlify-trial"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "22"
+  BUN_VERSION = "1.4.2"
+  BUN_FLAGS = "--frozen-lockfile"
+  NEXT_PUBLIC_MIGRATION_TRIAL = "true"
+  MORALCLEAN_PREVIEW = "true"
+  NETLIFY_NEXT_SKEW_PROTECTION = "true"
+
+# OpenNext is supplied by Netlify's automatic Next.js framework detection.
+# Do not add a static-export redirect or deploy the .next folder as plain files.
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"

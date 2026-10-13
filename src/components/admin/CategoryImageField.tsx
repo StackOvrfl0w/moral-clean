@@ -3,7 +3,7 @@
 import { useRef, useState } from "react";
 import { Loader2, Upload, Link as LinkIcon, X } from "lucide-react";
 
-import { uploadCategoryImage } from "@/lib/actions/admin/categories";
+import { uploadAdminImage } from "@/lib/upload-admin-image";
 
 interface CategoryImageFieldProps {
   defaultValue?: string;
@@ -25,9 +25,7 @@ export function CategoryImageField({
     setUploading(true);
     setUploadError("");
     try {
-      const fd = new FormData();
-      fd.append("file", file);
-      const { url } = await uploadCategoryImage(fd);
+      const { url } = await uploadAdminImage(file, "categories");
       setImageUrl(url);
     } catch {
       setUploadError("Upload failed. Please try again.");

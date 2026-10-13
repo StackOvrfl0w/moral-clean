@@ -1,0 +1,8 @@
+{
+  "evidenceType": "Illustrative assumptions only; not measured MoralClean monthly usage",
+  "productionDeploys": 4,
+  "bandwidthGb": 5,
+  "computeGbHours": 1,
+  "webRequests": 100000,
+  "otherTeamCredits": 0
+}

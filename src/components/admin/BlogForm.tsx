@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { uploadBlogImage } from "@/lib/actions/admin/blog";
+import { uploadAdminImage } from "@/lib/upload-admin-image";
 import { getImageKitAuthParams } from "@/lib/actions/admin/imagekit-auth";
 import { slugify } from "@/lib/utils";
 
@@ -72,11 +72,8 @@ export function BlogForm({ mode, initialData, submitAction }: BlogFormProps) {
     if (!fileList?.[0]) return;
     setUploading(true);
 
-    const formData = new FormData();
-    formData.set("file", fileList[0]);
-
     try {
-      const uploaded = await uploadBlogImage(formData);
+      const uploaded = await uploadAdminImage(fileList[0], "blog");
       setCoverImage(uploaded.url);
       toast.success("Cover image uploaded.");
     } catch (error) {

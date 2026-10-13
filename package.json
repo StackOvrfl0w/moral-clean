@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:netlify-trial": "node scripts/build-netlify-trial.mjs",
     "postbuild": "next-sitemap",
     "start": "next start",
     "lint": "next lint"

@@ -1,0 +1,2065 @@
+{
+  "origin": "http://localhost:3017",
+  "testedAt": "2026-10-13T09:17:43.656Z",
+  "backend": "Synthetic transport; not real service integration",
+  "pages": [
+    {
+      "route": "/guides/cleaning-machine-maintenance-checklist",
+      "canonical": "http://localhost:3017/guides/cleaning-machine-maintenance-checklist",
+      "h1": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "BreadcrumbList",
+        "Article"
+      ]
+    },
+    {
+      "route": "/guides/commercial-pressure-washer-pressure-flow-guide",
+      "canonical": "http://localhost:3017/guides/commercial-pressure-washer-pressure-flow-guide",
+      "h1": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "BreadcrumbList",
+        "Article"
+      ]
+    },
+    {
+      "route": "/guides/commercial-steam-cleaner-buying-guide-pakistan",
+      "canonical": "http://localhost:3017/guides/commercial-steam-cleaner-buying-guide-pakistan",
+      "h1": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "BreadcrumbList",
+        "Article"
+      ]
+    },
+    {
+      "route": "/guides/floor-cleaning-machine-costs-pakistan",
+      "canonical": "http://localhost:3017/guides/floor-cleaning-machine-costs-pakistan",
+      "h1": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "BreadcrumbList",
+        "Article"
+      ]
+    },
+    {
+      "route": "/guides/floor-cleaning-pads-brushes-selection-guide",
+      "canonical": "http://localhost:3017/guides/floor-cleaning-pads-brushes-selection-guide",
+      "h1": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "BreadcrumbList",
+        "Article"
+      ]
+    },
+    {
+      "route": "/guides/floor-scrubber-cleaning-capacity-calculator",
+      "canonical": "http://localhost:3017/guides/floor-scrubber-cleaning-capacity-calculator",
+      "h1": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "BreadcrumbList",
+        "Article"
+      ]
+    },
+    {
+      "route": "/guides/floor-scrubber-not-picking-up-water",
+      "canonical": "http://localhost:3017/guides/floor-scrubber-not-picking-up-water",
+      "h1": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "BreadcrumbList",
+        "Article"
+      ]
+    },
+    {
+      "route": "/guides/floor-sweeper-vs-scrubber-dryer",
+      "canonical": "http://localhost:3017/guides/floor-sweeper-vs-scrubber-dryer",
+      "h1": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "BreadcrumbList",
+        "Article"
+      ]
+    },
+    {
+      "route": "/guides/mop-trolley-cleaning-trolley-buying-guide-pakistan",
+      "canonical": "http://localhost:3017/guides/mop-trolley-cleaning-trolley-buying-guide-pakistan",
+      "h1": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "BreadcrumbList",
+        "Article"
+      ]
+    },
+    {
+      "route": "/guides/single-disc-machine-vs-scrubber-dryer",
+      "canonical": "http://localhost:3017/guides/single-disc-machine-vs-scrubber-dryer",
+      "h1": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "BreadcrumbList",
+        "Article"
+      ]
+    },
+    {
+      "route": "/guides/steam-cleaner-vs-wet-dry-vacuum",
+      "canonical": "http://localhost:3017/guides/steam-cleaner-vs-wet-dry-vacuum",
+      "h1": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "BreadcrumbList",
+        "Article"
+      ]
+    },
+    {
+      "route": "/guides/walk-behind-vs-ride-on-scrubber-dryer",
+      "canonical": "http://localhost:3017/guides/walk-behind-vs-ride-on-scrubber-dryer",
+      "h1": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "BreadcrumbList",
+        "Article"
+      ]
+    },
+    {
+      "route": "/guides/warehouse-floor-cleaning-equipment-checklist-pakistan",
+      "canonical": "http://localhost:3017/guides/warehouse-floor-cleaning-equipment-checklist-pakistan",
+      "h1": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "BreadcrumbList",
+        "Article"
+      ]
+    },
+    {
+      "route": "/guides/wet-dry-vacuum-cleaner-buying-guide-pakistan",
+      "canonical": "http://localhost:3017/guides/wet-dry-vacuum-cleaner-buying-guide-pakistan",
+      "h1": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "BreadcrumbList",
+        "Article"
+      ]
+    },
+    {
+      "route": "/about",
+      "canonical": "http://localhost:3017/about",
+      "h1": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite"
+      ]
+    },
+    {
+      "route": "/",
+      "canonical": "http://localhost:3017",
+      "h1": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite"
+      ]
+    },
+    {
+      "route": "/services",
+      "canonical": "http://localhost:3017/services",
+      "h1": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        null
+      ]
+    },
+    {
+      "route": "/guides",
+      "canonical": "http://localhost:3017/guides",
+      "h1": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "BreadcrumbList",
+        "CollectionPage"
+      ]
+    },
+    {
+      "route": "/services/brush-refilling",
+      "canonical": "http://localhost:3017/services/brush-refilling",
+      "h1": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "BreadcrumbList",
+        "Service"
+      ]
+    },
+    {
+      "route": "/services/cleaning-machine-parts",
+      "canonical": "http://localhost:3017/services/cleaning-machine-parts",
+      "h1": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "BreadcrumbList",
+        "Service"
+      ]
+    },
+    {
+      "route": "/services/cleaning-machine-repair",
+      "canonical": "http://localhost:3017/services/cleaning-machine-repair",
+      "h1": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "BreadcrumbList",
+        "Service"
+      ]
+    },
+    {
+      "route": "/contact",
+      "canonical": "http://localhost:3017/contact",
+      "h1": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite"
+      ]
+    },
+    {
+      "route": "/products",
+      "canonical": "http://localhost:3017/products",
+      "h1": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite"
+      ]
+    },
+    {
+      "route": "/blog",
+      "canonical": "http://localhost:3017/blog",
+      "h1": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite"
+      ]
+    },
+    {
+      "route": "/products/trial-equipment-1",
+      "canonical": "http://localhost:3017/products/trial-equipment-1",
+      "h1": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "route": "/products/trial-equipment-2",
+      "canonical": "http://localhost:3017/products/trial-equipment-2",
+      "h1": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "route": "/products/trial-equipment-3",
+      "canonical": "http://localhost:3017/products/trial-equipment-3",
+      "h1": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "route": "/products/trial-equipment-4",
+      "canonical": "http://localhost:3017/products/trial-equipment-4",
+      "h1": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "route": "/products/trial-equipment-5",
+      "canonical": "http://localhost:3017/products/trial-equipment-5",
+      "h1": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "route": "/products/trial-equipment-6",
+      "canonical": "http://localhost:3017/products/trial-equipment-6",
+      "h1": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "route": "/products/trial-equipment-7",
+      "canonical": "http://localhost:3017/products/trial-equipment-7",
+      "h1": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "route": "/products/trial-equipment-8",
+      "canonical": "http://localhost:3017/products/trial-equipment-8",
+      "h1": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "route": "/products/trial-equipment-9",
+      "canonical": "http://localhost:3017/products/trial-equipment-9",
+      "h1": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "route": "/products/trial-equipment-10",
+      "canonical": "http://localhost:3017/products/trial-equipment-10",
+      "h1": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "route": "/products/trial-equipment-11",
+      "canonical": "http://localhost:3017/products/trial-equipment-11",
+      "h1": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "route": "/products/trial-equipment-12",
+      "canonical": "http://localhost:3017/products/trial-equipment-12",
+      "h1": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "route": "/products/trial-equipment-13",
+      "canonical": "http://localhost:3017/products/trial-equipment-13",
+      "h1": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "route": "/products/trial-equipment-14",
+      "canonical": "http://localhost:3017/products/trial-equipment-14",
+      "h1": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "route": "/products/trial-equipment-15",
+      "canonical": "http://localhost:3017/products/trial-equipment-15",
+      "h1": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "route": "/products/trial-equipment-16",
+      "canonical": "http://localhost:3017/products/trial-equipment-16",
+      "h1": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "route": "/products/trial-equipment-17",
+      "canonical": "http://localhost:3017/products/trial-equipment-17",
+      "h1": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "route": "/products/trial-equipment-18",
+      "canonical": "http://localhost:3017/products/trial-equipment-18",
+      "h1": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "route": "/products/trial-equipment-19",
+      "canonical": "http://localhost:3017/products/trial-equipment-19",
+      "h1": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "route": "/products/trial-equipment-20",
+      "canonical": "http://localhost:3017/products/trial-equipment-20",
+      "h1": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "route": "/products/trial-equipment-21",
+      "canonical": "http://localhost:3017/products/trial-equipment-21",
+      "h1": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "route": "/products/trial-equipment-22",
+      "canonical": "http://localhost:3017/products/trial-equipment-22",
+      "h1": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "route": "/products/trial-equipment-23",
+      "canonical": "http://localhost:3017/products/trial-equipment-23",
+      "h1": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "route": "/products/trial-equipment-24",
+      "canonical": "http://localhost:3017/products/trial-equipment-24",
+      "h1": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "route": "/products/trial-equipment-25",
+      "canonical": "http://localhost:3017/products/trial-equipment-25",
+      "h1": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "route": "/products/trial-equipment-26",
+      "canonical": "http://localhost:3017/products/trial-equipment-26",
+      "h1": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "route": "/products/trial-equipment-27",
+      "canonical": "http://localhost:3017/products/trial-equipment-27",
+      "h1": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "route": "/products/trial-equipment-28",
+      "canonical": "http://localhost:3017/products/trial-equipment-28",
+      "h1": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "route": "/products/trial-equipment-29",
+      "canonical": "http://localhost:3017/products/trial-equipment-29",
+      "h1": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "route": "/products/trial-equipment-30",
+      "canonical": "http://localhost:3017/products/trial-equipment-30",
+      "h1": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "Product",
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "route": "/products/category/floor-cleaning-machines",
+      "canonical": "http://localhost:3017/products/category/floor-cleaning-machines",
+      "h1": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "route": "/products/category/vacuum-cleaners",
+      "canonical": "http://localhost:3017/products/category/vacuum-cleaners",
+      "h1": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "route": "/products/category/high-pressure-cleaners",
+      "canonical": "http://localhost:3017/products/category/high-pressure-cleaners",
+      "h1": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "route": "/products/category/sweepers",
+      "canonical": "http://localhost:3017/products/category/sweepers",
+      "h1": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "route": "/products/category/single-disc-machines",
+      "canonical": "http://localhost:3017/products/category/single-disc-machines",
+      "h1": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "route": "/products/category/cleaning-chemicals",
+      "canonical": "http://localhost:3017/products/category/cleaning-chemicals",
+      "h1": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "route": "/products/category/janitorial-equipment",
+      "canonical": "http://localhost:3017/products/category/janitorial-equipment",
+      "h1": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "route": "/blog/how-to-choose-the-right-industrial-vacuum-for-your-facility",
+      "canonical": "http://localhost:3017/blog/how-to-choose-the-right-industrial-vacuum-for-your-facility",
+      "h1": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "BreadcrumbList",
+        "Article"
+      ]
+    },
+    {
+      "route": "/blog/5-maintenance-tips-to-extend-your-scrubber-dryers-lifespan",
+      "canonical": "http://localhost:3017/blog/5-maintenance-tips-to-extend-your-scrubber-dryers-lifespan",
+      "h1": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "BreadcrumbList",
+        "Article"
+      ]
+    },
+    {
+      "route": "/blog/steam-vs-pressure-cleaning-which-is-right-for-your-industry",
+      "canonical": "http://localhost:3017/blog/steam-vs-pressure-cleaning-which-is-right-for-your-industry",
+      "h1": 1,
+      "schemaTypes": [
+        "Organization",
+        "WebSite",
+        "BreadcrumbList",
+        "Article"
+      ]
+    }
+  ],
+  "optimizedImages": 13,
+  "requests": [
+    {
+      "route": "/sitemap.xml",
+      "status": 200,
+      "ttfbMs": 66,
+      "totalMs": 68,
+      "decodedBytes": 259,
+      "contentType": "application/xml",
+      "robots": "noindex, nofollow",
+      "cacheControl": "public, max-age=0",
+      "nextCache": null,
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/sitemap-0.xml",
+      "status": 200,
+      "ttfbMs": 9,
+      "totalMs": 11,
+      "decodedBytes": 2273,
+      "contentType": "application/xml",
+      "robots": "noindex, nofollow",
+      "cacheControl": "public, max-age=0",
+      "nextCache": null,
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/catalog-sitemap.xml",
+      "status": 200,
+      "ttfbMs": 75,
+      "totalMs": 76,
+      "decodedBytes": 5164,
+      "contentType": "text/xml",
+      "robots": "noindex, nofollow",
+      "cacheControl": null,
+      "nextCache": "HIT",
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/guides/cleaning-machine-maintenance-checklist",
+      "status": 200,
+      "ttfbMs": 82,
+      "totalMs": 84,
+      "decodedBytes": 93356,
+      "contentType": "text/html; charset=utf-8",
+      "robots": "noindex, nofollow",
+      "cacheControl": "s-maxage=900, stale-while-revalidate",
+      "nextCache": "HIT",
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/guides/commercial-pressure-washer-pressure-flow-guide",
+      "status": 200,
+      "ttfbMs": 16,
+      "totalMs": 17,
+      "decodedBytes": 96713,
+      "contentType": "text/html; charset=utf-8",
+      "robots": "noindex, nofollow",
+      "cacheControl": "s-maxage=900, stale-while-revalidate",
+      "nextCache": "HIT",
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/guides/commercial-steam-cleaner-buying-guide-pakistan",
+      "status": 200,
+      "ttfbMs": 10,
+      "totalMs": 11,
+      "decodedBytes": 97141,
+      "contentType": "text/html; charset=utf-8",
+      "robots": "noindex, nofollow",
+      "cacheControl": "s-maxage=900, stale-while-revalidate",
+      "nextCache": "HIT",
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/guides/floor-cleaning-machine-costs-pakistan",
+      "status": 200,
+      "ttfbMs": 10,
+      "totalMs": 11,
+      "decodedBytes": 92999,
+      "contentType": "text/html; charset=utf-8",
+      "robots": "noindex, nofollow",
+      "cacheControl": "s-maxage=900, stale-while-revalidate",
+      "nextCache": "HIT",
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/guides/floor-cleaning-pads-brushes-selection-guide",
+      "status": 200,
+      "ttfbMs": 10,
+      "totalMs": 11,
+      "decodedBytes": 121045,
+      "contentType": "text/html; charset=utf-8",
+      "robots": "noindex, nofollow",
+      "cacheControl": "s-maxage=900, stale-while-revalidate",
+      "nextCache": "HIT",
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/guides/floor-scrubber-cleaning-capacity-calculator",
+      "status": 200,
+      "ttfbMs": 11,
+      "totalMs": 13,
+      "decodedBytes": 108647,
+      "contentType": "text/html; charset=utf-8",
+      "robots": "noindex, nofollow",
+      "cacheControl": "s-maxage=900, stale-while-revalidate",
+      "nextCache": "HIT",
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/guides/floor-scrubber-not-picking-up-water",
+      "status": 200,
+      "ttfbMs": 11,
+      "totalMs": 12,
+      "decodedBytes": 121504,
+      "contentType": "text/html; charset=utf-8",
+      "robots": "noindex, nofollow",
+      "cacheControl": "s-maxage=900, stale-while-revalidate",
+      "nextCache": "HIT",
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/guides/floor-sweeper-vs-scrubber-dryer",
+      "status": 200,
+      "ttfbMs": 11,
+      "totalMs": 12,
+      "decodedBytes": 101405,
+      "contentType": "text/html; charset=utf-8",
+      "robots": "noindex, nofollow",
+      "cacheControl": "s-maxage=900, stale-while-revalidate",
+      "nextCache": "HIT",
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/guides/mop-trolley-cleaning-trolley-buying-guide-pakistan",
+      "status": 200,
+      "ttfbMs": 10,
+      "totalMs": 11,
+      "decodedBytes": 105677,
+      "contentType": "text/html; charset=utf-8",
+      "robots": "noindex, nofollow",
+      "cacheControl": "s-maxage=900, stale-while-revalidate",
+      "nextCache": "HIT",
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/guides/single-disc-machine-vs-scrubber-dryer",
+      "status": 200,
+      "ttfbMs": 8,
+      "totalMs": 9,
+      "decodedBytes": 102383,
+      "contentType": "text/html; charset=utf-8",
+      "robots": "noindex, nofollow",
+      "cacheControl": "s-maxage=900, stale-while-revalidate",
+      "nextCache": "HIT",
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/guides/steam-cleaner-vs-wet-dry-vacuum",
+      "status": 200,
+      "ttfbMs": 10,
+      "totalMs": 12,
+      "decodedBytes": 120434,
+      "contentType": "text/html; charset=utf-8",
+      "robots": "noindex, nofollow",
+      "cacheControl": "s-maxage=900, stale-while-revalidate",
+      "nextCache": "HIT",
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/guides/walk-behind-vs-ride-on-scrubber-dryer",
+      "status": 200,
+      "ttfbMs": 13,
+      "totalMs": 14,
+      "decodedBytes": 92829,
+      "contentType": "text/html; charset=utf-8",
+      "robots": "noindex, nofollow",
+      "cacheControl": "s-maxage=900, stale-while-revalidate",
+      "nextCache": "HIT",
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/guides/warehouse-floor-cleaning-equipment-checklist-pakistan",
+      "status": 200,
+      "ttfbMs": 7,
+      "totalMs": 8,
+      "decodedBytes": 100740,
+      "contentType": "text/html; charset=utf-8",
+      "robots": "noindex, nofollow",
+      "cacheControl": "s-maxage=900, stale-while-revalidate",
+      "nextCache": "HIT",
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/guides/wet-dry-vacuum-cleaner-buying-guide-pakistan",
+      "status": 200,
+      "ttfbMs": 8,
+      "totalMs": 10,
+      "decodedBytes": 96997,
+      "contentType": "text/html; charset=utf-8",
+      "robots": "noindex, nofollow",
+      "cacheControl": "s-maxage=900, stale-while-revalidate",
+      "nextCache": "HIT",
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/about",
+      "status": 200,
+      "ttfbMs": 32,
+      "totalMs": 33,
+      "decodedBytes": 107140,
+      "contentType": "text/html; charset=utf-8",
+      "robots": "noindex, nofollow",
+      "cacheControl": "s-maxage=900, stale-while-revalidate",
+      "nextCache": "HIT",
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/",
+      "status": 200,
+      "ttfbMs": 23,
+      "totalMs": 24,
+      "decodedBytes": 204148,
+      "contentType": "text/html; charset=utf-8",
+      "robots": "noindex, nofollow",
+      "cacheControl": "s-maxage=900, stale-while-revalidate",
+      "nextCache": "HIT",
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/services",
+      "status": 200,
+      "ttfbMs": 14,
+      "totalMs": 15,
+      "decodedBytes": 107938,
+      "contentType": "text/html; charset=utf-8",
+      "robots": "noindex, nofollow",
+      "cacheControl": "s-maxage=900, stale-while-revalidate",
+      "nextCache": "HIT",
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/guides",
+      "status": 200,
+      "ttfbMs": 12,
+      "totalMs": 13,
+      "decodedBytes": 138117,
+      "contentType": "text/html; charset=utf-8",
+      "robots": "noindex, nofollow",
+      "cacheControl": "s-maxage=900, stale-while-revalidate",
+      "nextCache": "HIT",
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/services/brush-refilling",
+      "status": 200,
+      "ttfbMs": 11,
+      "totalMs": 12,
+      "decodedBytes": 67860,
+      "contentType": "text/html; charset=utf-8",
+      "robots": "noindex, nofollow",
+      "cacheControl": "s-maxage=900, stale-while-revalidate",
+      "nextCache": "HIT",
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/services/cleaning-machine-parts",
+      "status": 200,
+      "ttfbMs": 6,
+      "totalMs": 7,
+      "decodedBytes": 68373,
+      "contentType": "text/html; charset=utf-8",
+      "robots": "noindex, nofollow",
+      "cacheControl": "s-maxage=900, stale-while-revalidate",
+      "nextCache": "HIT",
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/services/cleaning-machine-repair",
+      "status": 200,
+      "ttfbMs": 5,
+      "totalMs": 6,
+      "decodedBytes": 68175,
+      "contentType": "text/html; charset=utf-8",
+      "robots": "noindex, nofollow",
+      "cacheControl": "s-maxage=900, stale-while-revalidate",
+      "nextCache": "HIT",
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/contact",
+      "status": 200,
+      "ttfbMs": 132,
+      "totalMs": 141,
+      "decodedBytes": 62370,
+      "contentType": "text/html; charset=utf-8",
+      "robots": "noindex, nofollow",
+      "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate",
+      "nextCache": null,
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/products",
+      "status": 200,
+      "ttfbMs": 81,
+      "totalMs": 88,
+      "decodedBytes": 150669,
+      "contentType": "text/html; charset=utf-8",
+      "robots": "noindex, nofollow",
+      "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate",
+      "nextCache": null,
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/blog",
+      "status": 200,
+      "ttfbMs": 55,
+      "totalMs": 60,
+      "decodedBytes": 77339,
+      "contentType": "text/html; charset=utf-8",
+      "robots": "noindex, nofollow",
+      "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate",
+      "nextCache": null,
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/products/trial-equipment-1",
+      "status": 200,
+      "ttfbMs": 52,
+      "totalMs": 54,
+      "decodedBytes": 115018,
+      "contentType": "text/html; charset=utf-8",
+      "robots": "noindex, nofollow",
+      "cacheControl": "s-maxage=900, stale-while-revalidate",
+      "nextCache": "HIT",
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/products/trial-equipment-2",
+      "status": 200,
+      "ttfbMs": 11,
+      "totalMs": 13,
+      "decodedBytes": 115034,
+      "contentType": "text/html; charset=utf-8",
+      "robots": "noindex, nofollow",
+      "cacheControl": "s-maxage=900, stale-while-revalidate",
+      "nextCache": "HIT",
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/products/trial-equipment-3",
+      "status": 200,
+      "ttfbMs": 9,
+      "totalMs": 10,
+      "decodedBytes": 114824,
+      "contentType": "text/html; charset=utf-8",
+      "robots": "noindex, nofollow",
+      "cacheControl": "s-maxage=900, stale-while-revalidate",
+      "nextCache": "HIT",
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/products/trial-equipment-4",
+      "status": 200,
+      "ttfbMs": 10,
+      "totalMs": 11,
+      "decodedBytes": 114955,
+      "contentType": "text/html; charset=utf-8",
+      "robots": "noindex, nofollow",
+      "cacheControl": "s-maxage=900, stale-while-revalidate",
+      "nextCache": "HIT",
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/products/trial-equipment-5",
+      "status": 200,
+      "ttfbMs": 9,
+      "totalMs": 12,
+      "decodedBytes": 103913,
+      "contentType": "text/html; charset=utf-8",
+      "robots": "noindex, nofollow",
+      "cacheControl": "s-maxage=900, stale-while-revalidate",
+      "nextCache": "HIT",
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/products/trial-equipment-6",
+      "status": 200,
+      "ttfbMs": 7,
+      "totalMs": 9,
+      "decodedBytes": 104005,
+      "contentType": "text/html; charset=utf-8",
+      "robots": "noindex, nofollow",
+      "cacheControl": "s-maxage=900, stale-while-revalidate",
+      "nextCache": "HIT",
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/products/trial-equipment-7",
+      "status": 200,
+      "ttfbMs": 7,
+      "totalMs": 8,
+      "decodedBytes": 98556,
+      "contentType": "text/html; charset=utf-8",
+      "robots": "noindex, nofollow",
+      "cacheControl": "s-maxage=900, stale-while-revalidate",
+      "nextCache": "HIT",
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/products/trial-equipment-8",
+      "status": 200,
+      "ttfbMs": 8,
+      "totalMs": 9,
+      "decodedBytes": 98728,
+      "contentType": "text/html; charset=utf-8",
+      "robots": "noindex, nofollow",
+      "cacheControl": "s-maxage=900, stale-while-revalidate",
+      "nextCache": "HIT",
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/products/trial-equipment-9",
+      "status": 200,
+      "ttfbMs": 8,
+      "totalMs": 9,
+      "decodedBytes": 109132,
+      "contentType": "text/html; charset=utf-8",
+      "robots": "noindex, nofollow",
+      "cacheControl": "s-maxage=900, stale-while-revalidate",
+      "nextCache": "HIT",
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/products/trial-equipment-10",
+      "status": 200,
+      "ttfbMs": 9,
+      "totalMs": 10,
+      "decodedBytes": 115038,
+      "contentType": "text/html; charset=utf-8",
+      "robots": "noindex, nofollow",
+      "cacheControl": "s-maxage=900, stale-while-revalidate",
+      "nextCache": "HIT",
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/products/trial-equipment-11",
+      "status": 200,
+      "ttfbMs": 8,
+      "totalMs": 9,
+      "decodedBytes": 115042,
+      "contentType": "text/html; charset=utf-8",
+      "robots": "noindex, nofollow",
+      "cacheControl": "s-maxage=900, stale-while-revalidate",
+      "nextCache": "HIT",
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/products/trial-equipment-12",
+      "status": 200,
+      "ttfbMs": 8,
+      "totalMs": 9,
+      "decodedBytes": 109242,
+      "contentType": "text/html; charset=utf-8",
+      "robots": "noindex, nofollow",
+      "cacheControl": "s-maxage=900, stale-while-revalidate",
+      "nextCache": "HIT",
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/products/trial-equipment-13",
+      "status": 200,
+      "ttfbMs": 8,
+      "totalMs": 9,
+      "decodedBytes": 115048,
+      "contentType": "text/html; charset=utf-8",
+      "robots": "noindex, nofollow",
+      "cacheControl": "s-maxage=900, stale-while-revalidate",
+      "nextCache": "HIT",
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/products/trial-equipment-14",
+      "status": 200,
+      "ttfbMs": 7,
+      "totalMs": 8,
+      "decodedBytes": 115064,
+      "contentType": "text/html; charset=utf-8",
+      "robots": "noindex, nofollow",
+      "cacheControl": "s-maxage=900, stale-while-revalidate",
+      "nextCache": "HIT",
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/products/trial-equipment-15",
+      "status": 200,
+      "ttfbMs": 8,
+      "totalMs": 9,
+      "decodedBytes": 114854,
+      "contentType": "text/html; charset=utf-8",
+      "robots": "noindex, nofollow",
+      "cacheControl": "s-maxage=900, stale-while-revalidate",
+      "nextCache": "HIT",
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/products/trial-equipment-16",
+      "status": 200,
+      "ttfbMs": 8,
+      "totalMs": 9,
+      "decodedBytes": 114985,
+      "contentType": "text/html; charset=utf-8",
+      "robots": "noindex, nofollow",
+      "cacheControl": "s-maxage=900, stale-while-revalidate",
+      "nextCache": "HIT",
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/products/trial-equipment-17",
+      "status": 200,
+      "ttfbMs": 9,
+      "totalMs": 10,
+      "decodedBytes": 103943,
+      "contentType": "text/html; charset=utf-8",
+      "robots": "noindex, nofollow",
+      "cacheControl": "s-maxage=900, stale-while-revalidate",
+      "nextCache": "HIT",
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/products/trial-equipment-18",
+      "status": 200,
+      "ttfbMs": 8,
+      "totalMs": 9,
+      "decodedBytes": 104035,
+      "contentType": "text/html; charset=utf-8",
+      "robots": "noindex, nofollow",
+      "cacheControl": "s-maxage=900, stale-while-revalidate",
+      "nextCache": "HIT",
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/products/trial-equipment-19",
+      "status": 200,
+      "ttfbMs": 7,
+      "totalMs": 9,
+      "decodedBytes": 98586,
+      "contentType": "text/html; charset=utf-8",
+      "robots": "noindex, nofollow",
+      "cacheControl": "s-maxage=900, stale-while-revalidate",
+      "nextCache": "HIT",
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/products/trial-equipment-20",
+      "status": 200,
+      "ttfbMs": 7,
+      "totalMs": 8,
+      "decodedBytes": 98758,
+      "contentType": "text/html; charset=utf-8",
+      "robots": "noindex, nofollow",
+      "cacheControl": "s-maxage=900, stale-while-revalidate",
+      "nextCache": "HIT",
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/products/trial-equipment-21",
+      "status": 200,
+      "ttfbMs": 7,
+      "totalMs": 8,
+      "decodedBytes": 109162,
+      "contentType": "text/html; charset=utf-8",
+      "robots": "noindex, nofollow",
+      "cacheControl": "s-maxage=900, stale-while-revalidate",
+      "nextCache": "HIT",
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/products/trial-equipment-22",
+      "status": 200,
+      "ttfbMs": 7,
+      "totalMs": 9,
+      "decodedBytes": 115039,
+      "contentType": "text/html; charset=utf-8",
+      "robots": "noindex, nofollow",
+      "cacheControl": "s-maxage=900, stale-while-revalidate",
+      "nextCache": "HIT",
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/products/trial-equipment-23",
+      "status": 200,
+      "ttfbMs": 9,
+      "totalMs": 10,
+      "decodedBytes": 115042,
+      "contentType": "text/html; charset=utf-8",
+      "robots": "noindex, nofollow",
+      "cacheControl": "s-maxage=900, stale-while-revalidate",
+      "nextCache": "HIT",
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/products/trial-equipment-24",
+      "status": 200,
+      "ttfbMs": 8,
+      "totalMs": 9,
+      "decodedBytes": 109242,
+      "contentType": "text/html; charset=utf-8",
+      "robots": "noindex, nofollow",
+      "cacheControl": "s-maxage=900, stale-while-revalidate",
+      "nextCache": "HIT",
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/products/trial-equipment-25",
+      "status": 200,
+      "ttfbMs": 8,
+      "totalMs": 9,
+      "decodedBytes": 115048,
+      "contentType": "text/html; charset=utf-8",
+      "robots": "noindex, nofollow",
+      "cacheControl": "s-maxage=900, stale-while-revalidate",
+      "nextCache": "HIT",
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/products/trial-equipment-26",
+      "status": 200,
+      "ttfbMs": 8,
+      "totalMs": 9,
+      "decodedBytes": 115068,
+      "contentType": "text/html; charset=utf-8",
+      "robots": "noindex, nofollow",
+      "cacheControl": "s-maxage=900, stale-while-revalidate",
+      "nextCache": "HIT",
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/products/trial-equipment-27",
+      "status": 200,
+      "ttfbMs": 7,
+      "totalMs": 9,
+      "decodedBytes": 114854,
+      "contentType": "text/html; charset=utf-8",
+      "robots": "noindex, nofollow",
+      "cacheControl": "s-maxage=900, stale-while-revalidate",
+      "nextCache": "HIT",
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/products/trial-equipment-28",
+      "status": 200,
+      "ttfbMs": 8,
+      "totalMs": 9,
+      "decodedBytes": 114985,
+      "contentType": "text/html; charset=utf-8",
+      "robots": "noindex, nofollow",
+      "cacheControl": "s-maxage=900, stale-while-revalidate",
+      "nextCache": "HIT",
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/products/trial-equipment-29",
+      "status": 200,
+      "ttfbMs": 7,
+      "totalMs": 8,
+      "decodedBytes": 103943,
+      "contentType": "text/html; charset=utf-8",
+      "robots": "noindex, nofollow",
+      "cacheControl": "s-maxage=900, stale-while-revalidate",
+      "nextCache": "HIT",
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/products/trial-equipment-30",
+      "status": 200,
+      "ttfbMs": 10,
+      "totalMs": 11,
+      "decodedBytes": 104035,
+      "contentType": "text/html; charset=utf-8",
+      "robots": "noindex, nofollow",
+      "cacheControl": "s-maxage=900, stale-while-revalidate",
+      "nextCache": "HIT",
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/products/category/floor-cleaning-machines",
+      "status": 200,
+      "ttfbMs": 68,
+      "totalMs": 76,
+      "decodedBytes": 128605,
+      "contentType": "text/html; charset=utf-8",
+      "robots": "noindex, nofollow",
+      "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate",
+      "nextCache": null,
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/products/category/vacuum-cleaners",
+      "status": 200,
+      "ttfbMs": 41,
+      "totalMs": 50,
+      "decodedBytes": 118080,
+      "contentType": "text/html; charset=utf-8",
+      "robots": "noindex, nofollow",
+      "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate",
+      "nextCache": null,
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/products/category/high-pressure-cleaners",
+      "status": 200,
+      "ttfbMs": 35,
+      "totalMs": 39,
+      "decodedBytes": 118461,
+      "contentType": "text/html; charset=utf-8",
+      "robots": "noindex, nofollow",
+      "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate",
+      "nextCache": null,
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/products/category/sweepers",
+      "status": 200,
+      "ttfbMs": 41,
+      "totalMs": 45,
+      "decodedBytes": 113626,
+      "contentType": "text/html; charset=utf-8",
+      "robots": "noindex, nofollow",
+      "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate",
+      "nextCache": null,
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/products/category/single-disc-machines",
+      "status": 200,
+      "ttfbMs": 30,
+      "totalMs": 34,
+      "decodedBytes": 97626,
+      "contentType": "text/html; charset=utf-8",
+      "robots": "noindex, nofollow",
+      "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate",
+      "nextCache": null,
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/products/category/cleaning-chemicals",
+      "status": 200,
+      "ttfbMs": 40,
+      "totalMs": 44,
+      "decodedBytes": 88116,
+      "contentType": "text/html; charset=utf-8",
+      "robots": "noindex, nofollow",
+      "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate",
+      "nextCache": null,
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/products/category/janitorial-equipment",
+      "status": 200,
+      "ttfbMs": 37,
+      "totalMs": 41,
+      "decodedBytes": 135236,
+      "contentType": "text/html; charset=utf-8",
+      "robots": "noindex, nofollow",
+      "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate",
+      "nextCache": null,
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/blog/how-to-choose-the-right-industrial-vacuum-for-your-facility",
+      "status": 200,
+      "ttfbMs": 11,
+      "totalMs": 11,
+      "decodedBytes": 79321,
+      "contentType": "text/html; charset=utf-8",
+      "robots": "noindex, nofollow",
+      "cacheControl": "s-maxage=900, stale-while-revalidate",
+      "nextCache": "HIT",
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/blog/5-maintenance-tips-to-extend-your-scrubber-dryers-lifespan",
+      "status": 200,
+      "ttfbMs": 6,
+      "totalMs": 7,
+      "decodedBytes": 79549,
+      "contentType": "text/html; charset=utf-8",
+      "robots": "noindex, nofollow",
+      "cacheControl": "s-maxage=900, stale-while-revalidate",
+      "nextCache": "HIT",
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/blog/steam-vs-pressure-cleaning-which-is-right-for-your-industry",
+      "status": 200,
+      "ttfbMs": 7,
+      "totalMs": 7,
+      "decodedBytes": 78946,
+      "contentType": "text/html; charset=utf-8",
+      "robots": "noindex, nofollow",
+      "cacheControl": "s-maxage=900, stale-while-revalidate",
+      "nextCache": "HIT",
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/products?page=2",
+      "status": 200,
+      "ttfbMs": 25,
+      "totalMs": 29,
+      "decodedBytes": 150909,
+      "contentType": "text/html; charset=utf-8",
+      "robots": "noindex, nofollow",
+      "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate",
+      "nextCache": null,
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/products?sort=name-az",
+      "status": 200,
+      "ttfbMs": 51,
+      "totalMs": 59,
+      "decodedBytes": 153681,
+      "contentType": "text/html; charset=utf-8",
+      "robots": "noindex, nofollow",
+      "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate",
+      "nextCache": null,
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/products?q=Trial",
+      "status": 200,
+      "ttfbMs": 56,
+      "totalMs": 60,
+      "decodedBytes": 153429,
+      "contentType": "text/html; charset=utf-8",
+      "robots": "noindex, nofollow",
+      "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate",
+      "nextCache": null,
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/contact?subject=Quotation",
+      "status": 200,
+      "ttfbMs": 82,
+      "totalMs": 85,
+      "decodedBytes": 62410,
+      "contentType": "text/html; charset=utf-8",
+      "robots": "noindex, nofollow",
+      "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate",
+      "nextCache": null,
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/admin/login",
+      "status": 200,
+      "ttfbMs": 125,
+      "totalMs": 128,
+      "decodedBytes": 19930,
+      "contentType": "text/html; charset=utf-8",
+      "robots": "noindex, nofollow",
+      "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate",
+      "nextCache": null,
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/robots.txt",
+      "status": 200,
+      "ttfbMs": 2,
+      "totalMs": 2,
+      "decodedBytes": 185,
+      "contentType": "text/plain; charset=UTF-8",
+      "robots": "noindex, nofollow",
+      "cacheControl": "public, max-age=0",
+      "nextCache": null,
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/products?page=999",
+      "status": 404,
+      "ttfbMs": 111,
+      "totalMs": 115,
+      "decodedBytes": 25757,
+      "contentType": "text/html; charset=utf-8",
+      "robots": "noindex, nofollow",
+      "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate",
+      "nextCache": null,
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/products?page=1.5",
+      "status": 404,
+      "ttfbMs": 78,
+      "totalMs": 80,
+      "decodedBytes": 25757,
+      "contentType": "text/html; charset=utf-8",
+      "robots": "noindex, nofollow",
+      "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate",
+      "nextCache": null,
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/products?page=0",
+      "status": 404,
+      "ttfbMs": 76,
+      "totalMs": 79,
+      "decodedBytes": 25753,
+      "contentType": "text/html; charset=utf-8",
+      "robots": "noindex, nofollow",
+      "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate",
+      "nextCache": null,
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/blog?page=999",
+      "status": 404,
+      "ttfbMs": 89,
+      "totalMs": 92,
+      "decodedBytes": 25009,
+      "contentType": "text/html; charset=utf-8",
+      "robots": "noindex, nofollow",
+      "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate",
+      "nextCache": null,
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/products/not-a-product",
+      "status": 404,
+      "ttfbMs": 110,
+      "totalMs": 110,
+      "decodedBytes": 25714,
+      "contentType": "text/html; charset=utf-8",
+      "robots": "noindex, nofollow",
+      "cacheControl": "s-maxage=900, stale-while-revalidate",
+      "nextCache": "MISS",
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/guides/not-a-guide",
+      "status": 404,
+      "ttfbMs": 63,
+      "totalMs": 63,
+      "decodedBytes": 25631,
+      "contentType": "text/html; charset=utf-8",
+      "robots": "noindex, nofollow",
+      "cacheControl": "s-maxage=900, stale-while-revalidate",
+      "nextCache": "MISS",
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/products?q=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "status": 404,
+      "ttfbMs": 106,
+      "totalMs": 108,
+      "decodedBytes": 26021,
+      "contentType": "text/html; charset=utf-8",
+      "robots": "noindex, nofollow",
+      "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate",
+      "nextCache": null,
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/admin",
+      "status": 307,
+      "ttfbMs": 9,
+      "totalMs": 9,
+      "decodedBytes": 47,
+      "contentType": null,
+      "robots": "noindex, nofollow",
+      "cacheControl": null,
+      "nextCache": null,
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/_next/image?url=%2Fassets%2Fservices-image%2Fpart-replacement.png&w=3840&q=75",
+      "status": 200,
+      "ttfbMs": 262,
+      "totalMs": 262,
+      "decodedBytes": 130056,
+      "contentType": "image/png",
+      "robots": "noindex, nofollow",
+      "cacheControl": "public, max-age=31536000, must-revalidate",
+      "nextCache": "MISS",
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/_next/image?url=%2Fassets%2Fservices-image%2Fbrush.jpeg&w=3840&q=75",
+      "status": 200,
+      "ttfbMs": 26,
+      "totalMs": 26,
+      "decodedBytes": 51097,
+      "contentType": "image/jpeg",
+      "robots": "noindex, nofollow",
+      "cacheControl": "public, max-age=31536000, must-revalidate",
+      "nextCache": "MISS",
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/_next/image?url=%2Fassets%2Fcategories%2Fwalk-behind-scrubber-dryer.png&w=3840&q=75",
+      "status": 200,
+      "ttfbMs": 172,
+      "totalMs": 172,
+      "decodedBytes": 79946,
+      "contentType": "image/png",
+      "robots": "noindex, nofollow",
+      "cacheControl": "public, max-age=31536000, must-revalidate",
+      "nextCache": "MISS",
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/_next/image?url=%2Fassets%2Fcategories%2Fsteam-cleaner.png&w=3840&q=75",
+      "status": 200,
+      "ttfbMs": 120,
+      "totalMs": 120,
+      "decodedBytes": 44639,
+      "contentType": "image/png",
+      "robots": "noindex, nofollow",
+      "cacheControl": "public, max-age=31536000, must-revalidate",
+      "nextCache": "MISS",
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/_next/image?url=%2Fassets%2Fcategories%2FPressure-washer.png&w=3840&q=75",
+      "status": 200,
+      "ttfbMs": 83,
+      "totalMs": 83,
+      "decodedBytes": 25656,
+      "contentType": "image/png",
+      "robots": "noindex, nofollow",
+      "cacheControl": "public, max-age=31536000, must-revalidate",
+      "nextCache": "MISS",
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/_next/image?url=%2Fassets%2Fcategories%2Fmop-bucket.png&w=3840&q=75",
+      "status": 200,
+      "ttfbMs": 228,
+      "totalMs": 229,
+      "decodedBytes": 61931,
+      "contentType": "image/png",
+      "robots": "noindex, nofollow",
+      "cacheControl": "public, max-age=31536000, must-revalidate",
+      "nextCache": "MISS",
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/_next/image?url=%2Fassets%2Fcategories%2FSingle-disk-machine.png&w=3840&q=75",
+      "status": 200,
+      "ttfbMs": 96,
+      "totalMs": 97,
+      "decodedBytes": 28337,
+      "contentType": "image/png",
+      "robots": "noindex, nofollow",
+      "cacheControl": "public, max-age=31536000, must-revalidate",
+      "nextCache": "MISS",
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/_next/image?url=%2Fassets%2Fcategories%2FRide-on-scrubber-dryer.png&w=3840&q=75",
+      "status": 200,
+      "ttfbMs": 143,
+      "totalMs": 143,
+      "decodedBytes": 85415,
+      "contentType": "image/png",
+      "robots": "noindex, nofollow",
+      "cacheControl": "public, max-age=31536000, must-revalidate",
+      "nextCache": "MISS",
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/_next/image?url=%2Fassets%2Fcategories%2FVaccumcleaners.png&w=3840&q=75",
+      "status": 200,
+      "ttfbMs": 96,
+      "totalMs": 96,
+      "decodedBytes": 48831,
+      "contentType": "image/png",
+      "robots": "noindex, nofollow",
+      "cacheControl": "public, max-age=31536000, must-revalidate",
+      "nextCache": "MISS",
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/_next/image?url=%2Fassets%2Fabout%2Fmuhammad-moiz-khan.webp&w=3840&q=75",
+      "status": 200,
+      "ttfbMs": 50,
+      "totalMs": 50,
+      "decodedBytes": 88306,
+      "contentType": "image/jpeg",
+      "robots": "noindex, nofollow",
+      "cacheControl": "public, max-age=31536000, must-revalidate",
+      "nextCache": "MISS",
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/_next/image?url=%2Fhero-placeholder.png&w=3840&q=75",
+      "status": 200,
+      "ttfbMs": 274,
+      "totalMs": 274,
+      "decodedBytes": 144646,
+      "contentType": "image/png",
+      "robots": "noindex, nofollow",
+      "cacheControl": "public, max-age=31536000, must-revalidate",
+      "nextCache": "MISS",
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/_next/image?url=%2Fassets%2Fservices-image%2Fmotor-repairing.png&w=3840&q=75",
+      "status": 200,
+      "ttfbMs": 73,
+      "totalMs": 74,
+      "decodedBytes": 156788,
+      "contentType": "image/png",
+      "robots": "noindex, nofollow",
+      "cacheControl": "public, max-age=31536000, must-revalidate",
+      "nextCache": "MISS",
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/_next/image?url=%2Fassets%2Fmap.jpg&w=3840&q=75",
+      "status": 200,
+      "ttfbMs": 22,
+      "totalMs": 22,
+      "decodedBytes": 26522,
+      "contentType": "image/jpeg",
+      "robots": "noindex, nofollow",
+      "cacheControl": "public, max-age=31536000, must-revalidate",
+      "nextCache": "MISS",
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/opengraph-image",
+      "status": 200,
+      "ttfbMs": 222,
+      "totalMs": 222,
+      "decodedBytes": 22009,
+      "contentType": "image/png",
+      "robots": "noindex, nofollow",
+      "cacheControl": "public, immutable, no-transform, max-age=31536000",
+      "nextCache": null,
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/guides/floor-scrubber-cleaning-capacity-calculator/social-image",
+      "status": 200,
+      "ttfbMs": 351,
+      "totalMs": 352,
+      "decodedBytes": 116063,
+      "contentType": "image/png",
+      "robots": "noindex, nofollow",
+      "cacheControl": "public, immutable, no-transform, max-age=31536000",
+      "nextCache": null,
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/",
+      "status": 200,
+      "ttfbMs": 9,
+      "totalMs": 10,
+      "decodedBytes": 204148,
+      "contentType": "text/html; charset=utf-8",
+      "robots": "noindex, nofollow",
+      "cacheControl": "s-maxage=900, stale-while-revalidate",
+      "nextCache": "HIT",
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/",
+      "status": 200,
+      "ttfbMs": 8,
+      "totalMs": 9,
+      "decodedBytes": 204148,
+      "contentType": "text/html; charset=utf-8",
+      "robots": "noindex, nofollow",
+      "cacheControl": "s-maxage=900, stale-while-revalidate",
+      "nextCache": "HIT",
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/",
+      "status": 200,
+      "ttfbMs": 8,
+      "totalMs": 9,
+      "decodedBytes": 204148,
+      "contentType": "text/html; charset=utf-8",
+      "robots": "noindex, nofollow",
+      "cacheControl": "s-maxage=900, stale-while-revalidate",
+      "nextCache": "HIT",
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/products",
+      "status": 200,
+      "ttfbMs": 27,
+      "totalMs": 32,
+      "decodedBytes": 150712,
+      "contentType": "text/html; charset=utf-8",
+      "robots": "noindex, nofollow",
+      "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate",
+      "nextCache": null,
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/products",
+      "status": 200,
+      "ttfbMs": 23,
+      "totalMs": 28,
+      "decodedBytes": 150712,
+      "contentType": "text/html; charset=utf-8",
+      "robots": "noindex, nofollow",
+      "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate",
+      "nextCache": null,
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/products",
+      "status": 200,
+      "ttfbMs": 37,
+      "totalMs": 42,
+      "decodedBytes": 150712,
+      "contentType": "text/html; charset=utf-8",
+      "robots": "noindex, nofollow",
+      "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate",
+      "nextCache": null,
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/catalog-sitemap.xml",
+      "status": 200,
+      "ttfbMs": 4,
+      "totalMs": 4,
+      "decodedBytes": 5164,
+      "contentType": "text/xml",
+      "robots": "noindex, nofollow",
+      "cacheControl": null,
+      "nextCache": "HIT",
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/catalog-sitemap.xml",
+      "status": 200,
+      "ttfbMs": 3,
+      "totalMs": 3,
+      "decodedBytes": 5164,
+      "contentType": "text/xml",
+      "robots": "noindex, nofollow",
+      "cacheControl": null,
+      "nextCache": "HIT",
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    },
+    {
+      "route": "/catalog-sitemap.xml",
+      "status": 200,
+      "ttfbMs": 3,
+      "totalMs": 3,
+      "decodedBytes": 5164,
+      "contentType": "text/xml",
+      "robots": "noindex, nofollow",
+      "cacheControl": null,
+      "nextCache": "HIT",
+      "netlifyCache": null,
+      "netlifyRequestId": null
+    }
+  ],
+  "errors": [],
+  "netlifyCredits": null,
+  "billedBandwidth": null,
+  "serverlessGbHours": null
+}

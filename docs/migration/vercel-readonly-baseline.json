@@ -1,0 +1,160 @@
+{
+  "sampledAt": "2026-10-13T09:17:50.373Z",
+  "origin": "https://moralclean.com",
+  "scope": "15 anonymous GETs from this machine; not a load test or representative monthly usage; decoded bytes are not billed bandwidth",
+  "actualVercelCpu": null,
+  "actualVercelMonthlyBandwidth": null,
+  "actualVercelMonthlyRequests": null,
+  "samples": [
+    {
+      "route": "/",
+      "iteration": 0,
+      "status": 200,
+      "ttfbMs": 1336,
+      "totalMs": 1346,
+      "decodedBytes": 212244,
+      "cache": "STALE",
+      "cacheControl": "public, max-age=0, must-revalidate"
+    },
+    {
+      "route": "/",
+      "iteration": 1,
+      "status": 200,
+      "ttfbMs": 299,
+      "totalMs": 307,
+      "decodedBytes": 212244,
+      "cache": "HIT",
+      "cacheControl": "public, max-age=0, must-revalidate"
+    },
+    {
+      "route": "/",
+      "iteration": 2,
+      "status": 200,
+      "ttfbMs": 56,
+      "totalMs": 63,
+      "decodedBytes": 212244,
+      "cache": "HIT",
+      "cacheControl": "public, max-age=0, must-revalidate"
+    },
+    {
+      "route": "/products",
+      "iteration": 0,
+      "status": 200,
+      "ttfbMs": 543,
+      "totalMs": 558,
+      "decodedBytes": 317934,
+      "cache": "MISS",
+      "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate"
+    },
+    {
+      "route": "/products",
+      "iteration": 1,
+      "status": 200,
+      "ttfbMs": 407,
+      "totalMs": 809,
+      "decodedBytes": 317891,
+      "cache": "MISS",
+      "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate"
+    },
+    {
+      "route": "/products",
+      "iteration": 2,
+      "status": 200,
+      "ttfbMs": 681,
+      "totalMs": 701,
+      "decodedBytes": 317891,
+      "cache": "MISS",
+      "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate"
+    },
+    {
+      "route": "/contact",
+      "iteration": 0,
+      "status": 200,
+      "ttfbMs": 390,
+      "totalMs": 611,
+      "decodedBytes": 68258,
+      "cache": "MISS",
+      "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate"
+    },
+    {
+      "route": "/contact",
+      "iteration": 1,
+      "status": 200,
+      "ttfbMs": 600,
+      "totalMs": 604,
+      "decodedBytes": 68258,
+      "cache": "MISS",
+      "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate"
+    },
+    {
+      "route": "/contact",
+      "iteration": 2,
+      "status": 200,
+      "ttfbMs": 304,
+      "totalMs": 308,
+      "decodedBytes": 68258,
+      "cache": "MISS",
+      "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate"
+    },
+    {
+      "route": "/guides",
+      "iteration": 0,
+      "status": 200,
+      "ttfbMs": 403,
+      "totalMs": 407,
+      "decodedBytes": 143492,
+      "cache": "STALE",
+      "cacheControl": "public, max-age=0, must-revalidate"
+    },
+    {
+      "route": "/guides",
+      "iteration": 1,
+      "status": 200,
+      "ttfbMs": 63,
+      "totalMs": 70,
+      "decodedBytes": 143492,
+      "cache": "HIT",
+      "cacheControl": "public, max-age=0, must-revalidate"
+    },
+    {
+      "route": "/guides",
+      "iteration": 2,
+      "status": 200,
+      "ttfbMs": 56,
+      "totalMs": 62,
+      "decodedBytes": 143492,
+      "cache": "HIT",
+      "cacheControl": "public, max-age=0, must-revalidate"
+    },
+    {
+      "route": "/catalog-sitemap.xml",
+      "iteration": 0,
+      "status": 200,
+      "ttfbMs": 287,
+      "totalMs": 288,
+      "decodedBytes": 5596,
+      "cache": "STALE",
+      "cacheControl": "public, max-age=0, must-revalidate"
+    },
+    {
+      "route": "/catalog-sitemap.xml",
+      "iteration": 1,
+      "status": 200,
+      "ttfbMs": 97,
+      "totalMs": 98,
+      "decodedBytes": 5596,
+      "cache": "HIT",
+      "cacheControl": "public, max-age=0, must-revalidate"
+    },
+    {
+      "route": "/catalog-sitemap.xml",
+      "iteration": 2,
+      "status": 200,
+      "ttfbMs": 58,
+      "totalMs": 58,
+      "decodedBytes": 5596,
+      "cache": "HIT",
+      "cacheControl": "public, max-age=0, must-revalidate"
+    }
+  ]
+}

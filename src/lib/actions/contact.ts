@@ -108,6 +108,11 @@ async function sendEmail(payload: {
   subject: string;
   html: string;
 }) {
+  if (env.migrationTrial && (!env.trialEmailRecipient ||
+      payload.to.some((recipient) => recipient !== env.trialEmailRecipient) ||
+      /@moralclean\.com\s*$/i.test(env.trialEmailRecipient))) {
+    throw new Error("Migration trial email recipient is not an isolated test mailbox.");
+  }
   try {
   const resend = new Resend(env.resendApiKey);
   const { data, error } = await resend.emails.send(payload);

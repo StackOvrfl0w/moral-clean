@@ -15,7 +15,7 @@ import { SortableContext, arrayMove, verticalListSortingStrategy, useSortable } 
 import { CSS } from "@dnd-kit/utilities";
 import { GripVertical, ImagePlus, RefreshCw, Trash2, Upload } from "lucide-react";
 
-import { uploadProductImage } from "@/lib/actions/admin/products";
+import { uploadAdminImage } from "@/lib/upload-admin-image";
 import { slugify } from "@/lib/utils";
 import { RichTextEditor } from "@/components/admin/RichTextEditor";
 import { Button } from "@/components/ui/button";
@@ -235,11 +235,8 @@ export function ProductForm({
     setUploading(true);
 
     for (const file of Array.from(files)) {
-      const formData = new FormData();
-      formData.set("file", file);
-
       try {
-        const uploaded = await uploadProductImage(formData);
+        const uploaded = await uploadAdminImage(file, "products");
         setImages((prev) => [
           ...prev,
           {
