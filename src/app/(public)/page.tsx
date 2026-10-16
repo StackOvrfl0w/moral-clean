@@ -260,27 +260,29 @@ export default async function Home() {
               <Link
                 key={category.id}
                 href={`/products/category/${category.slug}`}
-                className="group rounded-md border border-border bg-white p-3 transition duration-200 hover:-translate-y-1 hover:border-accent hover:shadow-lg hover:shadow-primary/5"
+                className="group rounded-md bg-border p-px shadow-sm transition duration-200 hover:-translate-y-1 hover:bg-brand-gradient hover:shadow-lg hover:shadow-brand-navy/10"
               >
-                <div className="relative aspect-square overflow-hidden rounded-md border border-border bg-[linear-gradient(135deg,#f8fafc_0%,#eef6fb_100%)]">
-                  {category.image_url ? (
-                    <Image
-                      src={category.image_url}
-                      alt={category.name}
-                      fill
-                      sizes="(min-width:1024px) 25vw, (min-width:768px) 33vw, 50vw"
-                      className="object-contain p-4 transition duration-300 group-hover:scale-105"
+                <div className="h-full rounded-[calc(0.375rem-1px)] bg-white p-3">
+                  <div className="relative aspect-square overflow-hidden rounded-md border border-border bg-[linear-gradient(135deg,#f8fafc_0%,#eef6fb_100%)]">
+                    {category.image_url ? (
+                      <Image
+                        src={category.image_url}
+                        alt={category.name}
+                        fill
+                        sizes="(min-width:1024px) 25vw, (min-width:768px) 33vw, 50vw"
+                        className="object-contain p-4 transition duration-300 group-hover:scale-105"
+                      />
+                    ) : (
+                      <MediaPlaceholder Icon={Boxes} className="h-full w-full" />
+                    )}
+                  </div>
+                  <div className="mt-4 flex items-center justify-between gap-3">
+                    <h3 className="text-base">{category.name}</h3>
+                    <ArrowRight
+                      className="size-4 shrink-0 text-accent transition-transform group-hover:translate-x-1"
+                      aria-hidden="true"
                     />
-                  ) : (
-                    <MediaPlaceholder Icon={Boxes} className="h-full w-full" />
-                  )}
-                </div>
-                <div className="mt-4 flex items-center justify-between gap-3">
-                  <h3 className="text-base">{category.name}</h3>
-                  <ArrowRight
-                    className="size-4 shrink-0 text-accent transition-transform group-hover:translate-x-1"
-                    aria-hidden="true"
-                  />
+                  </div>
                 </div>
               </Link>
             ))}
