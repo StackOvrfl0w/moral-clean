@@ -2,10 +2,10 @@ import type { Event } from "@sentry/nextjs";
 
 // A stackless NetworkError does not identify its source. Preserve it and attach
 // browser state so a recurrence can distinguish offline clients from font errors.
-export function addBrowserNetworkContext(
-  event: Event,
+export function addBrowserNetworkContext<T extends Event>(
+  event: T,
   browser: { online: boolean; fonts: Iterable<Pick<FontFace, "family" | "status" | "weight">> },
-): Event {
+): T {
   if (!event.exception?.values?.some((exception) =>
     /\bNetworkError\b/.test(exception.value ?? "") || exception.type === "NetworkError",
   )) return event;
