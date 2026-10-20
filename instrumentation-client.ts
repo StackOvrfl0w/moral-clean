@@ -2,6 +2,7 @@ import * as Sentry from "@sentry/nextjs";
 
 import { env } from "@/config/env";
 import { isInjectedRuntimeGetReaderError } from "@/lib/sentry-client-filter";
+import { addBrowserNetworkContext } from "@/lib/sentry-network-context";
 
 Sentry.init({
   dsn: env.publicSentryDsn || undefined,
@@ -9,7 +10,16 @@ Sentry.init({
   tracesSampleRate: 0.1,
   sendDefaultPii: false,
   beforeSend(event) {
-    return isInjectedRuntimeGetReaderError(event) ? null : event;
+    if (isInjectedRuntimeGetReaderError(event)) return null;
+    try {
+      return addBrowserNetworkContext(event, {
+        online: navigator.onLine,
+        fonts: document.fonts,
+      });
+    } catch {
+      // Diagnostics must never prevent the original event from being reported.
+      return event;
+    }
   },
 });
 

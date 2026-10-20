@@ -137,6 +137,14 @@ grant select on public.services to anon, authenticated;
 grant select on public.blog_posts to anon, authenticated;
 grant insert on public.contact_submissions to anon, authenticated;
 
+-- New tables no longer receive automatic Data API grants after 2026-10-30.
+-- BYPASSRLS does not replace table privileges for the server-only service role.
+grant select, insert, update, delete on
+  public.categories, public.products, public.product_images, public.tags,
+  public.product_tags, public.services, public.blog_posts,
+  public.contact_submissions
+to service_role;
+
 drop policy if exists "Public read categories" on public.categories;
 create policy "Public read categories"
   on public.categories
