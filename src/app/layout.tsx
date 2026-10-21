@@ -104,7 +104,10 @@ export const metadata: Metadata = {
   creator: "Moral Clean",
   publisher: "Moral Clean",
   icons: {
-    icon: "/icon.png",
+    icon: [
+      { url: "/favicon.ico", sizes: "48x48", type: "image/x-icon" },
+      { url: "/icon.png", sizes: "800x800", type: "image/png" },
+    ],
   },
   openGraph: {
     title,
