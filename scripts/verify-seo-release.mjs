@@ -58,7 +58,7 @@ async function worker() {
     const article = schemas.find((schema) => schema["@type"] === "Article");
     if (response.status !== 200 || !title || h1Count !== 1 || canonical !== url || noindex) errors.push(`Page checks failed: ${path}`);
     if (/(?:\|\s*Moral Clean\s*){2}/.test(title || "")) errors.push(`Repeated title suffix: ${path}`);
-    if (path.startsWith("/products/") && !path.startsWith("/products/category/") && (!product || !html.includes("Technical specifications"))) errors.push(`Product details/schema missing: ${path}`);
+    if (path.startsWith("/products/") && !path.startsWith("/products/category/") && !html.includes("Technical specifications")) errors.push(`Product details missing: ${path}`);
     if (product && (product.offers || product.aggregateRating || product.review)) errors.push(`Unverified commercial schema: ${path}`);
     if (path.startsWith("/guides/") && (!article || !article.datePublished || !article.headline || !html.includes('aria-label="Article contents"'))) errors.push(`Article metadata or contents missing: ${path}`);
     if (article && (!Array.isArray(article.image) || article.image.length < 2 || !article.image.every((image) => image.startsWith("https://moralclean.com/")) || !html.includes(`${path}/social-image`))) errors.push(`Article images or social preview missing: ${path}`);
@@ -69,13 +69,14 @@ async function worker() {
     if (schemas.some(schema => schema["@type"] === "WebSite" && schema.potentialAction)) errors.push("Obsolete site-search action remains: " + path);
     const breadcrumb = schemas.find(schema => schema["@type"] === "BreadcrumbList");
     const category = breadcrumb?.itemListElement?.find(item => item.item?.includes("/products/category/"))?.item;
-    const janitorial = product && category?.endsWith("/janitorial-equipment");
-    const singleDisc = product && category?.endsWith("/single-disk-machine");
+    const isProductPage = path.startsWith("/products/") && !path.startsWith("/products/category/");
+    const janitorial = isProductPage && category?.endsWith("/janitorial-equipment");
+    const singleDisc = isProductPage && category?.endsWith("/single-disk-machine");
     const supportBlock = html.match(/<section aria-labelledby="product-support"[^>]*>(.*?)<\/section>/s)?.[1] || "";
     if (path === "/") for (const {slug} of JSON.parse(fs.readFileSync("src/content/service-pages.json", "utf8"))) if (!internalLinks.includes("/services/" + slug)) errors.push("Homepage service link missing: " + slug);
-    if (product && janitorial && (!supportBlock.includes("/guides/mop-trolley-cleaning-trolley-buying-guide-pakistan") || supportBlock.includes("/services/cleaning-machine-repair"))) errors.push("Manual-equipment support relevance failed: " + path);
-    if (product && !janitorial && !["cleaning-machine-repair", "cleaning-machine-parts"].every(slug => supportBlock.includes("/services/" + slug))) errors.push("Machine support links missing: " + path);
-    if (product && singleDisc && !supportBlock.includes("/services/brush-refilling")) errors.push("Single-disc brush support link missing: " + path);
+    if (janitorial && (!supportBlock.includes("/guides/mop-trolley-cleaning-trolley-buying-guide-pakistan") || supportBlock.includes("/services/cleaning-machine-repair"))) errors.push("Manual-equipment support relevance failed: " + path);
+    if (isProductPage && !janitorial && !["cleaning-machine-repair", "cleaning-machine-parts"].every(slug => supportBlock.includes("/services/" + slug))) errors.push("Machine support links missing: " + path);
+    if (singleDisc && !supportBlock.includes("/services/brush-refilling")) errors.push("Single-disc brush support link missing: " + path);
     results.push({ path, status: response.status, title, canonical, noindex, h1Count, schemaTypes: schemas.map((schema) => schema["@type"]), fullSpecifications: product ? html.includes("Technical specifications") : undefined });
   }
 }

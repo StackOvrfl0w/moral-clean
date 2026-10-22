@@ -20,8 +20,6 @@ import { BreadcrumbSchema } from "@/components/seo/BreadcrumbSchema";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { JsonLd } from "@/components/seo/JsonLd";
-import { absoluteUrl } from "@/lib/seo";
 import { GuideLinks } from "@/components/seo/GuideLinks";
 import {
   getProductBySlug,
@@ -181,17 +179,6 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
   const brochureUrl = getBrochureUrl(product.specifications);
   return (
     <>
-      <JsonLd data={{
-        "@context": "https://schema.org", "@type": "Product",
-        "@id": `${absoluteUrl(`/products/${product.slug}`)}#product`,
-        name: product.name.trim(), url: absoluteUrl(`/products/${product.slug}`),
-        description: getDescription(product),
-        image: product.images.map((image) => image.url),
-        ...(product.model_code ? { model: product.model_code } : {}),
-        ...(product.brand ? { brand: { "@type": "Brand", name: product.brand } } : {}),
-        ...(product.category ? { category: product.category.name } : {}),
-        additionalProperty: specEntries.map((entry) => ({ "@type": "PropertyValue", name: entry.label, value: entry.value })),
-      }} />
       <BreadcrumbSchema
         items={[
           { name: "Home", url: "/" },
