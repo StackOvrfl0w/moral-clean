@@ -4,10 +4,15 @@ import fs from "node:fs";
 const origin = process.argv[2] || "http://localhost:3011";
 const output = process.argv[3];
 const results = [];
+const previewToken = new URL(origin).hostname.endsWith(".vercel.app") ? process.env.VERCEL_OIDC_TOKEN : undefined;
 const anchors = (html) => [...html.matchAll(/<a\b[^>]*href="([^"]+)"/gi)].map((m) => m[1].replaceAll("&amp;", "&"));
 const noindex = (html) => /<meta\b(?=[^>]*name="robots")(?=[^>]*content="[^"]*noindex)[^>]*>/i.test(html);
 async function get(path, status = 200) {
-  const response = await fetch(origin + path, { signal: AbortSignal.timeout(30000) });
+  const response = await fetch(origin + path, {
+    signal: AbortSignal.timeout(30000),
+    redirect: "manual",
+    headers: previewToken ? { "x-vercel-trusted-oidc-idp-token": previewToken } : undefined,
+  });
   const body = await response.text();
   assert.equal(response.status, status, `${path}: HTTP status`);
   results.push({ path, status, noindex: noindex(body) });
