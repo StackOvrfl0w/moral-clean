@@ -1,9 +1,10 @@
 import Link from "next/link";
-import { Check, X } from "lucide-react";
+import { X } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import type { Category, Tag } from "@/lib/types";
 import { cn } from "@/lib/utils";
+import { ProductFilterButton } from "@/components/products/ProductFilterButton";
 
 type ActiveFilters = {
   category?: string;
@@ -44,39 +45,6 @@ function createFilterHref(
   const query = params.toString();
 
   return query ? `/products?${query}` : "/products";
-}
-
-function CheckboxFilter({
-  href,
-  checked,
-  children,
-}: {
-  href: string;
-  checked: boolean;
-  children: React.ReactNode;
-}) {
-  return (
-    <Link
-      href={href}
-      aria-current={checked ? "page" : undefined}
-      scroll={false}
-      className={cn(
-        "flex w-full items-center gap-3 rounded-md px-2 py-2 text-sm transition-colors hover:bg-muted",
-        checked && "bg-accent/10 text-primary",
-      )}
-    >
-      <span
-        className={cn(
-          "flex size-4 shrink-0 items-center justify-center rounded border border-border",
-          checked && "border-accent bg-accent text-accent-foreground",
-        )}
-        aria-hidden="true"
-      >
-        {checked ? <Check className="size-3" /> : null}
-      </span>
-      {children}
-    </Link>
-  );
 }
 
 export function ProductFilters({
@@ -135,13 +103,13 @@ export function ProductFilters({
         <h2 className="text-base">Brands</h2>
         <div className="mt-3 space-y-1">
           {brands.map((brand) => (
-            <CheckboxFilter
+            <ProductFilterButton
               key={brand}
               href={createFilterHref(activeFilters, "brand", brand)}
               checked={activeFilters.brand === brand}
             >
               <span>{brand}</span>
-            </CheckboxFilter>
+            </ProductFilterButton>
           ))}
         </div>
       </div> : null}
@@ -150,13 +118,13 @@ export function ProductFilters({
         <h2 className="text-base">Tags</h2>
         <div className="mt-3 space-y-1">
           {tags.map((tag) => (
-            <CheckboxFilter
+            <ProductFilterButton
               key={tag.id}
               href={createFilterHref(activeFilters, "tag", tag.slug)}
               checked={activeFilters.tag === tag.slug}
             >
               <span>{tag.name}</span>
-            </CheckboxFilter>
+            </ProductFilterButton>
           ))}
         </div>
       </div> : null}

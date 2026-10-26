@@ -523,6 +523,7 @@ const getRequestProducts = cache(async (category: string, brand: string, tag: st
   const facets = (await getCatalogFacets()) ?? getSeedFacets();
   const knownFilters = (!category || facets.categories.some(item => item.slug === category)) &&
     (!tag || facets.tags.some(item => item.slug === tag)) && (!brand || facets.brands.includes(brand));
+  if (!knownFilters) notFound();
   if (page > 1) {
     let count = 0;
     if (!hasSupabaseConfig()) count = filterSeedProducts(mockProducts, { category, brand, tag, q: search }).length;
@@ -532,9 +533,9 @@ const getRequestProducts = cache(async (category: string, brand: string, tag: st
     }
     validatePage(page, count, PRODUCTS_PER_PAGE);
   }
-  // Free-text searches and unknown filters are request-memoized only. Random
-  // searches and unknown filter strings must not generate persistent cache keys.
-  if (search || !knownFilters) return queryProducts(category, brand, tag, search, sort, page);
+  // Free-text searches are request-memoized only. Unknown filters were rejected
+  // above, so neither can generate arbitrary persistent cache keys.
+  if (search) return queryProducts(category, brand, tag, search, sort, page);
   const rows = await getCachedProducts(category, brand, tag, search, sort, page);
   return {
     ...rows,
@@ -551,7 +552,11 @@ export async function getProducts(params: ProductQueryParams = {}): Promise<Prod
   if (values.some(value => value.length > 120 || /[\u0000-\u001f\u007f]/.test(value))) notFound();
   if (params.sort && (params.sort.length > 120 || /[\u0000-\u001f\u007f]/.test(params.sort))) notFound();
   try {
-    return await getRequestProducts(values[0], values[1], values[2], values[3], normalizeSort(params.sort), page);
+    const result = await getRequestProducts(values[0], values[1], values[2], values[3], normalizeSort(params.sort), page);
+    // Empty search results remain a usable search page. Empty catalogue facets
+    // are nonexistent combinations, rather than indexable HTTP-200 pages.
+    if (!values[3] && values.slice(0, 3).some(Boolean) && result.totalCount === 0) notFound();
+    return result;
   } catch (error) {
     if (error instanceof PageOutOfRangeError) notFound();
     throw error;

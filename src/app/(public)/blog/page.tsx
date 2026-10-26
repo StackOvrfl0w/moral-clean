@@ -16,11 +16,9 @@ import { getAllPosts } from "@/lib/queries/blog";
 export async function generateMetadata({ searchParams }: { searchParams?: Record<string, string | string[] | undefined> }): Promise<Metadata> {
   const page = parsePage(getParam(searchParams, "page"));
   if (page === null) notFound();
-  if (page > 1) {
-    const result = await getAllPosts({ page, limit: POSTS_PER_PAGE });
-    if (page > result.pageCount) notFound();
-  }
-  return listingMetadata('Cleaning Equipment Guides & Maintenance Tips', 'Read Moral Clean guides on choosing commercial cleaning machines, maintaining equipment and planning cleaning operations for facilities in Pakistan.', '/blog', searchParams);
+  const result = await getAllPosts({ page, limit: POSTS_PER_PAGE });
+  if (page > result.pageCount) notFound();
+  return listingMetadata('Cleaning Equipment Guides & Maintenance Tips', 'Read Moral Clean guides on choosing commercial cleaning machines, maintaining equipment and planning cleaning operations for facilities in Pakistan.', '/blog', searchParams, result.totalCount === 0);
 }
 
 const POSTS_PER_PAGE = 9;

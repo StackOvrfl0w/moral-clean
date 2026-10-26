@@ -49,5 +49,6 @@ export async function GET() {
     entries("categories", "/products/category", "slug,created_at,products(count)"),
     entries("blog_posts", "/blog", "slug,updated_at,created_at"),
   ]);
-  return getServerSideSitemap(groups.flat());
+  const blogIndex = groups[2].length > 0 ? [{ loc: absoluteUrl("/blog") }] : [];
+  return getServerSideSitemap([...groups.flat(), ...blogIndex]);
 }

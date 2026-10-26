@@ -3,7 +3,7 @@ import { createClient as realCreateClient } from "@supabase/supabase-js";
 import { parsePage } from "../src/lib/pagination";
 const createTransportClient = realCreateClient;
 
-let requests, persistent, requestMemo, cacheLookups, filteredCount, blogCount, rowCount, forcedError, gallery, clientsCreated;
+let requests, persistent, requestMemo, cacheLookups, filteredCount, blogCount, rowCount, forcedError, gallery, clientsCreated, categoryCount;
 mock.module("server-only", () => ({}));
 mock.module("next/navigation", () => ({ notFound: () => { throw Object.assign(new Error("Not found"), { digest: "NEXT_NOT_FOUND" }); } }));
 mock.module("@/config/env", () => ({ env: { supabaseUrl: "https://catalog.example.invalid", supabaseAnonKey: "public-test-key" } }));
@@ -25,7 +25,7 @@ mock.module("@supabase/supabase-js", () => ({ createClient: (url, key, options) 
     const table = url.pathname.split("/").pop();
     const select = url.searchParams.get("select");
     let body = [], count;
-    if (table === "categories") body = [{ id: "cat", slug: "single-disc", name: "Single disc", products: [{ count: 36 }] }];
+    if (table === "categories") body = [{ id: "cat", slug: "single-disc", name: "Single disc", products: [{ count: categoryCount }] }];
     else if (table === "tags") body = [{ id: "tag", slug: "commercial", name: "Commercial" }];
     else if (table === "products" && select === "brand") body = [{ brand: "Brand" }];
     else if (table === "product_tags") body = [{ product_id: "model" }];
@@ -46,7 +46,7 @@ mock.module("@supabase/supabase-js", () => ({ createClient: (url, key, options) 
 const { getProducts } = await import("../src/lib/queries/products");
 const { getAllPosts } = await import("../src/lib/queries/blog");
 const { getProductsByCategory } = await import("../src/lib/queries/categories");
-beforeEach(() => { requests = []; persistent = new Map(); requestMemo = new Map(); cacheLookups = []; filteredCount = 18; blogCount = 18; rowCount = undefined; forcedError = undefined; gallery = []; clientsCreated = 0; });
+beforeEach(() => { requests = []; persistent = new Map(); requestMemo = new Map(); cacheLookups = []; filteredCount = 18; blogCount = 18; rowCount = undefined; forcedError = undefined; gallery = []; clientsCreated = 0; categoryCount = 36; });
 const ranges = () => requests.filter(r => r.url.searchParams.has("offset"));
 const countCalls = () => requests.filter(r => r.method === "HEAD" && (r.url.searchParams.has("brand") || r.url.pathname.endsWith("blog_posts")));
 const notFound = (promise) => expect(promise).rejects.toMatchObject({ digest: "NEXT_NOT_FOUND" });
@@ -119,17 +119,31 @@ test("valid filtered pagination counts before fetching rows and reuses caches", 
   const before = requests.length; requestMemo = new Map(); await getProducts({ brand: "Brand", page: 2 });
   expect(requests.length).toBe(before);
 });
-test("empty filtered first page is valid; empty page two rejects without row query", async () => {
+test("empty facet combinations return 404; page two rejects without another row query", async () => {
   filteredCount = 0;
-  expect((await getProducts({ brand: "Brand" })).products).toEqual([]);
+  await notFound(getProducts({ brand: "Brand" }));
   requestMemo = new Map(); const before = ranges().length;
   await notFound(getProducts({ brand: "Brand", page: 2 })); expect(ranges()).toHaveLength(before);
 });
 test("unknown filters cannot create persistent result or count entries", async () => {
-  expect((await getProducts({ brand: "unknown" })).products).toEqual([]);
+  await notFound(getProducts({ brand: "unknown" }));
   await notFound(getProducts({ tag: "unknown", page: 999 }));
   expect(ranges()).toHaveLength(0);
   expect(cacheLookups.every(c => ["catalog-facets-validated-v1", "catalog-product-count-v1"].includes(c.keys[0]))).toBe(true);
+});
+test("an empty free-text search remains usable, with or without a valid facet", async () => {
+  filteredCount = 0;
+  expect((await getProducts({ q: "no matches" })).products).toEqual([]);
+  expect((await getProducts({ q: "no matches", brand: "Brand" })).products).toEqual([]);
+});
+test("an empty category landing remains usable without exposing unrelated global facets", async () => {
+  categoryCount = 0;
+  const result = await getProductsByCategory("cat", { page: 1 });
+  expect(result.totalCount).toBe(0);
+  expect(result.brands).toEqual([]);
+  expect(result.tags).toEqual([]);
+  expect(ranges()).toHaveLength(0);
+  expect(requests.some(r => r.url.pathname.endsWith("tags"))).toBe(false);
 });
 test("search result/counts are not persisted, but equivalent calls deduplicate within request", async () => {
   await getProducts({ q: "  machine  " }); await getProducts({ q: "machine" });
