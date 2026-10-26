@@ -29,7 +29,7 @@ import { cn } from "@/lib/utils";
 export async function generateMetadata({ searchParams }: { searchParams?: Record<string, string | string[] | undefined> }): Promise<Metadata> {
   const page = parsePage(getParam(searchParams, "page"));
   if (page === null) notFound();
-  if (page > 1) {
+  if (page > 1 || ["category", "brand", "tag"].some((key) => getParam(searchParams, key))) {
     const result = await getProducts({ page, category: getParam(searchParams, "category"), brand: getParam(searchParams, "brand"), tag: getParam(searchParams, "tag"), q: getParam(searchParams, "q"), sort: getParam(searchParams, "sort") });
     if (page > result.pageCount) notFound();
   }

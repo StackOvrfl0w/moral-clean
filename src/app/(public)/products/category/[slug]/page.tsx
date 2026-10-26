@@ -153,7 +153,7 @@ export async function generateMetadata({ params, searchParams }: CategoryPagePro
   if (requestedPage === null) notFound();
   const category = await getCategoryBySlug(params.slug);
   if (!category) notFound();
-  if (requestedPage > 1) {
+  if (requestedPage > 1 || getParam(searchParams, "brand") || getParam(searchParams, "tag")) {
     const result = await getProductsByCategory(category.id, {
       page: requestedPage,
       sort: getParam(searchParams, "sort"),

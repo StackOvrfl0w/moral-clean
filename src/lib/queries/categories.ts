@@ -148,6 +148,14 @@ export async function getProductsByCategory(
       if (error instanceof PageOutOfRangeError) notFound();
       throw error;
     }
+    // A real, empty category can still serve its noindex enquiry landing page.
+    // It must not expose global brand/tag combinations with no products.
+    if (category.product_count === 0) {
+      return {
+        products: [], totalCount: 0, page: 1, pageCount: 1,
+        perPage: CATEGORY_PRODUCTS_PER_PAGE, brands: [], tags: [],
+      };
+    }
   }
   const result = await getProducts({
     category: category.slug,

@@ -3,7 +3,8 @@ const siteUrl = configuredSiteUrl && !/localhost|127\.0\.0\.1/i.test(configuredS
   ? configuredSiteUrl.replace(/\/$/, "") : "https://moralclean.com";
 const guides = [...require("./src/content/planning-guides.json"), ...require("./src/content/guides.json"), ...require("./src/content/additional-guides.json"), ...require("./src/content/expert-guides.json")];
 const services = require("./src/content/service-pages.json");
-const pages = ["/", "/about", "/services", "/contact", "/products", "/blog", "/guides", ...guides.map(({ slug }) => `/guides/${slug}`), ...services.map(({ slug }) => `/services/${slug}`)];
+// The dynamic sitemap adds /blog only while published articles exist.
+const pages = ["/", "/about", "/services", "/contact", "/products", "/guides", ...guides.map(({ slug }) => `/guides/${slug}`), ...services.map(({ slug }) => `/services/${slug}`)];
 
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
